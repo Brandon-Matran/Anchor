@@ -1,4 +1,3 @@
-
 # Anchor
 
 
@@ -98,6 +97,7 @@
 * Request body (form):
     ```json
     {
+        "title": string,
         "description": string,
         "picture_url": string
     }
@@ -194,6 +194,7 @@
 * Request body (form):
       ```json
     {
+        "title": string,
         "company_name" : string,
         "job_position": string,
         "apply_url": string,
@@ -204,6 +205,7 @@
 * Response shape (JSON):
     ```json
     {
+        "title": string,
         "company_name" : string,
         "job_position": string,
         "apply_url": string,
