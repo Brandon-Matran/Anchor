@@ -75,6 +75,7 @@
     {
         "blog": [
             {
+                "title": string,
                 "picture_url": string,
                 "description": string,
                 "date/time": datetime,
@@ -127,6 +128,7 @@
     ```json
     {
         "id": int,
+        "title": string,
         "description": string,
         "picture_url": string,
         "user": {
@@ -147,6 +149,7 @@
 * Request body (form):
     ```json
     {
+        "title": string,
         "description": string,
         "picture_url": string
     }
@@ -191,6 +194,7 @@
 * Response shape (JSON):
     ```json
     {
+        "title": string,
         "company_name" : string,
         "job_position": string,
         "apply_url": string,
