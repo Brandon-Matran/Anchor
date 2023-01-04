@@ -160,6 +160,22 @@
         "message": string
     }
     ```
+### Delete Blog
+
+* Endpoint path: /blog/<id>
+* Endpoint method: DELETE
+
+* Headers:
+  * Authorization: Bearer token
+
+* Response: Successful delete blog message or error
+* Response shape (JSON):
+    ```json
+    {
+        "success": boolean,
+        "message": string
+    }
+    ```
 
 ### Get Job Listings
 
@@ -211,5 +227,53 @@
         "apply_url": string,
         "deadline": datetime,
         "created": datetime.now()
+    }
+    ```
+
+### Update Job Listing
+
+* Endpoint path: /jobs/<id>
+* Endpoint method: PUT
+
+* Headers:
+  * Authorization: Bearer token
+
+* Request body (form):
+      ```json
+    {
+        "title": string,
+        "company_name" : string,
+        "job_position": string,
+        "apply_url": string,
+        "deadline": datetime
+    }
+    ```
+* Response: Successful udpate of job or error
+* Response shape (JSON):
+    ```json
+    {
+        "title": string,
+        "company_name" : string,
+        "job_position": string,
+        "apply_url": string,
+        "deadline": datetime,
+        "created": datetime.now()
+    }
+    ```
+
+### Delete Job Listing
+
+* Endpoint path: /jobs/<id>
+* Endpoint method: DELETE
+
+* Headers:
+  * Authorization: Bearer token
+
+* Response: Successful delete job listings message or error
+* Response shape (JSON):
+    ```json
+    {
+        "success": boolean,
+        "message": string
     }
     ```
