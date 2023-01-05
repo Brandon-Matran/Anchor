@@ -6,13 +6,15 @@
 ## 01/04/2023
 Completed:
     - validated pipeline
-    - created feature issues
-    - added story issues to each feature
-    - assigned points to each issue
-    - project setup following instructions
+    - created feature issues together
+    - added story issues to each feature together
+    - project setup following instructions: created account, blog and listing services folders and added required basic files. added contents to docker-compose.yaml
 
 Plan:
-    - assign works to each member
+    - assign points and works to each member
+    - go over setup process
+
+
 
 
 

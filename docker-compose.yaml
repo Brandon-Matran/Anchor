@@ -37,9 +37,12 @@ services:
       NODE_ENV: development
       HOST: "0.0.0.0"
       PUBLIC_URL: http://localhost:3000
-      REACT_APP_SAMPLE_SERVICE_API_HOST: http://localhost:8000
+      # REACT_APP_SAMPLE_SERVICE_API_HOST: http://localhost:8000
+      REACT_APP_BLOG_SERVICE: http://localhost:8080
+      REACT_APP_LISTING_SERVICE: http://localhost:8090
+      REACT_APP_ACCOUNT_SERVICE: http://localhost:8100
 
-blog-service:
+  blog-service:
     build:
         context: ./blog-service
         dockerfile: ./Dockerfile.dev
@@ -48,7 +51,29 @@ blog-service:
     volumes:
         - ./blog-service:/app
     environment:
-      DATABASE_URL: postgresql://blog-service:maxbspass@postgres/5432/blog-service
+      DATABASE_URL: postgresql://blog-service:maxbspass@postgres/db-blog
       WAIT_HOSTS: postgres:5432
-      REACT_APP_FASTAPI_SERVICE: http://localhost:8000
-      REACT_APP_THIRD_PARTY_SERVICE: http://third-party.com
+
+  listing-service:
+    build:
+        context: ./listing-service
+        dockerfile: ./Dockerfile.dev
+    ports:
+        - "8090:8000"
+    volumes:
+        - ./listing-service:/app
+    environment:
+      DATABASE_URL: postgresql://listing-service:maxbspass@postgres/db-listing
+      WAIT_HOSTS: postgres:5432
+
+  account-service:
+    build:
+        context: ./account-service
+        dockerfile: ./Dockerfile.dev
+    ports:
+        - "8100:8000"
+    volumes:
+        - ./account-service:/app
+    environment:
+      DATABASE_URL: postgresql://account-service:maxbspass@postgres/db-account
+      WAIT_HOSTS: postgres:5432
