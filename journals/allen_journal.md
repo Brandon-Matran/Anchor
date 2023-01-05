@@ -8,6 +8,7 @@ Completed:
 
 Work in Progress:
 - still need to figure out which db to use
+- assign points and members to issues
 - Discuss implementation of drop down feature and issues
 - Discuss implementation of 'my Blogs' page and 'my Jobs Listing' page
 - Ask instructors to review features and issues. Assign duties tomorrow
