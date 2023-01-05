@@ -38,3 +38,17 @@ services:
       HOST: "0.0.0.0"
       PUBLIC_URL: http://localhost:3000
       REACT_APP_SAMPLE_SERVICE_API_HOST: http://localhost:8000
+
+blog-service:
+    build:
+        context: ./blog-service
+        dockerfile: ./Dockerfile.dev
+    ports:
+        - "8080:8000"
+    volumes:
+        - ./blog-service:/app
+    environment:
+      DATABASE_URL: postgresql://blog-service:maxbspass@postgres/5432/blog-service
+      WAIT_HOSTS: postgres:5432
+      REACT_APP_FASTAPI_SERVICE: http://localhost:8000
+      REACT_APP_THIRD_PARTY_SERVICE: http://third-party.com
