@@ -1,5 +1,20 @@
 # Allen's Day to Day
 
+## 01/04/2023
+
+Completed:
+- added features/issues for sign up/log in, blogs CRUD, job listings CRUD
+- updated api-design with blog "title" and job listings update and delete
+
+Work in Progress:
+- still need to figure out which db to use
+- Discuss implementation of drop down feature and issues
+- Discuss implementation of 'my Blogs' page and 'my Jobs Listing' page
+- Ask instructors to review features and issues. Assign duties tomorrow
+
+Notes:
+Xue will work on Docker. Will discuss as a team tomorrow. Hope to have one endpoint modeled be Fri end.
+
 ## 01/03/2023
 
 Completed:
