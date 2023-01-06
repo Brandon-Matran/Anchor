@@ -1,3 +1,23 @@
+## 1/5/23
+
+Today I worked on:
+
+-Finishing up the issues and features with the team.
+
+The team finished up the features and issues today. We assigned each team member to tasks totalling up to 13 points per the grading rubric. I am in charge of Log In (Front End/Back End), Log Out(Front End/Back End), And Updating a Blog (Back End).
+
+## 1/4/23
+
+Today I worked on:
+
+-The issues and features regarding Project Anchor with my team.
+
+The team worked together on creating Features and identifying the issues that would have to be done in order to get each feature to work for the MVP.
+
+For design decisions, we decided that tomorrow we will go over a My Jobs Page and My Blogs page.
+
+I learned how to create issues and features using GitLab today.
+
 ## 1/3/23
 
 Today, I worked on:
