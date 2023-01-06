@@ -51,7 +51,7 @@ services:
     volumes:
       - ./blog-service:/app
     environment:
-      DATABASE_URL: postgresql://blog-service:maxbspass@postgres/db-blog
+      DATABASE_URL: postgresql://blog:password@postgres/blog
       WAIT_HOSTS: postgres:5432
 
   listing-service:
@@ -63,7 +63,7 @@ services:
     volumes:
       - ./listing-service:/app
     environment:
-      DATABASE_URL: postgresql://listing-service:maxbspass@postgres/db-listing
+      DATABASE_URL: postgresql://listing:password@postgres/listing
       WAIT_HOSTS: postgres:5432
 
   account-service:
@@ -75,5 +75,5 @@ services:
     volumes:
       - ./account-service:/app
     environment:
-      DATABASE_URL: postgresql://account-service:maxbspass@postgres/db-account
+      DATABASE_URL: postgresql://account:password@postgres/account
       WAIT_HOSTS: postgres:5432
