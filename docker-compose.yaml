@@ -2,7 +2,9 @@
 volumes:
   anchor-postgres-data:
     external: true
-    # other volumes...
+  pg-admin:
+    external: true
+
 services:
   postgres:
     build:
@@ -11,7 +13,7 @@ services:
     volumes:
       - anchor-postgres-data:/var/lib/postgresql/data
     environment:
-      - POSTGRES_MULTIPLE_DATABASES=db-account,db-blog,db-listing
+      - POSTGRES_MULTIPLE_DATABASES=account,blog,listing
       - POSTGRES_PASSWORD=test-databases
     ports:
       - 15432:5432
@@ -42,38 +44,49 @@ services:
       REACT_APP_LISTING_SERVICE: http://localhost:8090
       REACT_APP_ACCOUNT_SERVICE: http://localhost:8100
 
-  blog-service:
+  blog_service:
     build:
-      context: ./blog-service
+      context: ./blog_service
       dockerfile: ./Dockerfile.dev
     ports:
       - "8080:8000"
     volumes:
-      - ./blog-service:/app
+      - ./blog_service:/app
     environment:
-      DATABASE_URL: postgresql://blog-service:maxbspass@postgres/db-blog
+      DATABASE_URL: postgresql://blog:password@postgres/blog
       WAIT_HOSTS: postgres:5432
 
-  listing-service:
+  listing_service:
     build:
-      context: ./listing-service
+      context: ./listing_service
       dockerfile: ./Dockerfile.dev
     ports:
       - "8090:8000"
     volumes:
-      - ./listing-service:/app
+      - ./listing_service:/app
     environment:
-      DATABASE_URL: postgresql://listing-service:maxbspass@postgres/db-listing
+      DATABASE_URL: postgresql://listing:password@postgres/listing
       WAIT_HOSTS: postgres:5432
 
-  account-service:
+  account_service:
     build:
-      context: ./account-service
+      context: ./account_service
       dockerfile: ./Dockerfile.dev
     ports:
       - "8100:8000"
     volumes:
-      - ./account-service:/app
+      - ./account_service:/app
     environment:
-      DATABASE_URL: postgresql://account-service:maxbspass@postgres/db-account
+      DATABASE_URL: postgresql://account:password@postgres/account
       WAIT_HOSTS: postgres:5432
+
+  pg-admin:
+    image: dpage/pgadmin4
+    volumes:
+      - pg-admin:/var/lib/pgadmin
+    ports:
+      - 8082:80
+    environment:
+      PGADMIN_DEFAULT_EMAIL: user@email.com
+      PGADMIN_DEFAULT_PASSWORD: password
+      PGADMIN_DISABLE_POSTFIX: 1

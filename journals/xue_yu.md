@@ -1,6 +1,7 @@
 ### instructions:
 
 docker volume create anchor-postgres-data
+docker volume create pg-admin
 docker compose build
 docker compose up
 
@@ -21,11 +22,18 @@ Completed:
 
 - finished the basic project setup and made a go-through with group
 - assigned points and works to each member together
+- added pgAdmin in yaml
 
 Plan:
 
-- add pg-admin
+- try pg-admin at http://localhost:8082
 - maybe start coding
+- discuss workflow: when to use main, when to use other branches? Such as adding journal?
+
+Issues:
+
+- ghi container not working because of a "debug" thing in gih/package.json
+- service containers not working "FATAL: password authentication failed for user "blog""
 
 ## 01/04/2023
 
