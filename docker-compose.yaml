@@ -1,14 +1,29 @@
 # volumes:
+volumes:
+  postgres-data:
+    external: true
+    # other volumes...
 services:
-  fastapi:
+  postgres:
     build:
-      context: sample_service
-      dockerfile: Dockerfile.dev
-    ports:
-      - 8000:8000
+      context: ./relational-data
+      dockerfile: ./Dockerfile.dev
     volumes:
-      - ./sample_service:/app
-      
+      - postgres-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_MULTIPLE_DATABASES=account,blog,listing
+      - POSTGRES_PASSWORD=test-databases
+    ports:
+      - 15432:5432
+  # fastapi:
+  #   build:
+  #     context: sample_service
+  #     dockerfile: Dockerfile.dev
+  #   ports:
+  #     - 8000:8000
+  #   volumes:
+  #     - ./sample_service:/app
+
   ghi:
     image: node:lts-bullseye
     command: /bin/bash run.sh
@@ -22,5 +37,43 @@ services:
       NODE_ENV: development
       HOST: "0.0.0.0"
       PUBLIC_URL: http://localhost:3000
-      REACT_APP_SAMPLE_SERVICE_API_HOST: http://localhost:8000
-            
+      # REACT_APP_SAMPLE_SERVICE_API_HOST: http://localhost:8000
+      REACT_APP_BLOG_SERVICE: http://localhost:8080
+      REACT_APP_LISTING_SERVICE: http://localhost:8090
+      REACT_APP_ACCOUNT_SERVICE: http://localhost:8100
+
+  blog-service:
+    build:
+      context: ./blog-service
+      dockerfile: ./Dockerfile.dev
+    ports:
+      - "8080:8000"
+    volumes:
+      - ./blog-service:/app
+    environment:
+      DATABASE_URL: postgresql://blog-service:maxbspass@postgres/db-blog
+      WAIT_HOSTS: postgres:5432
+
+  listing-service:
+    build:
+      context: ./listing-service
+      dockerfile: ./Dockerfile.dev
+    ports:
+      - "8090:8000"
+    volumes:
+      - ./listing-service:/app
+    environment:
+      DATABASE_URL: postgresql://listing-service:maxbspass@postgres/db-listing
+      WAIT_HOSTS: postgres:5432
+
+  account-service:
+    build:
+      context: ./account-service
+      dockerfile: ./Dockerfile.dev
+    ports:
+      - "8100:8000"
+    volumes:
+      - ./account-service:/app
+    environment:
+      DATABASE_URL: postgresql://account-service:maxbspass@postgres/db-account
+      WAIT_HOSTS: postgres:5432
