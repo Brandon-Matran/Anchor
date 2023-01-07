@@ -13,8 +13,8 @@ services:
     volumes:
       - anchor-postgres-data:/var/lib/postgresql/data
     environment:
-      - POSTGRES_MULTIPLE_DATABASES=account,blog,listing
-      - POSTGRES_PASSWORD=test-databases
+      POSTGRES_MULTIPLE_DATABASES: account,blog,listing
+      POSTGRES_PASSWORD: test-databases
     ports:
       - 15432:5432
   # fastapi:

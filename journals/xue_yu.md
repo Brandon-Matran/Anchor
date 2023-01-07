@@ -16,6 +16,16 @@ remove:
 docker container prune
 docker volume remove postgres-data
 
+## 01/06/2023
+
+Completed:
+
+- done debugging, all containers and pg-admin is working.
+
+Plan:
+
+- create all feature branches and story sub-branches
+
 ## 01/05/2023
 
 Completed:
