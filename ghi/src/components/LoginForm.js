@@ -1,19 +1,17 @@
-function Construct(props) {
-
-    const pad2 = num => String(num).padStart(2, '0');
-
-    return (
+function LoginForm(props) {
+  return (
+    <div className="container">
     <form>
       <div class="form-group">
-        <label for="exampleInputEmail1">Email address</label>
+        <label for="username">Username</label>
         <input
-          type="email"
+          type="username"
           class="form-control"
-          id="exampleInputEmail1"
+          id="username"
           aria-describedby="emailHelp"
-          placeholder="Enter email"
+          placeholder="Enter username"
         />
-        <small id="emailHelp" class="form-text text-muted">
+        <small id="emailHelp" className="form-text text-muted">
           We'll never share your email with anyone else.
         </small>
       </div>
@@ -30,8 +28,8 @@ function Construct(props) {
         Submit
       </button>
     </form>
-  );
-    
-}
+    </div>
 
-export default Construct;
+  );
+}
+export default LoginForm;
