@@ -1,5 +1,18 @@
 # Allen's Day to Day
 
+## 01/06/2023
+
+Completed:
+- set up PostgreSQL and pgAdmin
+- set up branches by Features and subbranches by stories
+- determined workflow for the project
+
+Work in Progress:
+- writing our first code; setting up at least one end-point.
+
+Notes:
+Need to catch up on some learning before coding. PostgreSQL and FastAPI.
+
 ## 01/05/2023
 
 Completed:
