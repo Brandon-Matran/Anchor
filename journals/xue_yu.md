@@ -24,7 +24,7 @@ Completed:
 
 Plan:
 
-- create all feature branches and story sub-branches
+- create all feature branches and some story sub-branches
 
 ## 01/05/2023
 
