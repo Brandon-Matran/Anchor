@@ -1,9 +1,9 @@
 import { useState } from "react";
 import "./App.css";
-import LoginForm from "./components/LoginForm.js";
+import LoginForm from "./accounts/LoginForm.js";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import TestPage from "./components/TestPage.js";
+import TestPage from "./accounts/TestPage.js";
 import Nav from "./Nav";
 function App() {
   const [token, setToken] = useState();
