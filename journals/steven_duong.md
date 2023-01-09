@@ -26,3 +26,8 @@ Work in progress:
     - Start working on the 3 containers that are currently not working (module not found)
 
 ## 01/06/2023
+Completed:
+    - Assigned roles to each story
+    - Assigned points to each feature / story
+Work in progress:
+    - Will start working on FASTAPI
