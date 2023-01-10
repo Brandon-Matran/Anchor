@@ -98,11 +98,12 @@ export function useToken() {
       setToken(token);
       console.log(token);
       return;
+    } else {
+      let error = await response.json();
+      console.log("error")
+      return handleErrorMessage(error);
     }
-    let error = await response.json();
-    console.log("error");
-    return handleErrorMessage(error);
-  }
+}
 
   async function signup(username, password, user_type) {
     const url = `${process.env.REACT_APP_ACCOUNT_SERVICE}/api/accounts/`;
