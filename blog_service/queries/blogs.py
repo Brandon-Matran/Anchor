@@ -31,7 +31,7 @@ class BlogRepository():
                         """
                         SELECT id, username, post_date, title, description, picture_url
                         FROM blogs
-                        ORDER BY id;
+                        ORDER BY post_date;
                         """
                     )
                     # result = []
@@ -54,7 +54,8 @@ class BlogRepository():
                             description=record[4],
                             picture_url=record[5],
                         ) 
-                        for record in db]
+                        for record in db
+                    ]
                         
                     
         except Exception as e:
