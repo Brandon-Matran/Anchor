@@ -25,6 +25,7 @@ Completed:
 Plan:
 
 - make sure signup front page works
+- discuss: email and user_type add to account service
 
 ## 01/06/2023
 

@@ -1,89 +1,115 @@
 import React, { useState } from "react";
 import { Navigate } from "react-router-dom";
-import { useAuthContext } from "./Authentication";
+import { useToken } from "./Authentication";
 import signup_image from "../images/signup_image.png";
 
 function Signup(props) {
-  const { token } = useAuthContext();
+  const [token, signup] = useToken();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [user_type, setType] = useState("");
   const [email, setEmail] = useState("");
-  const { signup } = props;
 
   if (token) {
     return <Navigate to="/" />;
   }
-  var handleUserName = function (e) {
-    const value = e.target.value;
-    setUsername(value);
-    props.setUsername(value);
-  };
 
   return (
-    <section class="vh-100" style="background-color: #eee;">
-      <div class="container h-100">
-        <div class="row d-flex justify-content-center align-items-center h-100">
-          <div class="col-lg-12 col-xl-11">
-            <div class="card text-black" style="border-radius: 25px;">
-              <div class="card-body p-md-5">
-                <div class="row justify-content-center">
-                  <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
-                    <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">
+    <section className="vh-100">
+      <div className="container h-100">
+        <div className="row d-flex justify-content-center align-items-center h-100">
+          <div className="col-lg-12 col-xl-11">
+            <div className="card text-black">
+              <div className="card-body p-md-5">
+                <div className="row justify-content-center">
+                  <div className="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+                    <p className="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">
                       Sign up
                     </p>
 
-                    <form class="mx-1 mx-md-4">
-                      <div class="d-flex flex-row align-items-center mb-4">
-                        <i class="fas fa-user fa-lg me-3 fa-fw"></i>
-                        <div class="form-outline flex-fill mb-0">
+                    <form className="mx-1 mx-md-4">
+                      <div className="d-flex flex-row align-items-center mb-4">
+                        <i className="fas fa-user fa-lg me-3 fa-fw"></i>
+                        <div className="form-outline flex-fill mb-0">
+                          <label
+                            className="form-label"
+                            // htmlFor="form3Example1c"
+                          >
+                            Your User Name
+                          </label>
                           <input
-                            onChange={handleUserName}
+                            onChange={(e) => setUsername(e.target.value)}
                             required
                             type="text"
                             id="form3Example1c"
                             className="form-control"
                             value={username}
                           />
-                          <label class="form-label" for="form3Example1c">
-                            Your User Name
-                          </label>
                         </div>
                       </div>
 
-                      <div class="d-flex flex-row align-items-center mb-4">
-                        <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
-                        <div class="form-outline flex-fill mb-0">
+                      <div className="d-flex flex-row align-items-center mb-4">
+                        <i className="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                        <div className="form-outline flex-fill mb-0">
+                          <label
+                            className="form-label"
+                            htmlFor="form3Example3c"
+                          >
+                            Your Email
+                          </label>
                           <input
                             onChange={(e) => setEmail(e.target.value)}
                             required
                             type="email"
                             id="form3Example3c"
-                            class="form-control"
+                            className="form-control"
                             value={email}
                           />
-                          <label class="form-label" for="form3Example3c">
-                            Your Email
-                          </label>
                         </div>
                       </div>
 
-                      <div class="d-flex flex-row align-items-center mb-4">
-                        <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
-                        <div class="form-outline flex-fill mb-0">
+                      <div className="d-flex flex-row align-items-center mb-4">
+                        <i className="fas fa-lock fa-lg me-3 fa-fw"></i>
+                        <div className="form-outline flex-fill mb-0">
+                          <label
+                            className="form-label"
+                            htmlFor="form3Example4c"
+                          >
+                            Password
+                          </label>
                           <input
                             onChange={(e) => setPassword(e.target.value)}
                             required
                             type="password"
                             id="form3Example4c"
-                            class="form-control"
+                            className="form-control"
                             value={password}
                           />
-                          <label class="form-label" for="form3Example4c">
-                            Password
-                          </label>
                         </div>
                       </div>
 
+                      <div className="d-flex flex-row align-items-center mb-4">
+                        <i className="fas fa-user fa-lg me-3 fa-fw"></i>
+                        <div className="form-outline flex-fill mb-0">
+                          <label
+                            className="form-label"
+                            htmlFor="form3Example1c"
+                          >
+                            Pick your user type:
+                          </label>
+                          <select
+                            required
+                            onChange={(e) => setType(e.target.value)}
+                            value={user_type}
+                            id="form3Example1c"
+                            className="form-select"
+                          >
+                            <option>Choose...</option>
+                            <option value="individual">Individual</option>
+                            <option value="company">Company</option>
+                          </select>
+                        </div>
+                      </div>
                       {/* <div class="d-flex flex-row align-items-center mb-4">
                         <i class="fas fa-key fa-lg me-3 fa-fw"></i>
                         <div class="form-outline flex-fill mb-0">
@@ -111,21 +137,23 @@ function Signup(props) {
                         </label>
                       </div> */}
 
-                      <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                      <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                         <button
-                          onClick={() => signup(username, password, email)}
+                          onClick={() =>
+                            signup(username, password, email, user_type)
+                          }
                           type="button"
-                          class="btn btn-primary btn-lg"
+                          className="btn btn-primary btn-lg"
                         >
-                          Register
+                          Submit
                         </button>
                       </div>
                     </form>
                   </div>
-                  <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
+                  <div className="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
                     <img
                       src={signup_image}
-                      class="img-fluid"
+                      className="img-fluid"
                       alt="signup_image"
                     />
                   </div>
