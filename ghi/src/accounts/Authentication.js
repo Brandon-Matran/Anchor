@@ -1,4 +1,3 @@
-
 import { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 let internalToken = null;
@@ -97,7 +96,7 @@ export function useToken() {
     if (response.ok) {
       const token = await getTokenInternal();
       setToken(token);
-      console.log(token)
+      console.log(token);
       return;
     } else {
       let error = await response.json();
@@ -106,7 +105,7 @@ export function useToken() {
     }
 }
 
-  async function signup(username, password, email, firstName, lastName) {
+  async function signup(username, password, email, user_type) {
     const url = `${process.env.REACT_APP_ACCOUNT_SERVICE}/api/accounts/`;
     const response = await fetch(url, {
       method: "post",
@@ -114,8 +113,7 @@ export function useToken() {
         username,
         password,
         email,
-        first_name: firstName,
-        last_name: lastName,
+        user_type,
       }),
       headers: {
         "Content-Type": "application/json",
