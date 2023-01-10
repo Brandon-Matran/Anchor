@@ -6,7 +6,8 @@ router = APIRouter()
 
 @router.get("/blogs", response_model=Union[Error, List[BlogList]])
 def get_all(
+    blogs: BlogList,
     repo: BlogRepository = Depends(),
 ):
-    return repo.get_all()
+    return repo.get_all(blogs)
     
