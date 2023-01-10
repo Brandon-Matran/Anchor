@@ -4,9 +4,9 @@ from typing import Union, List
 
 router = APIRouter()
 
-@router.get("/blogs", response_model=List[BlogList])
-def all_blogs(
+@router.get("/blogs", response_model=Union[Error, List[BlogList]])
+def get_all(
     repo: BlogRepository = Depends(),
 ):
-    return repo.all_blogs()
+    return repo.get_all()
     

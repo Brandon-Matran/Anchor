@@ -1,16 +1,14 @@
 steps = [
     [
-        ## Create the table
         """
         CREATE TABLE blogs (
             id SERIAL PRIMARY KEY NOT NULL,
-            title VARCHAR(1000) NOT NULL,
-            description TEXT NOT NULL,
-            picture_url TEXT NOT NULL
-            
+            username VARCHAR(100) NOT NULL,
+            post_date DATE NOT NULL,
+            pic_url VARCHAR(1000) NOT NULL,
+            description TEXT
         );
         """,
-        ## Drop the table
         """
         DROP TABLE blogs;
         """
