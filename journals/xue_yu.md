@@ -20,6 +20,16 @@ docker volume remove postgres-data
 
 Completed:
 
+- a
+
+Plan:
+
+- m
+
+## 01/09/2023
+
+Completed:
+
 - added signup front page
 
 Plan:
