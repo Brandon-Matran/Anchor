@@ -38,6 +38,8 @@ class BlogRepository():
                     # for record in db:
                     #     blog = BlogList(
                     #         id=record[0],
+                    #         username=record[1],
+                    #         post_date=record[2],
                     #         title=record[1],
                     #         description=record[2],
                     #         picture_url=record[3],
