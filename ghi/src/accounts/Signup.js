@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Navigate } from "react-router-dom";
 import { useToken } from "./Authentication";
 import signup_image from "../images/signup_image.png";
+import background_image from "../images/background_image.png";
 
 function Signup(props) {
   const [token, signup] = useToken();
@@ -15,7 +16,10 @@ function Signup(props) {
   }
 
   return (
-    <section className="vh-100">
+    <section
+      className="vh-100"
+      style={{ backgroundImage: `url(${background_image})` }}
+    >
       <div className="container h-100">
         <div className="row d-flex justify-content-center align-items-center h-100">
           <div className="col-lg-12 col-xl-11">
@@ -101,7 +105,6 @@ function Signup(props) {
                             required
                             onChange={(e) => setType(e.target.value)}
                             value={user_type}
-                            id="form3Example1c"
                             className="form-select"
                           >
                             <option>Choose...</option>
