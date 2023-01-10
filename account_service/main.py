@@ -1,6 +1,23 @@
-# from authenticator import authenticator
-from fastapi import APIRouter, FastAPI
-
+from authenticator import authenticator
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from routers import accounts
+import os
 app = FastAPI()
 
-# app.include_router(authenticator.router)
+origins = [
+    "http://localhost:3000",
+    "http://localhost:8100",
+
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[os.environ.get("REACT_APP_ACCOUNT_SERVICE"), "http://localhost:3000",],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+app.include_router(authenticator.router)
+app.include_router(accounts.router)

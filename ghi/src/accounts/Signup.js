@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Navigate } from "react-router-dom";
-import { useAuthContext } from "./Auth";
+import { useAuthContext } from "./Authentication";
 import signup_image from "../images/signup_image.png";
 
 function Signup(props) {

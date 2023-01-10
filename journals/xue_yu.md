@@ -16,6 +16,16 @@ remove:
 docker container prune
 docker volume remove postgres-data
 
+## 01/09/2023
+
+Completed:
+
+- added signup front page
+
+Plan:
+
+- make sure signup front page works
+
 ## 01/06/2023
 
 Completed:

@@ -1,37 +1,34 @@
-import { useEffect, useState } from 'react';
-import Construct from './Construct.js'
-import ErrorNotification from './ErrorNotification';
-import './App.css';
+import { useState } from "react";
+import "./App.css";
+import LoginForm from "./accounts/LoginForm.js";
+import { BrowserRouter as Router , Route, Routes } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
+import TestPage from "./accounts/TestPage.js";
+import { AuthProvider, useToken } from "./accounts/Authentication.js";
+
+function GetToken() {
+  // Get token from JWT cookie (if already logged in)
+  useToken();
+  return null;
+}
 
 function App() {
-  const [launch_info, setLaunchInfo] = useState([]);
-  const [error, setError] = useState(null);  
+  // const [token, setToken] = useState();
 
-  useEffect(() => {
-    async function getData() {
-      let url = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/api/launch-details`;
-      console.log('fastapi url: ', url);
-      let response = await fetch(url);
-      console.log("------- hello? -------");
-      let data = await response.json();
-
-      if (response.ok) {
-        console.log("got launch data!");
-        setLaunchInfo(data.launch_details);
-      } else {
-        console.log("drat! something happened");
-        setError(data.message);
-      }
-    }
-    getData();
-  }, [])
-
+  // if (!token) {
+  //   return <LoginForm setToken={setToken} />;
+  // }
 
   return (
-    <div>
-      <ErrorNotification error={error} />
-      <Construct info={launch_info} />
-    </div>
+    <Router>
+      <AuthProvider>
+        <GetToken />
+        <Routes>
+        <Route path="/login" element={<LoginForm />} />
+          <Route path="/test" element={<TestPage />} />
+        </Routes>
+      </AuthProvider>
+    </Router>
   );
 }
 
