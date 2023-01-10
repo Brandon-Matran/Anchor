@@ -1,9 +1,15 @@
 import { useState} from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useToken } from './Authentication.js';
 
 
 
 function LoginForm() {
-  const
+  const navigate = useNavigate();
+  const [token, login] = useToken();
+
+
+
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -11,14 +17,9 @@ function LoginForm() {
 
 
   const handleSubmit = async e => {
+    login(username, password)
     e.preventDefault();
-    const token = getToken({
-      username,
-      password
-
-    });
-    console.log(token)
-
+    // navigate("/test")
   }
 
   return (

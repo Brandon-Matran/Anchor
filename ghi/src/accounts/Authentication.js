@@ -8,7 +8,7 @@ export function getToken() {
 }
 
 export async function getTokenInternal() {
-  const url = `${process.env.REACT_APP_ACCOUNT_SERVICE}token`;
+  const url = `${process.env.REACT_APP_ACCOUNT_SERVICE}/token`;
   try {
     const response = await fetch(url, {
       credentials: "include",
@@ -76,7 +76,7 @@ export function useToken() {
 
   async function logout() {
     if (token) {
-      const url = `${process.env.REACT_APP_ACCOUNT_SERVICE}token`;
+      const url = `${process.env.REACT_APP_ACCOUNT_SERVICE}/token`;
       await fetch(url, { method: "delete", credentials: "include" });
       internalToken = null;
       setToken(null);
@@ -85,7 +85,7 @@ export function useToken() {
   }
 
   async function login(username, password) {
-    const url = `${process.env.REACT_APP_ACCOUNT_SERVICE}token`;
+    const url = `${process.env.REACT_APP_ACCOUNT_SERVICE}/token`;
     const form = new FormData();
     form.append("username", username);
     form.append("password", password);
@@ -97,9 +97,11 @@ export function useToken() {
     if (response.ok) {
       const token = await getTokenInternal();
       setToken(token);
+      console.log(token)
       return;
     }
     let error = await response.json();
+    console.log("error")
     return handleErrorMessage(error);
   }
 

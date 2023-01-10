@@ -1,24 +1,34 @@
 import { useState } from "react";
 import "./App.css";
 import LoginForm from "./accounts/LoginForm.js";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router , Route, Routes } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import TestPage from "./accounts/TestPage.js";
-import Nav from "./Nav";
-function App() {
-  const [token, setToken] = useState();
+import { AuthProvider, useToken } from "./accounts/Authentication.js";
 
-  if (!token) {
-    return <LoginForm setToken={setToken} />;
-  }
+function GetToken() {
+  // Get token from JWT cookie (if already logged in)
+  useToken();
+  return null;
+}
+
+function App() {
+  // const [token, setToken] = useState();
+
+  // if (!token) {
+  //   return <LoginForm setToken={setToken} />;
+  // }
 
   return (
-    <BrowserRouter>
-      {/* <Nav /> */}
-      <Routes>
-        <Route path="/test" element={<TestPage />} />
-      </Routes>
-    </BrowserRouter>
+    <Router>
+      <AuthProvider>
+        <GetToken />
+        <Routes>
+        <Route path="/login" element={<LoginForm />} />
+          <Route path="/test" element={<TestPage />} />
+        </Routes>
+      </AuthProvider>
+    </Router>
   );
 }
 

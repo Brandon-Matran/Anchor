@@ -13,7 +13,7 @@ origins = [
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=[os.environ.get("REACT_APP_ACCOUNT_SERVICE"), "http://localhost:3000",],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
