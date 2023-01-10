@@ -8,10 +8,12 @@ class DuplicateAccountError(ValueError):
 class AccountIn(BaseModel):
     username: str
     password: str
+    user_type: str
 
 class AccountOut(BaseModel):
     id: str
     username: str
+    user_type: str
 
 class AccountOutWithPassword(AccountOut):
     hashed_password: str
@@ -22,16 +24,18 @@ class AccountQueries:
             with conn.cursor() as cur:
                 cur.execute(
                     """
-                    SELECT id, username, hashed_password
+                    SELECT id, username, hashed_password, user_type
                     FROM accounts
                     WHERE username = %s
                 """,
                     [username],
                 )
-
                 record = cur.fetchone()
-                print("RECORD", record)
-                return AccountOutWithPassword(id=record[0], username=record[1], hashed_password=record[2])
+                print("RECORD: ", record )
+                if record != None:
+                    return AccountOutWithPassword(id=record[0], username=record[1], hashed_password=record[2], user_type=record[3])
+                else:
+                    print("bad username")
 
 
 
@@ -43,7 +47,8 @@ class AccountQueries:
                     """
                     INSERT INTO accounts (
                         username,
-                        hashed_password
+                        hashed_password,
+                        user_type
 
                     )
                     VALUES (%s, %s)
@@ -51,7 +56,8 @@ class AccountQueries:
                     """,
                     [
                         account.username,
-                        hashed_password
+                        hashed_password,
+                        account.user_type
 
                     ]
 
