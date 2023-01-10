@@ -51,7 +51,7 @@ class AccountQueries:
                         user_type
 
                     )
-                    VALUES (%s, %s)
+                    VALUES (%s, %s, %s)
                     RETURNING id
                     """,
                     [
