@@ -9,7 +9,7 @@ function Signup(props) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [user_type, setType] = useState("");
-  const [email, setEmail] = useState("");
+  // const [email, setEmail] = useState("");
 
   if (token) {
     return <Navigate to="/" />;
@@ -52,7 +52,7 @@ function Signup(props) {
                         </div>
                       </div>
 
-                      <div className="d-flex flex-row align-items-center mb-4">
+                      {/* <div className="d-flex flex-row align-items-center mb-4">
                         <i className="fas fa-envelope fa-lg me-3 fa-fw"></i>
                         <div className="form-outline flex-fill mb-0">
                           <label
@@ -70,7 +70,7 @@ function Signup(props) {
                             value={email}
                           />
                         </div>
-                      </div>
+                      </div> */}
 
                       <div className="d-flex flex-row align-items-center mb-4">
                         <i className="fas fa-lock fa-lg me-3 fa-fw"></i>
@@ -142,9 +142,7 @@ function Signup(props) {
 
                       <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                         <button
-                          onClick={() =>
-                            signup(username, password, email, user_type)
-                          }
+                          onClick={() => signup(username, password, user_type)}
                           type="button"
                           className="btn btn-primary btn-lg"
                         >
