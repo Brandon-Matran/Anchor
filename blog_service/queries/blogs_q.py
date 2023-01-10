@@ -79,3 +79,4 @@ class BlogRepo:
                     return BlogOut(id=id, **old_data)
         except Exception:
             return {"message": "Could not create new blog!"}
+
