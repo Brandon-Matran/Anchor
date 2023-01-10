@@ -1,5 +1,31 @@
 # Allen's Day to Day
 
+## 01/09/2023
+
+Completed:
+- set up Migrations for Blogs table
+- wrote basic lines for blogs queries and routers
+
+Work in Progress:
+- figure out how to pull/fetch data from registered user from account microservice
+- write lines for delete blogs
+
+Blockers:
+- Find out how to pull/fetch data from other microservices
+
+## 01/06/2023
+
+Completed:
+- set up project and pgadmin
+- resolved docker container issue
+- set up subbranch Allen/Create_Delete_Blogs
+
+Work in Progress:
+- begin coding and work on creaet blogs
+
+Blockers:
+- Need to learn more about FastAPI
+
 ## 01/05/2023
 
 Completed:
