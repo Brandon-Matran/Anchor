@@ -23,7 +23,7 @@ class BlogList(BaseModel):
     
     
 class BlogRepository():
-    def get_all(self) -> Union[Error, List[BlogList]]:
+    def all_blogs(self) -> Union[Error, List[BlogList]]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
