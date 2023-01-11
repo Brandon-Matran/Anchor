@@ -100,14 +100,15 @@ export function useToken() {
       return;
     } else {
       let error = await response.json();
-      console.log("error")
+      console.log("error");
       return handleErrorMessage(error);
     }
-}
+  }
 
   async function signup(username, password, user_type) {
-    const url = `${process.env.REACT_APP_ACCOUNT_SERVICE}/api/accounts/`;
-    const response = await fetch(url, {
+    const url1 = `${process.env.REACT_APP_ACCOUNT_SERVICE}/api/accounts/`;
+    console.log(url1);
+    const response = await fetch(url1, {
       method: "post",
       body: JSON.stringify({
         username,
@@ -118,9 +119,9 @@ export function useToken() {
         "Content-Type": "application/json",
       },
     });
-    if (response.ok) {
-      await login(username, password);
-    }
+    // if (response.ok) {
+    //   await login(username, password);
+    // }
     return false;
   }
 

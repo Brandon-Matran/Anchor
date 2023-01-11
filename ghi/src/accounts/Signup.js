@@ -5,15 +5,15 @@ import signup_image from "../images/signup_image.png";
 import background_image from "../images/background_image.png";
 
 function Signup(props) {
-  const [token, signup] = useToken();
+  const [signup] = useToken();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [user_type, setType] = useState("");
   // const [email, setEmail] = useState("");
 
-  if (token) {
-    return <Navigate to="/" />;
-  }
+  // if (token) {
+  //   return <Navigate to="/" />;
+  // }
 
   return (
     <section
@@ -142,7 +142,9 @@ function Signup(props) {
 
                       <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                         <button
-                          onClick={() => signup(username, password, user_type)}
+                          onClick={async () =>
+                            await signup(username, password, user_type)
+                          }
                           type="button"
                           className="btn btn-primary btn-lg"
                         >
