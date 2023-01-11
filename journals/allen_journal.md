@@ -1,5 +1,17 @@
 # Allen's Day to Day
 
+## 01/10/2023
+
+Completed:
+- completed create and delete backend
+- merged to FEATURE/blogs
+
+Work in Progress:
+- complete front end and merge to FEATURE/blogs branch
+
+Notes:
+Discussed fetching data from account microservice with team. Decided we will fetch account data from the frontend then post the account data with blog data to the blogs table. We decided not to use Redux.
+
 ## 01/09/2023
 
 Completed:
