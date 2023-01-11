@@ -81,3 +81,30 @@ class BlogRepo:
         except Exception:
             return {"message": "Could not create new blog!"}
 
+    def update(self, blog_id:int, blog:BlogIn) -> Union[BlogOut,BlogError]:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    db.execute(
+                        """
+                        UPDATE blogs
+                        Set username = %s
+                        , post_date= %s
+                        , title= %s
+                        , description= %s
+                        , pic_url= %s
+                        WHERE id = %s
+                        """,
+                        [
+                            blog.username,
+                            blog.post_date,
+                            blog.title,
+                            blog.description,
+                            blog.pic_url,
+                            blog_id
+                        ]
+                    )
+                    old_data = blog.dict()
+                    return BlogOut(id=blog_id, **old_data)
+        except Exception:
+            return {"message": "Could not update that blog!"}

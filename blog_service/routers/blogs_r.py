@@ -21,6 +21,17 @@ def all_blogs(
     ):
     return repo.all_blogs()
 
+
 @router.delete("/blogs/{blog_id}", response_model=bool)
 def delete_blog(blog_id: int, repo: BlogRepo = Depends()) -> bool:
     return repo.delete(blog_id)
+
+
+@router.put("/blogs/{blog_id}", response_model=Union[BlogOut, BlogError])
+def update_blog(
+    blog_id: int,
+    blog:BlogIn,
+    repo: BlogRepo = Depends(),
+    ) ->Union[BlogOut, BlogError]:
+
+    return repo.update(blog_id,blog)
