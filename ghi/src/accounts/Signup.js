@@ -5,33 +5,11 @@ import signup_image from "../images/signup_image.png";
 import background_image from "../images/background_image.png";
 
 function Signup(props) {
-  const [token,login] = useToken();
+  const [token,login, logout, signup] = useToken();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [user_type, setType] = useState("");
-  // const [email, setEmail] = useState("");
 
-  async function signup(username, password, user_type) {
-    console.log("pooP");
-    const url = `${process.env.REACT_APP_ACCOUNT_SERVICE}/api/accounts`;
-    const response = await fetch(url, {
-      method: "post",
-      body: JSON.stringify({
-        username,
-        password,
-        user_type,
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-
-    if (response.ok) {
-      console.log("THIS THE RESPONSE", response);
-      await login(username, password, user_type);
-    }
-    return false;
-  }
 
   if (token) {
     return <Navigate to="/" />;
