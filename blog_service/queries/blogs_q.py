@@ -77,7 +77,7 @@ class BlogRepo:
                     result = db.execute(
                         """
                         INSERT INTO blogs
-                            (username, post_date,title, pic_url, description)
+                            (username, post_date, title, pic_url, description)
                         VALUES
                             (%s, %s, %s, %s, %s)
                         RETURNING id;
