@@ -9,7 +9,7 @@ function Logout(props) {
   }
   return (
     <button onClick={() => logout()} class="btn btn-primary" type="submit">
-      Button
+      Logout
     </button>
   );
 }

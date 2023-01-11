@@ -146,7 +146,7 @@ function Signup(props) {
                           type="button"
                           className="btn btn-primary btn-lg"
                         >
-                          Submit Yay
+                          Submit
                         </button>
                       </div>
                     </form>

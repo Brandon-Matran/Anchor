@@ -37,6 +37,25 @@ class AccountQueries:
                 else:
                     print("bad username")
 
+    def get_by_id(self, id: int) -> AccountOut:
+       with pool.connection() as conn:
+            with conn.cursor() as cur:
+                cur.execute(
+                    """
+                    SELECT id, username, hashed_password, user_type
+                    FROM accounts
+                    WHERE id = %s
+                """,
+                    [id],
+                )
+                record = cur.fetchone()
+                print("RECORD: ", record )
+                if record != None:
+                    return AccountOut(id=record[0], username=record[1], hashed_password=record[2], user_type=record[3])
+                else:
+                    print("ID not in database")
+
+
 
 
     def create(self, account: AccountIn, hashed_password: str) -> AccountOutWithPassword:
