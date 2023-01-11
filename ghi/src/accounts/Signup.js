@@ -142,7 +142,9 @@ function Signup(props) {
 
                       <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                         <button
-                          onClick={() => signup(username, password, user_type)}
+                          onClick={async () =>
+                            await signup(username, password, user_type)
+                          }
                           type="button"
                           className="btn btn-primary btn-lg"
                         >

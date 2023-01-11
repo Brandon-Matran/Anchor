@@ -84,7 +84,6 @@ export function useToken() {
   }
 
   async function login(username, password, user_type) {
-
     const url = `${process.env.REACT_APP_ACCOUNT_SERVICE}/token`;
     const form = new FormData();
     form.append("username", username);
@@ -102,9 +101,10 @@ export function useToken() {
       return;
     } else {
       let error = await response.json();
+      console.log("error");
       return handleErrorMessage(error);
     }
-}
+  }
 
   async function signup(username, password, user_type) {
     console.log("pooP");
@@ -122,7 +122,7 @@ export function useToken() {
     });
 
     if (response.ok) {
-      console.log("THIS THE RESPONSE", response)
+      console.log("THIS THE RESPONSE", response);
       await login(username, password, user_type);
     }
     return false;
