@@ -60,7 +60,7 @@ class ListingRepository:
                 with conn.cursor() as db:
                     db.execute(
                         """
-                        DELETE FROM vacations
+                        DELETE FROM listings
                         WHERE id = %s
                         """,
                         [listing_id]
