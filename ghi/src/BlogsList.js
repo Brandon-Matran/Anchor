@@ -49,8 +49,11 @@ const BlogsList = () => {
             <td>{blog.post_date}</td>
             <td>{blog.title}</td>
             <td>{blog.description}</td>
+            <td>
+              <button type="button" className="btn btn-danger" onClick={() => deleteBlog(blog.id)}>Delete Blog</button>
+            </td>
           </tr>
-        )})}
+        );})}
         </tbody>
       </table>
     </div>
