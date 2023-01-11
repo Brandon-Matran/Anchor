@@ -24,8 +24,9 @@ class BlogOut(BaseModel):
     id: int
     username: str
     post_date: date
-    pic_url: str
+    title: str
     description: str
+    # picture_url: Optional[str]
 
 
 class BlogRepo:

@@ -1,12 +1,11 @@
-from queries.blogs_q import BlogIn
 from fastapi import APIRouter, Depends, Response
-from queries.blogs_q import BlogList, BlogError, BlogRepo
 from typing import Union, List
 from queries.blogs_q import (
     BlogError,
     BlogIn,
     BlogRepo,
     BlogOut,
+    BlogList
 )
 
 router = APIRouter()
@@ -15,15 +14,13 @@ router = APIRouter()
 def create_blog(blog: BlogIn, response: Response, repo: BlogRepo = Depends()):
     return repo.create(blog)
 
-@router.delete("/blogs/{blog_id}", response_model=bool)
-def delete_blog(blog_id: int, repo: BlogRepo = Depends()) -> bool:
-    return repo.delete(blog_id)
-
-
 
 @router.get("/blogs", response_model=Union[BlogError, List[BlogList]])
 def all_blogs(
-    blogs: BlogList,
     repo: BlogRepo = Depends(),
-):
-    return repo.all_blogs(blogs)
+    ):
+    return repo.all_blogs()
+
+@router.delete("/blogs/{blog_id}", response_model=bool)
+def delete_blog(blog_id: int, repo: BlogRepo = Depends()) -> bool:
+    return repo.delete(blog_id)
