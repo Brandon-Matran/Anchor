@@ -12,7 +12,7 @@ function Signup(props) {
   // const [email, setEmail] = useState("");
 
   async function signup(username, password, user_type) {
-    console.log("pooP");
+    // console.log("pooP");
     const url = `${process.env.REACT_APP_ACCOUNT_SERVICE}/api/accounts`;
     const response = await fetch(url, {
       method: "post",
