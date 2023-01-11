@@ -53,3 +53,19 @@ class ListingRepository:
                     return ListingOut(id=id, **old_data)
         except Exception:
             return {"message": "Could not create new job listing!"}
+
+    def delete(self, listing_id: int) -> bool:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    db.execute(
+                        """
+                        DELETE FROM vacations
+                        WHERE id = %s
+                        """,
+                        [listing_id]
+                    )
+                    return True
+        except Exception as e:
+            print(e)
+            return False

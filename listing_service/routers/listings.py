@@ -17,3 +17,10 @@ def create_listing(
     repo: ListingRepository = Depends()
 ):
     return repo.create(listing)
+
+@router.delete("/listings/{listing_id}", response_model=bool)
+def delete_listing(
+    listing_id: int,
+    repo: ListingRepository = Depends(),
+) -> bool:
+    return repo.delete(listing_id)
