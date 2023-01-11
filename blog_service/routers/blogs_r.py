@@ -4,8 +4,8 @@ from queries.blogs_q import (
     BlogError,
     BlogIn,
     BlogRepo,
-    BlogOut,
-    BlogList
+    BlogOut
+    # BlogList
 )
 
 router = APIRouter()
@@ -15,13 +15,23 @@ def create_blog(blog: BlogIn, response: Response, repo: BlogRepo = Depends()):
     return repo.create(blog)
 
 
-@router.get("/blogs", response_model=Union[BlogError, List[BlogList]])
+@router.get("/blogs", response_model=Union[BlogError, List[BlogOut]])
 def all_blogs(
-    blogs: BlogList,
+    # blogs: BlogList,
     repo: BlogRepo = Depends(),
 ):
-    return repo.all_blogs(blogs)
+    return repo.all_blogs()
 
 @router.delete("/blogs/{blog_id}", response_model=bool)
 def delete_blog(blog_id: int, repo: BlogRepo = Depends()) -> bool:
     return repo.delete(blog_id)
+
+
+@router.put("/blogs/{blog_id}", response_model=Union[BlogOut, BlogError])
+def update_blog(
+    blog_id: int,
+    blog:BlogIn,
+    repo: BlogRepo = Depends(),
+    ) ->Union[BlogOut, BlogError]:
+
+    return repo.update(blog_id,blog)
