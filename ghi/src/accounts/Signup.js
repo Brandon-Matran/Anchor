@@ -5,15 +5,37 @@ import signup_image from "../images/signup_image.png";
 import background_image from "../images/background_image.png";
 
 function Signup(props) {
-  const [signup] = useToken();
+  const [token, login] = useToken();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [user_type, setType] = useState("");
   // const [email, setEmail] = useState("");
 
-  // if (token) {
-  //   return <Navigate to="/" />;
-  // }
+  async function signup(username, password, user_type) {
+    console.log("pooP");
+    const url = `${process.env.REACT_APP_ACCOUNT_SERVICE}/api/accounts`;
+    const response = await fetch(url, {
+      method: "post",
+      body: JSON.stringify({
+        username,
+        password,
+        user_type,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (response.ok) {
+      console.log("THIS THE RESPONSE", response);
+      await login(username, password, user_type);
+    }
+    return false;
+  }
+
+  if (token) {
+    return <Navigate to="/" />;
+  }
 
   return (
     <section
@@ -148,7 +170,7 @@ function Signup(props) {
                           type="button"
                           className="btn btn-primary btn-lg"
                         >
-                          Submit
+                          Submit Yay
                         </button>
                       </div>
                     </form>

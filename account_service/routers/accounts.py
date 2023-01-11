@@ -49,7 +49,8 @@ async def create_account(
         )
     form = AccountForm(
         username=info.username,
-        password=info.password
+        password=info.password,
+        user_type=info.user_type
         )
     token = await authenticator.login(response, request, form, repo)
     print(token)
@@ -67,4 +68,3 @@ async def get_token(
             "type": "Bearer",
             "account": account,
         }
-   

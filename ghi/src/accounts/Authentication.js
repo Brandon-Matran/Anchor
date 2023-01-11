@@ -83,11 +83,12 @@ export function useToken() {
     }
   }
 
-  async function login(username, password) {
+  async function login(username, password, user_type) {
     const url = `${process.env.REACT_APP_ACCOUNT_SERVICE}/token`;
     const form = new FormData();
     form.append("username", username);
     form.append("password", password);
+    form.append("user_type", user_type);
     const response = await fetch(url, {
       method: "post",
       credentials: "include",
@@ -106,9 +107,9 @@ export function useToken() {
   }
 
   async function signup(username, password, user_type) {
-    const url1 = `${process.env.REACT_APP_ACCOUNT_SERVICE}/api/accounts/`;
-    console.log(url1);
-    const response = await fetch(url1, {
+    console.log("pooP");
+    const url = `${process.env.REACT_APP_ACCOUNT_SERVICE}/api/accounts`;
+    const response = await fetch(url, {
       method: "post",
       body: JSON.stringify({
         username,
@@ -119,9 +120,11 @@ export function useToken() {
         "Content-Type": "application/json",
       },
     });
-    // if (response.ok) {
-    //   await login(username, password);
-    // }
+
+    if (response.ok) {
+      console.log("THIS THE RESPONSE", response);
+      await login(username, password, user_type);
+    }
     return false;
   }
 
