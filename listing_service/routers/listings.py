@@ -1,11 +1,20 @@
-from fastapi import APIRouter
-from queries.listings import ListingIn
+from fastapi import APIRouter, Depends, Response
+from typing import Union
+from queries.listings import (
+    Error,
+    ListingIn,
+    ListingRepository,
+    ListingOut,
+)
 
 router = APIRouter()
 
 
-@router.post("/listings")
-def create_listing(listing: ListingIn):
-    print('listing', listing)
-    print('deadline', listing.deadline.month)
-    return listing
+@router.post("/listings", response_model=Union[ListingOut, Error])
+def create_listing(
+    listing: ListingIn,
+    response: Response,
+    repo: ListingRepository = Depends()
+):
+    response.status_code = 400
+    return repo.create(listing)
