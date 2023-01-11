@@ -97,6 +97,8 @@ async def up(db_url, to=LATEST, dir=os.path.dirname(__file__)):
         migrations_to_run = migrations_to_run[:to]
     for migration, record in migrations_to_run:
         if record and migration != record:
+            print(record)
+            print(migration)
             message = f"Incompatible migration history at {migration.name}"
             raise RuntimeError(message)
         elif record and migration == record:

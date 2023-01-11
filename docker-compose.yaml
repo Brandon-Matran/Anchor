@@ -1,9 +1,9 @@
 # volumes:
 volumes:
-  anchor-postgres-data:
-    external: true
-  pg-admin:
-    external: true
+    anchor-postgres-data:
+      external: true
+    pg-admin:
+      external: true
 
 services:
   postgres:

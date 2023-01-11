@@ -39,7 +39,6 @@ Plan:
 Issues:
 
 - ghi container not working because of a "debug" thing in gih/package.json
-- service containers not working "FATAL: password authentication failed for user "blog""
 
 ## 01/04/2023
 

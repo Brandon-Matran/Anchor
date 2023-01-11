@@ -9,17 +9,19 @@ COPY main.py main.py
 
 # Copy all of the subdirectories in your service's directory
 # Modify these instructions to do that
-# COPY queries queries
-# COPY routers routers
-
+COPY queries queries
+COPY routers routers
+COPY authenticator.py authenticator.py
 
 # If you're using a relational database with migrations,
 # uncomment the following line
-# COPY migrations migrations
-
+COPY migrations migrations
+ADD https://github.com/ufoscout/docker-compose-wait/releases/download/2.9.0/wait /wait
+RUN chmod +x /wait
 RUN python -m pip install -r requirements.txt
-# CMD uvicorn main:app --host 0.0.0.0 --port $PORT
-CMD uvicorn main:app --host 0.0.0.0 
+WORKDIR /app
+CMD uvicorn main:app --host 0.0.0.0 --port $PORT
+# CMD uvicorn main:app --host 0.0.0.0
 
 # If you're using a relational database and want migrations
 # to be run automatically, delete the previous CMD line and
