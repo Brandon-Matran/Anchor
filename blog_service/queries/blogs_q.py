@@ -12,11 +12,12 @@ class BlogList(BaseModel):
     post_date: date
     title: str
     description: str
-    picture_url: Optional[str]
+    pic_url: Optional[str]
 
 class BlogIn(BaseModel):
     username: str
     post_date: date
+    title: str
     pic_url: str
     description: str
 
@@ -24,6 +25,7 @@ class BlogOut(BaseModel):
     id: int
     username: str
     post_date: date
+    title: str
     pic_url: str
     description: str
 
@@ -48,13 +50,13 @@ class BlogRepo:
                             title=record[3],
                             description=record[4],
                             picture_url=record[5],
-                        ) 
+                        )
                         for record in db
                     ]
         except Exception as e:
             print(e)
             return {"message": "Could not retrieve the list of blogs"}
-        
+
     def create(self, blog: BlogIn) -> BlogOut:
         try:
             with pool.connection() as conn:
@@ -80,3 +82,29 @@ class BlogRepo:
         except Exception:
             return {"message": "Could not create new blog!"}
 
+    def update(self, blog_id:int, blog:BlogIn) -> Union[BlogOut,BlogError]:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    db.execute(
+                        """
+                        UPDATE blogs
+                        Set username = %s
+                        , post_date= %s
+                        , title= %s
+                        , description= %s
+                        , picture_url= %s
+                        """,
+                        [
+                            blog.username,
+                            blog.post_date,
+                            blog.title,
+                            blog.description,
+                            blog.pic_url,
+                            blog_id
+                        ]
+                    )
+                    old_data = blog.dict()
+                    return BlogOut(id=blog_id, **old_data)
+        except Exception:
+            return {"message": "Could not update that blog!"}

@@ -16,6 +16,12 @@ remove:
 docker container prune
 docker volume remove postgres-data
 
+## 01/10/2023
+
+conflicts:
+1 blogs missing "title" here and there
+2 picture_url or pic_url
+
 ## 01/05/2023
 
 Completed:
