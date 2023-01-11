@@ -31,3 +31,17 @@ Completed:
     - Assigned points to each feature / story
 Work in progress:
     - Will start working on FASTAPI
+
+## 01/09/2023
+Completed:
+    - Coded at first endpoint for Job Listings
+    - Created router, query, and migrations files
+Work in progress:
+    - Get specific blogs
+
+
+## 01/10/2023
+Completed:
+    - Response models for job listings post
+Work in progress:
+    - Get specific blogs
