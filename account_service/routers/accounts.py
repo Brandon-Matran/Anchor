@@ -43,6 +43,7 @@ async def create_account(
     hashed_password = authenticator.hash_password(info.password)
     try:
         account = repo.create(info, hashed_password)
+        print("ACOUNT", account)
     except DuplicateAccountError:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
@@ -53,8 +54,9 @@ async def create_account(
         password=info.password,
         user_type=info.user_type
         )
+    print("FORM", form)
     token = await authenticator.login(response, request, form, repo)
-    print(token)
+    print("TOKEN", token)
     return AccountToken(account=account, **token.dict())
 
 

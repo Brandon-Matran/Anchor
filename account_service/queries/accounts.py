@@ -31,7 +31,7 @@ class AccountQueries:
                     [username],
                 )
                 record = cur.fetchone()
-                print("RECORD: ", record )
+
                 if record != None:
                     return AccountOutWithPassword(id=record[0], username=record[1], hashed_password=record[2], user_type=record[3])
                 else:
@@ -49,7 +49,7 @@ class AccountQueries:
                     [id],
                 )
                 record = cur.fetchone()
-                print("RECORD: ", record )
+
                 if record != None:
                     return AccountOut(id=record[0], username=record[1], hashed_password=record[2], user_type=record[3])
                 else:
@@ -58,7 +58,7 @@ class AccountQueries:
 
 
 
-    def create(self, account: AccountIn, hashed_password: str) -> AccountOutWithPassword:
+    def create(self, account: AccountIn, hashed_password: str) -> AccountOut:
 
         with pool.connection() as conn:
             with conn.cursor() as cur:
@@ -85,4 +85,4 @@ class AccountQueries:
                 print(id)
                 old_data = account.dict()
                 print("OLD DATA", old_data)
-                return AccountOutWithPassword(id=id, hashed_password=hashed_password, **old_data)
+                return AccountOut(id=id, **old_data)
