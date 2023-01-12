@@ -16,6 +16,27 @@ remove:
 docker container prune
 docker volume remove postgres-data
 
+## 01/09/2023
+
+Completed:
+
+- a
+
+Plan:
+
+- m
+
+## 01/09/2023
+
+Completed:
+
+- added signup front page
+
+Plan:
+
+- make sure signup front page works
+- discuss: email and user_type add to account service
+
 ## 01/06/2023
 
 Completed:
@@ -24,7 +45,7 @@ Completed:
 
 Plan:
 
-- create all feature branches and story sub-branches
+- create all feature branches and some story sub-branches
 
 ## 01/05/2023
 
