@@ -1,26 +1,19 @@
-import { useState} from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useToken } from './Authentication.js';
-
-
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useToken } from "./Authentication.js";
 
 function LoginForm() {
   const navigate = useNavigate();
   const [token, login] = useToken();
 
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
-
-
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-
-
-
-  const handleSubmit = async e => {
-    login(username, password)
+  const handleSubmit = async (e) => {
+    login(username, password);
     e.preventDefault();
-    // navigate("/test")
-  }
+    navigate("/test");
+  };
 
   return (
     <div className="container">
@@ -30,7 +23,7 @@ function LoginForm() {
           <input
             required
             type="text"
-            onChange={e=>setUsername(e.target.value)}
+            onChange={(e) => setUsername(e.target.value)}
             value={username}
             className="form-control"
             id="username"
@@ -41,7 +34,7 @@ function LoginForm() {
           <input
             required
             type="password"
-            onChange={e=>setPassword(e.target.value)}
+            onChange={(e) => setPassword(e.target.value)}
             value={password}
             className="form-control"
             id="password"
@@ -54,6 +47,5 @@ function LoginForm() {
     </div>
   );
 }
-
 
 export default LoginForm;

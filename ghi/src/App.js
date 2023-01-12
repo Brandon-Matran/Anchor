@@ -6,9 +6,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import TestPage from "./accounts/TestPage.js";
 import { AuthProvider, useToken } from "./accounts/Authentication.js";
 import Signup from "./accounts/Signup";
-import MainPage from "./MainPage";
-import Nav from "./Nav";
-
+import MainPage from "./accounts/MainPage";
 function GetToken() {
   // Get token from JWT cookie (if already logged in)
   useToken();
@@ -28,7 +26,7 @@ function App() {
       <AuthProvider>
         <GetToken />
         <Routes>
-          <Route index path="/" element={<MainPage />} />
+          <Route path="/" element={<MainPage />} />
           <Route path="/login" element={<LoginForm />} />
           <Route path="/test" element={<TestPage />} />
           <Route path="/signup" element={<Signup />} />

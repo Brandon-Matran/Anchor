@@ -5,11 +5,10 @@ import signup_image from "../images/signup_image.png";
 import background_image from "../images/background_image.png";
 
 function Signup(props) {
-  const [token, login] = useToken();
+  const [token, login, logout, signup] = useToken();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [user_type, setType] = useState("");
-  // const [email, setEmail] = useState("");
 
   async function signup(username, password, user_type) {
     // console.log("pooP");
@@ -170,7 +169,7 @@ function Signup(props) {
                           type="button"
                           className="btn btn-primary btn-lg"
                         >
-                          Submit Yay
+                          Submit
                         </button>
                       </div>
                     </form>
