@@ -6,7 +6,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import TestPage from "./accounts/TestPage.js";
 import { AuthProvider, useToken } from "./accounts/Authentication.js";
 import Signup from "./accounts/Signup";
-import MainPage from "./MainPage";
+import MainPage from "./accounts/MainPage";
 import Nav from "./Nav";
 
 function GetToken() {
@@ -28,7 +28,7 @@ function App() {
       <AuthProvider>
         <GetToken />
         <Routes>
-          <Route index path="/" element={<MainPage />} />
+          <Route path="/" element={<MainPage />} />
           <Route path="/login" element={<LoginForm />} />
           <Route path="/test" element={<TestPage />} />
           <Route path="/signup" element={<Signup />} />

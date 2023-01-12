@@ -9,12 +9,13 @@ from fastapi import (
 )
 from jwtdown_fastapi.authentication import Token
 from authenticator import authenticator
-
+from typing import Optional
 from pydantic import BaseModel
 
 from queries.accounts import (
     AccountIn,
     AccountOut,
+    AccountOutWithPassword,
     AccountQueries,
     DuplicateAccountError,
 )
@@ -68,3 +69,22 @@ async def get_token(
             "type": "Bearer",
             "account": account,
         }
+
+@router.get("/api/protected", response_model=bool)
+async def get_protected(
+  account_data: dict = Depends(authenticator.get_current_account_data),
+):
+  return True
+
+@router.get("/api/accounts/{id}", response_model=Optional[AccountOut])
+def account_detail(
+  id: int,
+  response: Response,
+  # repo: AccountQueries = Depends(authenticator.get_current_account_data),
+  account_data: dict = Depends(authenticator.get_current_account_data),
+  repo: AccountQueries = Depends(),
+) -> AccountOutWithPassword:
+  user = repo.get_by_id(id)
+  if user is None:
+    response.status_code= 404
+  return user
