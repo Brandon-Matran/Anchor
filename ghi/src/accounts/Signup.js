@@ -5,11 +5,10 @@ import signup_image from "../images/signup_image.png";
 import background_image from "../images/background_image.png";
 
 function Signup(props) {
-  const [token,login, logout, signup] = useToken();
+  const [token, login, logout, signup] = useToken();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [user_type, setType] = useState("");
-
 
   if (token) {
     return <Navigate to="/" />;
