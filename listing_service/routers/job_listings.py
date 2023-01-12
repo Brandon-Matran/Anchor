@@ -6,8 +6,7 @@ router = APIRouter()
 
 @router.get("/job_listings", response_model=Union[Error, List[JobListings]])
 def all_listings(
-    job_listings: JobListings,
     repo: JobListingsRepository = Depends(),
 ):
-    return repo.all_listings(job_listings)
+    return repo.all_listings()
     
