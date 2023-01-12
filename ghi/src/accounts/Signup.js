@@ -33,18 +33,13 @@ function Signup(props) {
                     <form className="mx-1 mx-md-4">
                       <div className="d-flex flex-row align-items-center mb-4">
                         <i className="fas fa-anchor fa-lg me-3 fa-fw"></i>
-                        <div className="form-outline flex-fill mb-0">
-                          <label
-                            className="form-label"
-                            // htmlFor="form3Example1c"
-                          >
-                            Your User Name
-                          </label>
+                        <div className="flex-fill mb-0">
+                          <label className="form-label">Your User Name</label>
                           <input
                             onChange={(e) => setUsername(e.target.value)}
                             required
                             type="text"
-                            id="form3Example1c"
+                            // id="form3Example1c"
                             className="form-control"
                             value={username}
                           />
@@ -73,13 +68,8 @@ function Signup(props) {
 
                       <div className="d-flex flex-row align-items-center mb-4">
                         <i className="fas fa-lock fa-lg me-3 fa-fw"></i>
-                        <div className="form-outline flex-fill mb-0">
-                          <label
-                            className="form-label"
-                            htmlFor="form3Example4c"
-                          >
-                            Password
-                          </label>
+                        <div className="flex-fill mb-0">
+                          <label className="form-label">Password</label>
                           <input
                             onChange={(e) => setPassword(e.target.value)}
                             required
@@ -94,10 +84,7 @@ function Signup(props) {
                       <div className="d-flex flex-row align-items-center mb-4">
                         <i className="fas fa-user fa-lg me-3 fa-fw"></i>
                         <div className="form-outline flex-fill mb-0">
-                          <label
-                            className="form-label"
-                            htmlFor="form3Example1c"
-                          >
+                          <label className="form-label">
                             Pick your user type:
                           </label>
                           <select

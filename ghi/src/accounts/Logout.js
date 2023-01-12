@@ -5,10 +5,10 @@ function Logout(props) {
   const [token, login, logout, signup] = useToken();
 
   if (!token) {
-    return <Navigate to="/login" />
+    return <Navigate to="/login" />;
   }
   return (
-    <button onClick={() => logout()} class="btn btn-primary" type="submit">
+    <button onClick={() => logout()} className="btn btn-primary" type="submit">
       Logout
     </button>
   );
