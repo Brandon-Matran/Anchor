@@ -15,7 +15,7 @@ def create_blog(blog: BlogIn, response: Response, repo: BlogRepo = Depends()):
     return repo.create(blog)
 
 
-@router.get("/blogs", response_model=Union[BlogError, List[BlogList]])
+@router.get("/blogs", response_model=Union[List[BlogOut], BlogError])
 def all_blogs(
     repo: BlogRepo = Depends(),
     ):
