@@ -22,7 +22,6 @@ function App() {
 
   return (
     <Router>
-      <Nav />
       <AuthProvider>
         <GetToken />
         <Routes>
