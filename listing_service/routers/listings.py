@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends, Response
-from typing import Union
+from typing import Union, List
 from queries.listings import (
     ListingError,
     ListingIn,
@@ -8,6 +8,12 @@ from queries.listings import (
 )
 
 router = APIRouter()
+
+@router.get("/listings", response_model=Union[List[ListingOut], ListingError])
+def all_listings(
+    repo: ListingRepository = Depends(),
+):
+    return repo.all_listings()
 
 
 @router.post("/listings", response_model=Union[ListingOut, ListingError])
