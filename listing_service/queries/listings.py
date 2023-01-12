@@ -69,3 +69,31 @@ class ListingRepository:
         except Exception as e:
             print(e)
             return False
+
+    def update(self, id: int, listing: ListingIn) -> ListingOut:
+        with pool.connection() as conn:
+            with conn.cursor() as db:
+                db.execute(
+                    """
+                    UPDATE listings
+                    SET title = %s
+                    , company_name = %s
+                    , job_position = %s
+                    , apply_url = %s
+                    , deadline = %s
+                    , created = %s
+                    WHERE id = %s
+                    """,
+                    [
+                        listing.title,
+                        listing.company_name,
+                        listing.job_position,
+                        listing.apply_url,
+                        listing.deadline,
+                        listing.created,
+                        id
+                    ]
+                )
+                
+                old_data = listing.dict()
+                return ListingOut(id=id, **old_data)

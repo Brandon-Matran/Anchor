@@ -24,3 +24,11 @@ def delete_listing(
     repo: ListingRepository = Depends(),
 ) -> bool:
     return repo.delete(listing_id)
+
+@router.put("/listings/{listing_id}", response_model=ListingOut)
+def update_listing(
+    listing_id: int,
+    listing: ListingIn,
+    repo: ListingRepository = Depends(),
+) -> ListingOut:
+    return repo.update(listing_id, listing)

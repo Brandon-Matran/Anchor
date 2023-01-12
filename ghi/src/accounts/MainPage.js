@@ -1,6 +1,7 @@
 import background_image from "../images/background_image.png";
 import programmer from "../images/programmer.jpg";
 import { useNavigate } from "react-router";
+import './MainPage.css';
 
 function MainPage() {
   const navigate = useNavigate();

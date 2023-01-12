@@ -1,3 +1,33 @@
+## 1/11/23
+Today I worked on:
+-I created the MainPage.js and assigned a signup and login button. Then I had 1 on 1 meetings with the instructors to understand how we could restrict certain endpoints for users with different roles. For instance, a regular user can only create blogs. However, a company user can only create job listings. Code was released and I was able have a better understanding on how to do that. I also finished the update job listings story.
+
+- Tomorrow I plan to talk over with my team how we are going to pull data from the access token to allow users for creating blogs.
+
+## 1/10/23
+Today I worked on:
+-I helped finish the Signup.js on the front end. We were having issues with the account not being created when we clicked the submit button on the sign up page. Afterwards, I worked on the logout button and that was completed. Afterwards, I tried to help other classmates with their code.
+
+- Tomorrow I plan to work on the MainPage and start putting together the front end. Also I plan to finish my last story which is the update Job Listings.
+
+## 1/9/23
+Over the weekend I:
+-I was able to get my Login/Logout/Signup backend working. I am now able to receive a token upon account creation. All my endpoints are working.
+
+Today I worked on:
+-I started working on my front end, specifically the login form. I added the code for the authentication on the front end to it's own file. This file is basically a library that will allow users to login/logout/signup.
+
+- Tomorrow I plan to finish my stories regarding Login/Logout (Back-end and Front-end)
+
+## 1/6/23
+Today I worked on:
+
+-I was having issues with my containers so I took a look at the Docker Compose file and found that there were some syntax errors. I checked the learn modules and was able to fix them in my Docker-Compose file. My containers worked after that. Afterwards, I started the Accounts microservice. I imported the dependencies to get started on authentication. Created my models and connected FASTAPI.
+
+-Tomorrow I plan to read through the JWTDown Authentication docs and watch the videos to get started on creating tokens.
+
+
+
 ## 1/5/23
 
 Today I worked on:
