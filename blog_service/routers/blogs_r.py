@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends, Response
-from typing import Union, List
+from typing import Union, List, Optional
 from queries.blogs_q import (
     BlogError,
     BlogIn,
@@ -35,3 +35,15 @@ def update_blog(
     ) ->Union[BlogOut, BlogError]:
 
     return repo.update(blog_id,blog)
+
+
+@router.get("/blogs/{blog_id}", response_model=Optional[BlogOut])
+def get_one_blog(
+    blog_id: int,
+    response: Response,
+    repo: BlogRepo = Depends(),
+) -> BlogOut:
+    blog = repo.get_one(blog_id)
+    if blog is None:
+        response.status_code = 404
+    return blog

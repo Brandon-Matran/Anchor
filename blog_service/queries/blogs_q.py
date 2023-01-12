@@ -139,3 +139,38 @@ class BlogRepo:
                     return BlogOut(id=blog_id, **old_data)
         except Exception:
             return {"message": "Could not update that blog!"}
+
+    def get_one(self, blog_id: int) -> Optional[BlogOut]:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    result = db.execute(
+                        """
+                        SELECT id
+                            , username
+                            , post_date
+                            , title
+                            , pic_url
+                            , description
+                        FROM blogs
+                        WHERE id = %s
+                        """,
+                        [blog_id]
+                    )
+                    record = result.fetchone()
+                    if record is None:
+                        return None
+                    return self.record_to_blog_out(record)
+        except Exception as e:
+            print(e)
+            return {"message": "Could not get that blog"}
+
+    def record_to_blog_out(self, record):
+        return BlogOut(
+            id=record[0],
+            username=record[1],
+            post_date=record[2],
+            title=record[3],
+            pic_url=record[4],
+            description=record[5],
+        )
