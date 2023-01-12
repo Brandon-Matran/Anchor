@@ -10,28 +10,6 @@ function Signup(props) {
   const [password, setPassword] = useState("");
   const [user_type, setType] = useState("");
 
-  async function signup(username, password, user_type) {
-    // console.log("pooP");
-    const url = `${process.env.REACT_APP_ACCOUNT_SERVICE}/api/accounts`;
-    const response = await fetch(url, {
-      method: "post",
-      body: JSON.stringify({
-        username,
-        password,
-        user_type,
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-
-    if (response.ok) {
-      console.log("THIS THE RESPONSE", response);
-      await login(username, password, user_type);
-    }
-    return false;
-  }
-
   if (token) {
     return <Navigate to="/" />;
   }
