@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import Construct from './Construct.js'
 import ErrorNotification from './ErrorNotification';
 import './App.css';
+import BlogsList from './Blogs/BlogsList.js';
+import JobListings from './Jobs/JobListings.js';
 
 function App() {
   const [launch_info, setLaunchInfo] = useState([]);
@@ -28,10 +30,14 @@ function App() {
 
 
   return (
-    <div>
-      <ErrorNotification error={error} />
-      <Construct info={launch_info} />
-    </div>
+  <Router>
+        <Routes>
+          <Route path="/" element={<MainPage />} />
+          <Route path="/blogs" element={<BlogsList />} />
+          <Route path="/listings" element={<JobListings />} />
+        </Routes>
+  </Router>
+
   );
 }
 
