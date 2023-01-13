@@ -7,6 +7,8 @@ import TestPage from "./accounts/TestPage.js";
 import { AuthProvider, useToken } from "./accounts/Authentication.js";
 import Signup from "./accounts/Signup";
 import MainPage from "./accounts/MainPage";
+import CreateBlogsForm from "./Blogs/CreateBlogsForm";
+
 function GetToken() {
   // Get token from JWT cookie (if already logged in)
   useToken();
@@ -30,6 +32,7 @@ function App() {
           <Route path="/login" element={<LoginForm />} />
           <Route path="/test" element={<TestPage />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/blogs/create" element={<CreateBlogsForm/>} />
         </Routes>
       </AuthProvider>
     </Router>

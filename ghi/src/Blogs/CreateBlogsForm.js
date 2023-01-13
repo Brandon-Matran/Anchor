@@ -1,43 +1,27 @@
 import {useEffect, useState} from "react"
 import React from "react"
+import { useAuthContext } from "../accounts/Authentication"
 
+function BootstrapInputs(props) {
 
-function CreateBlogsForm() {
+    const {id, labelText, onChange, placeholder, type, value} = props;
+
+    return (
+        <div className="form-floating mb-3">
+            <label htmlFor={id}>{labelText}</label>
+            <input onChange={onChange} placeholder={placeholder} required type={type} id={id} className="form-control" value={value}/>
+        </div>
+    );
+}
+
+function CreateBlogsForm(props) {
+    const { token } = useAuthContext();
     const [username, setUserName] = useState('')
     const post_date = new Date().toLocaleString() + ''
     const [title, setTitle] = useState('')
     const [pic_url, setPicURL] = useState('')
-    const [description, setDescription] = setState('')
+    const [description, setDescription] = useState('')
     const [submitted, setSubmitted] = useState(false)
-
-    // useEffect(() => {
-    //     const loginURL = 'http://localhost:8100/api/accounts'
-    //     fetch(loginURL)
-    //     .then(response => {
-    //         if(response.ok) {
-    //             let data = response.json()
-    //             return data
-    //         }
-    //         throw new Error ("BAD RESPONSE!")
-    //     })
-    //     .then(data => {setUserName(data.username)})
-    //     .catch((err) => console.log(err))
-    // }, [])
-
-    const handleTitleChange = (event) => {
-        const value = event.target.value
-        setName(value);
-    }
-
-    const handlePicURLChange = (event) => {
-        const value = event.target.value
-        setName(value);
-    }
-
-    const handleDsptChange = (event) => {
-        const value = event.target.value
-        setName(value);
-    }
 
     const handleSubmit = (event) => {
         event.preventDefault()
@@ -49,7 +33,7 @@ function CreateBlogsForm() {
             "description": description
         }
 
-        const blogURL = `${REACT_APP_BLOG_SERVICE}/blogs`
+        const blogURL = `${process.env.REACT_APP_BLOG_SERVICE}/blogs`
         const fetchConfig = {
             method: "post",
             body: JSON.stringify(newBlog),
@@ -80,22 +64,24 @@ function CreateBlogsForm() {
                 <div className="shadow p-4 mt-4">
                     <h1>Create a New Blog</h1>
                     <form onSubmit={handleSubmit} id="create-blog-form">
-                        <div className="form-floating mb-3">
-                            <input onChange={handleTitleChange} placeholder="Title" required
-                            type="text" name ="title" id="title"
-                            className="form-control" value={title}/>
-                            <label htmlFor="title">Title</label>
-                        </div>
-                        <div className="form-floating mb-3">
-                            <input onChange={handlePicURLChange} placeholder="Picture URL" required
-                            type="text" name ="pic_url" id="pic_url"
-                            className="form-control" value={pic_url}/>
-                            <label htmlFor="pic_url">Picture URL</label>
-                        </div>
+                        <BootstrapInputs
+                        id = "text"
+                        labelText = "Title"
+                        onChange = {e => setTitle(e.target.value)}
+                        placeholder = "Write a Blog Title"
+                        type = "text"
+                        value = {title} />
+                        <BootstrapInputs
+                        id = "text"
+                        labelText = "Picture URL"
+                        onChange = {e => setPicURL(e.target.value)}
+                        placeholder = "Enter a Picture URL"
+                        type = "text"
+                        value = {pic_url} />
                         <div className="mb-3">
                             <label htmlFor="description" className="form-label">Description</label>
-                            <textarea onChange={handleDsptChange} className="form-control"
-                            name="description" id="description" rows="3" value={description} ></textarea>
+                            <textarea onChange={e => setDescription(e.target.value)} className="form-control"
+                            id="description" rows="3" value={description} ></textarea>
                         </div>
                         <button type="submit" className="btn btn-primary">Create</button>
                     </form>
@@ -108,3 +94,5 @@ function CreateBlogsForm() {
     );
 
 }
+
+export default CreateBlogsForm
