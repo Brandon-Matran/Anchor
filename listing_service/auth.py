@@ -1,7 +1,6 @@
 import os
 from fastapi import Depends
 from jwtdown_fastapi.authentication import Authenticator
-from fastapi.middleware.cors import CORSMiddleware
 
 
 class MyAuthenticator(Authenticator):
