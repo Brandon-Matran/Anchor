@@ -2,3 +2,5 @@ fastapi[all]==0.78.0
 uvicorn[standard]==0.17.6
 psycopg[binary,pool]==3.0.14
 pytest
+python-jose[cryptography]==3.3.0
+python-multipart==0.0.5
