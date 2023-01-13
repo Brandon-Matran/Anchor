@@ -31,7 +31,37 @@ const BlogsList = () => {
 
   return (
     <div>
-    
+      <table className="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Username</th>
+            <th scope="col">Post Date</th>
+            <th scope="col">Title</th>
+            <th scope="col">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          {blogs.blogs?.map((blog) => {
+            return (
+              <tr key={blog.id}>
+                <td>{blog.username}</td>
+                <td>{blog.post_date}</td>
+                <td>{blog.title}</td>
+                <td>{blog.description}</td>
+                <td>
+                  <button
+                    type="button"
+                    className="btn btn-danger"
+                    onClick={() => deleteBlog(blog.id)}
+                  >
+                    Delete Blog
+                  </button>
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
     </div>
   );
 };

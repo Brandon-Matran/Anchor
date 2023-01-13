@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends, Response, HTTPException, status
-from typing import Union
+from typing import Union, List
 
 # from token_auth import get_current_user
 from auth import authenticator
@@ -17,6 +17,13 @@ router = APIRouter()
 #     detail="Invalid authentication credentials",
 #     headers={"WWW-Authenticate": "Bearer"},
 # )
+
+
+@router.get("/listings", response_model=Union[List[ListingOut], ListingError])
+def all_listings(
+    repo: ListingRepository = Depends(),
+):
+    return repo.all_listings()
 
 
 @router.post("/listings", response_model=Union[ListingOut, ListingError])

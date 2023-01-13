@@ -6,6 +6,7 @@ from typing import Optional, List, Union
 class BlogError(BaseModel):
     message: str
 
+<<<<<<< HEAD
 # class BlogList(BaseModel):
 #     id: int
 #     username: str
@@ -14,6 +15,8 @@ class BlogError(BaseModel):
 #     description: str
 #     pic_url: Optional[str]
 
+=======
+>>>>>>> FEATURE/job_listings
 class BlogIn(BaseModel):
     username: str
     post_date: date

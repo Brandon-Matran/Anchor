@@ -14,6 +14,8 @@ function GetToken() {
   useToken();
   return null;
 }
+import BlogsList from "./Blogs/BlogsList.js";
+import JobListings from "./Jobs/JobListings.js";
 
 function App() {
   // const [token, setToken] = useState();
@@ -32,6 +34,8 @@ function App() {
           <Route path="/login" element={<LoginForm />} />
           <Route path="/test" element={<TestPage />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/blogs" element={<BlogsList />} />
+          <Route path="/listings" element={<JobListings />} />
         </Routes>
       </AuthProvider>
     </Router>
