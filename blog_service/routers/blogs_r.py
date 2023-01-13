@@ -11,7 +11,13 @@ router = APIRouter()
 
 
 @router.post("/blogs", response_model=Union[BlogOut, BlogError])
-def create_blog(blog: BlogIn, response: Response, repo: BlogRepo = Depends()):
+def create_blog(
+    blog: BlogIn,
+    response: Response,
+    repo: BlogRepo = Depends(),
+    account: dict = Depends(get_current_user),
+):
+    print(account)
     return repo.create(blog)
 
 @router.get("/blogs", response_model=Union[List[BlogOut], BlogError])
