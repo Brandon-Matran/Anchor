@@ -3,6 +3,12 @@ from datetime import date
 from queries.pool import pool
 
 
+class AccountOut(BaseModel):
+    id: str
+    username: str
+    user_type: str
+
+
 class ListingError(BaseModel):
     message: str
 
@@ -45,8 +51,8 @@ class ListingRepository:
                             listing.job_position,
                             listing.apply_url,
                             listing.deadline,
-                            listing.created
-                        ]
+                            listing.created,
+                        ],
                     )
                     id = result.fetchone()[0]
                     old_data = listing.dict()
@@ -63,7 +69,7 @@ class ListingRepository:
                         DELETE FROM listings
                         WHERE id = %s
                         """,
-                        [listing_id]
+                        [listing_id],
                     )
                     return True
         except Exception as e:
