@@ -8,6 +8,7 @@ import { AuthProvider, useToken } from "./accounts/Authentication.js";
 import Signup from "./accounts/Signup";
 import MainPage from "./accounts/MainPage";
 import Nav from "./Nav";
+import CreateBlogsForm from "./Blogs/CreateBlogsForm";
 
 function GetToken() {
   // Get token from JWT cookie (if already logged in)

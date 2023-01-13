@@ -1,13 +1,20 @@
-from fastapi import APIRouter, Depends, Response
-from typing import Union, List
+from fastapi import APIRouter, Depends, Response, HTTPException, status
+from typing import Union, List, Optional
 from queries.blogs_q import (
     BlogError,
     BlogIn,
     BlogRepo,
     BlogOut,
 )
+from token_auth import get_current_user
 
 router = APIRouter()
+
+not_authorized = HTTPException(
+    status_code=status.HTTP_401_UNAUTHORIZED,
+    detail="Invalid authentication credentials",
+    headers={"WWW-Authenticate": "Bearer"},
+)
 
 
 @router.post("/blogs", response_model=Union[BlogOut, BlogError])
@@ -18,6 +25,8 @@ def create_blog(
     account: dict = Depends(get_current_user),
 ):
     print(account)
+    if "individual" not in account.user_type:
+        raise not_authorized
     return repo.create(blog)
 
 @router.get("/blogs", response_model=Union[List[BlogOut], BlogError])
@@ -38,4 +47,16 @@ def update_blog(
     repo: BlogRepo = Depends(),
 ) -> Union[BlogOut, BlogError]:
 
-    return repo.update(blog_id, blog)
+    return repo.update(blog_id,blog)
+
+
+@router.get("/blogs/{blog_id}", response_model=Optional[BlogOut])
+def get_one_blog(
+    blog_id: int,
+    response: Response,
+    repo: BlogRepo = Depends(),
+) -> BlogOut:
+    blog = repo.get_one(blog_id)
+    if blog is None:
+        response.status_code = 404
+    return blog
