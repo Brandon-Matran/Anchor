@@ -5,7 +5,7 @@ const BlogsList = () => {
   const [blogs, setBlog] = useState([]);
 
   const getBlog = async () => {
-    const url = "http://localhost:8080/blogs";
+    const url = `${process.env.REACT_APP_BLOG_SERVICE}/blogs`;
     const response = await fetch(url);
     if (response.ok) {
       const data = await response.json();

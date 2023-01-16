@@ -6,7 +6,7 @@ const JobListings = () => {
 
 
   const getJob = async () => {
-    const url = "http://localhost:8090/listings";
+    const url = `${process.env.REACT_APP_LISTING_SERVICE}/listings`;
     const response = await fetch(url);
     if (response.ok) {
       const data = await response.json();
