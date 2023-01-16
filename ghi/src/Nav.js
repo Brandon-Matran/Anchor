@@ -59,6 +59,16 @@ function Nav() {
                 </li>
               </ul>
             </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" to="blogs">
+                Blogs
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" to="listings">
+                Listings
+              </NavLink>
+            </li>
           </ul>
         </div>
       </div>
