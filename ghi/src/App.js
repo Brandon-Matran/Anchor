@@ -9,14 +9,14 @@ import Signup from "./accounts/Signup";
 import MainPage from "./accounts/MainPage";
 import Nav from "./Nav";
 import CreateBlogsForm from "./Blogs/CreateBlogsForm";
-
+import BlogsList from "./Blogs/BlogsList.js";
+import JobListings from "./Jobs/JobListings.js";
 function GetToken() {
   // Get token from JWT cookie (if already logged in)
   useToken();
   return null;
 }
-import BlogsList from "./Blogs/BlogsList.js";
-import JobListings from "./Jobs/JobListings.js";
+
 
 function App() {
   // const [token, setToken] = useState();
