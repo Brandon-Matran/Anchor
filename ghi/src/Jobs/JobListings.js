@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const JobListings = () => {
   const [jobs, setJob] = useState([]);
@@ -23,21 +24,22 @@ const JobListings = () => {
   //   }
   // };
 
-  const ApplyToJobListing = async (apply_url) => {
-    const url = `http://localhost:8080/listings${apply_url}`;
-    const fetchConfig = {
-      method: "put",
-      body: JSON.stringify({ applied: true }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
-    const response = await fetch(url, fetchConfig);
-    if (response.ok) {
-      // getJob(url);
-      window.location.href = url;
-    }
-  };
+  // const ApplyToJobListing = async (apply_url) => {
+  //   const url = `http://localhost:8090`;
+  //   // const fetchConfig = {
+  //   //   method: "put",
+  //   //   body: JSON.stringify({ applied: true }),
+  //   //   headers: {
+  //   //     "Content-Type": "application/json",
+  //   //   },
+  //   // };
+  //   // const response = await fetch(url, fetchConfig);
+  //   const response = await fetch(url, apply_url);
+  //   if (response.ok) {
+  //     // getJob(url);
+  //     window.location.href = url;
+  //   }
+  // };
 
   useEffect(() => {
     getJob();
@@ -81,14 +83,25 @@ const JobListings = () => {
                 <td>{job.apply_url}</td>
                 <td>{job.deadline}</td>
                 <td>{job.created}</td>
+
                 <td>
+                  <button
+                    type="button"
+                    className="btn btn-danger"
+                    onClick={() => useNavigate(jobs.apply_url)}
+                  >
+                    Apply
+                  </button>
+                </td>
+
+                {/* <td>
                   <button
                     type="button"
                     className="btn btn-danger"
                     onClick={() => ApplyToJobListing(job.apply_url)}
                   >Apply
                   </button>
-                </td>
+                </td> */}
 
                 {/* <td>
                   <button
@@ -98,7 +111,6 @@ const JobListings = () => {
                     >Apply
                   </button>
                 </td> */}
-
               </tr>
             );
           })}
