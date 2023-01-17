@@ -9,7 +9,7 @@ import BlogsList from './Blogs/BlogsList.js';
 import JobListings from './Jobs/JobListings.js';
 
 function App() {
-  
+
   // const [launch_info, setLaunchInfo] = useState([]);
   // const [error, setError] = useState(null);  
 
@@ -46,3 +46,4 @@ function App() {
 }
 
 export default App;
+

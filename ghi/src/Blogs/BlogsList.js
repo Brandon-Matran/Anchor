@@ -14,7 +14,8 @@ const BlogsList = () => {
   };
 
   const deleteBlog = async (id) => {
-    const url = `http://localhost:8080/${id}`;
+    // const url = `http://localhost:8080/blogs/${id}`;
+    const url = `${process.env.REACT_APP_BLOG_SERVICE}/blogs/${id}`;
     const fetchConfig = { method: "delete" };
     const response = await fetch(url, fetchConfig);
     if (response.ok) {

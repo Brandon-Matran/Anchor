@@ -23,8 +23,8 @@ const JobListings = () => {
   //   }
   // };
 
-  const ApplyToJobListing = async (id) => {
-    const url = `http://localhost:8080/${jobs.apply_url}`;
+  const ApplyToJobListing = async (apply_url) => {
+    const url = `http://localhost:8080/listings${apply_url}`;
     const fetchConfig = {
       method: "put",
       body: JSON.stringify({ applied: true }),
@@ -34,7 +34,8 @@ const JobListings = () => {
     };
     const response = await fetch(url, fetchConfig);
     if (response.ok) {
-      getJob(url);
+      // getJob(url);
+      window.location.href = url;
     }
   };
 
@@ -50,6 +51,7 @@ const JobListings = () => {
             <th scope="col">Title</th>
             <th scope="col">Company Name</th>
             <th scope="col">Job Position</th>
+            <th scope="col">Application Link</th>
             <th scope="col">Deadline</th>
             <th scope="col">Created Date</th>
           </tr>
@@ -76,15 +78,27 @@ const JobListings = () => {
                 <td>{job.title}</td>
                 <td>{job.company_name}</td>
                 <td>{job.job_position}</td>
+                <td>{job.apply_url}</td>
                 <td>{job.deadline}</td>
                 <td>{job.created}</td>
                 <td>
-                <button
-                  type="button"
-                  className="btn btn-danger"
-                  onClick={() => ApplyToJobListing(job.apply_url)}>Apply
-                </button>
+                  <button
+                    type="button"
+                    className="btn btn-danger"
+                    onClick={() => ApplyToJobListing(job.apply_url)}
+                  >Apply
+                  </button>
                 </td>
+
+                {/* <td>
+                  <button
+                    type="button"
+                    className="btn btn-danger"
+                    onClick={() => {window.location.href = `http://localhost:8080/listings${job.apply_url}`}}
+                    >Apply
+                  </button>
+                </td> */}
+
               </tr>
             );
           })}
@@ -95,3 +109,15 @@ const JobListings = () => {
 };
 
 export default JobListings;
+
+
+//  <button
+//    type="button"
+//    className="btn btn-danger"
+//    onClick={() => ApplyToJobListing(job.apply_url)}
+//    to={{
+//      pathname: `http://localhost:8080/listings${jobs.apply_url}`,
+//    }}
+//  >
+//    Apply
+//  </button>;
