@@ -1,0 +1,136 @@
+.modalContainer {
+  /* display: flex;
+  align-items: center;
+  justify-content: center; */
+  width: 25%;
+  padding: 4rem 2rem;
+  border-radius: 0.8rem;
+  color: var(--light);
+  background: var(--background);
+  background-color: white;
+  box-shadow: 0.4rem 0.4rem 2.4rem 0.2rem hsla(235, 24%, 81%, 0.3);
+  overflow: hidden;
+  top: 30%;
+  position: absolute;
+  left: 35%;
+  animation: fadeInAnimation ease 1s;
+}
+
+.modalBackground {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1040;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(15px);
+    align-items: center;
+  justify-content: center;
+}
+
+@keyframes fadeInAnimation {
+    0% {
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.1;
+    }
+    20% {
+        opacity: 0.2;
+    }
+    30% {
+        opacity: 0.3;
+    }
+    40% {
+        opacity: 0.4;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    60% {
+        opacity: 0.6;
+    }
+    70% {
+        opacity: 0.7;
+    }
+    80% {
+        opacity: 0.8;
+    }
+    90% {
+        opacity: 0.9;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.cancel {
+    transform: translate(200px, 50px);
+  border-radius: 8px;
+  border-style: none;
+  box-sizing: border-box;
+  color: #f7f7f7;
+  background-color: #3d5c97;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial,
+    sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  height: 40px;
+  line-height: 20px;
+  list-style: none;
+  margin: 0;
+  outline: none;
+  padding: 10px 16px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  transition: color 100ms;
+  vertical-align: baseline;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+
+}
+
+.cancel:hover,
+.cancel:focus {
+  background-color: #82b5f0;
+}
+
+
+.submit {
+    transform: translate(100px, 50px);
+      border-radius: 8px;
+  border-style: none;
+  box-sizing: border-box;
+  color: #f7f7f7;
+  background-color: #3d5c97;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial,
+    sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  height: 40px;
+  line-height: 20px;
+  list-style: none;
+  margin: 0;
+  outline: none;
+  padding: 10px 16px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  transition: color 100ms;
+  vertical-align: baseline;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.submit:hover,
+.submit:focus {
+  background-color: #82b5f0;
+}
