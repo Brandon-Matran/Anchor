@@ -1,0 +1,134 @@
+.backgroundImage {
+  background-blend-mode: darken;
+}
+
+.programmer {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 40%;
+}
+
+#footer-container {
+  background-color: rgb(243, 243, 243);
+  max-width: 100%;
+}
+
+.login {
+  width: 75%;
+  margin-bottom: 50px;
+  position: relative;
+  left: 15%;
+}
+
+.openLoginModal {
+  transform: translate(700%, -100%);
+  background-color: #3d5c97;
+  border-radius: 8px;
+  border-style: none;
+  box-sizing: border-box;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial,
+    sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  height: 40px;
+  line-height: 20px;
+  list-style: none;
+  margin: 0;
+  outline: none;
+  padding: 10px 16px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  transition: color 100ms;
+  vertical-align: baseline;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.openLoginModal:hover,
+.openLoginModal:focus {
+  background-color: #82b5f0;
+}
+
+.openSignupModal {
+  transform: translate(-600%, -5%);
+  background-color: #3d5c97;
+  border-radius: 8px;
+  border-style: none;
+  box-sizing: border-box;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial,
+    sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  height: 40px;
+  line-height: 20px;
+  list-style: none;
+  margin: 0;
+  outline: none;
+  padding: 10px 16px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  transition: color 100ms;
+  vertical-align: baseline;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.openSignupModal:hover,
+.openSignupModal:focus {
+  background-color: #82b5f0;
+}
+
+#logo {
+  font-family: "Yanone Kaffeesatz";
+  font-size: 100px;
+  display: flex;
+  position: absolute;
+  bottom: 20vh;
+  left: 50%;
+  transform: translateX(-50%);
+  user-select: none;
+  top: -1%;
+}
+
+.header {
+  padding: 60px;
+  text-align: center;
+  background: #1abc9c;
+  color: rgb(56, 89, 138);
+  font-size: 30px;
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  color: rgb(255, 255, 255);
+  text-align: center;
+  padding: 50px;
+}
+
+.middle {
+  background-color: #ffffff;
+}
+
+.blogRow {
+  margin: auto;
+  width: 50%;
+  padding-top: 20px;
+}
+
+.aboveFooter {
+    background-color: #d4c0e7;
+}

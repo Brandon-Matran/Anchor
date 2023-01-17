@@ -37,6 +37,7 @@ const BlogsList = () => {
             <th scope="col">Username</th>
             <th scope="col">Post Date</th>
             <th scope="col">Title</th>
+            <th scope="col">Url</th>
             <th scope="col">Description</th>
           </tr>
         </thead>
@@ -47,6 +48,7 @@ const BlogsList = () => {
                 <td>{blog.username}</td>
                 <td>{blog.post_date}</td>
                 <td>{blog.title}</td>
+                <td>{blog.pic_url}</td>
                 <td>{blog.description}</td>
                 <td>
                   <button
@@ -66,4 +68,4 @@ const BlogsList = () => {
   );
 };
 
-export default BlogsList;
+// export default BlogsList;

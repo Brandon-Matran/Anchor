@@ -3,16 +3,35 @@ function Construct(props) {
     const pad2 = num => String(num).padStart(2, '0');
 
     return (
-        <div className="App">
-            <header className="App-header">
-                <h1>Under construction</h1>
-                <h2>Coming on (or before)</h2>
-                <h2>{props.info.year}-{pad2(props.info.month)}-{pad2(props.info.day)}</h2>
-                <h2>by or <strong>WELL BEFORE</strong> {pad2(props.info.hour)}:{pad2(props.info.min)}</h2>
-                
-            </header>
-        </div>
-    )
+    <form>
+      <div class="form-group">
+        <label for="exampleInputEmail1">Email address</label>
+        <input
+          type="email"
+          class="form-control"
+          id="exampleInputEmail1"
+          aria-describedby="emailHelp"
+          placeholder="Enter email"
+        />
+        <small id="emailHelp" class="form-text text-muted">
+          We'll never share your email with anyone else.
+        </small>
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Password</label>
+        <input
+          type="password"
+          class="form-control"
+          id="exampleInputPassword1"
+          placeholder="Password"
+        />
+      </div>
+      <button type="submit" class="btn btn-primary">
+        Submit
+      </button>
+    </form>
+  );
+    
 }
 
 export default Construct;

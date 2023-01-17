@@ -5,12 +5,12 @@ import os
 
 
 app = FastAPI()
-app.include_router(listings.router)
-
 origins = [
     "http://localhost:3000",
     "http://localhost:8090",
+
 ]
+
 
 app.add_middleware(
     CORSMiddleware,
@@ -19,5 +19,4 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-
+app.include_router(listings.router)

@@ -2,10 +2,10 @@ import { NavLink } from "react-router-dom";
 
 function Nav() {
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-success">
+    <nav className="navbar navbar-expand-lg navbar-dark bg-opacity-75 bg-success">
       <div className="container-fluid">
         <NavLink className="navbar-brand" to="/">
-          Anchor
+          ANCHOR
         </NavLink>
         <button
           className="navbar-toggler"
@@ -25,6 +25,40 @@ function Nav() {
                 Home
               </NavLink>
             </li>
+            <li className="nav-item dropdown">
+              <a
+                className=" nav-link dropdown-toggle "
+                href="#"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Account
+              </a>
+              <ul
+                className="dropdown-menu dropdown-menu-dark"
+                aria-labelledby="navbarDarkDropdownMenuLink"
+              >
+                <li>
+                  <NavLink
+                    className="dropdown-item"
+                    aria-current="page"
+                    to="signup"
+                  >
+                    Signup
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    className="dropdown-item"
+                    aria-current="page"
+                    to="login"
+                  >
+                    Login
+                  </NavLink>
+                </li>
+              </ul>
+            </li>
             <li className="nav-item">
               <NavLink className="nav-link" to="blogs">
                 Blogs
@@ -32,7 +66,7 @@ function Nav() {
             </li>
             <li className="nav-item">
               <NavLink className="nav-link" to="listings">
-                Job listings
+                Listings
               </NavLink>
             </li>
           </ul>

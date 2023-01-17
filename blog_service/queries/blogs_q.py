@@ -3,8 +3,23 @@ from datetime import date
 from queries.pool import pool
 from typing import Optional, List, Union
 
+class AccountOut(BaseModel):
+    id: str
+    username: str
+    user_type: str
+
 class BlogError(BaseModel):
     message: str
+
+
+# class BlogList(BaseModel):
+#     id: int
+#     username: str
+#     post_date: date
+#     title: str
+#     description: str
+#     pic_url: Optional[str]
+
 
 class BlogIn(BaseModel):
     username: str
@@ -12,6 +27,7 @@ class BlogIn(BaseModel):
     title: str
     pic_url: str
     description: str
+
 
 class BlogOut(BaseModel):
     id: int
@@ -79,8 +95,8 @@ class BlogRepo:
                             blog.post_date,
                             blog.title,
                             blog.pic_url,
-                            blog.description
-                        ]
+                            blog.description,
+                        ],
                     )
                     id = result.fetchone()[0]
                     old_data = blog.dict()
@@ -97,14 +113,14 @@ class BlogRepo:
                         DELETE FROM blogs
                         WHERE id = %s
                         """,
-                        [blog_id]
+                        [blog_id],
                     )
                     return True
         except Exception as e:
             print(e)
             return False
 
-    def update(self, blog_id:int, blog:BlogIn) -> Union[BlogOut,BlogError]:
+    def update(self, blog_id: int, blog: BlogIn) -> Union[BlogOut, BlogError]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
@@ -124,8 +140,8 @@ class BlogRepo:
                             blog.title,
                             blog.description,
                             blog.pic_url,
-                            blog_id
-                        ]
+                            blog_id,
+                        ],
                     )
                     old_data = blog.dict()
                     return BlogOut(id=blog_id, **old_data)
@@ -147,7 +163,7 @@ class BlogRepo:
                         FROM blogs
                         WHERE id = %s
                         """,
-                        [blog_id]
+                        [blog_id],
                     )
                     record = result.fetchone()
                     if record is None:
