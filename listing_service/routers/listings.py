@@ -58,3 +58,19 @@ def delete_listing(
         raise HTTPException(
             status_code=401, detail="Only company user can delete job listing"
         )
+
+
+
+@router.put("/listings/{listing_id}", response_model=ListingOut)
+def update_listing(
+    listing_id: int,
+    listing: ListingIn,
+    repo: ListingRepository = Depends(),
+    account: dict = Depends(authenticator.get_current_account_data),
+) -> ListingOut:
+    if account["user_type"] == "company":
+          return repo.update(listing_id, listing)
+    else:
+        raise HTTPException(
+            status_code=401, detail="Only company user can update job listing"
+        )

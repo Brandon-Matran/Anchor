@@ -4,12 +4,6 @@ from datetime import date
 from queries.pool import pool
 
 
-class AccountOut(BaseModel):
-    id: str
-    username: str
-    user_type: str
-
-
 class ListingError(BaseModel):
     message: str
 
@@ -45,7 +39,7 @@ class ListingRepository:
                         ORDER BY created;
                         """
                     )
-                    
+
                     return [
                             ListingOut(
                                 id=record[0],
@@ -55,7 +49,7 @@ class ListingRepository:
                                 apply_url=record[4],
                                 deadline=record[5],
                                 created=record[6],
-                            ) 
+                            )
                             for record in db
                     ]
         # except Exception as e:
@@ -80,8 +74,8 @@ class ListingRepository:
                             listing.job_position,
                             listing.apply_url,
                             listing.deadline,
-                            listing.created,
-                        ],
+                            listing.created
+                        ]
                     )
                     id = result.fetchone()[0]
                     old_data = listing.dict()
@@ -98,10 +92,37 @@ class ListingRepository:
                         DELETE FROM listings
                         WHERE id = %s
                         """,
-                        [listing_id],
+                        [listing_id]
                     )
                     return True
         except Exception as e:
             print(e)
             return False
-        
+
+    def update(self, id: int, listing: ListingIn) -> ListingOut:
+        with pool.connection() as conn:
+            with conn.cursor() as db:
+                db.execute(
+                    """
+                    UPDATE listings
+                    SET title = %s
+                    , company_name = %s
+                    , job_position = %s
+                    , apply_url = %s
+                    , deadline = %s
+                    , created = %s
+                    WHERE id = %s
+                    """,
+                    [
+                        listing.title,
+                        listing.company_name,
+                        listing.job_position,
+                        listing.apply_url,
+                        listing.deadline,
+                        listing.created,
+                        id
+                    ]
+                )
+
+                old_data = listing.dict()
+                return ListingOut(id=id, **old_data)
