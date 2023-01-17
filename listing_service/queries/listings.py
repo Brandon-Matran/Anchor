@@ -94,6 +94,6 @@ class ListingRepository:
                         id
                     ]
                 )
-                
+
                 old_data = listing.dict()
                 return ListingOut(id=id, **old_data)
