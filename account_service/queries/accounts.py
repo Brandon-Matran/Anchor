@@ -1,5 +1,7 @@
 from pydantic import BaseModel
 from .pool import pool
+from typing import List
+
 
 
 class DuplicateAccountError(ValueError):
@@ -86,3 +88,28 @@ class AccountQueries:
                 old_data = account.dict()
                 print("OLD DATA", old_data)
                 return AccountOut(id=id, **old_data)
+
+    def get_all(self) -> List[AccountOut]:
+         with pool.connection() as conn:
+            with conn.cursor() as cur:
+                cur.execute(
+                    """
+                    SELECT id, username, user_type
+                    FROM accounts
+                    ORDER BY id
+                    """
+                )
+
+                results = []
+
+                for record in cur:
+
+                    account = AccountOut (
+                    id=record[0],
+                    username=record[1],
+                    user_type=record[2]
+
+                    )
+                    results.append(account)
+
+                return results

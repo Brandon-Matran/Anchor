@@ -11,6 +11,7 @@ from jwtdown_fastapi.authentication import Token
 from authenticator import authenticator
 from typing import Optional
 from pydantic import BaseModel
+from typing import List
 
 from queries.accounts import (
     AccountIn,
@@ -90,3 +91,10 @@ def account_detail(
   if user is None:
     response.status_code= 404
   return user
+
+@router.get("/api/accounts", response_model=List[AccountOut])
+def get_all(
+    repo: AccountQueries = Depends(),
+
+):
+    return repo.get_all()
