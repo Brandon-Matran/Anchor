@@ -18,7 +18,7 @@ def create_blog(
     repo: BlogRepo = Depends(),
     account: dict = Depends(authenticator.get_current_account_data),
 ):
-    if account["user_type"] == 'individual':
+    if account["user_type"] == 'individual' or account["user_type"] == 'company':
         return repo.create(blog)
     else:
         raise HTTPException(status_code=401, detail="Only registered users are allowed to post new blog")
@@ -37,7 +37,7 @@ def delete_blog(
     repo: BlogRepo = Depends(),
     account: dict = Depends(authenticator.get_current_account_data)
     ) -> bool:
-    if account["user_type"] == 'individual':
+    if account["user_type"] == 'individual' or account["user_type"] == 'company':
         return repo.delete(blog_id)
     else:
         raise HTTPException(status_code=401, detail="Only registered users are allowed to delete blog")
@@ -50,7 +50,7 @@ def update_blog(
     repo: BlogRepo = Depends(),
     account: dict = Depends(authenticator.get_current_account_data)
     ) ->Union[BlogOut, BlogError]:
-    if account["user_type"] == 'individual':
+    if account["user_type"] == 'individual' or account["user_type"] == 'company':
         return repo.update(blog_id,blog)
     else:
         raise HTTPException(status_code=401, detail="Only registered users are allowed to update blog")

@@ -1,27 +1,17 @@
 import {useEffect, useState} from "react"
-import React from "react"
 import { useAuthContext } from "../accounts/Authentication"
-
-function BootstrapInputs(props) {
-
-    const {id, labelText, onChange, placeholder, type, value} = props;
-
-    return (
-        <div className="form-floating mb-3">
-            <label htmlFor={id}>{labelText}</label>
-            <input onChange={onChange} placeholder={placeholder} required type={type} id={id} className="form-control" value={value}/>
-        </div>
-    );
-}
+import { parseJwt } from "../decode"
 
 function CreateBlogsForm(props) {
     const { token } = useAuthContext();
-    const [username, setUserName] = useState('')
-    const post_date = new Date().toLocaleString() + ''
+
+    const [username, setUsername] = useState('')
+    const [post_date, setPostDate] = useState('')
     const [title, setTitle] = useState('')
     const [pic_url, setPicURL] = useState('')
     const [description, setDescription] = useState('')
     const [submitted, setSubmitted] = useState(false)
+    const current_date = new Date().toLocaleString() + ''
 
     const handleSubmit = (event) => {
         event.preventDefault()
@@ -64,20 +54,18 @@ function CreateBlogsForm(props) {
                 <div className="shadow p-4 mt-4">
                     <h1>Create a New Blog</h1>
                     <form onSubmit={handleSubmit} id="create-blog-form">
-                        <BootstrapInputs
-                        id = "text"
-                        labelText = "Title"
-                        onChange = {e => setTitle(e.target.value)}
-                        placeholder = "Write a Blog Title"
-                        type = "text"
-                        value = {title} />
-                        <BootstrapInputs
-                        id = "text"
-                        labelText = "Picture URL"
-                        onChange = {e => setPicURL(e.target.value)}
-                        placeholder = "Enter a Picture URL"
-                        type = "text"
-                        value = {pic_url} />
+                        <div className="form-floating mb-3">
+                            <input onChange = {e => setTitle(e.target.value)} placeholder="Write a Blog Title" required
+                            type="text" name ="title" id="title"
+                            className="form-control" value={title}/>
+                            <label htmlFor="title">Title</label>
+                        </div>
+                        <div className="form-floating mb-3">
+                                <input onChange = {e => setPicURL(e.target.value)} placeholder="Enter a Picture Url"
+                                required type="url" name="pic_url"  id="pic_url"
+                                className="form-control" value={pic_url}/>
+                                <label htmlFor="pic_url">Picture Url</label>
+                        </div>
                         <div className="mb-3">
                             <label htmlFor="description" className="form-label">Description</label>
                             <textarea onChange={e => setDescription(e.target.value)} className="form-control"
