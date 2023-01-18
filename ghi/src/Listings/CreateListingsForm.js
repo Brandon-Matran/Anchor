@@ -63,12 +63,14 @@ function CreateJobsForm() {
       method: "post",
       body: JSON.stringify(newJob),
       headers: {
+        'Authorization': `Bearer ${token}`,
         "Content-Type": "application/json",
       },
     };
 
     fetch(jobsListingURL, fetchConfig)
       .then((response) => response.json())
+
       .then(() => {
         setTitle("");
         setCompanyName("");

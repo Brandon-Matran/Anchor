@@ -1,6 +1,19 @@
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
+import "./Nav.css";
 
 function Nav() {
+  const [menu, setMenu] = useState(false);
+
+  const handleToggle = () => {
+      setMenu((prev) => !prev);
+    };
+
+    const closeMenu = () => {
+      setMenu(false)
+    }
+
+
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-opacity-75 bg-success">
       <div className="container-fluid">
@@ -25,16 +38,15 @@ function Nav() {
                 Home
               </NavLink>
             </li>
+
             <li className="nav-item dropdown">
               <a
-                className=" nav-link dropdown-toggle "
-                href="#"
-                role="button"
+                className=" nav-link dropdown-toggle"
                 data-bs-toggle="dropdown"
-                aria-expanded="false"
               >
                 Account
               </a>
+              <span className="hamburger"></span>
               <ul
                 className="dropdown-menu dropdown-menu-dark"
                 aria-labelledby="navbarDarkDropdownMenuLink"
@@ -60,6 +72,19 @@ function Nav() {
               </ul>
             </li>
           </ul>
+        </div>
+        <div>
+          <nav className="navBar">
+            <button onClick={handleToggle}>{menu ? "Close" : "Open"}</button>
+            <NavLink
+              to={"/test"}
+              activeClassName="active-link"
+              onClick={() => closeMenu()}
+              exact
+            >
+              SignUp
+            </NavLink>
+          </nav>
         </div>
       </div>
     </nav>
