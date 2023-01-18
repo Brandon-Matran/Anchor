@@ -83,20 +83,21 @@ const JobListings = () => {
             <th scope="col">Title</th>
             <th scope="col">Company Name</th>
             <th scope="col">Job Position</th>
-            <th scope="col">Application Link</th>
             <th scope="col">Deadline</th>
             <th scope="col">Created Date</th>
           </tr>
         </thead>
         <tbody>
           {jobs.map((job) => {
-            if (getAccount()){
+            if (getAccount===true){
               return (
               <tr key={job.title}>
                 <td>{job.title}</td>
                 <td>{job.company_name}</td>
                 <td>{job.job_position}</td>
-                <td><button type="button" className="btn btn-danger" onClick={() => DeleteJobListing(job.title)}>Delete Listing</button></td>
+                <td>
+                  <button type="button" className="btn btn-danger" onClick={() => DeleteJobListing(job.id)}>Delete Listing</button>
+                </td>
                 <td>{job.deadline}</td>
                 <td>{job.created}</td>
               </tr>
@@ -114,7 +115,7 @@ const JobListings = () => {
                     <button
                       onClick={() => applyClick()}
                       type="button"
-                      className="btn btn-danger"
+                      className="btn btn-success"
                     >Apply
                     </button>
                   </td>
