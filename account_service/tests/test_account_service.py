@@ -52,3 +52,27 @@ def test_get_accounts():
 
     #cleanup
     app.dependency_overrides = {}
+
+def test_create_accounts():
+
+    req_body = {
+    "username": "test",
+    "password": "test",
+    "user_type": "individual"
+    }
+
+    #Arrange
+    app.dependency_overrides[AccountQueries] = MockAccountQueries
+    
+
+    # Act
+    response = client.post('/api/accounts', json=req_body)
+    actual = response.json()
+
+
+    #Assert
+    assert response.status_code == 200
+    assert actual == [expected_post_response]
+
+    #cleanup
+    app.dependency_overrides = {}
