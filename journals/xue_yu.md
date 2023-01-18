@@ -16,6 +16,27 @@ remove:
 docker container prune
 docker volume remove postgres-data
 
+## 01/09/2023
+
+Completed:
+
+- added signup front page
+
+Plan:
+
+- make sure signup front page works
+- discuss: email and user_type add to account service
+
+## 01/06/2023
+
+Completed:
+
+- done debugging, all containers and pg-admin is working.
+
+Plan:
+
+- create all feature branches and some story sub-branches
+
 ## 01/10/2023
 
 Completed:
@@ -44,7 +65,6 @@ Plan:
 Issues:
 
 - ghi container not working because of a "debug" thing in gih/package.json
-- service containers not working "FATAL: password authentication failed for user "blog""
 
 ## 01/04/2023
 

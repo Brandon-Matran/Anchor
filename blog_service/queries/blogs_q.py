@@ -3,8 +3,14 @@ from datetime import date
 from queries.pool import pool
 from typing import Optional, List, Union
 
+class AccountOut(BaseModel):
+    id: str
+    username: str
+    user_type: str
+
 class BlogError(BaseModel):
     message: str
+
 
 # class BlogList(BaseModel):
 #     id: int
@@ -14,12 +20,14 @@ class BlogError(BaseModel):
 #     description: str
 #     pic_url: Optional[str]
 
+
 class BlogIn(BaseModel):
     username: str
     post_date: date
     title: str
     pic_url: str
     description: str
+
 
 class BlogOut(BaseModel):
     id: int
@@ -77,7 +85,7 @@ class BlogRepo:
                     result = db.execute(
                         """
                         INSERT INTO blogs
-                            (username, post_date,title, pic_url, description)
+                            (username, post_date, title, pic_url, description)
                         VALUES
                             (%s, %s, %s, %s, %s)
                         RETURNING id;
@@ -87,8 +95,8 @@ class BlogRepo:
                             blog.post_date,
                             blog.title,
                             blog.pic_url,
-                            blog.description
-                        ]
+                            blog.description,
+                        ],
                     )
                     id = result.fetchone()[0]
                     old_data = blog.dict()
@@ -96,7 +104,23 @@ class BlogRepo:
         except Exception:
             return {"message": "Could not create new blog!"}
 
-    def update(self, blog_id:int, blog:BlogIn) -> Union[BlogOut,BlogError]:
+    def delete(self, blog_id: int) -> bool:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    result = db.execute(
+                        """
+                        DELETE FROM blogs
+                        WHERE id = %s
+                        """,
+                        [blog_id],
+                    )
+                    return True
+        except Exception as e:
+            print(e)
+            return False
+
+    def update(self, blog_id: int, blog: BlogIn) -> Union[BlogOut, BlogError]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
@@ -116,10 +140,45 @@ class BlogRepo:
                             blog.title,
                             blog.description,
                             blog.pic_url,
-                            blog_id
-                        ]
+                            blog_id,
+                        ],
                     )
                     old_data = blog.dict()
                     return BlogOut(id=blog_id, **old_data)
         except Exception:
             return {"message": "Could not update that blog!"}
+
+    def get_one(self, blog_id: int) -> Optional[BlogOut]:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    result = db.execute(
+                        """
+                        SELECT id
+                            , username
+                            , post_date
+                            , title
+                            , pic_url
+                            , description
+                        FROM blogs
+                        WHERE id = %s
+                        """,
+                        [blog_id],
+                    )
+                    record = result.fetchone()
+                    if record is None:
+                        return None
+                    return self.record_to_blog_out(record)
+        except Exception as e:
+            print(e)
+            return {"message": "Could not get that blog"}
+
+    def record_to_blog_out(self, record):
+        return BlogOut(
+            id=record[0],
+            username=record[1],
+            post_date=record[2],
+            title=record[3],
+            pic_url=record[4],
+            description=record[5],
+        )
