@@ -1,11 +1,13 @@
-import { useState } from "react";
-import { useAuthContext } from "./accounts/Authentication.js";
-import parseJwt from ".decode.jsx";
+import React, { useEffect, useState } from "react";
+import { useAuthContext } from "../accounts/Authentication.js";
+import parseJwt from "../decode.jsx";
+
 function UpdateListing() {
   const { token } = useAuthContext();
 
-  info = parseJwt(token);
+  const info = parseJwt(token);
 
+  const [id, setID] = useState("");
   const [title, setTitle] = useState("");
   const [company_name, setName] = useState("");
   const [job_position, setPosition] = useState("");
@@ -22,6 +24,7 @@ function UpdateListing() {
         });
         if (response.ok) {
           const data = await response.json();
+          setID(data.id);
           setTitle(data.title);
           setName(data.company_name);
           setPosition(data.job_position);
@@ -152,7 +155,7 @@ function UpdateListing() {
           type="submit"
           className="btn btn-primary btn-block mb-4"
         >
-          Update the listing
+          Finishing the update
         </button>
       </form>
     </div>

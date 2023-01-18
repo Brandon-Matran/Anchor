@@ -10,12 +10,13 @@ import MainPage from "./accounts/MainPage";
 import CreateBlogsForm from "./Blogs/CreateBlogsForm";
 import BlogsList from "./Blogs/BlogsList.js";
 import JobListings from "./Jobs/JobListings.js";
+import UpdateListing from "./Listings/update_listing";
+
 function GetToken() {
   // Get token from JWT cookie (if already logged in)
   useToken();
   return null;
 }
-
 
 function App() {
   // const [token, setToken] = useState();
@@ -35,7 +36,8 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/blogs" element={<BlogsList />} />
           <Route path="/listings" element={<JobListings />} />
-          <Route path="/blogs/create" element={<CreateBlogsForm/>} />
+          <Route path="/blogs/create" element={<CreateBlogsForm />} />
+          <Route path="/listings/update/{id}" element={<UpdateListing />} />
         </Routes>
       </AuthProvider>
     </Router>
