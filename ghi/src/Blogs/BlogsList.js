@@ -68,4 +68,4 @@ const BlogsList = () => {
   );
 };
 
-// export default BlogsList;
+export default BlogsList;
