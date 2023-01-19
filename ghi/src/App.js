@@ -12,6 +12,7 @@ import CreateBlogsForm from "./Blogs/CreateBlogsForm";
 // import JobListings from "./Jobs/JobListings.js";
 import CreateJobsForm from "./Listings/CreateListingsForm";
 import GetOneBlog from "./Blogs/GetOneBlogTest";
+import Nav from "./Nav";
 
 function GetToken() {
   // Get token from JWT cookie (if already logged in)
@@ -31,6 +32,7 @@ function App() {
     <Router>
       <AuthProvider>
         <GetToken />
+        <Nav />
         <Routes>
           <Route path="/" element={<MainPage />} />
           <Route path="/login" element={<LoginForm />} />
