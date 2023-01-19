@@ -37,40 +37,6 @@ function UpdateBlog() {
     getBlog(id);
   }, []);
 
-  //   [setID, setUserName, setDate, setTitle, setPicURL, setDescription]);
-  //   [username, post_date, title, pic_url, description]
-
-  //   async function update(username, new_post_date, title, pic_url, description) {
-  //     const newBlog = {
-  //       username: username,
-  //       post_date: new_post_date,
-  //       title: title,
-  //       pic_url: pic_url,
-  //       description: description,
-  //     };
-  //     const url = `${process.env.REACT_APP_BLOG_SERVICE}/blogs/${id}`;
-  //     const fetchConfig = {
-  //       method: "patch",
-  //       body: JSON.stringify(newBlog),
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //     };
-  //     fetch(url, fetchConfig)
-  //       .then((response) => response.json())
-  //       .then(() => {
-  //         setTitle("");
-  //         setPicURL("");
-  //         setDescription("");
-  //         setSubmitted(true);
-  //       })
-  //       .catch((e) => console.error("ERROR: ", e));
-  //   }
-
-  //   useEffect(() => {
-  //     update(update(username, new_post_date, title, pic_url, description));
-  //   }, [username, new_post_date, title, pic_url, description]);
-
   async function handleSubmit(event) {
     event.preventDefault();
     const newBlog = {
@@ -84,11 +50,11 @@ function UpdateBlog() {
     const url = `${process.env.REACT_APP_BLOG_SERVICE}/blogs/${id}`;
 
     const fetchConfig = {
-      method: "patch",
+      method: "put",
       body: JSON.stringify(newBlog),
       headers: {
-        "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
       },
     };
 
@@ -100,25 +66,8 @@ function UpdateBlog() {
       setTitle(data.title);
       setPicURL(data.pic_url);
       setDescription(data.description);
-
-      // // username = data.username;
-      // title = data.title;
-      // pic_url = data.pic_url;
-      // description = data.description;
     }
-
-    // const response = await fetch(url, fetchConfig);
-    // fetch(url, fetchConfig)
-    //   .then((response) => response.json())
-    //   //   .then(() => {
-    //   //     setTitle("");
-    //   //     setPicURL("");
-    //   //     setDescription("");
-    //   //     setSubmitted(true);
-    //   //   })
-    //   .catch((e) => console.error("ERROR: ", e));
   }
-
   return (
     <div className="row">
       <div className="offset-3 col-6">
