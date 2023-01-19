@@ -61,7 +61,6 @@ function CreateJobsForm() {
       method: "post",
       body: JSON.stringify(newJob),
       headers: {
-        'Authorization': `Bearer ${token}`,
         "Content-Type": "application/json",
         "Authorization": `Bearer ${token}`
       },

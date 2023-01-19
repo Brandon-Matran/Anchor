@@ -11,7 +11,7 @@ import CreateBlogsForm from "./Blogs/CreateBlogsForm";
 // import BlogsList from "./Blogs/BlogsList.js";
 // import JobListings from "./Jobs/JobListings.js";
 import CreateJobsForm from "./Listings/CreateListingsForm";
-import GetOneBlog from "./Blogs/GetOneBlogTest";
+import GetOneBlog from "./Blogs/GetOneBlog";
 import Nav from "./Nav";
 
 function GetToken() {
