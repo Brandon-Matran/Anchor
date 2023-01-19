@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useAuthContext } from "../accounts/Authentication.js";
+import background_image from "../images/background_image.png";
+
 // import parseJwt from "../decode.jsx";
 
 function UpdateBlog() {
@@ -11,6 +13,7 @@ function UpdateBlog() {
   const [username, setUserName] = useState("");
   const [post_date, setDate] = useState("");
   // const new_post_date = new Date().toLocaleString() + "";
+
   const [title, setTitle] = useState("");
   const [pic_url, setPicURL] = useState("");
   const [description, setDescription] = useState("");
@@ -30,7 +33,6 @@ function UpdateBlog() {
           setTitle(data.title);
           setPicURL(data.pic_url);
           setDescription(data.description);
-          console.log(title);
         }
       } catch (e) {}
     }
@@ -46,7 +48,6 @@ function UpdateBlog() {
       pic_url: pic_url,
       description: description,
     };
-    console.log(newBlog);
     const url = `${process.env.REACT_APP_BLOG_SERVICE}/blogs/${id}`;
 
     const fetchConfig = {
@@ -62,53 +63,75 @@ function UpdateBlog() {
     if (res.ok) {
       const data = await res.json();
       // setUserName(data.username);
-      // // setDate(data.post_date);
+      // setDate(data.post_date);
       setTitle(data.title);
       setPicURL(data.pic_url);
       setDescription(data.description);
     }
   }
   return (
-    <div className="row">
-      <div className="offset-3 col-6">
-        <div className="shadow p-4 mt-4">
-          <form onSubmit={handleSubmit} id="update-blog-form">
-            <div className="form-floating mb-3">
-              <input
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-                type="text"
-                id="form6Example1"
-                className="form-control"
-              />
-              <label className="form-label">Title</label>
-            </div>
+    <section
+      className="vh-100"
+      style={{ backgroundImage: `url(${background_image})` }}
+    >
+      <div className="container h-100">
+        <div className="row d-flex justify-content-center align-items-center h-100">
+          <div className="col-lg-12 col-xl-11">
+            <div className="card text-black">
+              <div className="card-body p-md-5">
+                <div className="row justify-content-center">
+                  {/*  <div className="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1"> */}
+                  <p className="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">
+                    Blog
+                  </p>
 
-            <div className="form-floating mb-3">
-              <input
-                value={pic_url}
-                onChange={(e) => setPicURL(e.target.value)}
-                className="form-control"
-              ></input>
-              <label className="form-label">Picture</label>
-            </div>
+                  <form onSubmit={handleSubmit} id="update-blog-form">
+                    <div className="form-floating mb-3">
+                      <input
+                        value={title}
+                        onChange={(e) => setTitle(e.target.value)}
+                        type="text"
+                        id="form6Example1"
+                        className="form-control"
+                      />
+                      <label className="form-label">Title</label>
+                    </div>
 
-            <div className="form-floating mb-3">
-              <textarea
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-                className="form-control"
-              ></textarea>
-              <label className="form-label">Description</label>
-            </div>
+                    <div className="form-floating mb-3">
+                      <input
+                        value={pic_url}
+                        onChange={(e) => setPicURL(e.target.value)}
+                        className="form-control"
+                      ></input>
+                      <label className="form-label">Picture</label>
+                    </div>
 
-            <button type="submit" className="btn btn-primary">
-              Finish the update
-            </button>
-          </form>
+                    <div className="form-floating mb-3">
+                      <textarea
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
+                        className="form-control"
+                        id="exampleFormControlTextarea1"
+                        rows="3"
+                      ></textarea>
+                      <label className="form-label">Description</label>
+                    </div>
+
+                    <button
+                      type="submit"
+                      className="btn btn-outline-primary center"
+                    >
+                      Finish the update
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+      {/*   </div> */}
+    </section>
   );
 }
 
