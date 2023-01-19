@@ -1,7 +1,7 @@
 from fastapi.testclient import TestClient
 from main import app
 from queries.accounts import AccountQueries
-from authenticator import authenticator
+from routers.accounts import get_authenticator
 
 client = TestClient(app)
 
@@ -20,15 +20,24 @@ expected_get_response = {
 }
 
 
+
 class MockAccountQueries:
     def get(self, username):
         pass
 
     def create(self, new_account, new_pass):
-        pass
+        return expected_post_response
 
     def get_all(self):
         return [expected_post_response]
+
+class MockAuthenticator:
+    def hash_password(self, password):
+        return "jaosifpa8u3aw-98fawf"
+
+    def login(self, response, request, form, repo):
+        return "viasubpsa93w8rha-3w9"
+
 
 def test_get_accounts():
 
@@ -40,6 +49,8 @@ def test_get_accounts():
 
     #Arrange
     app.dependency_overrides[AccountQueries] = MockAccountQueries
+
+
 
     # Act
     response = client.get('/api/accounts', json=req_body)
@@ -63,7 +74,8 @@ def test_create_accounts():
 
     #Arrange
     app.dependency_overrides[AccountQueries] = MockAccountQueries
-    
+    app.dependency_overrides[get_authenticator]
+
 
     # Act
     response = client.post('/api/accounts', json=req_body)

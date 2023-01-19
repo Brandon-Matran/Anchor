@@ -33,6 +33,8 @@ class HttpError(BaseModel):
 
 router = APIRouter()
 
+def get_authenticator():
+    return authenticator
 
 @router.post("/api/accounts", response_model=AccountToken | HttpError)
 async def create_account(
@@ -40,8 +42,9 @@ async def create_account(
     request: Request,
     response: Response,
     repo: AccountQueries = Depends(),
+    auth = Depends(get_authenticator)
 ):
-    hashed_password = authenticator.hash_password(info.password)
+    hashed_password = auth.hash_password(info.password)
     try:
         account = repo.create(info, hashed_password)
         print("ACOUNT", account)
@@ -56,7 +59,7 @@ async def create_account(
         user_type=info.user_type
         )
     print("FORM", form)
-    token = await authenticator.login(response, request, form, repo)
+    token = await auth.login(response, request, form, repo)
     print("TOKEN", token)
     return AccountToken(account=account, **token.dict())
 
