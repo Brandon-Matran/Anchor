@@ -40,7 +40,7 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           {/* <Route path="/blogs" element={<BlogsList />} />
           <Route path="/listings" element={<JobListings />} /> */}
-          <Route path="/blogs/:blog_id" element={<GetOneBlog />} />
+          <Route path="/blogs/:id" element={<GetOneBlog />} />
           <Route path="/blogs/create" element={<CreateBlogsForm/>} />
           <Route path="/listings/create" element={<CreateJobsForm/>} />
         </Routes>
