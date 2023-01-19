@@ -1,12 +1,10 @@
 import { useState } from "react";
 import React from "react";
 import { useAuthContext } from "../accounts/Authentication";
-import parseJwt from "../decode.jsx";
 
 
 
 function CreateJobsForm() {
-  // info = parseJwt(token);
   const { token } = useAuthContext();
   const [title, setTitle] = useState("");
   const [company_name, setCompanyName] = useState("");
@@ -64,6 +62,7 @@ function CreateJobsForm() {
       body: JSON.stringify(newJob),
       headers: {
         "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
       },
     };
 
