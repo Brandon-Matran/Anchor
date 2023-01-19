@@ -1,16 +1,19 @@
 import { useState } from "react";
 import React from "react";
-// import { useAuthContext } from "../accounts/Authentication";
+import { useAuthContext } from "../accounts/Authentication";
+import parseJwt from "../decode.jsx";
+
 
 
 function CreateJobsForm() {
-  // const { token } = useAuthContext();
+  // info = parseJwt(token);
+  const { token } = useAuthContext();
   const [title, setTitle] = useState("");
   const [company_name, setCompanyName] = useState("");
   const [job_position, setJobPosition] = useState("");
   const [apply_url, setApplyUrl] = useState("");
   const [deadline, setDeadline] = useState("");
-  const created = new Date().toLocaleString() + "";
+  const [created, setCreated] = useState("");
   const [submitted, setSubmitted] = useState(false);
 
 
@@ -41,7 +44,7 @@ function CreateJobsForm() {
 
   const handleCreatedChange = (event) => {
     const value = event.target.value;
-    created(value);
+    setCreated(value);
   };
 
   const handleSubmit = (event) => {
@@ -55,23 +58,26 @@ function CreateJobsForm() {
       created: created,
     };
 
-    const jobsListingURL = "${REACT_APP_LISTING_SERVICE}/listings";
+    const jobsListingURL = `${process.env.REACT_APP_LISTING_SERVICE}/listings`
     const fetchConfig = {
       method: "post",
       body: JSON.stringify(newJob),
       headers: {
+        'Authorization': `Bearer ${token}`,
         "Content-Type": "application/json",
       },
     };
 
     fetch(jobsListingURL, fetchConfig)
       .then((response) => response.json())
+
       .then(() => {
         setTitle("");
         setCompanyName("");
         setJobPosition("");
         setApplyUrl("");
         setDeadline("");
+        setCreated("");
         setSubmitted(true);
       })
       .catch((e) => console.error("ERROR: ", e));
