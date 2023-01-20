@@ -1,19 +1,64 @@
 # Allen's Day to Day
 
-## 01/06/2023
-
+## 01/19/2023
 Completed:
-
-- set up PostgreSQL and pgAdmin
-- set up branches by Features and subbranches by stories
-- determined workflow for the project
+- Resolved token issue; can now parse token to get user data
+- Completed Create Blogs
 
 Work in Progress:
-
-- writing our first code; setting up at least one end-point.
+- Finish MyBlogs page
 
 Notes:
-Need to catch up on some learning before coding. PostgreSQL and FastAPI.
+- Ideally finish front end by tomorrow
+
+## 01/18/2023
+Completed:
+- Made small progress towards parsing token
+
+Work in Progress:
+- resolve setting state to JWT with useEffect
+- start unit test
+
+Notes:
+- Need to coordinate with team on deployment
+
+## 01/17/2023
+Completed:
+- assigned to work on MyBlogs, which should just a filtered version of Blogs page
+- Xue updated listings back end with get_one_listing endpoint
+- Capsrover set up complete
+
+Work in Progress:
+- still stuck on getting the user data from tokens
+- set up async function, but cannot await the useAuthContext()
+
+Notes:
+- We need to start setting up our deployment, unit testing should be conducted as soon as possible
+
+## 01/17/2023
+Completed:
+- merged to main
+
+Work in Progress:
+- Xue found a token parser online; need to get token data
+- Need to implement MyListing and MyBlogs front end
+
+Notes:
+- all back end APIs are working
+
+## 01/13/2023
+
+Completed:
+- set auth.py and token_auth.py
+- blogs back end complete
+
+Work in Progress:
+- need to figure out how to get user data from token on the front end
+- we will merge all subbranches to main on Tue.
+
+Notes:
+- No need to set up relational endpoints to other data tables
+
 ## 01/12/2023
 Completed:
 - confirmed you can use token obj to access username data

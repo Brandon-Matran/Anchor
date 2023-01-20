@@ -1,17 +1,39 @@
+import { object } from "prop-types"
 import {useEffect, useState} from "react"
 import { useAuthContext } from "../accounts/Authentication"
-import { parseJwt } from "../decode"
 
 function CreateBlogsForm(props) {
-    const { token } = useAuthContext();
 
-    const [username, setUsername] = useState('')
-    const [post_date, setPostDate] = useState('')
+    const [username, setUserName] = useState('')
+    const [user_type, setUserType] = useState('')
+    let today = new Date()
+    let post_date = today.getFullYear() + '-' + parseInt(today.getMonth() + 1) + '-' + today.getDate()
     const [title, setTitle] = useState('')
     const [pic_url, setPicURL] = useState('')
     const [description, setDescription] = useState('')
+    const [Jwt, setJwt] = useState(null)
     const [submitted, setSubmitted] = useState(false)
-    const current_date = new Date().toLocaleString() + ''
+
+    const token = useAuthContext()
+
+    function parseJwt(data) {
+        const base64Url = data.split(".")[1];
+        const base64 = base64Url.replace("-", "+").replace("_", "/");
+        const info = JSON.parse(window.atob(base64));
+        setUserName(info.account.username);
+        setUserType(info.account.user_type);
+    }
+
+    useEffect(() => {
+        fetch(token)
+        .then(response => {if ((typeof response.token) !== "object") {
+            setJwt(token.token);
+            if (Jwt !== null) {
+                parseJwt(Jwt);
+            }
+        }})
+
+    }, [token, Jwt])
 
     const handleSubmit = (event) => {
         event.preventDefault()
@@ -29,6 +51,7 @@ function CreateBlogsForm(props) {
             body: JSON.stringify(newBlog),
             headers: {
                 'Content-Type': 'application/json',
+                "Authorization": `Bearer ${Jwt}`
             },
         }
 

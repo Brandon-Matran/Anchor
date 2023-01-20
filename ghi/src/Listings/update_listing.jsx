@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useAuthContext } from "../accounts/Authentication.js";
-import parseJwt from "../decode.jsx";
+import parseJwt from "../decode.js";
 
 function UpdateListing() {
   const { token } = useAuthContext();
