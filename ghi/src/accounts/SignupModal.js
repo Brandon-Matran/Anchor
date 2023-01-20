@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Navigate } from "react-router-dom";
 import { useToken } from "./Authentication";
 import signup_image from "../images/signup_image.png";
 import "./SignupModal.css";
@@ -12,19 +12,24 @@ function SignUpModal({ closeSignupModal }) {
   const [user_type, setType] = useState("");
   const [signUpSuccess, setsignUpSuccess] = useState(null);
 
-  function handleClick() {
-    if (token) {
-      setsignUpSuccess(true);
-      navigate("/test");
-    }
-    else {
-      alert('Invalid Credentials')
-    }
+
+  if (token) {
+    return <Navigate to="/" />;
   }
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    await signup(username, password);
-  };
+
+  // function handleClick() {
+  //   if (token) {
+  //     setsignUpSuccess(true);
+  //     navigate("/test");
+  //   }
+  //   else {
+  //     alert('Invalid Credentials')
+  //   }
+  // }
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   await signup(username, password, user_type);
+  // };
 
   return (
     <div className="modalBackground">
@@ -38,7 +43,7 @@ function SignUpModal({ closeSignupModal }) {
                     <p className="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">
                       Sign up
                     </p>
-                    <form className="mx-1 mx-md-4" onSubmit={handleSubmit}>
+                    <form className="mx-1 mx-md-4" >
                       <div className="d-flex flex-row align-items-center mb-4">
                         <i className="fas fa-anchor fa-lg me-3 fa-fw"></i>
                         <div className="flex-fill mb-0">
@@ -89,7 +94,9 @@ function SignUpModal({ closeSignupModal }) {
 
                       <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                         <button
-                          onClick={handleClick}
+                          onClick={async () =>
+                            await signup(username, password, user_type)
+                          }
                           type="button"
                           className="submitSignup"
                         >

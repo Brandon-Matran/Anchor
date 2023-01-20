@@ -40,8 +40,8 @@ const JobListings = () => {
 
 
 
-  const DeleteJobListing = async (title) => {
-    const url = `http://localhost:8080/${title}`;
+  const DeleteJobListing = async (id) => {
+    const url = `${process.env.REACT_APP_LISTING_SERVICE}/listings/${id}`;
     const fetchConfig = { method: "delete" };
     const response = await fetch(url, fetchConfig);
     if (response.ok) {
@@ -95,11 +95,11 @@ const JobListings = () => {
                 <td>{job.title}</td>
                 <td>{job.company_name}</td>
                 <td>{job.job_position}</td>
+                <td>{job.deadline}</td>
+                <td>{job.created}</td>
                 <td>
                   <button type="button" className="btn btn-danger" onClick={() => DeleteJobListing(job.id)}>Delete Listing</button>
                 </td>
-                <td>{job.deadline}</td>
-                <td>{job.created}</td>
               </tr>
             );
             } else {
@@ -115,7 +115,7 @@ const JobListings = () => {
                     <button
                       onClick={() => applyClick()}
                       type="button"
-                      className="btn btn-success"
+                      className="btn btn-link- btn-outline-light btn-primary"
                     >Apply
                     </button>
                   </td>
