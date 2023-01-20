@@ -10,7 +10,7 @@ import MainPage from "./accounts/MainPage";
 import CreateBlogsForm from "./Blogs/CreateBlogsForm";
 // import BlogsList from "./Blogs/BlogsList.js";
 // import JobListings from "./Jobs/JobListings.js";
-
+import MyBlogs from "./Blogs/MyBlogs";
 function GetToken() {
   // Get token from JWT cookie (if already logged in)
   useToken();
@@ -37,6 +37,7 @@ function App() {
           {/* <Route path="/blogs" element={<BlogsList />} /> */}
           {/* <Route path="/listings" element={<JobListings />} /> */}
           <Route path="/blogs/create" element={<CreateBlogsForm/>} />
+          <Route path="/blogs/myblogs" element={<MyBlogs/>}/>
         </Routes>
       </AuthProvider>
     </Router>

@@ -1,11 +1,10 @@
-import { object } from "prop-types"
 import {useEffect, useState} from "react"
 import { useAuthContext } from "../accounts/Authentication"
 
 function CreateBlogsForm(props) {
 
     const [username, setUserName] = useState('')
-    const [user_type, setUserType] = useState('')
+    // const [user_type, setUserType] = useState('')
     let today = new Date()
     let post_date = today.getFullYear() + '-' + parseInt(today.getMonth() + 1) + '-' + today.getDate()
     const [title, setTitle] = useState('')
@@ -21,7 +20,7 @@ function CreateBlogsForm(props) {
         const base64 = base64Url.replace("-", "+").replace("_", "/");
         const info = JSON.parse(window.atob(base64));
         setUserName(info.account.username);
-        setUserType(info.account.user_type);
+        // setUserType(info.account.user_type);
     }
 
     useEffect(() => {
