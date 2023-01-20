@@ -114,7 +114,7 @@ class BlogRepo:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
-                    result = db.execute(
+                    db.execute(
                         """
                         DELETE FROM blogs
                         WHERE id = %s
