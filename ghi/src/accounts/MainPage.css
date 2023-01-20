@@ -56,7 +56,7 @@
 }
 
 .openSignupModal {
-  /* transform: translate(-600%, -5%); */
+
   background-color: #3d5c97;
   border-radius: 8px;
   border-style: none;
@@ -187,5 +187,5 @@
 }
 
 .card-body {
-  width: 50%;
+  width: 100%;
 }

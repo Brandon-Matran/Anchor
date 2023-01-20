@@ -97,7 +97,7 @@ function MainPage() {
             />
           </div>
           <div className="container">
-            <div className="blogContainer max-width justify-content-center row">
+            <div className="blogContainer d-flex justify-content-center align-items-center h-100 row">
               <div className="col-sm d-flex justify-content-end">
                 <button
                   onClick={() => {
@@ -123,7 +123,7 @@ function MainPage() {
               </div>
             </div>
           </div>
-    
+
           <div className="aboveFooter">
             <div className="no-gutters row-cols-3 d-flex justify-content-center ">
               <div className="row  no-gutters blogRow">
