@@ -7,21 +7,24 @@ import LoginModal from "./LoginModal";
 import SignUpModal from "./SignupModal";
 import { useToken } from "./Authentication.js";
 
-
 function Column(props) {
   return (
-    <div className="col">
+    <div className="col-md">
       {props.list.map((data, index) => {
         const dateString = data.post_date;
         const dateObj = new Date(dateString);
-        const options = { timeStyle: "short" };
         const date = dateObj.toLocaleDateString();
         return (
           <div key={index} className="card mb-3 shadow">
-            <div className="card shadow">
-              <img src={data.pic_url} className="card-img-top" alt="..." />
+            <div className="card-shadow">
+              <div className="col-md-6">
+                <img
+                  src={data.pic_url}
+                  className="card-img-top pic"
+                  alt="..."
+                />
+              </div>
               <div className="card-body">
-                <h5 className="card-title">{data.venue}</h5>
                 <p className="card-text">Date: {date}</p>
 
                 <p className="card-text">Description: {data.description}</p>
@@ -43,9 +46,8 @@ function MainPage() {
 
   const handleLogout = () => {
     logout();
-    alert('You have logged out')
-  }
-
+    alert("You have logged out");
+  };
 
   useEffect(() => {
     const url = "http://localhost:8080/blogs";
@@ -77,7 +79,13 @@ function MainPage() {
         className="header"
         style={{ backgroundImage: `url(${background_image})` }}
       >
-        <div id="logo" animation="fadeIn 3s">Anchor</div>
+        <div
+          className="col-sm d-flex justify-content-end"
+          id="logo"
+          animation="fadeIn 3s"
+        >
+          Anchor
+        </div>
       </div>
       <div className="middle">
         <div>
@@ -89,8 +97,8 @@ function MainPage() {
             />
           </div>
           <div className="container">
-            <div className="blogContainer max-width">
-              <div className="d-flex flex-row-reverse">
+            <div className="blogContainer max-width justify-content-center row">
+              <div className="col-sm d-flex justify-content-end">
                 <button
                   onClick={() => {
                     setSignUpModal(true);
@@ -104,27 +112,29 @@ function MainPage() {
                   <SignUpModal closeSignupModal={setSignUpModal} />
                 )}
               </div>
-              <button
-                className="openLoginModal"
-                onClick={() => setLoginModal(true)}
-              >
-                Log In
-              </button>
-              {loginModal && <LoginModal closeLoginModal={setLoginModal} />}
+              <div className="col-sm d-flex justify-content-start">
+                <button
+                  className="openLoginModal"
+                  onClick={() => setLoginModal(true)}
+                >
+                  Log In
+                </button>
+                {loginModal && <LoginModal closeLoginModal={setLoginModal} />}
+              </div>
             </div>
           </div>
-          <div className="justify">
-            <div className="aboveFooter">
-              <div>
-                <div className="row blogRow">
-                  {blogs.map((blog, index) => {
-                    return <Column key={index} list={blog} />;
-                  })}
-                </div>
+    
+          <div className="aboveFooter">
+            <div className="no-gutters row-cols-3 d-flex justify-content-center ">
+              <div className="row  no-gutters blogRow">
+                {blogs.map((blog, index) => {
+                  return <Column key={index} list={blog} />;
+                })}
               </div>
             </div>
           </div>
         </div>
+
       </div>
 
       <div className="container" id="footer-container">

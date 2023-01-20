@@ -3,22 +3,25 @@ from .pool import pool
 from typing import List
 
 
-
 class DuplicateAccountError(ValueError):
     pass
+
 
 class AccountIn(BaseModel):
     username: str
     password: str
     user_type: str
 
+
 class AccountOut(BaseModel):
     id: str
     username: str
     user_type: str
 
+
 class AccountOutWithPassword(AccountOut):
     hashed_password: str
+
 
 class AccountQueries:
     def get(self, username: str) -> AccountOutWithPassword:
@@ -34,13 +37,18 @@ class AccountQueries:
                 )
                 record = cur.fetchone()
 
-                if record != None:
-                    return AccountOutWithPassword(id=record[0], username=record[1], hashed_password=record[2], user_type=record[3])
+                if record is not None:
+                    return AccountOutWithPassword(
+                        id=record[0],
+                        username=record[1],
+                        hashed_password=record[2],
+                        user_type=record[3],
+                    )
                 else:
                     print("bad username")
 
     def get_by_id(self, id: int) -> AccountOut:
-       with pool.connection() as conn:
+        with pool.connection() as conn:
             with conn.cursor() as cur:
                 cur.execute(
                     """
@@ -52,13 +60,15 @@ class AccountQueries:
                 )
                 record = cur.fetchone()
 
-                if record != None:
-                    return AccountOut(id=record[0], username=record[1], hashed_password=record[2], user_type=record[3])
+                if record is not None:
+                    return AccountOut(
+                        id=record[0],
+                        username=record[1],
+                        hashed_password=record[2],
+                        user_type=record[3],
+                    )
                 else:
                     print("ID not in database")
-
-
-
 
     def create(self, account: AccountIn, hashed_password: str) -> AccountOut:
 
@@ -75,13 +85,7 @@ class AccountQueries:
                     VALUES (%s, %s, %s)
                     RETURNING id
                     """,
-                    [
-                        account.username,
-                        hashed_password,
-                        account.user_type
-
-                    ]
-
+                    [account.username, hashed_password, account.user_type],
                 )
                 id = result.fetchone()[0]
                 print(id)
@@ -90,7 +94,7 @@ class AccountQueries:
                 return AccountOut(id=id, **old_data)
 
     def get_all(self) -> List[AccountOut]:
-         with pool.connection() as conn:
+        with pool.connection() as conn:
             with conn.cursor() as cur:
                 cur.execute(
                     """
@@ -104,11 +108,8 @@ class AccountQueries:
 
                 for record in cur:
 
-                    account = AccountOut (
-                    id=record[0],
-                    username=record[1],
-                    user_type=record[2]
-
+                    account = AccountOut(
+                        id=record[0], username=record[1], user_type=record[2]
                     )
                     results.append(account)
 

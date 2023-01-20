@@ -22,7 +22,7 @@
 }
 
 .openLoginModal {
-  transform: translate(700%, -100%);
+  /* transform: translate(700%, -100%); */
   background-color: #3d5c97;
   border-radius: 8px;
   border-style: none;
@@ -56,7 +56,7 @@
 }
 
 .openSignupModal {
-  transform: translate(-600%, -5%);
+  /* transform: translate(-600%, -5%); */
   background-color: #3d5c97;
   border-radius: 8px;
   border-style: none;
@@ -128,8 +128,8 @@
 }
 
 .blogRow {
-  margin: auto;
-  width: 50%;
+  /* margin: auto; */
+  width: 60%;
   padding-top: 20px;
 }
 
@@ -174,3 +174,18 @@
   100% { opacity: 1; }
 }
 
+
+.pic {
+  left: 0;
+}
+
+.card-text {
+  font-size: 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.card-body {
+  width: 50%;
+}
