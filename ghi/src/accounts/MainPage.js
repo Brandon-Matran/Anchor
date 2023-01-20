@@ -5,7 +5,8 @@ import "./MainPage.css";
 import { useEffect, useState } from "react";
 import LoginModal from "./LoginModal";
 import SignUpModal from "./SignupModal";
-import { useToken, getToken } from "./Authentication.js";
+import { useToken } from "./Authentication.js";
+
 
 function Column(props) {
   return (
@@ -40,6 +41,10 @@ function MainPage() {
   const [signupModal, setSignUpModal] = useState(false);
   const [blogs, setBlogList] = useState([], [], []);
 
+  const handleLogout = () => {
+    logout();
+    alert('You have logged out')
+  }
 
 
   useEffect(() => {
@@ -72,10 +77,7 @@ function MainPage() {
         className="header"
         style={{ backgroundImage: `url(${background_image})` }}
       >
-        <div id="logo">Anchor ⚓</div>
-        <button className="LogOutButton" onClick={async () => logout()}>
-          Log out
-        </button>
+        <div id="logo" animation="fadeIn 3s">Anchor</div>
       </div>
       <div className="middle">
         <div>

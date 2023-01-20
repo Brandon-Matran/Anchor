@@ -2,6 +2,8 @@ from fastapi.testclient import TestClient
 from main import app
 from queries.accounts import AccountQueries
 from routers.accounts import get_authenticator
+from jwtdown_fastapi.authentication import Token
+
 
 client = TestClient(app)
 
@@ -19,6 +21,15 @@ expected_get_response = {
 
 }
 
+expected_create_response = {
+  "access_token": "asfivuabwoiurbaw3iruabwvknsd",
+  "token_type": "Bearer",
+  "account": {
+    "id": "1",
+    "username": "test",
+    "user_type": "individual"
+  }
+}
 
 
 class MockAccountQueries:
@@ -35,9 +46,11 @@ class MockAuthenticator:
     def hash_password(self, password):
         return "jaosifpa8u3aw-98fawf"
 
-    def login(self, response, request, form, repo):
-        return "viasubpsa93w8rha-3w9"
+    async def login(self, response, request, form, repo):
+        return Token(access_token="asfivuabwoiurbaw3iruabwvknsd")
 
+def mock_get_authenticator():
+    return MockAuthenticator()
 
 def test_get_accounts():
 
@@ -54,12 +67,14 @@ def test_get_accounts():
 
     # Act
     response = client.get('/api/accounts', json=req_body)
+    print(response)
     actual = response.json()
 
 
     #Assert
     assert response.status_code == 200
     assert actual == [expected_post_response]
+
 
     #cleanup
     app.dependency_overrides = {}
@@ -74,7 +89,7 @@ def test_create_accounts():
 
     #Arrange
     app.dependency_overrides[AccountQueries] = MockAccountQueries
-    app.dependency_overrides[get_authenticator]
+    app.dependency_overrides[get_authenticator] = mock_get_authenticator
 
 
     # Act
@@ -84,7 +99,7 @@ def test_create_accounts():
 
     #Assert
     assert response.status_code == 200
-    assert actual == [expected_post_response]
+    assert actual == expected_create_response
 
     #cleanup
     app.dependency_overrides = {}
