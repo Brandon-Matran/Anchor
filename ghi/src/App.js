@@ -40,14 +40,9 @@ function App() {
           <Route path="/login" element={<LoginForm />} />
           <Route path="/test" element={<TestPage />} />
           <Route path="/signup" element={<Signup />} />
-<<<<<<< HEAD
-          {/* <Route path="/blogs" element={<BlogsList />} />
-          <Route path="/listings" element={<JobListings />} /> */}
           <Route path="/blogs/:id" element={<GetOneBlog />} />
-=======
           <Route path="/blogs" element={<BlogsList />} />
           <Route path="/listings" element={<JobListings />} />
->>>>>>> main
           <Route path="/blogs/create" element={<CreateBlogsForm/>} />
           <Route path="/listings/create" element={<CreateJobsForm/>} />
         </Routes>
