@@ -9,11 +9,13 @@ api-unit-test-job:
   stage: test
   needs:
     - lint-test-job
+  before_script:
+    - export SIGNING_KEY=$(cat path/to/.env)
   script:
     - cd account_service
     - pip install -r requirements.txt
     - python -m pytest
-    
+
 # Run flake8 to check for code quality
 lint-test-job:
   image: python:3-bullseye
