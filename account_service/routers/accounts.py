@@ -11,6 +11,7 @@ from jwtdown_fastapi.authentication import Token
 from authenticator import authenticator
 from typing import Optional
 from pydantic import BaseModel
+from typing import List
 
 from queries.accounts import (
     AccountIn,
@@ -32,6 +33,8 @@ class HttpError(BaseModel):
 
 router = APIRouter()
 
+def get_authenticator():
+    return authenticator
 
 @router.post("/api/accounts", response_model=AccountToken | HttpError)
 async def create_account(
@@ -39,8 +42,9 @@ async def create_account(
     request: Request,
     response: Response,
     repo: AccountQueries = Depends(),
+    auth = Depends(get_authenticator)
 ):
-    hashed_password = authenticator.hash_password(info.password)
+    hashed_password = auth.hash_password(info.password)
     try:
         account = repo.create(info, hashed_password)
         print("ACOUNT", account)
@@ -55,7 +59,7 @@ async def create_account(
         user_type=info.user_type
         )
     print("FORM", form)
-    token = await authenticator.login(response, request, form, repo)
+    token = await auth.login(response, request, form, repo)
     print("TOKEN", token)
     return AccountToken(account=account, **token.dict())
 
@@ -90,3 +94,10 @@ def account_detail(
   if user is None:
     response.status_code= 404
   return user
+
+@router.get("/api/accounts", response_model=List[AccountOut])
+def get_all(
+    repo: AccountQueries = Depends(),
+
+):
+    return repo.get_all()

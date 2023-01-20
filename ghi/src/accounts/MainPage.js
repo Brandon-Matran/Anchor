@@ -5,6 +5,8 @@ import "./MainPage.css";
 import { useEffect, useState } from "react";
 import LoginModal from "./LoginModal";
 import SignUpModal from "./SignupModal";
+import { useToken } from "./Authentication.js";
+
 
 function Column(props) {
   return (
@@ -33,10 +35,17 @@ function Column(props) {
 }
 
 function MainPage() {
+  const [token, login, logout] = useToken();
   const navigate = useNavigate();
   const [loginModal, setLoginModal] = useState(false);
   const [signupModal, setSignUpModal] = useState(false);
   const [blogs, setBlogList] = useState([], [], []);
+
+  const handleLogout = () => {
+    logout();
+    alert('You have logged out')
+  }
+
 
   useEffect(() => {
     const url = "http://localhost:8080/blogs";
@@ -62,68 +71,59 @@ function MainPage() {
     fetchData();
   }, []);
 
-  const signupClick = async (e) => {
-    navigate("/signup");
-  };
-
-  const LoginClick = async (e) => {
-    navigate("/login");
-  };
-
   return (
     <div>
       <div
         className="header"
         style={{ backgroundImage: `url(${background_image})` }}
       >
-        <div id="logo">Anchor ⚓</div>
+        <div id="logo" animation="fadeIn 3s">Anchor</div>
       </div>
       <div className="middle">
-          <div>
-            <div className="container-fluid">
-              <img
-                src={programmer}
-                className="programmer img-fluid"
-                alt="programmer"
-              />
-            </div>
-            <div className="container">
-              <div className="blogContainer max-width">
-                <div className="d-flex flex-row-reverse">
-                  <button
-                    onClick={() => {
-                      setSignUpModal(true);
-                    }}
-                    type="button"
-                    className="openSignupModal"
-                  >
-                    Sign Up
-                  </button>
-                  {signupModal && (
-                    <SignUpModal closeSignupModal={setSignUpModal} />
-                  )}
-                </div>
+        <div>
+          <div className="container-fluid">
+            <img
+              src={programmer}
+              className="programmer img-fluid"
+              alt="programmer"
+            />
+          </div>
+          <div className="container">
+            <div className="blogContainer max-width">
+              <div className="d-flex flex-row-reverse">
                 <button
-                  className="openLoginModal"
-                  onClick={() => setLoginModal(true)}
+                  onClick={() => {
+                    setSignUpModal(true);
+                  }}
+                  type="button"
+                  className="openSignupModal"
                 >
-                  Log In
+                  Sign Up
                 </button>
-                {loginModal && <LoginModal closeLoginModal={setLoginModal} />}
+                {signupModal && (
+                  <SignUpModal closeSignupModal={setSignUpModal} />
+                )}
               </div>
+              <button
+                className="openLoginModal"
+                onClick={() => setLoginModal(true)}
+              >
+                Log In
+              </button>
+              {loginModal && <LoginModal closeLoginModal={setLoginModal} />}
             </div>
-            <div className="justify">
-              <div className="aboveFooter">
-                <div>
-                  <div className="row blogRow">
-                    {blogs.map((blog, index) => {
-                      return <Column key={index} list={blog} />;
-                    })}
-                  </div>
+          </div>
+          <div className="justify">
+            <div className="aboveFooter">
+              <div>
+                <div className="row blogRow">
+                  {blogs.map((blog, index) => {
+                    return <Column key={index} list={blog} />;
+                  })}
                 </div>
               </div>
             </div>
-
+          </div>
         </div>
       </div>
 
@@ -132,8 +132,7 @@ function MainPage() {
           className="footer"
           id="footer"
           style={{ backgroundImage: `url(${background_image})` }}
-        >
-        </footer>
+        ></footer>
       </div>
     </div>
   );
