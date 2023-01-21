@@ -1,8 +1,19 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuthContext } from "../accounts/Authentication"
 
 
 const BlogsList = () => {
   const [blogs, setBlog] = useState([]);
+  const token = useAuthContext();
+  const [Jwt, setJwt] = useState(null);
+
+  function parseJwt(data) {
+    const base64Url = data.split(".")[1];
+    const base64 = base64Url.replace("-", "+").replace("_", "/");
+    const info = JSON.parse(window.atob(base64));
+    setUserName(info.account.username);
+}
 
   const getBlog = async () => {
     const url = `${process.env.REACT_APP_BLOG_SERVICE}/blogs`;
@@ -14,20 +25,31 @@ const BlogsList = () => {
   };
 
   const deleteBlog = async (id) => {
-    // const url = `http://localhost:8080/blogs/${id}`;
     const url = `${process.env.REACT_APP_BLOG_SERVICE}/blogs/${id}`;
-    const fetchConfig = { method: "delete" };
+    const fetchConfig = { 
+      method: "delete",
+      headers: {
+        "Authorization": `Bearer ${Jwt}`,
+        "Content-Type": "application/json"
+      }
+    };
     const response = await fetch(url, fetchConfig);
     if (response.ok) {
       getBlog();
-      // const data = await response.json();
-      // getBlog(data);
     }
   };
 
   useEffect(() => {
     getBlog();
-  }, []);
+    fetch(token)
+    .then(response => {if ((typeof response.token) !== "object") {
+        setJwt(token.token);
+        if (Jwt !== null) {
+            parseJwt(Jwt);
+        }
+    }})
+  }, [token, Jwt]);
+    console.log(Jwt, "GHJFGHFFGHJFHGHJHJFGHFGJJGH");
 
   return (
     <div>
@@ -55,8 +77,7 @@ const BlogsList = () => {
                     type="button"
                     className="btn btn-danger"
                     onClick={() => deleteBlog(blog.id)}
-                  >
-                    Delete Blog
+                    >Delete Blog
                   </button>
                 </td>
               </tr>

@@ -7,6 +7,7 @@ const JobListings = () => {
   const navigate = useNavigate();
   const token = useAuthContext();
   const [Jwt, setJwt] = useState(null);
+  // const [username, setUserName] = useState('')
 
   function parseJwt(data) {
     const base64Url = data.split(".")[1];
@@ -50,7 +51,7 @@ const JobListings = () => {
 
   const DeleteJobListing = async (id) => {
 
-    const url = `http://localhost:8090/listings/${id}`;
+    const url = `${process.env.REACT_APP_LISTING_SERVICE}/${id}`;
     const fetchConfig = { 
       method: "delete",
       headers: {
