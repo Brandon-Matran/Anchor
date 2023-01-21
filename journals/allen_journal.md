@@ -1,5 +1,40 @@
 # Allen's Day to Day
 
+## 01/06/2023
+
+Completed:
+
+- set up PostgreSQL and pgAdmin
+- set up branches by Features and subbranches by stories
+- determined workflow for the project
+
+Work in Progress:
+
+- writing our first code; setting up at least one end-point.
+
+Notes:
+Need to catch up on some learning before coding. PostgreSQL and FastAPI.
+## 01/12/2023
+Completed:
+- confirmed you can use token obj to access username data
+
+Work in Progrss:
+- need to figure out and write token auth for blogs
+- need to figure out how to access data points in other tables in postgres
+
+Note:
+- discuss CI/CD with team. Hopefully we will be ready to test all features by next week.
+
+## 01/11/2023
+Completed:
+- completed blogs back end and merged all subbranches to FEATURE/blogs
+
+Work in Progress:
+- Blogs front end; still needs to figure out how to grab username on the front end
+
+Note:
+- Waiting on listings back end to compelete, then I will start listings front end for update API.
+
 ## 01/10/2023
 
 Completed:

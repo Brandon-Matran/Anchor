@@ -7,16 +7,19 @@ import TestPage from "./accounts/TestPage.js";
 import { AuthProvider, useToken } from "./accounts/Authentication.js";
 import Signup from "./accounts/Signup";
 import MainPage from "./accounts/MainPage";
-import Nav from "./Nav";
 import CreateBlogsForm from "./Blogs/CreateBlogsForm";
 import BlogsList from "./Blogs/BlogsList.js";
 import JobListings from "./Jobs/JobListings.js";
+import UpdateListing from "./Listings/update_listing";
+import CreateJobsForm from "./Listings/CreateListingsForm";
+import Nav from "./Nav";
+import NavFooter from "./NavFooter";
+
 function GetToken() {
   // Get token from JWT cookie (if already logged in)
   useToken();
   return null;
 }
-
 
 function App() {
   // const [token, setToken] = useState();
@@ -29,6 +32,8 @@ function App() {
     <Router>
       <AuthProvider>
         <GetToken />
+        <Nav />
+        <NavFooter/>
         <Routes>
           <Route path="/" element={<MainPage />} />
           <Route path="/login" element={<LoginForm />} />
@@ -36,6 +41,8 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/blogs" element={<BlogsList />} />
           <Route path="/listings" element={<JobListings />} />
+          <Route path="/blogs/create" element={<CreateBlogsForm/>} />
+          <Route path="/listings/create" element={<CreateJobsForm/>} />
         </Routes>
       </AuthProvider>
     </Router>
@@ -43,4 +50,3 @@ function App() {
 }
 
 export default App;
-
