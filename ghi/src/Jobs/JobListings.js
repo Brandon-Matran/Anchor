@@ -71,9 +71,9 @@ const JobListings = () => {
   //   }
   // };
 
-  useEffect(() => {
-    getJob();
-  }, []);
+//   useEffect(() => {
+//     getJob();
+//   }, []);
 
   return (
     <div>

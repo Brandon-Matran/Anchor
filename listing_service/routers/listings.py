@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends, Response, HTTPException, status
-from typing import Union, List
+from typing import Union, List, Optional
 
 # from token_auth import get_current_user
 from auth import authenticator
@@ -60,7 +60,6 @@ def delete_listing(
         )
 
 
-
 @router.put("/listings/{listing_id}", response_model=ListingOut)
 def update_listing(
     listing_id: int,
@@ -69,8 +68,20 @@ def update_listing(
     account: dict = Depends(authenticator.get_current_account_data),
 ) -> ListingOut:
     if account["user_type"] == "company":
-          return repo.update(listing_id, listing)
+        return repo.update(listing_id, listing)
     else:
         raise HTTPException(
             status_code=401, detail="Only company user can update job listing"
         )
+
+
+@router.get("/listings/{listing_id}", response_model=Optional[ListingOut])
+def get_one_listing(
+    listing_id: int,
+    response: Response,
+    repo: ListingRepository = Depends(),
+) -> ListingOut:
+    listing = repo.get_one(listing_id)
+    if listing is None:
+        response.status_code = 404
+    return listing

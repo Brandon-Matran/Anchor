@@ -1,5 +1,5 @@
 steps = [
-        [
+    [
         # "Up" SQL statement
         """
         CREATE TABLE accounts (
@@ -14,5 +14,4 @@ steps = [
         DROP TABLE accounts;
         """,
     ]
-
 ]

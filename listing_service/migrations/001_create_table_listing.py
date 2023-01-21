@@ -4,6 +4,7 @@ steps = [
         """
         CREATE TABLE listings (
             id SERIAL PRIMARY KEY NOT NULL,
+            username VARCHAR(100) NOT NULL,
             title VARCHAR(1000) NOT NULL,
             company_name VARCHAR(1000) NOT NULL,
             job_position VARCHAR(1000) NOT NULL,
@@ -15,6 +16,6 @@ steps = [
         # "Down" SQL statement
         """
         DROP TABLE listings;
-        """
+        """,
     ],
 ]

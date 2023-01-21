@@ -75,6 +75,7 @@ export function useToken() {
 
   async function logout() {
     if (token) {
+      console.log("token deleted")
       const url = `${process.env.REACT_APP_ACCOUNT_SERVICE}/token`;
       await fetch(url, { method: "delete", credentials: "include" });
       internalToken = null;
@@ -106,7 +107,6 @@ export function useToken() {
   }
 
   async function signup(username, password, user_type) {
-    console.log("pooP");
     const url = `${process.env.REACT_APP_ACCOUNT_SERVICE}/api/accounts`;
     const response = await fetch(url, {
       method: "post",
@@ -121,8 +121,7 @@ export function useToken() {
     });
 
     if (response.ok) {
-      console.log("THIS THE RESPONSE", response);
-      await login(username, password, user_type)
+      await login(username, password, user_type);
       return <Navigate to="/" />;
     }
     return false;
@@ -148,7 +147,6 @@ export function useToken() {
     }
     return false;
   }
-
 
   return [token, login, logout, signup, update];
 }
