@@ -4,9 +4,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from routers import blogs_r
 
 
-
-
 app = FastAPI()
+
 origins = [
     "http://localhost:3000",
     "http://localhost:8080",

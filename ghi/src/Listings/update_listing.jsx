@@ -1,11 +1,13 @@
-import { useState } from "react";
-import { useAuthContext } from "./accounts/Authentication.js";
-import parseJwt from ".decode.jsx";
+import React, { useEffect, useState } from "react";
+import { useAuthContext } from "../accounts/Authentication.js";
+import parseJwt from "../decode.jsx";
+
 function UpdateListing() {
   const { token } = useAuthContext();
 
-  info = parseJwt(token);
+  const info = parseJwt(token);
 
+  const [id, setID] = useState("");
   const [title, setTitle] = useState("");
   const [company_name, setName] = useState("");
   const [job_position, setPosition] = useState("");
@@ -13,25 +15,56 @@ function UpdateListing() {
   const [deadline, setDead] = useState("");
   const [created, setCreated] = useState("");
 
-  async function getListing(id) {
+  useEffect(() => {
+    async function getListing(id) {
+      const url = `${process.env.REACT_APP_LISTING_SERVICE}/listings/${id}`;
+      try {
+        const response = await fetch(url, {
+          credentials: "include",
+        });
+        if (response.ok) {
+          const data = await response.json();
+          setID(data.id);
+          setTitle(data.title);
+          setName(data.company_name);
+          setPosition(data.job_position);
+          setUrl(data.apply_url);
+          setDead(data.deadline);
+          setCreated(data.created);
+        }
+      } catch (e) {}
+    }
+    getListing(id);
+  }, [setTitle, setName, setPosition, setUrl, setDead, setCreated]);
+
+  async function update(id) {
     const url = `${process.env.REACT_APP_LISTING_SERVICE}/listings/${id}`;
+    const Config = {
+      method: "put",
+      body: JSON.stringify({
+        title,
+        company_name,
+        job_position,
+        apply_url,
+        deadline,
+        created,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
     try {
-      const response = await fetch(url, {
-        credentials: "include",
-      });
+      const response = await fetch(url, Config);
       if (response.ok) {
         const data = await response.json();
         setTitle(data.title);
         setName(data.company_name);
-        setPosition();
-        setUrl();
-        setDead();
-        setCreated();
-
-        return;
+        setPosition(data.job_position);
+        setUrl(data.apply_url);
+        setDead(data.deadline);
+        setCreated(data.created);
       }
     } catch (e) {}
-    return false;
   }
 
   return (
@@ -117,8 +150,12 @@ function UpdateListing() {
           </label>
         </div>
 
-        <button type="submit" className="btn btn-primary btn-block mb-4">
-          Update the listing
+        <button
+          onClick={async () => await update(id)}
+          type="submit"
+          className="btn btn-primary btn-block mb-4"
+        >
+          Finishing the update
         </button>
       </form>
     </div>
