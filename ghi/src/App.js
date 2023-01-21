@@ -11,6 +11,7 @@ import CreateBlogsForm from "./Blogs/CreateBlogsForm";
 import BlogsList from "./Blogs/BlogsList.js";
 import JobListings from "./Jobs/JobListings.js";
 import UpdateListing from "./Listings/update_listing";
+import MyListings from "./Jobs/MyListings.js";
 import CreateJobsForm from "./Listings/CreateListingsForm";
 import Nav from "./Nav";
 import NavFooter from "./NavFooter";
@@ -41,6 +42,7 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/blogs" element={<BlogsList />} />
           <Route path="/listings" element={<JobListings />} />
+          <Route path="/listings/my" element={<MyListings />} />
           <Route path="/blogs/create" element={<CreateBlogsForm/>} />
           <Route path="/listings/create" element={<CreateJobsForm/>} />
         </Routes>

@@ -1,10 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuthContext } from "../accounts/Authentication"
 
 const JobListings = () => {
   const [jobs, setJob] = useState([]);
   const navigate = useNavigate();
+  const token = useAuthContext();
+  const [Jwt, setJwt] = useState(null);
 
+  function parseJwt(data) {
+    const base64Url = data.split(".")[1];
+    const base64 = base64Url.replace("-", "+").replace("_", "/");
+    const info = JSON.parse(window.atob(base64));
+    setUserName(info.account.username);
+}
   const getJob = async () => {
     const url = `${process.env.REACT_APP_LISTING_SERVICE}/listings`;
     const response = await fetch(url);
@@ -39,10 +48,16 @@ const JobListings = () => {
   console.log("ACCOUNT", getAccount())
 
 
-
   const DeleteJobListing = async (id) => {
-    const url = `${process.env.REACT_APP_LISTING_SERVICE}/listings/${id}`;
-    const fetchConfig = { method: "delete" };
+
+    const url = `http://localhost:8090/listings/${id}`;
+    const fetchConfig = { 
+      method: "delete",
+      headers: {
+        "Authorization": `Bearer ${Jwt}`,
+        "Content-Type": "application/json"
+      }
+    };
     const response = await fetch(url, fetchConfig);
     if (response.ok) {
       getJob();
@@ -71,9 +86,17 @@ const JobListings = () => {
   //   }
   // };
 
-//   useEffect(() => {
-//     getJob();
-//   }, []);
+  useEffect(() => {
+    getJob();
+    fetch(token)
+    .then(response => {if ((typeof response.token) !== "object") {
+        setJwt(token.token);
+        if (Jwt !== null) {
+            parseJwt(Jwt);
+        }
+    }})
+  }, [token, Jwt]);
+    console.log(Jwt, "GHJFGHFFGHJFHGHJHJFGHFGJJGH")
 
   return (
     <div>
@@ -85,13 +108,14 @@ const JobListings = () => {
             <th scope="col">Job Position</th>
             <th scope="col">Deadline</th>
             <th scope="col">Created Date</th>
+            <th scope="col"> Button </th>
           </tr>
         </thead>
         <tbody>
           {jobs.map((job) => {
-            if (getAccount===true){
+            if (getAccount !== true){
               return (
-              <tr key={job.title}>
+              <tr key={job.id}>
                 <td>{job.title}</td>
                 <td>{job.company_name}</td>
                 <td>{job.job_position}</td>
@@ -108,14 +132,13 @@ const JobListings = () => {
                   <td>{job.title}</td>
                   <td>{job.company_name}</td>
                   <td>{job.job_position}</td>
-                  <td>{job.apply_url}</td>
                   <td>{job.deadline}</td>
                   <td>{job.created}</td>
                   <td>
                     <button
                       onClick={() => applyClick()}
                       type="button"
-                      className="btn btn-link- btn-outline-light btn-primary"
+                      className="btn btn-success"
                     >Apply
                     </button>
                   </td>
