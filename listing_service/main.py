@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from routers import listings
 
 
@@ -18,4 +19,3 @@ app.add_middleware(
     allow_headers=["*"],
 )
 app.include_router(listings.router)
-
