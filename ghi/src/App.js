@@ -9,8 +9,7 @@ import Signup from "./accounts/Signup";
 import MainPage from "./accounts/MainPage";
 import CreateBlogsForm from "./Blogs/CreateBlogsForm";
 import BlogsList from "./Blogs/BlogsList.js";
-import JobListings from "./Jobs/JobListings.js";
-import UpdateListing from "./Listings/update_listing";
+import UpdateListing from "./Listings/UpdateListingsForm";
 import CreateJobsForm from "./Listings/CreateListingsForm";
 import Nav from "./Nav";
 import NavFooter from "./NavFooter";
@@ -40,9 +39,9 @@ function App() {
           <Route path="/test" element={<TestPage />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/blogs" element={<BlogsList />} />
-          <Route path="/listings" element={<JobListings />} />
           <Route path="/blogs/create" element={<CreateBlogsForm/>} />
           <Route path="/listings/create" element={<CreateJobsForm/>} />
+          <Route path="/listings/update/:id" element={<UpdateListing/>} />
         </Routes>
       </AuthProvider>
     </Router>
