@@ -17,7 +17,7 @@ function UpdateBlog() {
   const [title, setTitle] = useState("");
   const [pic_url, setPicURL] = useState("");
   const [description, setDescription] = useState("");
-  // const [submitted, setSubmitted] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
 
   useEffect(() => {
     async function getBlog(id) {
@@ -67,8 +67,15 @@ function UpdateBlog() {
       setTitle(data.title);
       setPicURL(data.pic_url);
       setDescription(data.description);
+      setSubmitted(true);
     }
   }
+
+  let messageClasses = "alert alert-success d-none mb-0";
+  if (submitted === true) {
+    messageClasses = "alert alert-success mb-0";
+  }
+
   return (
     <section
       className="vh-100"
@@ -124,6 +131,10 @@ function UpdateBlog() {
                       Finish the update
                     </button>
                   </form>
+                </div>
+                <br />
+                <div className={messageClasses} id="success-message">
+                  Success! Blog Updated!
                 </div>
               </div>
             </div>
