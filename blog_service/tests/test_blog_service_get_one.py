@@ -20,7 +20,6 @@ class MockQueries:
 
 
 def test_get_one_blog():
-    # arrange
     req = {
     "id": 1,
     "username": "string",
@@ -30,6 +29,7 @@ def test_get_one_blog():
     "description": "string"
   }
 
+    # Arrange
     app.dependency_overrides[BlogRepo] = MockQueries
 
     # Act
