@@ -75,6 +75,7 @@ export function useToken() {
 
   async function logout() {
     if (token) {
+      console.log("token deleted")
       const url = `${process.env.REACT_APP_ACCOUNT_SERVICE}/token`;
       await fetch(url, { method: "delete", credentials: "include" });
       internalToken = null;

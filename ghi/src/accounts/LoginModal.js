@@ -18,7 +18,7 @@ function LoginModal({ closeLoginModal }) {
   useEffect(() => {
     if (token) {
       setFormSuccess(true);
-      navigate("/signup");
+      navigate("/blogs");
     }
   }, [token]);
 
