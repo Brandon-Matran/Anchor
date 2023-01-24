@@ -19,6 +19,26 @@ api-unit-test-job:
     - pip install -r requirements.txt
     - python -m pytest
 
+service-blog-unit-test-job:
+  image: python:3-bullseye
+  stage: test
+  needs:
+    - lint-test-job
+  script:
+    - cd blog_service
+    - pip install -r requirements.txt
+    - python -m pytest
+
+listing-blog-unit-test-job:
+  image: python:3-bullseye
+  stage: test
+  needs:
+    - lint-test-job
+  script:
+    - cd listing_service
+    - pip install -r requirements.txt
+    - python -m pytest
+
 # Run flake8 to check for code quality
 lint-test-job:
   image: python:3-bullseye

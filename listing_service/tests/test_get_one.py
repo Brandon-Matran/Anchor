@@ -16,6 +16,7 @@ expected_response = {
     "created": "2023-01-23"
   }
 
+
 class MockQueries:
     def get_one(self, listing_id=2):
         return expected_response
