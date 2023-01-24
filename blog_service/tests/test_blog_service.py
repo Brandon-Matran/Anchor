@@ -1,7 +1,6 @@
 from fastapi.testclient import TestClient
 from main import app
 from queries.blogs_q import BlogRepo
-from routers.blogs_r import all_blogs
 
 
 client = TestClient(app)
@@ -17,17 +16,14 @@ expected_get_response = {
 }
 
 
-
 class MockBlogQueries:
-    
+
     def all_blogs(self):
         return [expected_get_response]
 
 
-
-
 def test_get_all_blogs():
-    
+
     req_body = {
         # "id":
         "username": "test",
@@ -36,7 +32,7 @@ def test_get_all_blogs():
         "pic_url": "test",
         "description": "test",
     }
-    
+
 #     expected_get_response = {
 #     "id": 1,
 #     "username": "test",
@@ -45,10 +41,9 @@ def test_get_all_blogs():
 #     "pic_url": "test",
 #     "description": "test",
 # }
-    
+
     # arrange
     app.dependency_overrides[BlogRepo] = MockBlogQueries
-    
 
     # Act
     response = client.get("/blogs", json=req_body)
@@ -61,4 +56,3 @@ def test_get_all_blogs():
 
     # cleanup
     app.dependency_overrides = {}
-

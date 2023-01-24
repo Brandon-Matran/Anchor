@@ -1,8 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from routers import listings
-from fastapi.middleware.cors import CORSMiddleware
-import os
 
 
 app = FastAPI()
