@@ -36,7 +36,13 @@ class ListingRepository:
             with conn.cursor() as db:
                 db.execute(
                     """
-                        SELECT id,username, title, company_name, job_position, apply_url, deadline, created
+                        SELECT id,username
+                        , title
+                        , company_name
+                        , job_position
+                        , apply_url
+                        , deadline
+                        , created
                         FROM listings
                         ORDER BY created;
                         """
@@ -67,7 +73,13 @@ class ListingRepository:
                     result = db.execute(
                         """
                         INSERT INTO listings
-                        (username, title, company_name, job_position, apply_url, deadline, created)
+                        (username
+                        , title
+                        , company_name
+                        , job_position
+                        , apply_url
+                        , deadline
+                        , created)
                         VALUES
                         (%s, %s, %s, %s, %s, %s,%s)
                         RETURNING id;

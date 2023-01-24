@@ -1,3 +1,10 @@
+## 1/20/23:
+Today I worked on:
+- Got the app deployed through CapRover.
+
+What I need to work on:
+- The database is not communicating smoothly with CapRover, I'm going to need to consult with an instructor to get it working on Monday.
+
 ## 1/18/23:
 Today I worked on:
 -I finished a unit test for get_all accounts list.

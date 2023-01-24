@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, Response, HTTPException, status
+from fastapi import APIRouter, Depends, Response, HTTPException
 from typing import Union, List, Optional
 
 # from token_auth import get_current_user
@@ -34,9 +34,6 @@ def create_listing(
     # account: dict = Depends(get_current_user),
     account: dict = Depends(authenticator.get_current_account_data),
 ):
-    # if "company" not in account.user_type:
-    #     raise not_authorized
-    # return repo.create(listing)
     if account["user_type"] == "company":
         return repo.create(listing)
     else:

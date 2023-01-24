@@ -11,8 +11,9 @@ expected_response = {
     "post_date": "2023-01-23",
     "title": "string",
     "pic_url": "string",
-    "description": "string"
-  }
+    "description": "string",
+}
+
 
 class MockQueries:
     def get_one(self, blog_id=2):
@@ -21,13 +22,13 @@ class MockQueries:
 
 def test_get_one_blog():
     req = {
-    "id": 1,
-    "username": "string",
-    "post_date": "2023-01-23",
-    "title": "string",
-    "pic_url": "string",
-    "description": "string"
-  }
+        "id": 1,
+        "username": "string",
+        "post_date": "2023-01-23",
+        "title": "string",
+        "pic_url": "string",
+        "description": "string",
+    }
 
     # Arrange
     app.dependency_overrides[BlogRepo] = MockQueries

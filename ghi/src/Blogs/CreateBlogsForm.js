@@ -45,7 +45,7 @@ function CreateBlogsForm(props) {
             method: "post",
             body: JSON.stringify(newBlog),
             headers: {
-                'Authorization': `Bearer ${token}`,
+                Authorization: `Bearer ${token}`,
                 'Content-Type': 'application/json',
             },
         }

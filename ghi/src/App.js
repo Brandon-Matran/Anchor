@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./App.css";
 import LoginForm from "./accounts/LoginForm.js";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as BrowserRouter, Route, Routes } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import TestPage from "./accounts/TestPage.js";
 import { AuthProvider, useToken } from "./accounts/Authentication.js";
@@ -24,6 +24,8 @@ function GetToken() {
 }
 
 function App() {
+  const domain = /https:\/\/[^/]+/;
+  const basename = process.env.PUBLIC_URL.replace(domain, "");
   // const [token, setToken] = useState();
 
   // if (!token) {
@@ -31,7 +33,7 @@ function App() {
   // }
 
   return (
-    <Router>
+    <BrowserRouter basename={basename}>
       <AuthProvider>
         <GetToken />
         <Nav />
@@ -49,7 +51,7 @@ function App() {
           <Route path="/listings/create" element={<CreateJobsForm/>} />
         </Routes>
       </AuthProvider>
-    </Router>
+    </BrowserRouter>
   );
 }
 
