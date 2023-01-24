@@ -42,7 +42,8 @@ def test_post_blogs():
     print("******************TEST*********************")
 
     app.dependency_overrides[BlogRepo] = MockPostBlogsQueries
-    app.dependency_overrides[authenticator.get_current_account_data]=fake_auth
+    app.dependency_overrides[authenticator.get_current_account_data]\
+     = fake_auth
 
     response = client.post("/blogs", json=req)
     actual = response.json()
