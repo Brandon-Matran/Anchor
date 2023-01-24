@@ -8,6 +8,7 @@ import { AuthProvider, useToken } from "./accounts/Authentication.js";
 import Signup from "./accounts/Signup";
 import MainPage from "./accounts/MainPage";
 import CreateBlogsForm from "./Blogs/CreateBlogsForm";
+import UpdateBlog from "./Blogs/update_blog";
 import BlogsList from "./Blogs/BlogsList.js";
 import JobListings from "./Jobs/JobListings.js";
 import UpdateListing from "./Listings/update_listing";
@@ -42,6 +43,7 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/blogs/:id" element={<GetOneBlog />} />
           <Route path="/blogs" element={<BlogsList />} />
+          <Route path="/blogs/update/:id" element={<UpdateBlog />} />
           {/* <Route path="/listings" element={<JobListings />} /> */}
           <Route path="/blogs/create" element={<CreateBlogsForm/>} />
           <Route path="/listings/create" element={<CreateJobsForm/>} />
