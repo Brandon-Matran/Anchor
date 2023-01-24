@@ -44,6 +44,7 @@ function CreateBlogsForm(props) {
         const fetchConfig = {
             method: "post",
             body: JSON.stringify(newBlog),
+            credentials: 'include',
             headers: {
                 Authorization: `Bearer ${token}`,
                 'Content-Type': 'application/json',
