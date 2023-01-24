@@ -34,41 +34,42 @@ function CreateBlogsForm(props) {
 
     }, [token, Jwt])
 
-    const handleSubmit = (event) => {
-        event.preventDefault()
-        const newBlog = {
-            "username": username,
-            "post_date": post_date,
-            "title": title,
-            "pic_url": pic_url,
-            "description": description
-        }
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const newBlog = {
+      username: username,
+      post_date: post_date,
+      title: title,
+      pic_url: pic_url,
+      description: description,
+    };
 
         const blogURL = `${process.env.REACT_APP_BLOG_SERVICE}/blogs`
         const fetchConfig = {
             method: "post",
             body: JSON.stringify(newBlog),
             headers: {
+                Authorization: `Bearer ${token}`,
                 'Content-Type': 'application/json',
                 "Authorization": `Bearer ${Jwt}`
             },
         }
 
-        fetch(blogURL, fetchConfig)
-            .then(response => response.json())
-            .then(() => {
-                setTitle('')
-                setPicURL('')
-                setDescription('')
-                setSubmitted(true)
-            })
-            .catch(e => console.error('ERROR: ', e))
-    }
+    fetch(blogURL, fetchConfig)
+      .then((response) => response.json())
+      .then(() => {
+        setTitle("");
+        setPicURL("");
+        setDescription("");
+        setSubmitted(true);
+      })
+      .catch((e) => console.error("ERROR: ", e));
+  };
 
-    let messageClasses = "alert alert-success d-none mb-0"
-    if(submitted === true){
-        messageClasses = "alert alert-success mb-0"
-    }
+  let messageClasses = "alert alert-success d-none mb-0";
+  if (submitted === true) {
+    messageClasses = "alert alert-success mb-0";
+  }
 
     return (
         <div className="row">
@@ -105,4 +106,4 @@ function CreateBlogsForm(props) {
 
 }
 
-export default CreateBlogsForm
+export default CreateBlogsForm;

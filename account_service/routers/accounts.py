@@ -11,6 +11,7 @@ from jwtdown_fastapi.authentication import Token
 from authenticator import authenticator
 from typing import Optional
 from pydantic import BaseModel
+from typing import List
 
 from queries.accounts import (
     AccountIn,
@@ -20,17 +21,25 @@ from queries.accounts import (
     DuplicateAccountError,
 )
 
+
 class AccountForm(BaseModel):
     username: str
     password: str
 
+
 class AccountToken(Token):
     account: AccountOut
+
 
 class HttpError(BaseModel):
     detail: str
 
+
 router = APIRouter()
+
+
+def get_authenticator():
+    return authenticator
 
 
 @router.post("/api/accounts", response_model=AccountToken | HttpError)
@@ -39,8 +48,9 @@ async def create_account(
     request: Request,
     response: Response,
     repo: AccountQueries = Depends(),
+    auth=Depends(get_authenticator),
 ):
-    hashed_password = authenticator.hash_password(info.password)
+    hashed_password = auth.hash_password(info.password)
     try:
         account = repo.create(info, hashed_password)
         print("ACOUNT", account)
@@ -52,10 +62,10 @@ async def create_account(
     form = AccountForm(
         username=info.username,
         password=info.password,
-        user_type=info.user_type
-        )
+        user_type=info.user_type,
+    )
     print("FORM", form)
-    token = await authenticator.login(response, request, form, repo)
+    token = await auth.login(response, request, form, repo)
     print("TOKEN", token)
     return AccountToken(account=account, **token.dict())
 
@@ -63,7 +73,9 @@ async def create_account(
 @router.get("/token", response_model=AccountToken | None)
 async def get_token(
     request: Request,
-    account: AccountQueries = Depends(authenticator.try_get_current_account_data)
+    account: AccountQueries = Depends(
+        authenticator.try_get_current_account_data
+    ),
 ) -> AccountToken | None:
     if account and authenticator.cookie_name in request.cookies:
         return {
@@ -72,21 +84,30 @@ async def get_token(
             "account": account,
         }
 
+
 @router.get("/api/protected", response_model=bool)
 async def get_protected(
-  account_data: dict = Depends(authenticator.get_current_account_data),
+    account_data: dict = Depends(authenticator.get_current_account_data),
 ):
-  return True
+    return True
+
 
 @router.get("/api/accounts/{id}", response_model=Optional[AccountOut])
 def account_detail(
-  id: int,
-  response: Response,
-  # repo: AccountQueries = Depends(authenticator.get_current_account_data),
-  account_data: dict = Depends(authenticator.get_current_account_data),
-  repo: AccountQueries = Depends(),
+    id: int,
+    response: Response,
+    # repo: AccountQueries = Depends(authenticator.get_current_account_data),
+    account_data: dict = Depends(authenticator.get_current_account_data),
+    repo: AccountQueries = Depends(),
 ) -> AccountOutWithPassword:
-  user = repo.get_by_id(id)
-  if user is None:
-    response.status_code= 404
-  return user
+    user = repo.get_by_id(id)
+    if user is None:
+        response.status_code = 404
+    return user
+
+
+@router.get("/api/accounts", response_model=List[AccountOut])
+def get_all(
+    repo: AccountQueries = Depends(),
+):
+    return repo.get_all()

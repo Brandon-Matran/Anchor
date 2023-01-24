@@ -1,16 +1,19 @@
-import { useState } from "react";
+import {useEffect, useState} from "react"
 import React from "react";
-// import { useAuthContext } from "../accounts/Authentication";
+import { useAuthContext } from "../accounts/Authentication";
 
 
 function CreateJobsForm() {
-  // const { token } = useAuthContext();
+  const today = new Date()
+  const { token } = useAuthContext();
+  const [username, setUserName] = useState('')
   const [title, setTitle] = useState("");
   const [company_name, setCompanyName] = useState("");
   const [job_position, setJobPosition] = useState("");
   const [apply_url, setApplyUrl] = useState("");
   const [deadline, setDeadline] = useState("");
-  const created = new Date().toLocaleString() + "";
+  const created = today.getFullYear() + '-' + parseInt(today.getMonth() + 1) + '-' + today.getDate()
+  const [Jwt, setJwt] = useState(null)
   const [submitted, setSubmitted] = useState(false);
 
 
@@ -39,14 +42,30 @@ function CreateJobsForm() {
     setDeadline(value);
   };
 
-  const handleCreatedChange = (event) => {
-    const value = event.target.value;
-    created(value);
-  };
+
+  function parseJwt(data) {
+    const base64Url = data.split(".")[1];
+    const base64 = base64Url.replace("-", "+").replace("_", "/");
+    const info = JSON.parse(window.atob(base64));
+    setUserName(info.account.username);
+}
+
+  useEffect(() => {
+      fetch(token)
+      .then(response => {if ((typeof response.token) !== "object") {
+          setJwt(token);
+          if (Jwt !== null) {
+              parseJwt(Jwt);
+          }
+      }})
+
+  }, [token, Jwt])
+
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const newJob = {
+      username: username,
       title: title,
       company_name: company_name,
       job_position: job_position,
@@ -55,17 +74,19 @@ function CreateJobsForm() {
       created: created,
     };
 
-    const jobsListingURL = "${REACT_APP_LISTING_SERVICE}/listings";
+    const jobsListingURL = `${process.env.REACT_APP_LISTING_SERVICE}/listings`
     const fetchConfig = {
       method: "post",
       body: JSON.stringify(newJob),
       headers: {
         "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
       },
     };
 
     fetch(jobsListingURL, fetchConfig)
       .then((response) => response.json())
+
       .then(() => {
         setTitle("");
         setCompanyName("");
@@ -153,19 +174,6 @@ function CreateJobsForm() {
                 value={deadline}
               />
               <label htmlFor="deadline">Deadline</label>
-            </div>
-            <div className="form-floating mb-3">
-              <input
-                onChange={handleCreatedChange}
-                placeholder="Created"
-                required
-                type="date"
-                name="created"
-                id="created"
-                className="form-control"
-                value={created}
-              />
-              <label htmlFor="created">Created</label>
             </div>
             <button type="submit" className="btn btn-primary">
               Post Job

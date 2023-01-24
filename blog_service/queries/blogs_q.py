@@ -3,10 +3,12 @@ from datetime import date
 from queries.pool import pool
 from typing import Optional, List, Union
 
+
 class AccountOut(BaseModel):
     id: str
     username: str
     user_type: str
+
 
 class BlogError(BaseModel):
     message: str
@@ -45,7 +47,11 @@ class BlogRepo:
                 with conn.cursor() as db:
                     db.execute(
                         """
-                        SELECT id, username, post_date, title, pic_url,description
+                        SELECT id
+                        , username
+                        , post_date
+                        , title
+                        , pic_url,description
                         FROM blogs
                         ORDER BY post_date;
                         """
@@ -108,7 +114,7 @@ class BlogRepo:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
-                    result = db.execute(
+                    db.execute(
                         """
                         DELETE FROM blogs
                         WHERE id = %s

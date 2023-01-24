@@ -1,3 +1,31 @@
+## 1/20/23:
+Today I worked on:
+- Got the app deployed through CapRover.
+
+What I need to work on:
+- The database is not communicating smoothly with CapRover, I'm going to need to consult with an instructor to get it working on Monday.
+
+## 1/18/23:
+Today I worked on:
+-I finished a unit test for get_all accounts list.
+
+## 1/17/23:
+Today I worked on:
+-Our group decided to merge all the code from the backend onto the Main branch on GitLab so we could all start working on the FrontEnd. So together, with my group, I was able to merge all the Feature branches into main. My group also really liked the Main Page Front End I worked on so we are going to go ahead with it. We also set up our CapRover instance. We are waiting to get our MVP up before we deploy it.
+
+-Tomorrow I plan to help the group on anything they need to get our MVP up and running.
+
+## 1/13/23
+Today I worked on:
+-It's Friday, so I didn't do as much as normal. I worked more on the main page and got clearance from the group to be able to make it look however I wanted. I also created a Test Page for blog creation.
+
+-Over the weekend I plan to focus on finishing the Main Page Front End.
+## 1/12/23:
+Today I worked on:
+-I helped the group out on figuring out how to get the accounts table to sync up with the blogs and job listings table on the backend. We need to have all microservices on the same signing key and have them all receive the same token so that they are able "communicate" with each other.
+
+-Tomorrow I plan to work on the Main Page.
+
 ## 1/11/23
 Today I worked on:
 -I created the MainPage.js and assigned a signup and login button. Then I had 1 on 1 meetings with the instructors to understand how we could restrict certain endpoints for users with different roles. For instance, a regular user can only create blogs. However, a company user can only create job listings. Code was released and I was able have a better understanding on how to do that. I also finished the update job listings story.

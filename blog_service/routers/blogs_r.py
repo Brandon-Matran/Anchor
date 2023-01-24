@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, Response, HTTPException, status
+from fastapi import APIRouter, Depends, Response, HTTPException
 from auth import authenticator
 from typing import Union, List, Optional
 from queries.blogs_q import (
@@ -28,6 +28,10 @@ def create_blog(
             status_code=401,
             detail="Only registered users are allowed to post new blog",
         )
+        raise HTTPException(
+            status_code=401,
+            detail="Only registered users are allowed to post new blog",
+        )
 
 
 @router.get("/blogs", response_model=Union[List[BlogOut], BlogError])
@@ -53,6 +57,10 @@ def delete_blog(
             status_code=401,
             detail="Only registered users are allowed to delete blog",
         )
+        raise HTTPException(
+            status_code=401,
+            detail="Only registered users are allowed to delete blog",
+        )
 
 
 @router.put("/blogs/{blog_id}", response_model=Union[BlogOut, BlogError])
@@ -68,6 +76,10 @@ def update_blog(
     ):
         return repo.update(blog_id, blog)
     else:
+        raise HTTPException(
+            status_code=401,
+            detail="Only registered users are allowed to update blog",
+        )
         raise HTTPException(
             status_code=401,
             detail="Only registered users are allowed to update blog",
