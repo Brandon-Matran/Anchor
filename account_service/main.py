@@ -6,9 +6,9 @@ from routers import accounts
 app = FastAPI()
 
 origins = [
-    "CORS_HOST,"
     "http://localhost:3000",
     "http://localhost:8100",
+    "https://maxbs.gitlab.io",
 ]
 
 app.add_middleware(

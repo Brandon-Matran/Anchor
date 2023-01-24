@@ -6,7 +6,7 @@ from routers import blogs_r
 app = FastAPI()
 
 origins = [
-    "CORS_HOST",
+    "https://maxbs.gitlab.io",
     "http://localhost:3000",
     "http://localhost:8080",
 ]
