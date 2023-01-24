@@ -34,6 +34,8 @@ listing-blog-unit-test-job:
   stage: test
   needs:
     - lint-test-job
+  before_script:
+    - export DATABASE_URL=postgresql://listing:password@postgres/listing
   script:
     - cd listing_service
     - pip install -r requirements.txt

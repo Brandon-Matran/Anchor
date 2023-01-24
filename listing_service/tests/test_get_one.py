@@ -18,7 +18,7 @@ expected_response = {
 
 
 class MockQueries:
-    def get_one(self, listing_id=2):
+    def get_one(self, listing_id=1):
         return expected_response
 
 
@@ -33,7 +33,6 @@ def test_get_one_listing():
     # act
 
     response = client.get("/listings/1", json=req)
-
     actual = response.json()
 
     # Assert
