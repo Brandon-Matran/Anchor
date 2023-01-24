@@ -12,6 +12,7 @@ import BlogsList from "./Blogs/BlogsList.js";
 import JobListings from "./Jobs/JobListings.js";
 import UpdateListing from "./Listings/update_listing";
 import CreateJobsForm from "./Listings/CreateListingsForm";
+import GetOneBlog from "./Blogs/GetOneBlog";
 import Nav from "./Nav";
 import NavFooter from "./NavFooter";
 
@@ -39,8 +40,9 @@ function App() {
           <Route path="/login" element={<LoginForm />} />
           <Route path="/test" element={<TestPage />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/blogs/:id" element={<GetOneBlog />} />
           <Route path="/blogs" element={<BlogsList />} />
-          <Route path="/listings" element={<JobListings />} />
+          {/* <Route path="/listings" element={<JobListings />} /> */}
           <Route path="/blogs/create" element={<CreateBlogsForm/>} />
           <Route path="/listings/create" element={<CreateJobsForm/>} />
         </Routes>
