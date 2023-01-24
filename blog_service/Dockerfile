@@ -12,7 +12,7 @@ COPY main.py main.py
 COPY queries queries
 COPY routers routers
 COPY token_auth.py token_auth.py
-COPY auth auth
+COPY auth.py auth.py
 
 # If you're using a relational database with migrations,
 # uncomment the following line
