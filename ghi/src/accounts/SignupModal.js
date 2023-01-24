@@ -13,9 +13,7 @@ function SignUpModal({ closeSignupModal }) {
   const [signUpSuccess, setsignUpSuccess] = useState(null);
 
 
-  // if (token) {
-  //   return <Navigate to="/" />;
-  // }
+
 
   // function handleClick() {
   //   if (token) {
