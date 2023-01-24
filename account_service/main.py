@@ -8,7 +8,7 @@ app = FastAPI()
 origins = [
     "http://localhost:3000",
     "http://localhost:8100",
-    "https://maxbs.gitlab.io",
+    "https://maxbs.gitlab.io/",
 ]
 
 app.add_middleware(
@@ -21,3 +21,4 @@ app.add_middleware(
 
 app.include_router(authenticator.router)
 app.include_router(accounts.router)
+

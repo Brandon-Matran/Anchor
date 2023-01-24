@@ -40,16 +40,16 @@ function CreateBlogsForm(props) {
       description: description,
     };
 
-        const blogURL = `${process.env.REACT_APP_BLOG_SERVICE}/blogs`
-        const fetchConfig = {
-            method: "post",
-            body: JSON.stringify(newBlog),
-            credentials: 'include',
-            headers: {
-                Authorization: `Bearer ${token}`,
-                'Content-Type': 'application/json',
-            },
-        }
+    const blogURL = `${process.env.REACT_APP_BLOG_SERVICE}/blogs`;
+    const fetchConfig = {
+      method: "post",
+      body: JSON.stringify(newBlog),
+      headers: {
+        Authorization: `Bearer ${token}`,
+        credentials: "include",
+        "Content-Type": "application/json",
+      },
+    };
 
     fetch(blogURL, fetchConfig)
       .then((response) => response.json())
