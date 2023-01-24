@@ -34,7 +34,6 @@ lint-test-job:
     - flake8 listing_service
 
 
-
 build-api-account-backend:
   rules:
     - if: $CI_COMMIT_BRANCH == $DEPLOY_TEST
@@ -144,11 +143,9 @@ build-front-end-job:
 
 # Deploy the React/JavaScript front-end to GitLab pages
 pages:
-  rules:
-    - if: $CI_COMMIT_BRANCH == $DEPLOY_TEST
   stage: deploy
   rules:
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+    - if: $CI_COMMIT_BRANCH == $DEPLOY_TEST
   dependencies:
     - build-front-end-job
   needs:
