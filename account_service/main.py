@@ -9,7 +9,6 @@ origins = [
     "CORS_HOST,"
     "http://localhost:3000",
     "http://localhost:8100",
-    
 ]
 
 app.add_middleware(
