@@ -8,6 +8,8 @@ variables:
 
 # Run the unit tests
 api-unit-test-job:
+  rules:
+    - if: $CI_COMMIT_BRANCH == $DEPLOY_TEST
   image: python:3-bullseye
   stage: test
   needs:
@@ -21,6 +23,8 @@ api-unit-test-job:
 
 # Run flake8 to check for code quality
 lint-test-job:
+  rules:
+    - if: $CI_COMMIT_BRANCH == $DEPLOY_TEST
   image: python:3-bullseye
   stage: test
   script:
@@ -32,6 +36,8 @@ lint-test-job:
 
 
 build-api-account-backend:
+  rules:
+    - if: $CI_COMMIT_BRANCH == $DEPLOY_TEST
   image: docker:19.03.1
   stage: build
   services:
@@ -54,10 +60,11 @@ build-api-account-backend:
     - echo $CONTAINER_FULL_IMAGE_NAME_WITH_TAG
     - echo "Deploying on CapRover..."
     - docker run caprover/cli-caprover:v2.1.1 caprover deploy --caproverUrl $CAPROVER_URL --caproverPassword $CAPROVER_PASSWORD --caproverApp $CAPROVER_APP_ONE --imageName $CONTAINER_FULL_IMAGE_NAME_WITH_TAG
-  only:
-    - main
+
 
 build-api-blog-backend:
+  rules:
+    - if: $CI_COMMIT_BRANCH == $DEPLOY_TEST
   image: docker:19.03.1
   stage: build
   services:
@@ -80,10 +87,11 @@ build-api-blog-backend:
     - echo $CONTAINER_FULL_IMAGE_NAME_WITH_TAG
     - echo "Deploying on CapRover..."
     - docker run caprover/cli-caprover:v2.1.1 caprover deploy --caproverUrl $CAPROVER_URL --caproverPassword $CAPROVER_PASSWORD --caproverApp $CAPROVER_APP_TWO --imageName $CONTAINER_FULL_IMAGE_NAME_WITH_TAG
-  only:
-    - main
+
 
 build-api-listing-backend:
+  rules:
+    - if: $CI_COMMIT_BRANCH == $DEPLOY_TEST
   image: docker:19.03.1
   stage: build
   services:
@@ -106,11 +114,12 @@ build-api-listing-backend:
     - echo $CONTAINER_FULL_IMAGE_NAME_WITH_TAG
     - echo "Deploying on CapRover..."
     - docker run caprover/cli-caprover:v2.1.1 caprover deploy --caproverUrl $CAPROVER_URL --caproverPassword $CAPROVER_PASSWORD --caproverApp $CAPROVER_APP_THREE --imageName $CONTAINER_FULL_IMAGE_NAME_WITH_TAG
-  only:
-    - main
+
 
 # Build the React/JavaScript front-end
 build-front-end-job:
+  rules:
+    - if: $CI_COMMIT_BRANCH == $DEPLOY_TEST
   stage: build
   image: node:lts-bullseye
   needs:
@@ -135,6 +144,8 @@ build-front-end-job:
 
 # Deploy the React/JavaScript front-end to GitLab pages
 pages:
+  rules:
+    - if: $CI_COMMIT_BRANCH == $DEPLOY_TEST
   stage: deploy
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
