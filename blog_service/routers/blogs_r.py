@@ -10,7 +10,6 @@ from queries.blogs_q import (
 
 router = APIRouter()
 
-
 @router.post("/blogs", response_model=Union[BlogOut, BlogError])
 def create_blog(
     blog: BlogIn,
@@ -35,7 +34,6 @@ def all_blogs(
     repo: BlogRepo = Depends(),
 ):
     return repo.all_blogs()
-
 
 @router.delete("/blogs/{blog_id}", response_model=bool)
 def delete_blog(

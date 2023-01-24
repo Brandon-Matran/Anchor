@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from "react";
 
-
-
 const BlogsList = () => {
   const [blogs, setBlog] = useState([]);
 
   const getBlog = async () => {
-    const url = "http://localhost:8080";
+    const url = 'http://localhost:8080/blogs';
     const response = await fetch(url);
     if (response.ok) {
       const data = await response.json();
@@ -37,16 +35,18 @@ const BlogsList = () => {
             <th scope="col">Username</th>
             <th scope="col">Post Date</th>
             <th scope="col">Title</th>
+            <th scope="col">Url</th>
             <th scope="col">Description</th>
           </tr>
         </thead>
         <tbody>
-          {blogs.blogs?.map((blog) => {
+          {blogs.map((blog) => {
             return (
               <tr key={blog.id}>
                 <td>{blog.username}</td>
                 <td>{blog.post_date}</td>
                 <td>{blog.title}</td>
+                <td>{blog.pic_url}</td>
                 <td>{blog.description}</td>
                 <td>
                   <button
