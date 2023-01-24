@@ -9,7 +9,7 @@ variables:
 # Run the unit tests
 api-unit-test-job:
   rules:
-    - if: $CI_COMMIT_BRANCH == $CI_BRANDON/TESTDEPLOYMENT_BRANCH # CHANGE BACK TO CI_DEFAULT_BRANCH WHEN DEPLOYING ON MAIN
+    - if: $CI_COMMIT_BRANCH == $DEPLOY_TEST # CHANGE BACK TO CI_DEFAULT_BRANCH WHEN DEPLOYING ON MAIN
   image: python:3-bullseye
   stage: test
   needs:
@@ -24,7 +24,7 @@ api-unit-test-job:
 # Run flake8 to check for code quality
 lint-test-job:
   rules:
-    - if: $CI_COMMIT_BRANCH == $CI_BRANDON/TESTDEPLOYMENT_BRANCH # CHANGE BACK TO CI_DEFAULT_BRANCH WHEN DEPLOYING ON MAIN
+    - if: $CI_COMMIT_BRANCH == $DEPLOY_TEST # CHANGE BACK TO CI_DEFAULT_BRANCH WHEN DEPLOYING ON MAIN
   image: python:3-bullseye
   stage: test
   script:
@@ -36,7 +36,7 @@ lint-test-job:
 
 build-api-account-backend:
   rules:
-    - if: $CI_COMMIT_BRANCH == $CI_BRANDON/TESTDEPLOYMENT_BRANCH # CHANGE BACK TO CI_DEFAULT_BRANCH WHEN DEPLOYING ON MAIN
+    - if: $CI_COMMIT_BRANCH == $DEPLOY_TEST # CHANGE BACK TO CI_DEFAULT_BRANCH WHEN DEPLOYING ON MAIN
   image: docker:19.03.1
   stage: build
   services:
@@ -63,7 +63,7 @@ build-api-account-backend:
 
 build-api-blog-backend:
   rules:
-    - if: $CI_COMMIT_BRANCH == $CI_BRANDON/TESTDEPLOYMENT_BRANCH # CHANGE BACK TO CI_DEFAULT_BRANCH WHEN DEPLOYING ON MAIN
+    - if: $CI_COMMIT_BRANCH == $DEPLOY_TEST # CHANGE BACK TO CI_DEFAULT_BRANCH WHEN DEPLOYING ON MAIN
   image: docker:19.03.1
   stage: build
   services:
@@ -90,7 +90,7 @@ build-api-blog-backend:
 
 build-api-listing-backend:
   rules:
-    - if: $CI_COMMIT_BRANCH == $CI_BRANDON/TESTDEPLOYMENT_BRANCH # CHANGE BACK TO CI_DEFAULT_BRANCH WHEN DEPLOYING ON MAIN
+    - if: $CI_COMMIT_BRANCH == $DEPLOY_TEST # CHANGE BACK TO CI_DEFAULT_BRANCH WHEN DEPLOYING ON MAIN
   image: docker:19.03.1
   stage: build
   services:
@@ -118,7 +118,7 @@ build-api-listing-backend:
 # Build the React/JavaScript front-end
 build-front-end-job:
   rules:
-    - if: $CI_COMMIT_BRANCH == $CI_BRANDON/TESTDEPLOYMENT_BRANCH # CHANGE BACK TO CI_DEFAULT_BRANCH WHEN DEPLOYING ON MAIN
+    - if: $CI_COMMIT_BRANCH == $DEPLOY_TEST # CHANGE BACK TO CI_DEFAULT_BRANCH WHEN DEPLOYING ON MAIN
   stage: build
   image: node:lts-bullseye
   needs:
@@ -145,7 +145,7 @@ build-front-end-job:
 pages:
   stage: deploy
   rules:
-    - if: $CI_COMMIT_BRANCH == $CI_BRANDON/TESTDEPLOYMENT_BRANCH # CHANGE BACK TO CI_DEFAULT_BRANCH WHEN DEPLOYING ON MAIN
+    - if: $CI_COMMIT_BRANCH == $DEPLOY_TEST # CHANGE BACK TO CI_DEFAULT_BRANCH WHEN DEPLOYING ON MAIN
   dependencies:
     - build-front-end-job
   needs:
