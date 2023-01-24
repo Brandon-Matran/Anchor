@@ -145,7 +145,7 @@ build-front-end-job:
 pages:
   stage: deploy
   rules:
-    - if: $CI_COMMIT_BRANCH == $DEPLOY_TEST # CHANGE BACK TO CI_DEFAULT_BRANCH WHEN DEPLOYING ON MAIN
+    - if: $CI_COMMIT_BRANCH == $DEPLOY_TEST  # CHANGE BACK TO CI_DEFAULT_BRANCH WHEN DEPLOYING ON MAIN
   dependencies:
     - build-front-end-job
   needs:
