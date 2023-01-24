@@ -1,7 +1,7 @@
 from fastapi.testclient import TestClient
 from main import app
 from queries.blogs_q import BlogRepo
-from auth import MyAuthenticator
+from auth import authenticator
 
 client = TestClient(app)
 
@@ -15,21 +15,19 @@ expected_post_response = {
 }
 
 test_acct = {
-    "account": {
-        "id": 3,
-        "username": "Subject3",
-        "user_type": "individual"
-    }
+    "id": 3,
+    "username": "Subject3",
+    "user_type": "individual"
 }
 
+
 class MockPostBlogsQueries:
-    def post(self, new_blog):
+    def create(self, new_blog):
         return expected_post_response
 
-class MockAuth:
-    def get_current_account_data(self):
-        print("get_current_account_data")
-        return test_acct
+
+def fake_auth():
+    return test_acct
 
 
 def test_post_blogs():
@@ -44,7 +42,7 @@ def test_post_blogs():
     print("******************TEST*********************")
 
     app.dependency_overrides[BlogRepo] = MockPostBlogsQueries
-    app.dependency_overrides[MyAuthenticator] = MockAuth
+    app.dependency_overrides[authenticator.get_current_account_data] = fake_auth
 
     response = client.post("/blogs", json=req)
     actual = response.json()
