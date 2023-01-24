@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./App.css";
 import LoginForm from "./accounts/LoginForm.js";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as BrowserRouter, Route, Routes } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import TestPage from "./accounts/TestPage.js";
 import { AuthProvider, useToken } from "./accounts/Authentication.js";
@@ -11,6 +11,7 @@ import CreateBlogsForm from "./Blogs/CreateBlogsForm";
 import BlogsList from "./Blogs/BlogsList.js";
 import UpdateListing from "./Listings/UpdateListingsForm";
 import CreateJobsForm from "./Listings/CreateListingsForm";
+import GetOneBlog from "./Blogs/GetOneBlog";
 import Nav from "./Nav";
 import NavFooter from "./NavFooter";
 
@@ -21,6 +22,8 @@ function GetToken() {
 }
 
 function App() {
+  const domain = /https:\/\/[^/]+/;
+  const basename = process.env.PUBLIC_URL.replace(domain, "");
   // const [token, setToken] = useState();
 
   // if (!token) {
@@ -28,7 +31,7 @@ function App() {
   // }
 
   return (
-    <Router>
+    <BrowserRouter basename={basename}>
       <AuthProvider>
         <GetToken />
         <Nav />
@@ -38,13 +41,15 @@ function App() {
           <Route path="/login" element={<LoginForm />} />
           <Route path="/test" element={<TestPage />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/blogs/:id" element={<GetOneBlog />} />
           <Route path="/blogs" element={<BlogsList />} />
+          {/* <Route path="/listings" element={<JobListings />} /> */}
           <Route path="/blogs/create" element={<CreateBlogsForm/>} />
           <Route path="/listings/create" element={<CreateJobsForm/>} />
           <Route path="/listings/update/:id" element={<UpdateListing/>} />
         </Routes>
       </AuthProvider>
-    </Router>
+    </BrowserRouter>
   );
 }
 

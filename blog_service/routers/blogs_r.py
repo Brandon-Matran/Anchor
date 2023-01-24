@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, Response, HTTPException, status
+from fastapi import APIRouter, Depends, Response, HTTPException
 from auth import authenticator
 from typing import Union, List, Optional
 from queries.blogs_q import (

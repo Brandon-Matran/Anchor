@@ -12,7 +12,7 @@ function LoginModal({ closeLoginModal }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
- await login(username, password);
+    login(username, password);
   };
 
   useEffect(() => {
