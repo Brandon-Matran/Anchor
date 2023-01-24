@@ -11,7 +11,6 @@ import CreateBlogsForm from "./Blogs/CreateBlogsForm";
 import UpdateBlog from "./Blogs/update_blog";
 import BlogsList from "./Blogs/BlogsList.js";
 import JobListings from "./Jobs/JobListings.js";
-import UpdateListing from "./Listings/update_listing";
 import MyListings from "./Jobs/MyListings.js";
 import UpdateListing from "./Listings/UpdateListingsForm";
 import CreateJobsForm from "./Listings/CreateListingsForm";
