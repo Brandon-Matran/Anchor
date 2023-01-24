@@ -191,21 +191,21 @@
 
 }
 
-.card-body {
+/* .card-body {
   justify-content: flex-start;
   display: flex;
   flex-direction: column;
 
-}
+} */
 
-.card {
+/* .card {
   width: 500px;
   height: 200px;
   display: grid;
   grid-template-rows: 1fr;
   border: #3d5c97;
   overflow: hidden;
-}
+} */
 .card-img-top {
   height: 100%;
   width: 100%;
