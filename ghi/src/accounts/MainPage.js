@@ -15,21 +15,23 @@ function Column(props) {
         const dateObj = new Date(dateString);
         const date = dateObj.toLocaleDateString();
         return (
-          <div key={index} className="card mb-3 shadow">
-            <div className="card-shadow">
-              <div className="col-md-6">
+          <div key={index} className="card mb-5">
+            <div className="row g-0 blogCard">
+              <div className="col-md-4">
                 <img
                   src={data.pic_url}
                   className="card-img-top pic"
                   alt="..."
                 />
               </div>
+              <div className="col-md-8 cardBackground">
               <div className="card-body">
                 <p className="card-text">Date: {date}</p>
 
                 <p className="card-text">Description: {data.description}</p>
               </div>
             </div>
+          </div>
           </div>
         );
       })}
@@ -97,7 +99,7 @@ function MainPage() {
             />
           </div>
           <div className="container">
-            <div className="blogContainer d-flex justify-content-center align-items-center h-100 row">
+            <div className="blogContainer d-flex align-items-cente row">
               <div className="col-sm d-flex justify-content-end">
                 <button
                   onClick={() => {
@@ -125,8 +127,8 @@ function MainPage() {
           </div>
 
           <div className="aboveFooter">
-            <div className="no-gutters row-cols-3 d-flex justify-content-center ">
-              <div className="row  no-gutters blogRow">
+            <div className="d-flex justify-content-center row">
+              <div className="row g-0 col-md-4 blogRow">
                 {blogs.map((blog, index) => {
                   return <Column key={index} list={blog} />;
                 })}
