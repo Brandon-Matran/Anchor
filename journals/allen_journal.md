@@ -1,5 +1,25 @@
 # Allen's Day to Day
 
+## 01/23/2023
+Completed:
+- Completed Update Listings Front End
+
+Work In Progress:
+- Finish unit test
+
+Notes:
+running into an issue with post unit test
+
+## 01/20/2023
+Completed:
+- Completed MyBlogs page
+
+Work In Progress:
+- Update Listings Front End
+
+Notes:
+Should be able to finish update listings front end over the weekend and begin unit testing on Monday
+
 ## 01/19/2023
 Completed:
 - Resolved token issue; can now parse token to get user data
