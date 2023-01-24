@@ -3,10 +3,6 @@ from datetime import date
 from queries.pool import pool
 from typing import Optional, List, Union
 
-class AccountOut(BaseModel):
-    id: str
-    username: str
-    user_type: str
 
 class AccountOut(BaseModel):
     id: str
