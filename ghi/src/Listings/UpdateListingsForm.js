@@ -14,7 +14,6 @@ function UpdateListing() {
   const [submitted, setSubmitted] = useState(false)
 
   const { token } = useAuthContext();
-  console.log(token)
 
   useEffect(() => {
     async function getListings(id) {
@@ -59,7 +58,7 @@ function UpdateListing() {
           "Authorization": `Bearer ${token}`
       },
   }
-
+  
   fetch(listingsURL, fetchConfig)
       .then(response => response.json())
       .then(() => {
