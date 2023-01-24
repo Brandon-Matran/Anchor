@@ -63,7 +63,7 @@ build-api-account-backend:
 
 build-api-blog-backend:
   rules:
-    - if: $CI_COMMIT_BRANCH == $DEPLOY_TEST
+    - if: $CI_COMMIT_BRANCH == $DEPLOY_TEST # CHANGE BACK TO CI_DEFAULT_BRANCH WHEN DEPLOYING ON MAIN
   image: docker:19.03.1
   stage: build
   services:
