@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from routers import listings
 from fastapi.middleware.cors import CORSMiddleware
 import os
@@ -6,6 +7,7 @@ import os
 
 app = FastAPI()
 origins = [
+    "CORS_HOST",
     "http://localhost:3000",
     "http://localhost:8090",
 

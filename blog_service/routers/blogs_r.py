@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, Response, HTTPException, status
+from fastapi import APIRouter, Depends, Response, HTTPException
 from auth import authenticator
 from typing import Union, List, Optional
 from queries.blogs_q import (
@@ -8,7 +8,9 @@ from queries.blogs_q import (
     BlogOut,
 )
 
+
 router = APIRouter()
+
 
 @router.post("/blogs", response_model=Union[BlogOut, BlogError])
 def create_blog(
@@ -17,7 +19,10 @@ def create_blog(
     repo: BlogRepo = Depends(),
     account: dict = Depends(authenticator.get_current_account_data),
 ):
-    if account["user_type"] == "individual":
+    if (
+        account["user_type"] == "individual"
+        or account["user_type"] == "company"
+    ):
         return repo.create(blog)
     else:
         raise HTTPException(
@@ -32,13 +37,17 @@ def all_blogs(
 ):
     return repo.all_blogs()
 
+
 @router.delete("/blogs/{blog_id}", response_model=bool)
 def delete_blog(
     blog_id: int,
     repo: BlogRepo = Depends(),
     account: dict = Depends(authenticator.get_current_account_data),
 ) -> bool:
-    if account["user_type"] == "individual":
+    if (
+        account["user_type"] == "individual"
+        or account["user_type"] == "company"
+    ):
         return repo.delete(blog_id)
     else:
         raise HTTPException(
@@ -54,7 +63,10 @@ def update_blog(
     repo: BlogRepo = Depends(),
     account: dict = Depends(authenticator.get_current_account_data),
 ) -> Union[BlogOut, BlogError]:
-    if account["user_type"] == "individual":
+    if (
+        account["user_type"] == "individual"
+        or account["user_type"] == "company"
+    ):
         return repo.update(blog_id, blog)
     else:
         raise HTTPException(

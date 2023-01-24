@@ -1,4 +1,3 @@
-import os
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from routers import blogs_r
@@ -8,6 +7,7 @@ app = FastAPI()
 origins = [
     "http://localhost:3000",
     "http://localhost:8080",
+    "CORS_HOST",
 ]
 
 app.add_middleware(

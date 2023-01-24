@@ -56,7 +56,6 @@
 }
 
 .openSignupModal {
-  /* transform: translate(-600%, -5%); */
   background-color: #3d5c97;
   border-radius: 8px;
   border-style: none;
@@ -90,7 +89,7 @@
 }
 
 #logo {
-  font-family: 'Cinzel', serif;
+  font-family: "Cinzel", serif;
   font-size: 90px;
   display: flex;
   position: absolute;
@@ -134,11 +133,11 @@
 }
 
 .aboveFooter {
-    background-color: #d4c0e7;
+  background-color: #38598a;
+  height: 100vh;
 }
 
 .LogOutButton {
-
   background-color: #3d5c97;
   border-radius: 8px;
   border-style: none;
@@ -167,25 +166,56 @@
   right: 50px;
 }
 
-
-
 @keyframes fadeIn {
-  0% { opacity: 0; }
-  100% { opacity: 1; }
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
-
 
 .pic {
   left: 0;
 }
 
 .card-text {
-  font-size: 10px;
+  font-size: 15px;
   overflow: hidden;
   text-overflow: ellipsis;
-    white-space: nowrap;
+  white-space: nowrap;
+  float: right;
+  line-height: 1.5;
+  display: block;
+  grid-row: 1;
+
 }
 
-.card-body {
-  width: 50%;
+/* .card-body {
+  justify-content: flex-start;
+  display: flex;
+  flex-direction: column;
+
+} */
+
+/* .card {
+  width: 500px;
+  height: 200px;
+  display: grid;
+  grid-template-rows: 1fr;
+  border: #3d5c97;
+  overflow: hidden;
+} */
+.card-img-top {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  overflow: hidden;
+}
+
+.cardBackground {
+  background-color:#9BACC4
+  ;
 }

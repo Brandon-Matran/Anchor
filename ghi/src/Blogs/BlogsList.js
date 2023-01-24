@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { useAuthContext } from "../accounts/Authentication"
+// import { useAuthContext } from "../accounts/Authentication"
 
 
 const BlogsList = () => {
