@@ -6,9 +6,9 @@ from routers import blogs_r
 app = FastAPI()
 
 origins = [
-    "https://maxbs.gitlab.io",
     "http://localhost:3000",
     "http://localhost:8080",
+    "https://maxbs.gitlab.io",
 ]
 
 app.add_middleware(

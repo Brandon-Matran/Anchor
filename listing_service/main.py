@@ -11,7 +11,7 @@ app.include_router(listings.router)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        os.environ.get("https://maxbs.gitlab.io", "http://localhost:3000",)
+        os.environ.get("http://localhost:3000", "https://maxbs.gitlab.io")
     ],
     allow_credentials=True,
     allow_methods=["*"],
