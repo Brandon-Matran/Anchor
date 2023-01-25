@@ -3,7 +3,54 @@ import { useAuthContext } from "../accounts/Authentication"
 import React from 'react';
 // import { Link } from 'react-router-dom';
 
-function JobsColumn(props) {
+
+function MyJobs(props) {
+  const [jobs, setJobs] = useState([], [], []);
+  const [job, setJob] = useState([]);
+  const [username, setUserName] = useState('')
+  const [Jwt, setJwt] = useState(null);
+
+  const token = useAuthContext();
+
+
+
+  const getJob = async () => {
+    const url = `${process.env.REACT_APP_LISTING_SERVICE}/listings`;
+    const response = await fetch(url);
+    if (response.ok) {
+      const data = await response.json();
+      console.log(data);
+      setJob(data);
+      window.location.reload(false)
+    }
+  };
+
+  const DeleteJobListing = async (id) => {
+
+    const url = `${process.env.REACT_APP_LISTING_SERVICE}/listings/${id}`;
+    const fetchConfig = { 
+      method: "delete",
+      headers: {
+        "Authorization": `Bearer ${Jwt}`,
+        "Content-Type": "application/json"
+      }
+    };
+    const response = await fetch(url, fetchConfig);
+    if (response.ok) {
+      getJob();
+      const data = await response.json()
+      console.log(data)
+    }
+  };
+
+  function parseJwt(data) {
+      const base64Url = data.split(".")[1];
+      const base64 = base64Url.replace("-", "+").replace("_", "/");
+      const info = JSON.parse(window.atob(base64));
+      setUserName(info.account.username);
+  }
+
+  function JobsColumn(props) {
     return (
       <div className="col">
         {props.list.map((data, index) => {
@@ -22,6 +69,9 @@ function JobsColumn(props) {
                   <p className="card-text">
                     Posted date: {data.created}
                   </p>
+                  
+                  <button type="button" className="btn btn-danger" onClick={() => DeleteJobListing(data.id)}>Delete Listing</button>
+              
                 </div>
               </div>
             // </Link>
@@ -31,19 +81,6 @@ function JobsColumn(props) {
     );
 }
 
-function MyJobs(props) {
-  const [jobs, setJobs] = useState([], [], []);
-  const [username, setUserName] = useState('')
-  const [Jwt, setJwt] = useState(null);
-
-  const token = useAuthContext();
-
-  function parseJwt(data) {
-      const base64Url = data.split(".")[1];
-      const base64 = base64Url.replace("-", "+").replace("_", "/");
-      const info = JSON.parse(window.atob(base64));
-      setUserName(info.account.username);
-  }
 
   useEffect(() => {
         const url = `${process.env.REACT_APP_LISTING_SERVICE}/listings`;
@@ -77,6 +114,9 @@ function MyJobs(props) {
       fetchData();
   }, [token, Jwt, username])
 
+  
+
+
   return (
     <>
         <div className="px-4 py-5 my-5 mt-0 text-center bg-white">
@@ -88,8 +128,11 @@ function MyJobs(props) {
             {jobs.map((job, index) => {
                 return (
                     <JobsColumn key={index} list={job} />
+                    
                 );
+
             })}
+
         </div>
         </div>
     </>
