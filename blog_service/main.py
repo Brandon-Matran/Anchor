@@ -7,7 +7,7 @@ app = FastAPI()
 origins = [
     "http://localhost:3000",
     "http://localhost:8080",
-    "CORS_HOST",
+    "https://maxbs.gitlab.io",
 ]
 
 app.add_middleware(

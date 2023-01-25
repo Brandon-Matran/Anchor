@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { useToken } from "./Authentication.js";
 
 function LoginForm() {
@@ -15,6 +15,9 @@ function LoginForm() {
     e.preventDefault();
     navigate("/main");
   };
+  if (token) {
+    return <Navigate to="/" />;
+  }
 
   return (
     <div className="container">

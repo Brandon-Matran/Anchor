@@ -5,9 +5,9 @@ from routers import listings
 
 app = FastAPI()
 origins = [
-    "CORS_HOST",
     "http://localhost:3000",
     "http://localhost:8090",
+    "https://maxbs.gitlab.io",
 
 ]
 

@@ -18,8 +18,9 @@ import CreateJobsForm from "./Listings/CreateListingsForm";
 import GetOneBlog from "./Blogs/GetOneBlog";
 import Nav from "./Nav";
 import NavFooter from "./NavFooter";
-
 import MyBlogs from "./Blogs/MyBlogs";
+
+
 function GetToken() {
   // Get token from JWT cookie (if already logged in)
   useToken();
@@ -40,7 +41,7 @@ function App() {
       <AuthProvider>
         <GetToken />
         <Nav />
-        <NavFooter/>
+        {/* <NavFooter/> */}
         <Routes>
           <Route path="/" element={<MainPage />} />
           <Route path="/main" element={<MainPage2 />} />

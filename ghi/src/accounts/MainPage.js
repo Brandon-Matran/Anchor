@@ -55,6 +55,10 @@ function MainPage() {
     navigate("/signup")
   }
 
+  const handleLogin = () => {
+    navigate("/login")
+  }
+
   useEffect(() => {
     const url = "http://localhost:8080/blogs";
     async function fetchData() {
@@ -122,11 +126,12 @@ function MainPage() {
               <div className="col-sm d-flex justify-content-start">
                 <button
                   className="openLoginModal"
-                  onClick={() => setLoginModal(true)}
+                  onClick={() => {handleLogin()}}
+                  // onClick={() => setLoginModal(true)}
                 >
                   Log In
                 </button>
-                {loginModal && <LoginModal closeLoginModal={setLoginModal} />}
+                {/* {loginModal && <LoginModal closeLoginModal={setLoginModal} />} */}
               </div>
             </div>
           </div>
