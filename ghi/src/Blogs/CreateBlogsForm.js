@@ -24,7 +24,8 @@ function BootstrapInputs(props) {
 function CreateBlogsForm(props) {
   const { token } = useAuthContext();
   const [username, setUserName] = useState("");
-  const post_date = new Date().toLocaleString() + "";
+  let today = new Date()
+  let post_date = today.getFullYear() + '-' + parseInt(today.getMonth() + 1) + '-' + today.getDate()
   const [title, setTitle] = useState("");
   const [pic_url, setPicURL] = useState("");
   const [description, setDescription] = useState("");
