@@ -44,4 +44,80 @@ Work in progress:
 Completed:
     - Response models for job listings post
 Work in progress:
-    - Get specific blogs
+    - Get specific blogs backend endpoint complete
+
+## 01/11/2023
+Work in progress:
+    - get detailed page for specific blog my id
+    - Front end for job listings and get specific blog
+
+
+## 01/12/2023
+Completed:
+    - Job listings form fixed bugs and minor changes
+Work in progress:
+    - Get specific blogs, trying to figure out how to useParams to get id for a specific blog
+
+## 01/13/2023
+Completed:
+    - Front end for job listings form
+    - Had to add code to pull username from database using Jwt to decode token
+Work in progress:
+    - Get specific blogs front end render
+
+## 01/17/2023
+Completed:
+    - Change some parameters and fixed some errors for job listings form
+Work in progress:
+    - Working on get specific blog, trying to figure out how to useParams to get ID
+
+## 01/18/2023
+Completed:
+    - Finished get specific blog my ID using useParams
+Work in progress:
+    - NavBar
+
+
+## 01/19/2023
+Completed:
+    - Working on NAVBAR
+Work in progress:
+    - Making small progress with NAVBAR, not complete but somewhat functional
+
+## 01/20/2023
+Completed:
+    - Working on NAVBAR
+Work in progress:
+    - Small changes to job listings form, added username
+
+## 01/23/2023
+Completed:
+    - Working on README
+Work in progress:
+    - README and navigating listings
+
+
+## 01/24/2023
+Completed:
+    - Unit test for test one blog
+Work in progress:
+    - Fixing up Navbar and working on ReadME
+
+## 01/25/2023
+
+Completed:
+    - Working on README and deployment
+Work in progress:
+    - README and navigating
+
+## 01/26/2023
+Completed:
+    - Working on README and deployment
+Work in progress:
+    - README and navigating
+
+## 01/27/2023
+Completed:
+    - Working on README and deployment
+Work in progress:
+    - README and navigating

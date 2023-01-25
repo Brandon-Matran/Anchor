@@ -8,6 +8,7 @@ from queries.blogs_q import (
     BlogOut,
 )
 
+
 router = APIRouter()
 
 
@@ -18,7 +19,10 @@ def create_blog(
     repo: BlogRepo = Depends(),
     account: dict = Depends(authenticator.get_current_account_data),
 ):
-    if account["user_type"] == "individual":
+    if (
+        account["user_type"] == "individual"
+        or account["user_type"] == "company"
+    ):
         return repo.create(blog)
     else:
         raise HTTPException(
@@ -40,7 +44,10 @@ def delete_blog(
     repo: BlogRepo = Depends(),
     account: dict = Depends(authenticator.get_current_account_data),
 ) -> bool:
-    if account["user_type"] == "individual":
+    if (
+        account["user_type"] == "individual"
+        or account["user_type"] == "company"
+    ):
         return repo.delete(blog_id)
     else:
         raise HTTPException(
@@ -56,7 +63,10 @@ def update_blog(
     repo: BlogRepo = Depends(),
     account: dict = Depends(authenticator.get_current_account_data),
 ) -> Union[BlogOut, BlogError]:
-    if account["user_type"] == "individual":
+    if (
+        account["user_type"] == "individual"
+        or account["user_type"] == "company"
+    ):
         return repo.update(blog_id, blog)
     else:
         raise HTTPException(

@@ -1,35 +1,38 @@
-import { useEffect, useState } from "react";
-import React from "react";
-import { useAuthContext } from "../accounts/Authentication";
-
-function BootstrapInputs(props) {
-  const { id, labelText, onChange, placeholder, type, value } = props;
-
-  return (
-    <div className="form-floating mb-3">
-      <label htmlFor={id}>{labelText}</label>
-      <input
-        onChange={onChange}
-        placeholder={placeholder}
-        required
-        type={type}
-        id={id}
-        className="form-control"
-        value={value}
-      />
-    </div>
-  );
-}
+import {useEffect, useState} from "react"
+import { useAuthContext } from "../accounts/Authentication"
 
 function CreateBlogsForm(props) {
-  const { token } = useAuthContext();
-  const [username, setUserName] = useState("");
-  let today = new Date()
-  let post_date = today.getFullYear() + '-' + parseInt(today.getMonth() + 1) + '-' + today.getDate()
-  const [title, setTitle] = useState("");
-  const [pic_url, setPicURL] = useState("");
-  const [description, setDescription] = useState("");
-  const [submitted, setSubmitted] = useState(false);
+
+    const [username, setUserName] = useState('')
+    // const [user_type, setUserType] = useState('')
+    let today = new Date()
+    let post_date = today.getFullYear() + '-' + parseInt(today.getMonth() + 1) + '-' + today.getDate()
+    const [title, setTitle] = useState('')
+    const [pic_url, setPicURL] = useState('')
+    const [description, setDescription] = useState('')
+    const [Jwt, setJwt] = useState(null)
+    const [submitted, setSubmitted] = useState(false)
+
+    const token = useAuthContext()
+
+    function parseJwt(data) {
+        const base64Url = data.split(".")[1];
+        const base64 = base64Url.replace("-", "+").replace("_", "/");
+        const info = JSON.parse(window.atob(base64));
+        setUserName(info.account.username);
+        // setUserType(info.account.user_type);
+    }
+
+    useEffect(() => {
+        fetch(token)
+        .then(response => {if ((typeof response.token) !== "object") {
+            setJwt(token.token);
+            if (Jwt !== null) {
+                parseJwt(Jwt);
+            }
+        }})
+
+    }, [token, Jwt])
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -41,16 +44,16 @@ function CreateBlogsForm(props) {
       description: description,
     };
 
-    const blogURL = `${process.env.REACT_APP_BLOG_SERVICE}/blogs`;
-    const fetchConfig = {
-      method: "post",
-      body: JSON.stringify(newBlog),
-      headers: {
-        Authorization: `Bearer ${token}`,
-        credentials: "include",
-        "Content-Type": "application/json",
-      },
-    };
+        const blogURL = `${process.env.REACT_APP_BLOG_SERVICE}/blogs`
+        const fetchConfig = {
+            method: "post",
+            body: JSON.stringify(newBlog),
+            headers: {
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json',
+                "Authorization": `Bearer ${Jwt}`
+            },
+        }
 
     fetch(blogURL, fetchConfig)
       .then((response) => response.json())
@@ -68,52 +71,39 @@ function CreateBlogsForm(props) {
     messageClasses = "alert alert-success mb-0";
   }
 
-  return (
-    <div className="row">
-      <div className="offset-3 col-6">
-        <div className="shadow p-4 mt-4">
-          <h1>Create a New Blog</h1>
-          <form onSubmit={handleSubmit} id="create-blog-form">
-            <BootstrapInputs
-              id="text"
-              labelText="Title"
-              onChange={(e) => setTitle(e.target.value)}
-              placeholder="Write a Blog Title"
-              type="text"
-              value={title}
-            />
-            <BootstrapInputs
-              id="text"
-              labelText="Picture URL"
-              onChange={(e) => setPicURL(e.target.value)}
-              placeholder="Enter a Picture URL"
-              type="text"
-              value={pic_url}
-            />
-            <div className="mb-3">
-              <label htmlFor="description" className="form-label">
-                Description
-              </label>
-              <textarea
-                onChange={(e) => setDescription(e.target.value)}
-                className="form-control"
-                id="description"
-                rows="3"
-                value={description}
-              ></textarea>
+    return (
+        <div className="row">
+            <div className="offset-3 col-6">
+                <div className="shadow p-4 mt-4">
+                    <h1>Create a New Blog</h1>
+                    <form onSubmit={handleSubmit} id="create-blog-form">
+                        <div className="form-floating mb-3">
+                            <input onChange = {e => setTitle(e.target.value)} placeholder="Write a Blog Title" required
+                            type="text" name ="title" id="title"
+                            className="form-control" value={title}/>
+                            <label htmlFor="title">Title</label>
+                        </div>
+                        <div className="form-floating mb-3">
+                                <input onChange = {e => setPicURL(e.target.value)} placeholder="Enter a Picture Url"
+                                required type="url" name="pic_url"  id="pic_url"
+                                className="form-control" value={pic_url}/>
+                                <label htmlFor="pic_url">Picture Url</label>
+                        </div>
+                        <div className="mb-3">
+                            <label htmlFor="description" className="form-label">Description</label>
+                            <textarea onChange={e => setDescription(e.target.value)} className="form-control"
+                            id="description" rows="3" value={description} ></textarea>
+                        </div>
+                        <button type="submit" className="btn btn-primary">Create</button>
+                    </form>
+                </div><br/>
+                <div className={messageClasses} id="success-message">
+                    Success! New Blog Posted!
+                </div>
             </div>
-            <button type="submit" className="btn btn-primary">
-              Create
-            </button>
-          </form>
         </div>
-        <br />
-        <div className={messageClasses} id="success-message">
-          Success! New Blog Posted!
-        </div>
-      </div>
-    </div>
-  );
+    );
+
 }
 
 export default CreateBlogsForm;

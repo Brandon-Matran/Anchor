@@ -8,14 +8,17 @@ import { AuthProvider, useToken } from "./accounts/Authentication.js";
 import Signup from "./accounts/Signup";
 import MainPage from "./accounts/MainPage";
 import CreateBlogsForm from "./Blogs/CreateBlogsForm";
+import UpdateBlog from "./Blogs/update_blog";
 import BlogsList from "./Blogs/BlogsList.js";
 import JobListings from "./Jobs/JobListings.js";
-import UpdateListing from "./Listings/update_listing";
+import MyListings from "./Jobs/MyListings.js";
+import UpdateListing from "./Listings/UpdateListingsForm";
 import CreateJobsForm from "./Listings/CreateListingsForm";
 import GetOneBlog from "./Blogs/GetOneBlog";
 import Nav from "./Nav";
 import NavFooter from "./NavFooter";
 
+import MyBlogs from "./Blogs/MyBlogs";
 function GetToken() {
   // Get token from JWT cookie (if already logged in)
   useToken();
@@ -44,9 +47,13 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/blogs/:id" element={<GetOneBlog />} />
           <Route path="/blogs" element={<BlogsList />} />
-          {/* <Route path="/listings" element={<JobListings />} /> */}
+          <Route path="/listings" element={<JobListings />} />
+          <Route path="/listings/my" element={<MyListings />} />
+          <Route path="/blogs/update/:id" element={<UpdateBlog />} />
           <Route path="/blogs/create" element={<CreateBlogsForm/>} />
+          <Route path="/blogs/myblogs" element={<MyBlogs/>}/>
           <Route path="/listings/create" element={<CreateJobsForm/>} />
+          <Route path="/listings/update/:id" element={<UpdateListing/>} />
         </Routes>
       </AuthProvider>
     </BrowserRouter>
