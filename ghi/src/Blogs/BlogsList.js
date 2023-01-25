@@ -71,7 +71,7 @@ const BlogsList = () => {
                 <td>{blog.post_date}</td>
                 <td>{blog.title}</td>
                 <td>
-                <img src={blog.pic_url} className="card-img-top figure-img img-fluid" />
+                <img src={blog.pic_url} className="card-img-top figure-img img-fluid img-thumbnail" />
                 </td>
                 <td>{blog.description}</td>
                 <td>
