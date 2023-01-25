@@ -1,40 +1,13 @@
 import { useEffect , useState} from "react";
 import { useAuthContext } from "../accounts/Authentication"
 import React from 'react';
-import { Link } from 'react-router-dom';
-
-// function BlogsColumn(props) {
-//     return (
-//       <div className="col">
-//         {props.list.map((data, index) => {
-//           return (
-//             <div key={index} className="card mb-3 shadow">
-//               <Link to={`/blogs/${data.id}`} key={index} className="text-decoration-none text-reset">
-//                   <img src={data.pic_url} className="card-img-top figure-img img-fluid" />
-//                   <div className="card-body">
-//                     <h5 className="card-title">{data.title}</h5>
-//                     <h6 className="card-subtitle mb-2 text-muted">
-//                       Author: {data.username}
-//                     </h6>
-//                     <p className="card-text">
-//                       {data.description}
-//                     </p>
-//                   </div>
-//               </Link>
-//               <div className="card-footer">
-//                 <button type="button" className="btn btn-danger" onClick={() => deleteBlog(data.id)}>Delete</button>
-//               </div>
-//             </div>
-//           );
-//         })}
-//       </div>
-//     );
-// }
+import { Link, useNavigate } from 'react-router-dom';
 
 function MyBlogs() {
     const [blogs, setBlogs] = useState([], [], []);
     const [username, setUserName] = useState('')
     const [Jwt, setJwt] = useState(null);
+    const navigate = useNavigate()
 
     const token = useAuthContext();
 
@@ -46,8 +19,27 @@ function MyBlogs() {
         // setUserType(info.account.user_type);
     }
 
-    useEffect(() => {
+    async function fetchData() {
         const url = `${process.env.REACT_APP_BLOG_SERVICE}/blogs`;
+        const response = await fetch(url);
+        if (response.ok) {
+            const data = await response.json();
+            const rev_sorted_data = data.reverse();
+            const filteredData = rev_sorted_data?.filter(fD => fD.username == username)
+            const blogs = [[], [], []];
+
+            let i = 0;
+            for (const blog of filteredData) {
+                blogs[i].push(blog);
+                i++;
+                if (i > 2) {
+                    i = 0;
+                }
+            } setBlogs(blogs);
+        }
+    }
+
+    useEffect(() => {
         fetch(token)
         .then(response => {if ((typeof response.token) !== "object") {
             setJwt(token.token);
@@ -55,32 +47,11 @@ function MyBlogs() {
                 parseJwt(Jwt);
             }
         }})
-        async function fetchData() {
-            const response = await fetch(url);
-            if (response.ok) {
-                const data = await response.json();
-                const rev_sorted_data = data.reverse();
-                const filteredData = rev_sorted_data?.filter(fD => fD.username == username)
-                const blogs = [[], [], []];
-
-                let i = 0;
-                for (const blog of filteredData) {
-                    blogs[i].push(blog);
-                    i++;
-                    if (i > 2) {
-                        i = 0;
-                    }
-                    setBlogs(blogs);
-                    // console.log(blogs[0][0].id)
-                }
-            }
-        }
         fetchData();
     }, [token, Jwt, username])
 
     function deleteBlog(id) {
       const blogURL = `${process.env.REACT_APP_BLOG_SERVICE}/blogs/${id}`
-
       const fetchConfig = {
         method: 'delete',
         headers: {
@@ -95,8 +66,7 @@ function MyBlogs() {
           }
       })
       .then(
-        console.log(id),
-        setBlogs(blogs.filter(blog => blog[0][0].id !== id))
+        fetchData
       )
       .catch((err) => {
           console.log(err)
@@ -122,7 +92,10 @@ function MyBlogs() {
                     </div>
                 </Link>
                 <div className="card-footer">
-                  <button type="button" className="btn btn-danger" onClick={() => deleteBlog(data.id)}>Delete</button>
+                  <div className="btn-wrapper text-center d-flex justify-content-between">
+                    <button className="btn btn-danger" onClick={() => deleteBlog(data.id)}>Delete</button>
+                    <button className="btn btn-warning" onClick={() => navigate(`/blogs/update/${data.id}`)}>Update</button>
+                  </div>
                 </div>
               </div>
             );
