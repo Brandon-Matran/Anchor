@@ -1,5 +1,17 @@
 # Allen's Day to Day
 
+## 01/24/2023
+Completed:
+- Finished unit test
+- Added redirect after submit to createblogsform
+- Added some bootstrap to GetOneBlog
+
+Work in Progress:
+- Need to finish added delete and update buttons to MyBlogs
+
+Notes:
+Update Murad on doing the same for MyListings
+
 ## 01/23/2023
 Completed:
 - Completed Update Listings Front End
