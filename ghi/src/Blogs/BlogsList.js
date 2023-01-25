@@ -1,10 +1,22 @@
 import React, { useState, useEffect } from "react";
+import { useAuthContext } from "../accounts/Authentication"
+
 
 const BlogsList = () => {
   const [blogs, setBlog] = useState([]);
+  const token = useAuthContext();
+  const [Jwt, setJwt] = useState(null);
+  const [userName, setUserName] = useState('')
+
+  function parseJwt(data) {
+    const base64Url = data.split(".")[1];
+    const base64 = base64Url.replace("-", "+").replace("_", "/");
+    const info = JSON.parse(window.atob(base64));
+    setUserName(info.account.username);
+}
 
   const getBlog = async () => {
-    const url = 'http://localhost:8080/blogs';
+    const url = `${process.env.REACT_APP_BLOG_SERVICE}/blogs`;
     const response = await fetch(url);
     if (response.ok) {
       const data = await response.json();
@@ -13,19 +25,31 @@ const BlogsList = () => {
   };
 
   const deleteBlog = async (id) => {
-    const url = `http://localhost:8080/${id}`;
-    const fetchConfig = { method: "delete" };
+    const url = `${process.env.REACT_APP_BLOG_SERVICE}/blogs/${id}`;
+    const fetchConfig = { 
+      method: "delete",
+      headers: {
+        "Authorization": `Bearer ${Jwt}`,
+        "Content-Type": "application/json"
+      }
+    };
     const response = await fetch(url, fetchConfig);
     if (response.ok) {
       getBlog();
-      // const data = await response.json();
-      // getBlog(data);
     }
   };
 
   useEffect(() => {
     getBlog();
-  }, []);
+    fetch(token)
+    .then(response => {if ((typeof response.token) !== "object") {
+        setJwt(token.token);
+        if (Jwt !== null) {
+            parseJwt(Jwt);
+        }
+    }})
+  }, [token, Jwt, userName]);
+    console.log(Jwt, "GHJFGHFFGHJFHGHJHJFGHFGJJGH");
 
   return (
     <div>
@@ -35,26 +59,27 @@ const BlogsList = () => {
             <th scope="col">Username</th>
             <th scope="col">Post Date</th>
             <th scope="col">Title</th>
-            <th scope="col">Url</th>
+            <th scope="col"></th>
             <th scope="col">Description</th>
           </tr>
         </thead>
         <tbody>
-          {blogs.map((blog) => {
+          {blogs?.map((blog) => {
             return (
               <tr key={blog.id}>
                 <td>{blog.username}</td>
                 <td>{blog.post_date}</td>
                 <td>{blog.title}</td>
-                <td>{blog.pic_url}</td>
+                <td>
+                <img src={blog.pic_url} className="card-img-top figure-img img-fluid img-thumbnail" />
+                </td>
                 <td>{blog.description}</td>
                 <td>
                   <button
                     type="button"
                     className="btn btn-danger"
                     onClick={() => deleteBlog(blog.id)}
-                  >
-                    Delete Blog
+                    >Delete Blog
                   </button>
                 </td>
               </tr>
