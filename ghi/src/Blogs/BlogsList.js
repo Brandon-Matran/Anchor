@@ -26,7 +26,7 @@ const BlogsList = () => {
 
   const deleteBlog = async (id) => {
     const url = `${process.env.REACT_APP_BLOG_SERVICE}/blogs/${id}`;
-    const fetchConfig = { 
+    const fetchConfig = {
       method: "delete",
       headers: {
         "Authorization": `Bearer ${Jwt}`,
@@ -71,7 +71,10 @@ const BlogsList = () => {
                 <td>{blog.post_date}</td>
                 <td>{blog.title}</td>
                 <td>
-                <img src={blog.pic_url} className="card-img-top figure-img img-fluid img-thumbnail" />
+                <img src={blog.pic_url} alt="cur" className="center"
+                  height={50}
+                  width={60}
+                  />
                 </td>
                 <td>{blog.description}</td>
                 <td>
