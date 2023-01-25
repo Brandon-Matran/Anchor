@@ -87,14 +87,17 @@ function Nav() {
                     </NavLink>
 
 
-                    <NavLink
+                    {!token && <NavLink
                       className="dropdown-item link"
                       aria-current="page"
                       to="/signup"
                     >
                       Signup
-                    </NavLink>
 
+                    </NavLink>
+                    }
+
+                    {!token &&
                     <NavLink
                       className="dropdown-item link"
                       aria-current="page"
@@ -102,6 +105,7 @@ function Nav() {
                     >
                       Login
                     </NavLink>
+                    }
 
                   {token &&
                   <NavLink

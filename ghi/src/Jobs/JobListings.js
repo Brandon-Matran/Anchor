@@ -1,97 +1,218 @@
-// import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuthContext } from "../accounts/Authentication"
 
-// const JobListings = () => {
-//   const [jobs, setJob] = useState([]);
-//   const getJob = async () => {
-//     const url = "http://localhost:8090";
-//     const response = await fetch(url);
-//     if (response.ok) {
-//       const data = await response.json();
-//       setJob(data);
-//     }
-//   };
+const JobListings = () => {
+  const [jobs, setJob] = useState([]);
+  const navigate = useNavigate();
+  const token = useAuthContext();
+  const [Jwt, setJwt] = useState(null);
+  // const [username, setUserName] = useState('')
 
-//   // const DeleteJobListing = async (title) => {
-//   //   const url = `http://localhost:8080/${title}`;
-//   //   const fetchConfig = { method: "delete" };
-//   //   const response = await fetch(url, fetchConfig);
-//   //   if (response.ok) {
-//   //     getJob();
-//   //   }
-//   // };
+  function parseJwt(data) {
+    const base64Url = data.split(".")[1];
+    const base64 = base64Url.replace("-", "+").replace("_", "/");
+    const info = JSON.parse(window.atob(base64));
+    setUserName(info.account.username);
+}
+  const getJob = async () => {
+    const url = `${process.env.REACT_APP_LISTING_SERVICE}/listings`;
+    const response = await fetch(url);
+    if (response.ok) {
+      const data = await response.json();
+      console.log(data);
+      setJob(data);
+    }
+    //   if (data?.account.user_type === "individual"){}
+    // const navigate = useNavigate()
+  };
 
-//   const ApplyToJobListing = async (title) => {
-//     const url = `http://localhost:8080/${apply_url}`;
-//     const fetchConfig = {
-//       method: "put",
-//       body: JSON.stringify({ applied: true }),
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//     };
-//     const response = await fetch(url, fetchConfig);
-//     if (response.ok) {
-//       getJob(url);
-//     }
-//   };
+  async function getAccount() {
+    const url = `http://localhost:8100/token`;
+    const response = await fetch(url, {
+      credentials: "include",
+    });
+    if (response.ok) {
+      const data = await response.json();
+      console.log(data)
+      if (data?.account.user_type === "company") {
+        console.log(data?.account.user_type);
+        console.log(true)
+        return true
+      }
+      else{
+        console.log(false)
+        return false
+      }
+    }
+  }
+  console.log("ACCOUNT", getAccount())
 
-//   useEffect(() => {
-//     getJob();
-//   }, []);
 
-//   return (
-//     <div>
-//       <table className="table table-striped">
-//         <thead>
-//           <tr>
-//             <th scope="col">Title</th>
-//             <th scope="col">Company Name</th>
-//             <th scope="col">Job Position</th>
-//             <th scope="col">Application Link</th>
-//             <th scope="col">Deadline</th>
-//             <th scope="col">Created Date</th>
-//           </tr>
-//         </thead>
-//         <tbody>
-//           {jobs.jobs?.map((job) => {
-//             // if (####IDK  job.UserAuthorized == true) {
-//             //   return (
-//             //   <tr key={job.title}>
-//             //     <td>{job.title}</td>
-//             //     <td>{job.company_name}</td>
-//             //     <td>{job.job_position}</td>
-//             //     <td><button type="button" className="btn btn-danger" onClick={() => DeleteJobListing(job.title)}>Delete Listing</button></td>
-//             //     <td>{job.deadline}</td>
-//             //     <td>{job.created}</td>
-//             //   </tr>
-//             // );
-//             // } else if (job.UserAuthorized == ###) {
-//             //   ###
-//             // }
+  const DeleteJobListing = async (id) => {
 
-//             return (
-//               <tr key={job.apply_url}>
-//                 <td>{job.title}</td>
-//                 <td>{job.company_name}</td>
-//                 <td>{job.job_position}</td>
-//                 <td>
-//                   <button
-//                     type="button"
-//                     className="btn btn-danger"
-//                     onClick={() => ApplyToJobListing(job.apply_url)}
-//                   >
-//                     Apply
-//                   </button>
-//                 </td>
-//                 <td>{job.deadline}</td>
-//                 <td>{job.created}</td>
-//               </tr>
-//             );
-//           })}
-//         </tbody>
-//       </table>
-//     </div>
-//   );
-// };
+    const url = `${process.env.REACT_APP_LISTING_SERVICE}/${id}`;
+    const fetchConfig = { 
+      method: "delete",
+      headers: {
+        "Authorization": `Bearer ${Jwt}`,
+        "Content-Type": "application/json"
+      }
+    };
+    const response = await fetch(url, fetchConfig);
+    if (response.ok) {
+      getJob();
+    }
+  };
+ 
 
-// export default JobListings;
+  const applyClick = async (apply_url) => {
+    navigate(`${apply_url}`);
+  };
+
+  // const ApplyToJobListing = async (apply_url) => {
+  //   const url = `http://localhost:8090`;
+  //   // const fetchConfig = {
+  //   //   method: "put",
+  //   //   body: JSON.stringify({ applied: true }),
+  //   //   headers: {
+  //   //     "Content-Type": "application/json",
+  //   //   },
+  //   // };
+  //   // const response = await fetch(url, fetchConfig);
+  //   const response = await fetch(url, apply_url);
+  //   if (response.ok) {
+  //     // getJob(url);
+  //     window.location.href = url;
+  //   }
+  // };
+
+  useEffect(() => {
+    getJob();
+    fetch(token)
+    .then(response => {if ((typeof response.token) !== "object") {
+        setJwt(token.token);
+        if (Jwt !== null) {
+            parseJwt(Jwt);
+        }
+    }})
+  }, [token, Jwt]);
+    console.log(Jwt, "GHJFGHFFGHJFHGHJHJFGHFGJJGH")
+
+  return (
+    <div>
+      <table className="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Company Name</th>
+            <th scope="col">Job Position</th>
+            <th scope="col">Deadline</th>
+            <th scope="col">Created Date</th>
+            <th scope="col"> Button </th>
+          </tr>
+        </thead>
+        <tbody>
+          {jobs.map((job) => {
+            if (getAccount !== true){
+              return (
+              <tr key={job.id}>
+                <td>{job.title}</td>
+                <td>{job.company_name}</td>
+                <td>{job.job_position}</td>
+                <td>{job.deadline}</td>
+                <td>{job.created}</td>
+                <td>
+                  <button type="button" className="btn btn-danger" onClick={() => DeleteJobListing(job.id)}>Delete Listing</button>
+                </td>
+              </tr>
+            );
+            } else {
+              return (
+                <tr key={job.id}>
+                  <td>{job.title}</td>
+                  <td>{job.company_name}</td>
+                  <td>{job.job_position}</td>
+                  <td>{job.deadline}</td>
+                  <td>{job.created}</td>
+                  <td>
+                    <button
+                      onClick={() => applyClick()}
+                      type="button"
+                      className="btn btn-success"
+                    >Apply
+                    </button>
+                  </td>
+                </tr>
+              );
+              }
+  
+
+            // return (
+            //   <tr key={job.id}>
+            //     <td>{job.title}</td>
+            //     <td>{job.company_name}</td>
+            //     <td>{job.job_position}</td>
+            //     <td>{job.apply_url}</td>
+            //     <td>{job.deadline}</td>
+            //     <td>{job.created}</td>
+            //     <td>
+            //       <button
+            //         onClick={() => applyClick()}
+            //         type="button"
+            //         className="btn btn-danger"
+            //       >Apply
+            //       </button>
+            //     </td>
+
+
+            //     {/* <td>
+            //       <button
+            //         type="button"
+            //         className="btn btn-danger"
+            //         onClick={() => useNavigate(jobs.apply_url)}
+            //       >
+            //         Apply
+            //       </button>
+            //     </td> */}
+
+            //     {/* <td>
+            //       <button
+            //         type="button"
+            //         className="btn btn-danger"
+            //         onClick={() => ApplyToJobListing(job.apply_url)}
+            //       >Apply
+            //       </button>
+            //     </td> */}
+
+
+            //     {/* <td>
+            //       <button
+            //         type="button"
+            //         className="btn btn-danger"
+            //         onClick={() => { window.location.href = `http://localhost:8080/listings${job.apply_url}` }}
+            //       >Apply
+            //       </button>
+            //     </td> */}
+
+            //   </tr>
+            // );
+          })}
+        </tbody>
+      </table>
+    </div>
+  );
+};
+
+export default JobListings;
+
+//  <button
+//    type="button"
+//    className="btn btn-danger"
+//    onClick={() => ApplyToJobListing(job.apply_url)}
+//    to={{
+//      pathname: `http://localhost:8080/listings${jobs.apply_url}`,
+//    }}
+//  >
+//    Apply
+//  </button>;

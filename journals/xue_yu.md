@@ -39,9 +39,14 @@ Plan:
 
 ## 01/10/2023
 
-conflicts:
-1 blogs missing "title" here and there
-2 picture_url or pic_url
+Completed:
+1 added blog update function
+2 modified merge leftovers: blogs missing "title" here and there, picture_url or pic_url
+3 sign up front page all set up
+
+plan:
+1 add job listing delete function
+2 start blog update front page
 
 ## 01/05/2023
 
