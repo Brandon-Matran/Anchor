@@ -49,7 +49,7 @@ function App() {
           <Route path="/blogs/:id" element={<GetOneBlog />} />
           <Route path="/blogs" element={<BlogsList />} />
           <Route path="/listings" element={<JobListings />} />
-          <Route path="/listings/my" element={<MyListings />} />
+          <Route path="/listings/mylistings" element={<MyListings />} />
           <Route path="/blogs/update/:id" element={<UpdateBlog />} />
           <Route path="/blogs/create" element={<CreateBlogsForm/>} />
           <Route path="/blogs/myblogs" element={<MyBlogs/>}/>
