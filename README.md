@@ -15,16 +15,63 @@ Have you ever wanted to be a part of something bigger than yourself? Welcome to 
 - In your browser go to this link: [https://gitlab.com/maxbs/anchor](https://gitlab.com/maxbs/anchor)
 - Fork the project
 - Clone it with HTTPS
-- open your terminal on your machine
-- make sure you are in the directory you would like to work in
-- type a command "git clone [https://gitlab.com/maxbs/anchor.git](https://gitlab.com/maxbs/anchor.git)"
-- change your directory to the project's directory by typing a command "cd anchor/"
-- type a command "code ." so your project opens in VSCode
+- Open your CLI on your machine
+- Make sure you are in the directory you would like to work in
+- Type a command "git clone [https://gitlab.com/maxbs/anchor.git](https://gitlab.com/maxbs/anchor.git)"
+- Change your directory to the project's directory by typing a command "cd anchor/"
+- Type a command "code ." so your project opens in VSCode
+- In your terminal type docker volume create
 - Our project has three microservices, namely, blogs, job_listings and accounts
 
+---
+
+## API Design
+
+---
+
+- In order to test the backend CRUD codes for the accounts microservice:
+    - go to [Accounts API](http://localhost:8100/docs)
+    - from there, choose the method you would like to test:
+        - POST, GET, DELETE
+    - GET All Accounts:
+        - Click on Get /api/accounts
+        - Press Try it out
+    - POST:
+        - Click on Post /api/accounts Create Account
+        Input:
+        ```
+            {
+            "username": "string",
+            "password": "string",
+            "user_type": "string"
+            }
+        ```
+        Output:
+        ```
+            {
+            "access_token": "string",
+            "token_type": "Bearer",
+            "account": {
+                "id": "string",
+                "username": "string",
+                "user_type": "string"
+            }
+            }
+        ```
+        Creating a successful account will yield an access token that allows the user other permissions based on user type.
+        A user_type of "individual" will be allowed to post blogs, while a "company" will be able to post blogs and job listings.
+    - DELETE:
+        - If successfully logged in and an access token was returned. If you wanted to test out delete. This would be your output
+      ```
+      {
+        true
+      }
+      ```
+
+---
 
 - In order to test the backend CRUD codes for the blogs microservice:
-    - go to [http://localhost:8080/docs#/default](http://localhost:8080/docs#/default)
+    - go to [http://localhost:8080/docs#/default](http://localhost:8080/docs)
     - from there, depeding on the feature you would like to test click on it:
         - for instance POST, GET, DELETE or PUT methods
 
@@ -35,6 +82,7 @@ Have you ever wanted to be a part of something bigger than yourself? Welcome to 
     - Next one is POST, meaning create a blog:
         - click on POST method
         - Try it out: you will see "fastapi_token" line and this table:
+        ```
             {
             "username": "string",
             "post_date": "2023-01-24",
@@ -42,7 +90,9 @@ Have you ever wanted to be a part of something bigger than yourself? Welcome to 
             "pic_url": "string",
             "description": "string"
             }
+        ```
         - In each row, after the semicolon, write your values, after putting in your login account token into the token field for authentication as an "Individual" user type:
+        ```
             {
             "username": "John99",
             "post_date": "2023-01-24",
@@ -50,6 +100,7 @@ Have you ever wanted to be a part of something bigger than yourself? Welcome to 
             "pic_url": "[https://s.yimg.com/os/creatr-uploaded-images/2022-11/bf2328a0-59f7-11ed-bbff-605e7e0e3149](https://s.yimg.com/os/creatr-uploaded-images/2022-11/bf2328a0-59f7-11ed-bbff-605e7e0e3149)",
             "description": "Today twitter has laid off multiple thousand if its employees"
             }
+        ```
         - press Execute and you should see your created object with an id number attached to it
     - If you would like to get a specific blog, we shift to GET method for Get One Blog part
         - click Try it out and input the blog id
@@ -64,15 +115,104 @@ Have you ever wanted to be a part of something bigger than yourself? Welcome to 
         - Input blog_id and press execute
         - This should delete the blog and give you a True response
 
+---
 
+- In order to test the backend CRUD codes for the blogs microservice:
+    - Go to [JOB LISTING API](http://localhost:8090/docs)
+    - From there, choose the method you would like to test:
+        - POST, GET, DELETE, PUT
 
+    - GET All Job Listings:
+        - Click on GET /listings with "All Listings" notation
+        - press Try it out
+        - This should return your list of Job Listings
 
+    - POST
+        - Click on POST /listings Create Listing
+        INPUT:
+        ```
+        {
+        "username": "string",
+        "title": "string",
+        "company_name": "string",
+        "job_position": "string",
+        "apply_url": "string",
+        "deadline": "2023-01-25",
+        "created": "2023-01-25"
+        }
+        ```
+        OUTPUT:
+        ```
+        {
+        "id": 0,
+        "username": "string",
+        "title": "string",
+        "company_name": "string",
+        "job_position": "string",
+        "apply_url": "string",
+        "deadline": "2023-01-25",
+        "created": "2023-01-25"
+        }
+        ```
+        Creating a successful job listing will save the attributes in the input field and assign a unique id to that job listing
+    - GET Specific Job Listing:
+        - Click on GET /listings/{listing_id} Get One Listing
+        - Enter ID of job listing into the listing_id field
+        OUTPUT:
+        ```
+        {
+        "id": 0,
+        "username": "string",
+        "title": "string",
+        "company_name": "string",
+        "job_position": "string",
+        "apply_url": "string",
+        "deadline": "2023-01-25",
+        "created": "2023-01-25"
+        }
+        ```
+    - PUT Specific Job Listing
+        - Click on PUT /listings/{listing_id} Update Listing
+        - Enter ID of job listing into the listing_id field
+        INPUT:
+        ```
+        {
+        "username": "string",
+        "title": "string",
+        "company_name": "string",
+        "job_position": "string",
+        "apply_url": "string",
+        "deadline": "2023-01-25",
+        "created": "2023-01-25"
+        }
+        ```
+        OUTPUT:
+        ```
+        {
+        "id": 0,
+        "username": "string",
+        "title": "string",
+        "company_name": "string",
+        "job_position": "string",
+        "apply_url": "string",
+        "deadline": "2023-01-25",
+        "created": "2023-01-25"
+        }
+        ```
+    - DELETE Specific Job Listing
+        - Click on DELETE /listings/{listing_id} Delete Listing
+        - Enter ID of job listing into the listing_id field
+        OUTPUT:
+        ```
+        {
+            true
+        }
+        ```
 
 ---
 # Diagrams:
 ![Diagrams] (ghi\public\Images\MAXBS_Anchor.png)
 ![Diagrams] (ghi\public\Images\MAXBS_Anchor2.png)
-
 
 
 ---
