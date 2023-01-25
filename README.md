@@ -38,6 +38,7 @@ Have you ever wanted to be a part of something bigger than yourself? Welcome to 
         - Press Try it out
     - POST:
         - Click on Post /api/accounts Create Account
+
         Input:
         ```
             {
@@ -129,6 +130,7 @@ Have you ever wanted to be a part of something bigger than yourself? Welcome to 
 
     - POST
         - Click on POST /listings Create Listing
+
         INPUT:
         ```
         {
@@ -155,9 +157,11 @@ Have you ever wanted to be a part of something bigger than yourself? Welcome to 
         }
         ```
         Creating a successful job listing will save the attributes in the input field and assign a unique id to that job listing
+        
     - GET Specific Job Listing:
         - Click on GET /listings/{listing_id} Get One Listing
         - Enter ID of job listing into the listing_id field
+
         OUTPUT:
         ```
         {
@@ -174,6 +178,7 @@ Have you ever wanted to be a part of something bigger than yourself? Welcome to 
     - PUT Specific Job Listing
         - Click on PUT /listings/{listing_id} Update Listing
         - Enter ID of job listing into the listing_id field
+
         INPUT:
         ```
         {
@@ -202,6 +207,7 @@ Have you ever wanted to be a part of something bigger than yourself? Welcome to 
     - DELETE Specific Job Listing
         - Click on DELETE /listings/{listing_id} Delete Listing
         - Enter ID of job listing into the listing_id field
+
         OUTPUT:
         ```
         {
