@@ -13,7 +13,7 @@ function LoginForm() {
   const handleSubmit = async (e) => {
     login(username, password);
     e.preventDefault();
-    navigate("/");
+    navigate("/main");
   };
 
   return (

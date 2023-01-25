@@ -7,6 +7,7 @@ import TestPage from "./accounts/TestPage.js";
 import { AuthProvider, useToken } from "./accounts/Authentication.js";
 import Signup from "./accounts/Signup";
 import MainPage from "./accounts/MainPage";
+import MainPage2 from "./accounts/MainPage2";
 import CreateBlogsForm from "./Blogs/CreateBlogsForm";
 import UpdateBlog from "./Blogs/update_blog";
 import BlogsList from "./Blogs/BlogsList.js";
@@ -42,6 +43,7 @@ function App() {
         <NavFooter/>
         <Routes>
           <Route path="/" element={<MainPage />} />
+          <Route path="/main" element={<MainPage2 />} />
           <Route path="/login" element={<LoginForm />} />
           <Route path="/test" element={<TestPage />} />
           <Route path="/signup" element={<Signup />} />
