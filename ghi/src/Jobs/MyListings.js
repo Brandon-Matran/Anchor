@@ -1,12 +1,14 @@
 import { useEffect , useState} from "react";
 import { useAuthContext } from "../accounts/Authentication"
 import React from 'react';
+// import { Link } from 'react-router-dom';
 
 function JobsColumn(props) {
     return (
       <div className="col">
         {props.list.map((data, index) => {
           return (
+            // <Link to={`/listings/${data.id}`} key={index} className="text-decoration-none text-reset" >
               <div key={index} className="card mb-3 shadow">
                 <div className="card-body">
                   <h5 className="card-title">
@@ -22,6 +24,7 @@ function JobsColumn(props) {
                   </p>
                 </div>
               </div>
+            // </Link>
           );
         })}
       </div>
