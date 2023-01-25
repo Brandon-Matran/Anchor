@@ -1,9 +1,11 @@
 import {useEffect, useState} from "react"
 import React from "react";
 import { useAuthContext } from "../accounts/Authentication";
+import { useNavigate } from "react-router-dom";
 
 
 function CreateJobsForm() {
+  const navigate = useNavigate();
   const today = new Date()
   const { token } = useAuthContext();
   const [username, setUserName] = useState('')
@@ -64,6 +66,7 @@ function CreateJobsForm() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    navigate("/listings/my");
     const newJob = {
       username: username,
       title: title,

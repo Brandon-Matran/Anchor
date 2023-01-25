@@ -61,6 +61,14 @@ function Nav() {
                       Blogs
                     </NavLink>
 
+                    <NavLink
+                      className="dropdown-item link"
+                      aria-current="page"
+                      to="blogs/create"
+                    >
+                      Create Blog
+                    </NavLink>
+
 
                     <NavLink
                       className="dropdown-item link"
@@ -70,11 +78,19 @@ function Nav() {
                       Job Listings
                     </NavLink>
 
+                    <NavLink
+                      className="dropdown-item link"
+                      aria-current="page"
+                      to="listings/create"
+                    >
+                      Post Job Listing
+                    </NavLink>
+
 
                     <NavLink
                       className="dropdown-item link"
                       aria-current="page"
-                      to="signup"
+                      to="/signup"
                     >
                       Signup
                     </NavLink>

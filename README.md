@@ -1,147 +1,167 @@
-# Module3 Project Gamma
+# Anchor - A Software Engineering Community
 
-## Getting started
+Have you ever wanted to be a part of something bigger than yourself? Welcome to Anchor, home of the fastest growing software engineering community on planet Earth.
 
-You have a project repository, now what? The next section
-lists all of the deliverables that are due at the end of the
-week. Below is some guidance for getting started on the
-tasks for this week.
+ ---
+ Anchor Team: MAXBS
+ - Murad Khudiev
+ - Allen Chen
+ - Xue Yu
+ - Brandon Matran
+ - Steven Duong
 
-## Install Extensions
+---
+# How to Run Application
+- In your browser go to this link: [https://gitlab.com/maxbs/anchor](https://gitlab.com/maxbs/anchor)
+- Fork the project
+- Clone it with HTTPS
+- open your terminal on your machine
+- make sure you are in the directory you would like to work in
+- type a command "git clone [https://gitlab.com/maxbs/anchor.git](https://gitlab.com/maxbs/anchor.git)"
+- change your directory to the project's directory by typing a command "cd anchor/"
+- type a command "code ." so your project opens in VSCode
+- Our project has three microservices, namely, blogs, job_listings and accounts
 
-* Prettier: <https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode>
-* Black Formatter: <https://marketplace.visualstudio.com/items?itemName=ms-python.black-formatter>
 
-## Deliverables
+- In order to test the backend CRUD codes for the blogs microservice:
+    - go to [http://localhost:8080/docs#/default](http://localhost:8080/docs#/default)
+    - from there, depeding on the feature you would like to test click on it:
+        - for instance POST, GET, DELETE or PUT methods
 
-* [ ] Wire-frame diagrams
-* [ ] API documentation
-* [ ] Project is deployed to Render.com/GitLab-pages
-* [ ] GitLab issue board is setup and in use
-* [ ] Journals
+    - Let's start with Get all blogs:
+        - click on GET /blogs with "all blogs" notation
+        - press Try it out
+        - press Execute and you should either see an empty list or your blogs if you have previously created any
+    - Next one is POST, meaning create a blog:
+        - click on POST method
+        - Try it out: you will see "fastapi_token" line and this table:
+            {
+            "username": "string",
+            "post_date": "2023-01-24",
+            "title": "string",
+            "pic_url": "string",
+            "description": "string"
+            }
+        - In each row, after the semicolon, write your values, after putting in your login account token into the token field for authentication as an "Individual" user type:
+            {
+            "username": "John99",
+            "post_date": "2023-01-24",
+            "title": "Software News",
+            "pic_url": "[https://s.yimg.com/os/creatr-uploaded-images/2022-11/bf2328a0-59f7-11ed-bbff-605e7e0e3149](https://s.yimg.com/os/creatr-uploaded-images/2022-11/bf2328a0-59f7-11ed-bbff-605e7e0e3149)",
+            "description": "Today twitter has laid off multiple thousand if its employees"
+            }
+        - press Execute and you should see your created object with an id number attached to it
+    - If you would like to get a specific blog, we shift to GET method for Get One Blog part
+        - click Try it out and input the blog id
+        - you should see the blog that was posted under that id number
+    - Next we have update blog under the PUT method:
+        - Try it out
+        - input the id number and your token in respective fields
+        - select the field you would like to update and in the table below change that value
+        - once you Execute you should see your full updated blog
+    - Lastly for the CRUD method, we have delete
+        - Try it out
+        - Input blog_id and press execute
+        - This should delete the blog and give you a True response
 
-## Project layout
 
-The layout of the project is just like all of the projects
-you did with `docker-compose` in module #2. You will create
-a directory in the root of the repository for each service
-that you add to your project just like those previous
-projects were setup.
 
-### Directories
 
-Several directories have been added to your project. The
-directories `docs` and `journals` are places for you and
-your team-mates to, respectively, put any documentation
-about your project that you create and to put your
-project-journal entries. See the _README.md_ file in each
-directory for more info.
 
-The other directories, `ghi` and `sample_service`, are
-sample services, that you can start building off of or use
-as a reference point.
+---
+# Diagrams:
+![Diagrams] (ghi\public\Images\MAXBS_Anchor.png)
+![Diagrams] (ghi\public\Images\MAXBS_Anchor2.png)
 
-Inside of `ghi` is a minimal React app that has an "under
-construction" page. It is setup similarly to all of the
-other React projects that you have worked on.
 
-Inside of `sample_service` is a minimal FastAPI application.
-"Where are all the files?" you might ask? Well, the
-`main.py` file is the whole thing, and go take look inside
-of it... There's not even much in there..., hmm? That is
-FastAPI, we'll learn more about it in the coming days. Can
-you figure out what this little web-application does even
-though you haven't learned about FastAPI yet?
 
-Also in `sample_service` is a directory for your migrations.
-If you choose to use PostgreSQL, then you'll want to use
-migrations to control your database. Unlike Django, where
-migrations were automatically created for you, you'll write
-yours by hand using DDL. Don't worry about not knowing what
-DDL means; we have you covered. There's a sample migration
-in there that creates two tables so you can see what they
-look like.
+---
+# Backend Endpoints:
+## Default Ports
+blogs:8080
+listings:8090
+accounts:8100
 
-The sample Dockerfile and Dockerfile.dev run your migrations
-for you automatically.
+  ## Blogs
+| HTTP Requests | URLs |
+| ----------- | ----------- |
+|   GET List of Blogs|  http://localhost:8080/blogs|
+|   GET Specific Blog | http://localhost:8080/blogs/:id|
+|   POST Blog|  http://localhost:8080/blogs|
+|   PUT Blog|  http://localhost:8080/blogs/:id|
+|   DELETE Blog  |  http://localhost:8080/blogs/:id|
 
-### Other files
+## Job Listings
+| HTTP Requests | URLs |
+| ----------- | ----------- |
+|   GET List of Jobs |  http://localhost:8090/listings|
+|   GET Specific Job Listing | http://localhost:8090/listings/:id|
+|   POST Job Listing |  http://localhost:8090/listings|
+|   PUT Job Listing |  http://localhost:8090/listings/:id|
+|   DELETE Job Listing  |  http://localhost:8090/listings/:id|
 
-The following project files have been created as a minimal
-starting point. Please follow the guidance for each one for
-a most successful project.
+## Accounts
+| HTTP Requests | URLs |
+| ----------- | ----------- |
+|   GET List of Accounts |  http://localhost:8100/api/accounts|
+|   GET Specific Account| http://localhost:8100/api/accounts/:id|
+|   POST Account|  http://localhost:8100/api/accounts|
+|   Get Protected Account|  http://localhost:8100/api/protected|
 
-* `docker-compose.yaml`: there isn't much in here, just a
-  **really** simple UI and FastAPI service. Add services
-  (like a database) to this file as you did with previous
-  projects in module #2.
-* `.gitlab-ci.yml`: This is your "ci/cd" file where you will
-  configure automated unit tests, code quality checks, and
-  the building and deployment of your production system.
-  Currently, all it does is deploy an "under construction"
-  page to your production UI on GitLab and a sample backend
-  to Render.com. We will learn much more about this file.
-* `.gitignore`: This is a file that prevents unwanted files
-  from getting added to your repository, files like
-  `pyc` files, `__pycache__`, etc. We've set it up so that
-  it has a good default configuration for Python projects.
+## Token
+| HTTP Requests | URLs |
+| ----------- | ----------- |
+|   Get Token|  http://localhost:8100/token|
+|   Post Token|  http://localhost:8100/token|
+|   DELETE Token|  http://localhost:8100/token|
 
-## How to complete the initial deploy
 
-There will be further guidance on completing the initial
-deployment, but it just consists of these steps:
 
-### Setup GitLab repo/project
+---
+### Frontend Endpoints:
 
-* make sure this project is in a group. If it isn't, stop
-  now and move it to a GitLab group
-* remove the fork relationship: In GitLab go to:
-  
-  Settings -> General -> Advanced -> Remove fork relationship
 
-* add these GitLab CI/CD variables:
-  * PUBLIC_URL : this is your gitlab pages URL
-  * SAMPLE_SERVICE_API_HOST: enter "blank" for now
 
-#### Your GitLab pages URL
+REACT:
 
-You can't find this in GitLab until after you've done a deploy
-but you can figure it out yourself from your GitLab project URL.
+http://localhost:3000
 
-If this is your project URL
 
-https://gitlab.com/GROUP_NAME/PROJECT_NAME
 
-then your GitLab pages URL will be
+---
+### Microservices:
+---
 
-https://GROUP_NAME.gitlab.io/PROJECT_NAME
 
-### Create render.com account and application
+###  Accounts -
 
-* create account on render.com
-* one person create a group and invite all other members
-* create a new "Web Service"
-  * authenticate with GitLab and choose your project
-  * Enter fields:
-    * Name: name of your service
-    * Root Directory: the directory of your service in your git repo.
-      For this example use "sample_service".
-    * Environment: Docker
-    * Plan Type: Free
-  * click the "Create Web Service" button to create it
-  * the build will succeed and it will look like the server is running,
-    most likely, in 6-10 minutes, it will fail.
-  * click "Manual Deploy" -> "Deploy latest commit" and the service
-    should deploy successfully.
+As an account user, there are only 3 requirements that need to be met. A username, password, and your choice of user type.
 
-### Update GitLab CI/CD variables
+There are currently two user types available: Individual and Company.
 
-Copy the service URL for your new render.com service and then paste
-that into the value for the SAMPLE_SERVICE_API_HOST CI/CD variable
-in GitLab.
+An individual user can post, edit, and delete blogs that they authored. Individual users can get blogs from other users and also browse job listings.
 
-### Deploy it
+As a company user, I can post, edit, and delete job listings to prospective employees and also have all the blogs functions that are available as an individual user.
 
-Merge a change into main to kick off the initial deploy. Once the build pipeline
-finishes you should be able to see an "under construction" page on your GitLab
-pages site.
+
+---
+### Blogs -
+
+The 3 most recent blogs will be displayed on the main page.
+
+Created a form to post blogs. In the form for blogs, we have 3 fields that are required.
+Title, description, and pic url. Post date and username will automatically be applied.
+
+When you click on "my blogs" the user can view all the blogs they posted.
+
+---
+### Jobs -
+
+As a company user, you can post job listings so people can apply.
+
+In the job listings form, the required fields are:
+Title, Company Name, Job Position, Apply URL, and a deadline date.
+
+Username and created timestamp will automatically be applied on click of "post job."
+
+When you click on "my listings" the user can view all the job listings they posted.
