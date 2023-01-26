@@ -19,7 +19,7 @@ docker volume remove postgres-data
 ## 01/26/2023
 Completed:
  - codes cleaned up
- - work on readme
+ - touch up on readme
 Plan:
  -
 
