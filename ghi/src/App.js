@@ -17,7 +17,7 @@ import UpdateListing from "./Listings/UpdateListingsForm";
 import CreateJobsForm from "./Listings/CreateListingsForm";
 import GetOneBlog from "./Blogs/GetOneBlog";
 import Nav from "./Nav";
-import NavFooter from "./NavFooter";
+
 import MyBlogs from "./Blogs/MyBlogs";
 
 
