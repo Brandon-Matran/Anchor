@@ -15,6 +15,7 @@ function LoginForm() {
     e.preventDefault();
     navigate("/main");
   };
+
   if (token) {
     return <Navigate to="/" />;
   }

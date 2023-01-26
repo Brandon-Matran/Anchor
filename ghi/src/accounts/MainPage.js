@@ -60,7 +60,7 @@ function MainPage() {
   }
 
   useEffect(() => {
-    const url = "http://localhost:8080/blogs";
+    const url = `${process.env.REACT_APP_BLOG_SERVICE}/blogs`;
     async function fetchData() {
       const response = await fetch(url);
       if (response.ok) {
