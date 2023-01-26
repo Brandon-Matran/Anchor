@@ -1,5 +1,5 @@
 import { useEffect , useState} from "react";
-import { useAuthContext, getTokenInternal } from "../accounts/Authentication"
+import { useAuthContext } from "../accounts/Authentication"
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
@@ -39,19 +39,15 @@ function MyBlogs() {
     }
 
     useEffect(() => {
-      try {
         fetch(token)
         .then(response => {if ((typeof response.token) !== "object") {
             setJwt(token.token);
             if (Jwt !== null) {
                 parseJwt(Jwt);
             }
-
         }})
-      }
-      catch (e) {}
+        fetchData();
     }, [token, Jwt, username])
-
 
     function deleteBlog(id) {
       const blogURL = `${process.env.REACT_APP_BLOG_SERVICE}/blogs/${id}`
@@ -59,7 +55,7 @@ function MyBlogs() {
         method: 'delete',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
+            'Authorization': `Bearer ${Jwt}`
         },
       }
       fetch(blogURL, fetchConfig)

@@ -4,6 +4,8 @@ import { useNavigate } from "react-router";
 import "./MainPage.css";
 import { useEffect, useState } from "react";
 import { useToken } from "./Authentication.js";
+import SignUpModal from "./SignupModal";
+import LoginModal from "./LoginModal";
 
 function Column(props) {
   return (
