@@ -122,6 +122,7 @@ function UpdateBlog() {
                         className="form-control"
                         id="exampleFormControlTextarea1"
                         rows="3"
+                        style={{height: 300}}
                       ></textarea>
                       <label className="form-label">Description</label>
                     </div>

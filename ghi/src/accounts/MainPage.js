@@ -28,7 +28,7 @@ function Column(props) {
               <div className="card-body">
                 <p className="card-text">Date: {date}</p>
 
-                <p className="card-text">Description: {data.description}</p>
+                <p className="card-text text-truncate">Description: {data.description}</p>
               </div>
             </div>
           </div>
