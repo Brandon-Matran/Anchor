@@ -86,9 +86,6 @@ function MyBlogs() {
                       <h6 className="card-subtitle mb-2 text-muted">
                         Author: {data.username}
                       </h6>
-                      <p className="card-text">
-                        {data.description}
-                      </p>
                     </div>
                 </Link>
                 <div className="card-footer">

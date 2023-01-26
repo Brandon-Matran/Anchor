@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import LoginModal from "./LoginModal";
 import SignUpModal from "./SignupModal";
 import { useToken } from "./Authentication.js";
+import { Link } from "react-router-dom";
 
 function Column(props) {
   return (
@@ -15,24 +16,30 @@ function Column(props) {
         const dateObj = new Date(dateString);
         const date = dateObj.toLocaleDateString();
         return (
-          <div key={index} className="card mb-5">
-            <div className="row g-0 blogCard">
-              <div className="col-md-4">
-                <img
-                  src={data.pic_url}
-                  className="card-img-top pic"
-                  alt="..."
-                />
-              </div>
-              <div className="col-md-8 cardBackground">
-              <div className="card-body">
-                <p className="card-text">Date: {date}</p>
-
-                <p className="card-text">Description: {data.description}</p>
+          <Link to={`/blogs/${data.id}`} key={index} className="text-decoration-none text-reset">
+            <div key={index} className="card mb-5">
+              <div className="row g-0 blogCard">
+                <div className="col-md-4">
+                  <img
+                    src={data.pic_url}
+                    className="card-img-top pic"
+                    alt="..."
+                  />
+                </div>
+                <div className="col-md-8 cardBackground">
+                <div className="card-body">
+                  <p className="card-text">{data.title}</p>
+                </div>
+                <div className="card-body">
+                  <p className="card-text">By: {data.username}</p>
+                </div>
+                <div className="card-body">
+                  <p className="card-text">{date}</p>
+                </div>
               </div>
             </div>
-          </div>
-          </div>
+            </div>
+          </Link>
         );
       })}
     </div>

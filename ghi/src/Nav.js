@@ -21,17 +21,15 @@ function Nav() {
   }
 
   const handleLogo = () => {
-    navigate('/')
+    navigate('/main')
   }
 
   return (
     <div>
       <nav className="navbar navbar-expand-lg">
         <div className="container-fluid">
-  <img src={anchor} className='anchor' onClick={handleLogo}></img>
-
+          <img src={anchor} className='anchor' onClick={handleLogo}></img>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
-
               <div className="nav-item">
                 <NavLink className="nav-link active" aria-current="page" to="/main">
                   Home
@@ -51,7 +49,7 @@ function Nav() {
             </button>
             {menu && (
 
-                <ul class="dropdownBurger cut">
+                <ul className="dropdownBurger cut">
 
                     <NavLink
                       className="dropdown-item link"
@@ -73,7 +71,7 @@ function Nav() {
                     {token && <NavLink
                       className="dropdown-item link"
                       aria-current="page"
-                      to="/blogs/my"
+                      to="blogs/myblogs"
                     >
                       My Blogs
 
