@@ -28,7 +28,7 @@ function Column(props) {
               <div className="card-body">
                 <p className="card-text">Date: {date}</p>
 
-                <p className="card-text text-truncate">Description: {data.description}</p>
+                <p className="card-text">Description: {data.description}</p>
               </div>
             </div>
           </div>
@@ -53,10 +53,6 @@ function MainPage() {
 
   const handleSignup = () => {
     navigate("/signup")
-  }
-
-  const handleLogin = () => {
-    navigate("/login")
   }
 
   useEffect(() => {
@@ -109,29 +105,7 @@ function MainPage() {
           <div className="container">
             <div className="blogContainer d-flex align-items-cente row">
               <div className="col-sm d-flex justify-content-end">
-                <button
-                  // onClick={() => {
-                  //   setSignUpModal(true);
-                  // }}
-                  onClick={() => {handleSignup()}}
-                  type="button"
-                  className="openSignupModal"
-                >
-                  Sign Up
-                </button>
-                {/* {signupModal && (
-                  <SignUpModal closeSignupModal={setSignUpModal} />
-                )} */}
-              </div>
-              <div className="col-sm d-flex justify-content-start">
-                <button
-                  className="openLoginModal"
-                  onClick={() => {handleLogin()}}
-                  // onClick={() => setLoginModal(true)}
-                >
-                  Log In
-                </button>
-                {/* {loginModal && <LoginModal closeLoginModal={setLoginModal} />} */}
+                {loginModal && <LoginModal closeLoginModal={setLoginModal} />}
               </div>
             </div>
           </div>

@@ -33,7 +33,7 @@ function Nav() {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
 
               <div className="nav-item">
-                <NavLink className="nav-link active" aria-current="page" to="/">
+                <NavLink className="nav-link active" aria-current="page" to="/main">
                   Home
                 </NavLink>
               </div>
@@ -61,14 +61,24 @@ function Nav() {
                       Blogs
                     </NavLink>
 
-                    <NavLink
+                    {token && <NavLink
                       className="dropdown-item link"
                       aria-current="page"
                       to="blogs/create"
                     >
                       Create Blog
                     </NavLink>
+                    }
 
+                    {token && <NavLink
+                      className="dropdown-item link"
+                      aria-current="page"
+                      to="/blogs/my"
+                    >
+                      My Blogs
+
+                    </NavLink>
+                    }
 
                     <NavLink
                       className="dropdown-item link"
@@ -78,13 +88,24 @@ function Nav() {
                       Job Listings
                     </NavLink>
 
-                    <NavLink
+                    {token && <NavLink
                       className="dropdown-item link"
                       aria-current="page"
                       to="listings/create"
                     >
                       Post Job Listing
                     </NavLink>
+                    }
+
+                    {token && <NavLink
+                      className="dropdown-item link"
+                      aria-current="page"
+                      to="/listings/my"
+                    >
+                      My listings
+
+                    </NavLink>
+                    }
 
 
                     {!token && <NavLink

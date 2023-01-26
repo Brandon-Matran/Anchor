@@ -54,7 +54,6 @@ lint-test-job:
     - flake8 listing_service
 
 
-
 build-api-account-backend:
   image: docker:19.03.1
   stage: build
@@ -80,6 +79,7 @@ build-api-account-backend:
     - docker run caprover/cli-caprover:v2.1.1 caprover deploy --caproverUrl $CAPROVER_URL --caproverPassword $CAPROVER_PASSWORD --caproverApp $CAPROVER_APP_ONE --imageName $CONTAINER_FULL_IMAGE_NAME_WITH_TAG
   only:
     - main
+
 
 build-api-blog-backend:
   image: docker:19.03.1
@@ -107,6 +107,7 @@ build-api-blog-backend:
   only:
     - main
 
+
 build-api-listing-backend:
   image: docker:19.03.1
   stage: build
@@ -132,6 +133,7 @@ build-api-listing-backend:
     - docker run caprover/cli-caprover:v2.1.1 caprover deploy --caproverUrl $CAPROVER_URL --caproverPassword $CAPROVER_PASSWORD --caproverApp $CAPROVER_APP_THREE --imageName $CONTAINER_FULL_IMAGE_NAME_WITH_TAG
   only:
     - main
+
 
 # Build the React/JavaScript front-end
 build-front-end-job:
@@ -161,7 +163,7 @@ build-front-end-job:
 pages:
   stage: deploy
   rules:
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH  # CHANGE BACK TO CI_DEFAULT_BRANCH WHEN DEPLOYING ON MAIN
   dependencies:
     - build-front-end-job
   needs:

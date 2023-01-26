@@ -1,3 +1,19 @@
+# 1/25/23:
+Today I worked on:
+- Going to run through our app on localhost to make sure all requirements for the project are met so that the entire group will get a passing grade. Currently have some small tweaks we need to make on the front end. Afterwards, we plan to make a push to main and at that point the MVP should be complete.
+
+
+## 1/24/23:
+Today I worked on:
+- Finished deployment completeley on the front and back end. The errors regarding disk space were resolved by clearing the disk space from the CapRover app itself. Unfortunately that information was not in their documentation. The other issue was getting the token to authorize for certain permissions within the Anchor app. With the help of a SEIR, we were able to create a valid token by updating the signing key within the CapRover dashboard and now all requests are going through.
+
+## 1/23/23:
+Today I worked on:
+- Still having issues with deployment where the front end is not communicating with the backend on CapRover. I plan to meet with instructors and try to figure out what is happening and how to overcome this issue.
+
+What I need to work on:
+- I ran into a huge issue where it was telling me there was no more space on the device when trying to deploy the app through CapRover. I was unable to find a solution. Will try again tomorrow.
+
 ## 1/20/23:
 Today I worked on:
 - Got the app deployed through CapRover.
