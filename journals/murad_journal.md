@@ -1,5 +1,18 @@
 # Murad Khudiev's Journal
 
+
+## 01/26/2023
+- Cleaning up the project, deleting all redundant text
+- Continuing to work on README
+
+
+## 01/25/2023
+
+- Worked on README and made sure everything is running smoothly
+- Checked the functionality of the app
+- Fixed the problem I had with all blogs page
+- Changed the design of some elements on the frontend for a better look
+
 ## 01/24/2023
 
 - Merging our branches together so we all have the same code
@@ -9,8 +22,8 @@
 
 ## 01/23/2023
 
-- I was working on unit testing for get all blogs page and get all listings
-- Ran into a few issues with the unit tests as they are failing
+- Completed unit testing for get all blogs page and get all listings over the weekend
+- Ran into a few issues with the unit tests as they were failing
 - Rewatched the recording of James's lecture about unit testings
 - Finished the Unit Tests, they are both passing.
 

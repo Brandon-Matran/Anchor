@@ -22,7 +22,6 @@
 }
 
 .openLoginModal {
-  /* transform: translate(700%, -100%); */
   background-color: #3d5c97;
   border-radius: 8px;
   border-style: none;
@@ -127,7 +126,6 @@
 }
 
 .blogRow {
-  /* margin: auto; */
   width: 60%;
   padding-top: 20px;
   column-gap: 30px;
@@ -198,7 +196,6 @@
   width: 100%;
 }
 
-
 .cardBackground {
   background-color:#9BACC4
   ;
@@ -208,7 +205,7 @@
 .fill-height {
   height: calc(30vh);
   display: grid;
-  grid-gap: 1rem; /* this will create a gap of 1rem between each card */
+  grid-gap: 1rem;
 }
 
 

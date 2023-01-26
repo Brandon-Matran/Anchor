@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate, Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useToken } from "./Authentication";
 import signup_image from "../images/signup_image.png";
 import "./SignupModal.css";

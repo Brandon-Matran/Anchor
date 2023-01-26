@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Navigate, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import "./Nav.css"
 import { useToken } from "./accounts/Authentication";
 import anchor from './images/anchor.jpg'

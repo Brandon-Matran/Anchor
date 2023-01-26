@@ -30,18 +30,13 @@ function GetToken() {
 function App() {
   const domain = /https:\/\/[^/]+/;
   const basename = process.env.PUBLIC_URL.replace(domain, "");
-  // const [token, setToken] = useState();
 
-  // if (!token) {
-  //   return <LoginForm setToken={setToken} />;
-  // }
 
   return (
     <BrowserRouter basename={basename}>
       <AuthProvider>
         <GetToken />
         <Nav />
-        {/* <NavFooter/> */}
         <Routes>
           <Route path="/" element={<MainPage />} />
           <Route path="/main" element={<MainPage2 />} />

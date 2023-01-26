@@ -16,7 +16,6 @@ function MyBlogs() {
         const base64 = base64Url.replace("-", "+").replace("_", "/");
         const info = JSON.parse(window.atob(base64));
         setUserName(info.account.username);
-        // setUserType(info.account.user_type);
     }
 
     async function fetchData() {

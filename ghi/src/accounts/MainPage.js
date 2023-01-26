@@ -1,10 +1,8 @@
 import background_image from "../images/background_image.png";
 import programmer from "../images/programmer.jpg";
-import { Navigate, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import "./MainPage.css";
 import { useEffect, useState } from "react";
-import LoginModal from "./LoginModal";
-import SignUpModal from "./SignupModal";
 import { useToken } from "./Authentication.js";
 
 function Column(props) {
@@ -45,11 +43,6 @@ function MainPage() {
   const [loginModal, setLoginModal] = useState(false);
   const [signupModal, setSignUpModal] = useState(false);
   const [blogs, setBlogList] = useState([], [], []);
-
-  const handleLogout = () => {
-    logout();
-    alert("You have logged out");
-  };
 
   const handleSignup = () => {
     navigate("/signup")
@@ -113,7 +106,6 @@ function MainPage() {
                   onClick={() => {
                     setSignUpModal(true);
                   }}
-                  // onClick={() => {handleSignup()}}
                   type="button"
                   className="openSignupModal"
                 >
@@ -126,7 +118,6 @@ function MainPage() {
               <div className="col-sm d-flex justify-content-start">
                 <button
                   className="openLoginModal"
-                  // onClick={() => {handleLogin()}}
                   onClick={() => setLoginModal(true)}
                 >
                   Log In

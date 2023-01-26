@@ -39,7 +39,6 @@ function Signup(props) {
                             onChange={(e) => setUsername(e.target.value)}
                             required
                             type="text"
-                            // id="form3Example1c"
                             className="form-control"
                             value={username}
                           />
@@ -59,7 +58,6 @@ function Signup(props) {
                           />
                         </div>
                       </div>
-
                       <div className="d-flex flex-row align-items-center mb-4">
                         <i className="fas fa-user fa-lg me-3 fa-fw"></i>
                         <div className="form-outline flex-fill mb-0">

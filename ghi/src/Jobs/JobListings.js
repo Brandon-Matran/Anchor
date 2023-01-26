@@ -22,7 +22,6 @@ const JobListings = () => {
       const data = await response.json();
       setJob(data);
     }
-
   };
 
   async function getAccount() {
@@ -40,7 +39,6 @@ const JobListings = () => {
       }
     }
   }
-
 
   useEffect(() => {
     getJob();
@@ -76,9 +74,6 @@ const JobListings = () => {
                 <td>{job.job_position}</td>
                 <td>{job.deadline}</td>
                 <td>{job.created}</td>
-                {/* <td>
-                  <button type="button" className="btn btn-danger" onClick={() => DeleteJobListing(job.id)}>Delete Listing</button>
-                </td> */}
               </tr>
             );
             } else {
@@ -96,62 +91,10 @@ const JobListings = () => {
                       className="btn btn-success"
                       >Apply
                   </button>
-
-                    {/* <button
-
-                      onClick={() =>  <Link to={{ pathname: `${job.apply_url}` }} target="_blank"> </Link>}
-                      type="button"
-                      className="btn btn-success"
-                    >Apply
-                    </button> */}
                   </td>
                 </tr>
               );
               }
-
-
-            // return (
-            //   <tr key={job.id}>
-            //     <td>{job.title}</td>
-            //     <td>{job.company_name}</td>
-            //     <td>{job.job_position}</td>
-            //     <td>{job.apply_url}</td>
-            //     <td>{job.deadline}</td>
-            //     <td>{job.created}</td>
-            //     <td>
-            //       <button
-            //         onClick={() => applyClick()}
-            //         type="button"
-            //         className="btn btn-danger"
-            //       >Apply
-            //       </button>
-            //     </td>
-
-
-            //     {/* <td>
-            //       <button
-            //         type="button"
-            //         className="btn btn-danger"
-            //         onClick={() => useNavigate(jobs.apply_url)}
-            //       >
-            //         Apply
-            //       </button>
-            //     </td> */}
-
-
-
-
-            //     {/* <td>
-            //       <button
-            //         type="button"
-            //         className="btn btn-danger"
-            //         onClick={() => { window.location.href = `http://localhost:8080/listings${job.apply_url}` }}
-            //       >Apply
-            //       </button>
-            //     </td> */}
-
-            //   </tr>
-            // );
           })}
         </tbody>
       </table>
@@ -160,24 +103,3 @@ const JobListings = () => {
 };
 
 export default JobListings;
-
-//  <button
-//    type="button"
-//    className="btn btn-danger"
-//    onClick={() => ApplyToJobListing(job.apply_url)}
-//    to={{
-//      pathname: `http://localhost:8080/listings${jobs.apply_url}`,
-//    }}
-//  >
-//    Apply
-//  </button>;
-
-
-{/* <td>
-<button
-  type="button"
-  className="btn btn-danger"
-  onClick={() => ApplyToJobListing(job.apply_url)}
-  >Apply
-</button>
-</td> */}
