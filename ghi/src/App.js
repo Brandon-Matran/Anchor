@@ -28,10 +28,6 @@ function App() {
   const { token } = useAuthContext();
   const domain = /https:\/\/[^/]+/;
   const basename = process.env.PUBLIC_URL.replace(domain, "");
-<<<<<<< HEAD
-=======
-
->>>>>>> main
 
   return (
     <BrowserRouter basename={basename}>
