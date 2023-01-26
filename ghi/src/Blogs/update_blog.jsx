@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../accounts/Authentication.js";
 import background_image from "../images/background_image.png";
 
@@ -18,6 +18,7 @@ function UpdateBlog() {
   const [pic_url, setPicURL] = useState("");
   const [description, setDescription] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const navigate = useNavigate()
 
   useEffect(() => {
     async function getBlog(id) {
@@ -68,6 +69,7 @@ function UpdateBlog() {
       setPicURL(data.pic_url);
       setDescription(data.description);
       setSubmitted(true);
+      navigate("/blogs/myblogs")
     }
   }
 

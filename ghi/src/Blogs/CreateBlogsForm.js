@@ -1,5 +1,6 @@
 import {useEffect, useState} from "react"
 import { useAuthContext } from "../accounts/Authentication"
+import { useNavigate } from "react-router-dom";
 
 function CreateBlogsForm(props) {
 
@@ -12,6 +13,7 @@ function CreateBlogsForm(props) {
     const [description, setDescription] = useState('')
     const [Jwt, setJwt] = useState(null)
     const [submitted, setSubmitted] = useState(false)
+    const navigate = useNavigate()
 
     const token = useAuthContext()
 
@@ -49,7 +51,6 @@ function CreateBlogsForm(props) {
             method: "post",
             body: JSON.stringify(newBlog),
             headers: {
-                Authorization: `Bearer ${token}`,
                 'Content-Type': 'application/json',
                 "Authorization": `Bearer ${Jwt}`
             },
@@ -63,6 +64,7 @@ function CreateBlogsForm(props) {
         setDescription("");
         setSubmitted(true);
       })
+      .then(navigate("/blogs/myblogs"))
       .catch((e) => console.error("ERROR: ", e));
   };
 

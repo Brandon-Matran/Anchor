@@ -11,7 +11,7 @@ function Signup(props) {
   const [user_type, setType] = useState("");
 
   if (token) {
-    return <Navigate to="/" />;
+    return <Navigate to="/main" />;
   }
 
   return (
