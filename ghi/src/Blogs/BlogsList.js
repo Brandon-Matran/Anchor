@@ -26,7 +26,7 @@ const BlogsList = () => {
 
   const deleteBlog = async (id) => {
     const url = `${process.env.REACT_APP_BLOG_SERVICE}/blogs/${id}`;
-    const fetchConfig = { 
+    const fetchConfig = {
       method: "delete",
       headers: {
         "Authorization": `Bearer ${Jwt}`,

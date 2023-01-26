@@ -38,6 +38,8 @@
   position: fixed;
   top: 0;
   left: 0;
+  right: 0;
+  bottom: 0;
   z-index: 1040;
   width: 100vw;
   height: 100vh;
@@ -56,7 +58,6 @@
 }
 
 .submitSignup {
-  transform: translate(150px, 50px);
   background-color: #3d5c97;
   border-radius: 8px;
   border-style: none;
@@ -85,7 +86,7 @@
 }
 
 .cancelSignup {
-  transform: translate(350px, 50px);
+  right: -5%;
   background-color: #3d5c97;
   border-radius: 8px;
   border-style: none;

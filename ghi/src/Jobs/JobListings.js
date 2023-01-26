@@ -31,7 +31,6 @@ const JobListings = () => {
     });
     if (response.ok) {
       const data = await response.json();
-      console.log(data)
       if (data?.account.user_type === "company") {
         return true
       }

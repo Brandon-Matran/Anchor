@@ -120,7 +120,6 @@ export function useToken() {
 
     if (response.ok) {
       await login(username, password, user_type);
-      return <Navigate to="/" />;
     }
     return false;
   }

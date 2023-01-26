@@ -128,11 +128,13 @@
 .blogRow {
   width: 60%;
   padding-top: 20px;
+  column-gap: 30px;
 }
 
 .aboveFooter {
   background-color: #38598a;
-  height: 100vh;
+
+
 }
 
 .LogOutButton {
@@ -197,4 +199,21 @@
 .cardBackground {
   background-color:#9BACC4
   ;
+}
+
+
+.fill-height {
+  height: calc(30vh);
+  display: grid;
+  grid-gap: 1rem;
+}
+
+
+.footerHeight {
+  height: 100px;
+}
+
+
+.blogText {
+  width: 100%;
 }

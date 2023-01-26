@@ -13,8 +13,10 @@ const TestPage = () => {
         credentials: "include",
       });
       if (response.ok) {
-        const data = await response.json()
+        const data = await response.json();
+
         if (data?.account.user_type === "individual") {
+
           return true
         }
         else{
@@ -23,10 +25,13 @@ const TestPage = () => {
       }
     }
 
+
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (await getAccount() === true) {
-      const url = `http://localhost:8080/blogs`;
+      const url = `{http://localhost:8080/blogs}`;
       const fetchConfig = {
         method: "post",
         body: JSON.stringify({

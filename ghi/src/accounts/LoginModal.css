@@ -63,7 +63,7 @@
 }
 
 .cancel {
-    transform: translate(200px, 50px);
+  align-self: flex-end;
   border-radius: 8px;
   border-style: none;
   box-sizing: border-box;
@@ -81,7 +81,8 @@
   margin: 0;
   outline: none;
   padding: 10px 16px;
-  position: relative;
+  position: absolute;
+  right: 8%;
   text-align: center;
   text-decoration: none;
   transition: color 100ms;
@@ -99,8 +100,7 @@
 
 
 .submit {
-    transform: translate(100px, 50px);
-      border-radius: 8px;
+  border-radius: 8px;
   border-style: none;
   box-sizing: border-box;
   color: #f7f7f7;

@@ -31,7 +31,6 @@ class ListingOut(BaseModel):
 
 class ListingRepository:
     def all_listings(self) -> Union[ListingError, List[ListingOut]]:
-        # try:
         with pool.connection() as conn:
             with conn.cursor() as db:
                 db.execute(
@@ -61,10 +60,6 @@ class ListingRepository:
                     )
                     for record in db
                 ]
-
-    # except Exception as e:
-    #     print(e)
-    #     return {"message": "Failed to display Job Listings"}
 
     def create(self, listing: ListingIn) -> ListingOut:
         try:
@@ -112,8 +107,7 @@ class ListingRepository:
                         [listing_id],
                     )
                     return True
-        except Exception as e:
-            print(e)
+        except Exception:
             return False
 
     def update(self, id: int, listing: ListingIn) -> ListingOut:
@@ -169,8 +163,7 @@ class ListingRepository:
                     if record is None:
                         return None
                     return self.record_to_listing_out(record)
-        except Exception as e:
-            print(e)
+        except Exception:
             return {"message": "Could not get that blog"}
 
     def record_to_listing_out(self, record):

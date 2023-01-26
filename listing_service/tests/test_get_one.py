@@ -4,7 +4,6 @@ from queries.listings import ListingRepository
 
 
 client = TestClient(app)
-
 expected_response = {
     "id": 1,
     "username": "string",
@@ -13,8 +12,8 @@ expected_response = {
     "job_position": "string",
     "apply_url": "string",
     "deadline": "2023-01-23",
-    "created": "2023-01-23"
-  }
+    "created": "2023-01-23",
+}
 
 
 class MockQueries:
@@ -23,21 +22,11 @@ class MockQueries:
 
 
 def test_get_one_listing():
-    # arrange
-    req = {
-        "id": 1
-    }
+    req = {"id": 1}
 
     app.dependency_overrides[ListingRepository] = MockQueries
-
-    # act
-
     response = client.get("/listings/1", json=req)
     actual = response.json()
-
-    # Assert
     assert response.status_code == 200
     assert actual == expected_response
-
-    # cleanup
     app.dependency_overrides = {}

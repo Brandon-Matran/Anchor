@@ -21,8 +21,12 @@ function Nav() {
   }
 
   const handleLogo = () => {
+    if (token) {
+    navigate('/main')
+  } else {
     navigate('/')
   }
+}
 
   return (
     <div>
@@ -32,11 +36,6 @@ function Nav() {
 
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
 
-              <div className="nav-item">
-                <NavLink className="nav-link active" aria-current="page" to="/main">
-                  Home
-                </NavLink>
-              </div>
 
 
           </div>
@@ -51,7 +50,7 @@ function Nav() {
             </button>
             {menu && (
 
-                <ul class="dropdownBurger cut">
+                <ul className="dropdownBurger cut">
 
                     <NavLink
                       className="dropdown-item link"
@@ -73,7 +72,7 @@ function Nav() {
                     {token && <NavLink
                       className="dropdown-item link"
                       aria-current="page"
-                      to="/blogs/my"
+                      to="/blogs/myblogs"
                     >
                       My Blogs
 
@@ -100,7 +99,7 @@ function Nav() {
                     {token && <NavLink
                       className="dropdown-item link"
                       aria-current="page"
-                      to="/listings/my"
+                      to="/listings/mylistings"
                     >
                       My listings
 

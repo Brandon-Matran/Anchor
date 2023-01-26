@@ -24,9 +24,9 @@ function Column(props) {
               </div>
               <div className="col-md-8 cardBackground">
               <div className="card-body">
-                <p className="card-text">Date: {date}</p>
+                <p className="card-text blogText">Date: {date}</p>
 
-                <p className="card-text">Description: {data.description}</p>
+                <p className="card-text text-truncate blogText">Description: {data.description}</p>
               </div>
             </div>
           </div>
@@ -100,29 +100,35 @@ function MainPage() {
             />
           </div>
           <div className="container">
-            <div className="blogContainer d-flex align-items-cente row">
+            <div className="blogContainer d-flex align-items-center row">
               <div className="col-sm d-flex justify-content-end">
                 <button
-                  onClick={() => {handleSignup()}}
+                  onClick={() => {
+                    setSignUpModal(true);
+                  }}
                   type="button"
                   className="openSignupModal"
                 >
                   Sign Up
                 </button>
+                {signupModal && (
+                  <SignUpModal closeSignupModal={setSignUpModal} />
+                )}
               </div>
               <div className="col-sm d-flex justify-content-start">
                 <button
                   className="openLoginModal"
-                  onClick={() => {handleLogin()}}
+                  onClick={() => setLoginModal(true)}
                 >
                   Log In
                 </button>
+                {loginModal && <LoginModal closeLoginModal={setLoginModal} />}
               </div>
             </div>
           </div>
 
-          <div className="aboveFooter">
-            <div className="d-flex justify-content-center row">
+          <div className="aboveFooter fill-height">
+            <div className="d-flex justify-content-center row fill-height">
               <div className="row g-0 col-md-4 blogRow">
                 {blogs.map((blog, index) => {
                   return <Column key={index} list={blog} />;
@@ -136,7 +142,7 @@ function MainPage() {
 
       <div className="container" id="footer-container">
         <footer
-          className="footer"
+          className="footer footerHeight"
           id="footer"
           style={{ backgroundImage: `url(${background_image})` }}
         ></footer>
