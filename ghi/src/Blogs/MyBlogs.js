@@ -74,20 +74,20 @@ function MyBlogs() {
 
     function BlogsColumn(props) {
       return (
-        <div className="col">
+        <div className="col text-truncate">
           {props.list.map((data, index) => {
             return (
-              <div key={index} className="card mb-3 shadow">
+              <div key={index} className="card mx-4 my-5 w-auto p-4 shadow">
                 <Link to={`/blogs/${data.id}`} key={index} className="text-decoration-none text-reset">
                     <img src={data.pic_url} className="card-img-top figure-img img-fluid" />
                     <div className="card-body">
-                      <h5 className="card-title">{data.title}</h5>
-                      <h6 className="card-subtitle mb-2 text-muted">
+                      <h5 className="card-title mb-2">{data.title}</h5>
+                      <h6 className="card-subtitle mb-3 text-muted">
                         Author: {data.username}
                       </h6>
-                      <p className="card-text">
+                      <div className="text-truncate">
                         {data.description}
-                      </p>
+                      </div>
                     </div>
                 </Link>
                 <div className="card-footer">
@@ -106,7 +106,7 @@ function MyBlogs() {
     return (
         <>
             <div className="px-4 py-5 my-5 mt-0 text-center bg-white">
-                <h1 className="display-5 fw-bold">My Blogs</h1>
+                <h1 className="display-5 fw-bold mb-4">My Blogs</h1>
                 <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
                     <Link to="/blogs/create" className="btn btn-success btn-lg px-4 gap-3">Post a New Blog</Link>
                 </div>
