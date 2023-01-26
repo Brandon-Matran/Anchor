@@ -11,14 +11,10 @@ expected_post_response = {
     "post_date": "2023-01-23",
     "title": "Passing Test",
     "pic_url": "https://test.example",
-    "description": "Testing 1 2 3"
+    "description": "Testing 1 2 3",
 }
 
-test_acct = {
-    "id": 3,
-    "username": "Subject3",
-    "user_type": "individual"
-}
+test_acct = {"id": 3, "username": "Subject3", "user_type": "individual"}
 
 
 class MockPostBlogsQueries:
@@ -36,14 +32,13 @@ def test_post_blogs():
         "post_date": "2023-01-23",
         "title": "Passing Test",
         "pic_url": "https://test.example",
-        "description": "Testing 1 2 3"
+        "description": "Testing 1 2 3",
     }
 
-    print("******************TEST*********************")
-
     app.dependency_overrides[BlogRepo] = MockPostBlogsQueries
-    app.dependency_overrides[authenticator.get_current_account_data]\
-        = fake_auth
+    app.dependency_overrides[
+        authenticator.get_current_account_data
+    ] = fake_auth
 
     response = client.post("/blogs", json=req)
     actual = response.json()

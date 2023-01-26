@@ -29,17 +29,12 @@ def test_get_one_blog():
         "pic_url": "string",
         "description": "string",
     }
-
-    # Arrange
     app.dependency_overrides[BlogRepo] = MockQueries
 
-    # Act
     response = client.get("/blogs/1", json=req)
     actual = response.json()
 
-    # Assert
     assert response.status_code == 200
     assert actual == expected_response
 
-    # Cleanup
     app.dependency_overrides = {}
