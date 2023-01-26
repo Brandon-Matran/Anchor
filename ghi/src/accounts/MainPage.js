@@ -1,10 +1,8 @@
 import background_image from "../images/background_image.png";
 import programmer from "../images/programmer.jpg";
-import { Navigate, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import "./MainPage.css";
 import { useEffect, useState } from "react";
-import LoginModal from "./LoginModal";
-import SignUpModal from "./SignupModal";
 import { useToken } from "./Authentication.js";
 
 function Column(props) {
@@ -45,11 +43,6 @@ function MainPage() {
   const [loginModal, setLoginModal] = useState(false);
   const [signupModal, setSignUpModal] = useState(false);
   const [blogs, setBlogList] = useState([], [], []);
-
-  const handleLogout = () => {
-    logout();
-    alert("You have logged out");
-  };
 
   const handleSignup = () => {
     navigate("/signup")
@@ -110,28 +103,20 @@ function MainPage() {
             <div className="blogContainer d-flex align-items-cente row">
               <div className="col-sm d-flex justify-content-end">
                 <button
-                  // onClick={() => {
-                  //   setSignUpModal(true);
-                  // }}
                   onClick={() => {handleSignup()}}
                   type="button"
                   className="openSignupModal"
                 >
                   Sign Up
                 </button>
-                {/* {signupModal && (
-                  <SignUpModal closeSignupModal={setSignUpModal} />
-                )} */}
               </div>
               <div className="col-sm d-flex justify-content-start">
                 <button
                   className="openLoginModal"
                   onClick={() => {handleLogin()}}
-                  // onClick={() => setLoginModal(true)}
                 >
                   Log In
                 </button>
-                {/* {loginModal && <LoginModal closeLoginModal={setLoginModal} />} */}
               </div>
             </div>
           </div>

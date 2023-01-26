@@ -49,7 +49,6 @@ const BlogsList = () => {
         }
     }})
   }, [token, Jwt, userName]);
-    console.log(Jwt, "GHJFGHFFGHJFHGHJHJFGHFGJJGH");
 
   return (
     <div>

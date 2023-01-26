@@ -1,4 +1,3 @@
-import { useState } from "react";
 import "./App.css";
 import LoginForm from "./accounts/LoginForm.js";
 import { BrowserRouter as BrowserRouter, Route, Routes } from "react-router-dom";
@@ -17,12 +16,10 @@ import UpdateListing from "./Listings/UpdateListingsForm";
 import CreateJobsForm from "./Listings/CreateListingsForm";
 import GetOneBlog from "./Blogs/GetOneBlog";
 import Nav from "./Nav";
-import NavFooter from "./NavFooter";
 import MyBlogs from "./Blogs/MyBlogs";
 
 
 function GetToken() {
-  // Get token from JWT cookie (if already logged in)
   useToken();
   return null;
 }
@@ -30,18 +27,12 @@ function GetToken() {
 function App() {
   const domain = /https:\/\/[^/]+/;
   const basename = process.env.PUBLIC_URL.replace(domain, "");
-  // const [token, setToken] = useState();
-
-  // if (!token) {
-  //   return <LoginForm setToken={setToken} />;
-  // }
 
   return (
     <BrowserRouter basename={basename}>
       <AuthProvider>
         <GetToken />
         <Nav />
-        {/* <NavFooter/> */}
         <Routes>
           <Route path="/" element={<MainPage />} />
           <Route path="/main" element={<MainPage2 />} />
