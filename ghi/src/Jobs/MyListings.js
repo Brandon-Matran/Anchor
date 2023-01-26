@@ -19,7 +19,6 @@ function MyJobs(props) {
     const response = await fetch(url);
     if (response.ok) {
       const data = await response.json();
-      console.log(data);
       setJob(data);
       window.location.reload(false)
     }
@@ -28,7 +27,7 @@ function MyJobs(props) {
   const DeleteJobListing = async (id) => {
 
     const url = `${process.env.REACT_APP_LISTING_SERVICE}/listings/${id}`;
-    const fetchConfig = { 
+    const fetchConfig = {
       method: "delete",
       headers: {
         "Authorization": `Bearer ${Jwt}`,
@@ -39,7 +38,6 @@ function MyJobs(props) {
     if (response.ok) {
       getJob();
       const data = await response.json()
-      console.log(data)
     }
   };
 
@@ -69,9 +67,9 @@ function MyJobs(props) {
                   <p className="card-text">
                     Posted date: {data.created}
                   </p>
-                  
+
                   <button type="button" className="btn btn-danger" onClick={() => DeleteJobListing(data.id)}>Delete Listing</button>
-              
+
                 </div>
               </div>
             // </Link>
@@ -97,7 +95,6 @@ function MyJobs(props) {
               const data = await response.json();
               const rev_sorted_data = data.reverse();
               const filteredData = rev_sorted_data?.filter(fD => fD.username == username)
-              console.log(filteredData)
               const blogs = [[], [], []];
 
               let i = 0;
@@ -114,7 +111,7 @@ function MyJobs(props) {
       fetchData();
   }, [token, Jwt, username])
 
-  
+
 
 
   return (
@@ -128,7 +125,7 @@ function MyJobs(props) {
             {jobs.map((job, index) => {
                 return (
                     <JobsColumn key={index} list={job} />
-                    
+
                 );
 
             })}

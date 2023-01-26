@@ -130,11 +130,13 @@
   /* margin: auto; */
   width: 60%;
   padding-top: 20px;
+  column-gap: 30px;
 }
 
 .aboveFooter {
   background-color: #38598a;
-  height: 100vh;
+
+
 }
 
 .LogOutButton {
@@ -191,31 +193,30 @@
 
 }
 
-/* .card-body {
-  justify-content: flex-start;
-  display: flex;
-  flex-direction: column;
-
-} */
-
-/* .card {
-  width: 500px;
-  height: 200px;
-  display: grid;
-  grid-template-rows: 1fr;
-  border: #3d5c97;
-  overflow: hidden;
-} */
 .card-img-top {
   height: 100%;
   width: 100%;
 }
 
-/* body {
-  overflow: hidden;
-} */
 
 .cardBackground {
   background-color:#9BACC4
   ;
+}
+
+
+.fill-height {
+  height: calc(30vh);
+  display: grid;
+  grid-gap: 1rem; /* this will create a gap of 1rem between each card */
+}
+
+
+.footerHeight {
+  height: 100px;
+}
+
+
+.blogText {
+  width: 100%;
 }

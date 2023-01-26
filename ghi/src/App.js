@@ -22,7 +22,6 @@ import MyBlogs from "./Blogs/MyBlogs";
 
 
 function GetToken() {
-  // Get token from JWT cookie (if already logged in)
   useToken();
   return null;
 }
@@ -30,11 +29,7 @@ function GetToken() {
 function App() {
   const domain = /https:\/\/[^/]+/;
   const basename = process.env.PUBLIC_URL.replace(domain, "");
-  // const [token, setToken] = useState();
 
-  // if (!token) {
-  //   return <LoginForm setToken={setToken} />;
-  // }
 
   return (
     <BrowserRouter basename={basename}>

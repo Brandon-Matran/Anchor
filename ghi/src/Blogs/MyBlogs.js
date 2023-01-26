@@ -69,7 +69,6 @@ function MyBlogs() {
         fetchData
       )
       .catch((err) => {
-          console.log(err)
       })
     }
 

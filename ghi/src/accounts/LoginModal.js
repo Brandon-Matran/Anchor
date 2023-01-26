@@ -62,12 +62,12 @@ function LoginModal({ closeLoginModal }) {
               Cancel
             </button>
           </form>
-          {/* {formSuccess === true && (
+          {formSuccess === true && (
             <p className="success-message">Login Successful!</p>
           )}
           {formSuccess === false && (
             <p className="error-message">Login Failed</p>
-          )} */}
+          )}
         </div>
       </div>
     </div>

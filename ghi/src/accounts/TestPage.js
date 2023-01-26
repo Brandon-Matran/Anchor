@@ -16,21 +16,17 @@ const TestPage = () => {
       });
       if (response.ok) {
         const data = await response.json();
-        console.log(data)
 
         if (data?.account.user_type === "individual") {
-          console.log(data?.account.user_type);
-          console.log(true)
+
           return true
         }
         else{
-          console.log(false)
           return false
         }
       }
     }
 
-    console.log(getAccount())
 
 
 

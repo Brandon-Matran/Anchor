@@ -20,11 +20,9 @@ const JobListings = () => {
     const response = await fetch(url);
     if (response.ok) {
       const data = await response.json();
-      console.log(data);
       setJob(data);
     }
-    //   if (data?.account.user_type === "individual"){}
-    // const navigate = useNavigate()
+
   };
 
   async function getAccount() {
@@ -34,61 +32,15 @@ const JobListings = () => {
     });
     if (response.ok) {
       const data = await response.json();
-      console.log(data)
       if (data?.account.user_type === "company") {
-        console.log(data?.account.user_type);
-        console.log(true)
         return true
       }
       else{
-        console.log(false)
         return false
       }
     }
   }
-  console.log("ACCOUNT", getAccount())
 
-
-  // const DeleteJobListing = async (id) => {
-
-  //   const url = `${process.env.REACT_APP_LISTING_SERVICE}/${id}`;
-  //   const fetchConfig = { 
-  //     method: "delete",
-  //     headers: {
-  //       "Authorization": `Bearer ${Jwt}`,
-  //       "Content-Type": "application/json"
-  //     }
-  //   };
-  //   const response = await fetch(url, fetchConfig);
-  //   if (response.ok) {
-  //     getJob();
-  //   }
-  // };
- 
-
-  // const applyClick = async (apply_url) => {
-    
-  //   navigate(`${apply_url}`);
-  // };
-
-
-
-  // const ApplyToJobListing = async (apply_url) => {
-  //   const url = `${apply.url}`;
-  //   // const fetchConfig = {
-  //   //   method: "put",
-  //   //   body: JSON.stringify({ applied: true }),
-  //   //   headers: {
-  //   //     "Content-Type": "application/json",
-  //   //   },
-  //   // };
-  //   // const response = await fetch(url, fetchConfig);
-  //   const response = await fetch(url, apply_url);
-  //   if (response.ok) {
-  //     // getJob(url);
-  //     window.location.href = url;
-  //   }
-  // };
 
   useEffect(() => {
     getJob();
@@ -100,7 +52,6 @@ const JobListings = () => {
         }
     }})
   }, [token, Jwt, userName]);
-    console.log(Jwt, "GHJFGHFFGHJFHGHJHJFGHFGJJGH")
 
   return (
     <div>
@@ -147,7 +98,7 @@ const JobListings = () => {
                   </button>
 
                     {/* <button
-                    
+
                       onClick={() =>  <Link to={{ pathname: `${job.apply_url}` }} target="_blank"> </Link>}
                       type="button"
                       className="btn btn-success"
@@ -157,7 +108,7 @@ const JobListings = () => {
                 </tr>
               );
               }
-  
+
 
             // return (
             //   <tr key={job.id}>
@@ -187,7 +138,7 @@ const JobListings = () => {
             //       </button>
             //     </td> */}
 
-            
+
 
 
             //     {/* <td>

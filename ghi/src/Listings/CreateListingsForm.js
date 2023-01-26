@@ -66,7 +66,7 @@ function CreateJobsForm() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    navigate("/listings/my");
+    navigate("/listings/mylistings");
     const newJob = {
       username: username,
       title: title,
