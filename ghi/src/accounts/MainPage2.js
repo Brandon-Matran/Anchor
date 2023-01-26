@@ -25,13 +25,13 @@ function Column(props) {
                 />
               </div>
               <div className="col-md-8 cardBackground">
-              <div className="card-body">
-                <p className="card-text">Date: {date}</p>
+                <div className="card-body">
+                  <p className="card-text">Date: {date}</p>
 
-                <p className="card-text">Description: {data.description}</p>
+                  <p className="card-text">Description: {data.description}</p>
+                </div>
               </div>
             </div>
-          </div>
           </div>
         );
       })}
@@ -46,17 +46,8 @@ function MainPage() {
   const [signupModal, setSignUpModal] = useState(false);
   const [blogs, setBlogList] = useState([], [], []);
 
-  const handleLogout = () => {
-    logout();
-    alert("You have logged out");
-  };
-
-  const handleSignup = () => {
-    navigate("/signup")
-  }
-
   useEffect(() => {
-    const url = "http://localhost:8080/blogs";
+    const url = `${process.env.REACT_APP_BLOG_SERVICE}/blogs`;
     async function fetchData() {
       const response = await fetch(url);
       if (response.ok) {
@@ -120,7 +111,6 @@ function MainPage() {
             </div>
           </div>
         </div>
-
       </div>
 
       <div className="container" id="footer-container">

@@ -60,7 +60,7 @@ function MainPage() {
   }
 
   useEffect(() => {
-    const url = "http://localhost:8080/blogs";
+    const url = `${process.env.REACT_APP_BLOG_SERVICE}/blogs`;
     async function fetchData() {
       const response = await fetch(url);
       if (response.ok) {
@@ -99,13 +99,13 @@ function MainPage() {
       </div>
       <div className="middle">
         <div>
-          <div className="container-fluid">
+          {/* <div className="container-fluid">
             <img
               src={programmer}
               className="programmer img-fluid"
               alt="programmer"
             />
-          </div>
+          </div> */}
           <div className="container">
             <div className="blogContainer d-flex align-items-center row">
               <div className="col-sm d-flex justify-content-end">
