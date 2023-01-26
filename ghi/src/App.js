@@ -4,7 +4,7 @@ import LoginForm from "./accounts/LoginForm.js";
 import { BrowserRouter as BrowserRouter, Route, Routes } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import TestPage from "./accounts/TestPage.js";
-import { AuthProvider, useAuthContext, useToken } from "./accounts/Authentication.js";
+import { AuthProvider, useToken } from "./accounts/Authentication.js";
 import Signup from "./accounts/Signup";
 import MainPage from "./accounts/MainPage";
 import MainPage2 from "./accounts/MainPage2";
@@ -22,15 +22,19 @@ import MyBlogs from "./Blogs/MyBlogs";
 
 
 function GetToken() {
+  // Get token from JWT cookie (if already logged in)
   useToken();
   return null;
 }
 
 function App() {
-  const { token } = useAuthContext();
   const domain = /https:\/\/[^/]+/;
   const basename = process.env.PUBLIC_URL.replace(domain, "");
+  // const [token, setToken] = useState();
 
+  // if (!token) {
+  //   return <LoginForm setToken={setToken} />;
+  // }
 
   return (
     <BrowserRouter basename={basename}>
@@ -44,27 +48,19 @@ function App() {
           <Route path="/login" element={<LoginForm />} />
           <Route path="/test" element={<TestPage />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/blogs" element={
-            <Routes>
-              <Route path="/" element={<BlogsList />} />
-              <Route path=":id" element={<GetOneBlog />} />
-              <Route path="update/:id" element={<UpdateBlog />} />
-              <Route path="create" element={<CreateBlogsForm/>} />
-              <Route path="myblogs" element={<MyBlogs/>}/>
-            </Routes>
-          }/>
-          <Route path="/listings" element={
-            <Routes>
-              <Route path="/" element={<JobListings />} />
-              <Route path="mylistings" element={<MyListings />} />
-              <Route path="create" element={<CreateJobsForm/>} />
-              <Route path="update/:id" element={<UpdateListing/>} />
-            </Routes>
-          }/>
+          <Route path="/blogs/:id" element={<GetOneBlog />} />
+          <Route path="/blogs" element={<BlogsList />} />
+          <Route path="/listings" element={<JobListings />} />
+          <Route path="/listings/mylistings" element={<MyListings />} />
+          <Route path="/blogs/update/:id" element={<UpdateBlog />} />
+          <Route path="/blogs/create" element={<CreateBlogsForm/>} />
+          <Route path="/blogs/myblogs" element={<MyBlogs/>}/>
+          <Route path="/listings/create" element={<CreateJobsForm/>} />
+          <Route path="/listings/update/:id" element={<UpdateListing/>} />
         </Routes>
       </AuthProvider>
     </BrowserRouter>
   );
-        }
+}
 
 export default App;

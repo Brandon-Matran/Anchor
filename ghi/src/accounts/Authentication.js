@@ -21,6 +21,7 @@ export async function getTokenInternal() {
   return false;
 }
 
+
 function handleErrorMessage(error) {
   if ("error" in error) {
     error = error.error;
