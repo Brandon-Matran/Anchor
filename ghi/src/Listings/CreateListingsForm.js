@@ -52,16 +52,13 @@ function CreateJobsForm() {
     setUserName(info.account.username);
 }
 
-  useEffect(() => {
-      fetch(token)
-      .then(response => {if ((typeof response.token) !== "object") {
-          setJwt(token);
-          if (Jwt !== null) {
-              parseJwt(Jwt);
-          }
-      }})
-
-  }, [token, Jwt])
+useEffect(() => {
+  {
+    if (token) {
+      parseJwt(token);
+    }
+  }
+}, [token]);
 
 
   const handleSubmit = (event) => {

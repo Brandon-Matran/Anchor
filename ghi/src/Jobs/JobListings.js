@@ -5,7 +5,7 @@ import { useAuthContext } from "../accounts/Authentication"
 const JobListings = () => {
   const [jobs, setJob] = useState([]);
   const navigate = useNavigate();
-  const token = useAuthContext();
+  const { token } = useAuthContext();
   const [Jwt, setJwt] = useState(null);
   const [userName, setUserName] = useState('')
 
@@ -25,7 +25,7 @@ const JobListings = () => {
   };
 
   async function getAccount() {
-    const url = `http://localhost:8100/token`;
+    const url = `${process.env.REACT_APP_ACCOUNT_SERVICE}/token`;
     const response = await fetch(url, {
       credentials: "include",
     });
@@ -41,15 +41,13 @@ const JobListings = () => {
   }
 
   useEffect(() => {
-    getJob();
-    fetch(token)
-    .then(response => {if ((typeof response.token) !== "object") {
-        setJwt(token.token);
-        if (Jwt !== null) {
-            parseJwt(Jwt);
-        }
-    }})
-  }, [token, Jwt, userName]);
+    getJob()
+    {
+      if (token) {
+        parseJwt(token);
+      }
+    }
+  }, [token]);
 
   return (
     <div>

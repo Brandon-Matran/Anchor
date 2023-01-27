@@ -9,7 +9,7 @@ function MyBlogs() {
     const [Jwt, setJwt] = useState(null);
     const navigate = useNavigate()
 
-    const token = useAuthContext();
+    const { token } = useAuthContext();
 
     function parseJwt(data) {
         const base64Url = data.split(".")[1];
@@ -39,15 +39,15 @@ function MyBlogs() {
     }
 
     useEffect(() => {
-        fetch(token)
-        .then(response => {if ((typeof response.token) !== "object") {
-            setJwt(token.token);
-            if (Jwt !== null) {
-                parseJwt(Jwt);
-            }
-        }})
-        fetchData();
-    }, [token, Jwt, username])
+
+      {
+        if (token) {
+          parseJwt(token);
+
+        }
+      }
+      fetchData()
+    }, [token, username]);
 
     function deleteBlog(id) {
       const blogURL = `${process.env.REACT_APP_BLOG_SERVICE}/blogs/${id}`
@@ -55,7 +55,7 @@ function MyBlogs() {
         method: 'delete',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${Jwt}`
+            'Authorization': `Bearer ${token}`
         },
       }
       fetch(blogURL, fetchConfig)
@@ -65,7 +65,7 @@ function MyBlogs() {
           }
       })
       .then(
-        fetchData
+        fetchData()
       )
       .catch((err) => {
       })

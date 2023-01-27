@@ -14,7 +14,7 @@ function CreateBlogsForm(props) {
     const [submitted, setSubmitted] = useState(false)
     const navigate = useNavigate()
 
-    const token = useAuthContext()
+    const { token } = useAuthContext()
 
     function parseJwt(data) {
         const base64Url = data.split(".")[1];
@@ -23,16 +23,14 @@ function CreateBlogsForm(props) {
         setUserName(info.account.username);
     }
 
-    useEffect(() => {
-        fetch(token)
-        .then(response => {if ((typeof response.token) !== "object") {
-            setJwt(token.token);
-            if (Jwt !== null) {
-                parseJwt(Jwt);
-            }
-        }})
 
-    }, [token, Jwt])
+    useEffect(() => {
+        {
+          if (token) {
+            parseJwt(token);
+          }
+        }
+      }, [token]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -50,7 +48,7 @@ function CreateBlogsForm(props) {
             body: JSON.stringify(newBlog),
             headers: {
                 'Content-Type': 'application/json',
-                "Authorization": `Bearer ${Jwt}`
+                "Authorization": `Bearer ${token}`
             },
         }
 

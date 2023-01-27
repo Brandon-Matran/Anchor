@@ -9,7 +9,7 @@ function MyJobs(props) {
   const [username, setUserName] = useState('')
   const [Jwt, setJwt] = useState(null);
 
-  const token = useAuthContext();
+  const { token } = useAuthContext();
 
 
 
@@ -58,12 +58,10 @@ function MyJobs(props) {
                   <h6 className="card-subtitle mb-2 text-muted">
                     Company: {data.company_name}
                   </h6>
-                  <h7 className="card-subtitle mb-2 text-muted">
+                  <p className="card-subtitle mb-2 text-muted">
                     Deadline: {data.deadline}
-                  </h7>
-                  <p className="card-text">
-                    Posted date: {data.created}
                   </p>
+
 
                   <button type="button" className="btn btn-danger" onClick={() => DeleteJobListing(data.id)}>Delete Listing</button>
 
@@ -75,16 +73,16 @@ function MyJobs(props) {
     );
 }
 
+useEffect(() => {
+  {
+    if (token) {
+      parseJwt(token);
+    }
+  }
+}, [token]);
 
   useEffect(() => {
         const url = `${process.env.REACT_APP_LISTING_SERVICE}/listings`;
-        fetch(token)
-        .then(response => {if ((typeof response.token) !== "object") {
-            setJwt(token.token);
-            if (Jwt !== null) {
-                parseJwt(Jwt);
-            }
-        }})
         async function fetchData() {
           const response = await fetch(url);
           if (response.ok) {
@@ -105,7 +103,7 @@ function MyJobs(props) {
           }
       }
       fetchData();
-  }, [token, Jwt, username])
+  }, [username])
 
 
 
