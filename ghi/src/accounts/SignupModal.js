@@ -11,9 +11,9 @@ function SignUpModal({ closeSignupModal }) {
   const [password, setPassword] = useState("");
   const [user_type, setType] = useState("");
 
-  if (token) {
-    navigate('/main')
-  }
+  // if (token) {
+  //   navigate('/main')
+  // }
   return (
     <div className="modalBackground">
       <div className="container-fluid signUpModal">
