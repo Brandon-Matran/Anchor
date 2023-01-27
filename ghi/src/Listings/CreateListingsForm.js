@@ -2,7 +2,6 @@ import {useEffect, useState} from "react"
 import React from "react";
 import { useAuthContext } from "../accounts/Authentication";
 import { useNavigate } from "react-router-dom";
-import "../accounts/MainPage.css";
 
 function CreateJobsForm() {
   const navigate = useNavigate();
@@ -15,7 +14,6 @@ function CreateJobsForm() {
   const [apply_url, setApplyUrl] = useState("");
   const [deadline, setDeadline] = useState("");
   const created = today.getFullYear() + '-' + parseInt(today.getMonth() + 1) + '-' + today.getDate()
-  const [Jwt, setJwt] = useState(null)
   const [submitted, setSubmitted] = useState(false);
 
 
@@ -63,7 +61,6 @@ useEffect(() => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    navigate("/listings/mylistings");
     const newJob = {
       username: username,
       title: title,
@@ -95,6 +92,7 @@ useEffect(() => {
         setDeadline("");
         setSubmitted(true);
       })
+      .then(navigate("/listings/mylistings"))
       .catch((e) => console.error("ERROR: ", e));
   };
 
@@ -105,87 +103,102 @@ useEffect(() => {
 
 
   return (
-    <div className="targetall row">
-      <div className="offset-3 col-6">
-        <div className="shadow p-4 mt-4">
-          <h1>Create Job Listing</h1>
-          <form onSubmit={handleSubmit} id="create-job-form">
-            <div className="form-floating mb-3">
-              <input
-                onChange={handleTitleChange}
-                placeholder="Title"
-                required
-                type="text"
-                name="title"
-                id="name"
-                className="form-control"
-                value={title}
-              />
-              <label htmlFor="title">Title</label>
+    <section
+    className="vh-100"
+  >
+    <div className="container">
+      <div className="row d-flex justify-content-center align-items-center h-100">
+        <div className="col-lg-12 col-xl-11">
+          <div className="card text-black shadow p-4 mt-4">
+            <div className="card-body p-md-5">
+              <div className="row justify-content-center">
+                <p className="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">
+                  Create Job Listing
+                </p>
+                <form onSubmit={handleSubmit} id="create-listings-form">
+                  <div className="form-floating mb-3">
+                    <input
+                      value={title}
+                      required
+                      onChange={handleTitleChange}
+                      type="text"
+                      id="title"
+                      placeholder="Title"
+                      className="form-control"
+                    />
+                    <label className="form-label" htmlFor="title">Title</label>
+                  </div>
+
+                  <div className="form-floating mb-3">
+                    <input
+                      value={company_name}
+                      required
+                      onChange={handleCompanyNameChange}
+                      type="text"
+                      id="company_name"
+                      placeholder="Company Name"
+                      className="form-control"
+                    ></input>
+                    <label className="form-label" htmlFor="company_name">Company Name</label>
+                  </div>
+
+                  <div className="form-floating mb-3">
+                    <input
+                      value={job_position}
+                      required
+                      onChange={handleJobPositionChange}
+                      type="text"
+                      id="job_position"
+                      placeholder="Job Position"
+                      className="form-control"
+                    ></input>
+                    <label className="form-label" htmlFor="jobPosition">Job Position</label>
+                  </div>
+
+                  <div className="form-floating mb-3">
+                      <input
+                        value={apply_url}
+                        required
+                        onChange={handleApplyUrlChange}
+                        type="url"
+                        id="application_url"
+                        placeholder="Enter Application URL"
+                        className="form-control"
+                      ></input>
+                      <label className="form-label" htmlFor="application_url">Application URL</label>
+                    </div>
+
+                    <div className="form-floating mb-3">
+                      <input
+                        value={deadline}
+                        required
+                        onChange={handleDeadlineChange}
+                        type="date"
+                        id="deadline"
+                        placeholder="Deadline"
+                        className="form-control"
+                      ></input>
+                      <label className="form-label" htmlFor="deadline">Deadline</label>
+                    </div>
+
+                  <button
+                    type="submit"
+                    className="btn btn-outline-primary center"
+                  >
+                    Post Job
+                  </button>
+                </form>
+              </div>
+              <br />
+              <div className={messageClasses} id="success-message">
+                Success! New Job Listed!
+              </div>
             </div>
-            <div className="form-floating mb-3">
-              <input
-                onChange={handleCompanyNameChange}
-                placeholder="Company Name"
-                required
-                type="text"
-                name="company_name"
-                id="company_name"
-                className="form-control"
-                value={company_name}
-              />
-              <label htmlFor="company_name">Company Name</label>
-            </div>
-            <div className="form-floating mb-3">
-              <input
-                onChange={handleJobPositionChange}
-                placeholder="Job Position"
-                required
-                type="text"
-                name="job_position"
-                id="job_position"
-                className="form-control"
-                value={job_position}
-              />
-              <label htmlFor="job_position">Job Position</label>
-            </div>
-            <div className="form-floating mb-3">
-              <input
-                onChange={handleApplyUrlChange}
-                placeholder="Apply Url"
-                required
-                type="text"
-                name="apply_url"
-                id="apply_url"
-                className="form-control"
-                value={apply_url}
-              />
-              <label htmlFor="apply_url">Apply Url</label>
-            </div>
-            <div className="form-floating mb-3">
-              <input
-                onChange={handleDeadlineChange}
-                placeholder="Deadline"
-                required
-                type="date"
-                name="deadline"
-                id="deadline"
-                className="form-control"
-                value={deadline}
-              />
-              <label htmlFor="deadline">Deadline</label>
-            </div>
-            <button type="submit" className="btn btn-primary">
-              Post Job
-            </button>
-          </form>
-        </div>
-        <br />
-        <div className={messageClasses} id="success-message">
-          Success! New Job Added!
+          </div>
         </div>
       </div>
     </div>
+  </section>
   );
 }
 

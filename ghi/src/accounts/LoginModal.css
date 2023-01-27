@@ -36,7 +36,7 @@
   }
 }
 
-.cancel {
+/* .cancel {
   align-self: flex-end;
   border-radius: 8px;
   border-style: none;
@@ -104,4 +104,4 @@
 .submit:hover,
 .submit:focus {
   background-color: #82b5f0;
-}
+} */

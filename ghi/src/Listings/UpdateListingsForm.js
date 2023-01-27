@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useAuthContext } from "../accounts/Authentication.js";
 import { useParams } from "react-router";
+import { useNavigate } from "react-router-dom";
 
 function UpdateListing() {
   const { id } = useParams()
@@ -12,6 +13,7 @@ function UpdateListing() {
   const [deadline, setDead] = useState('');
   const [created, setCreated] = useState('');
   const [submitted, setSubmitted] = useState(false)
+  const navigate = useNavigate()
 
   const { token } = useAuthContext();
 
@@ -58,7 +60,7 @@ function UpdateListing() {
           "Authorization": `Bearer ${token}`
       },
   }
-  
+
   fetch(listingsURL, fetchConfig)
       .then(response => response.json())
       .then(() => {
@@ -69,6 +71,7 @@ function UpdateListing() {
           setDead('')
           setSubmitted(true)
       })
+      .then(navigate("/listings/mylistings"))
       .catch(e => console.error('ERROR: ', e))
 
   }
@@ -79,49 +82,93 @@ function UpdateListing() {
   }
 
   return (
-    <div className="row">
-      <div className="offset-3 col-6">
-        <div className="shadow p-4 mt-4">
-          <h1>Update Job Listings</h1>
-          <form onSubmit={handleSubmit} id="update-jobListings-form">
-            <div className="form-floating mb-3">
-              <input onChange={e => setTitle(e.target.value)} placeholder="Title"
-              type="text" name ="title" id="title"
-              className="form-control" value={title}/>
-              <label htmlFor="title">Title</label>
+    <section
+      className="vh-100"
+    >
+      <div className="container h-100">
+        <div className="row d-flex justify-content-center align-items-center h-100">
+          <div className="col-lg-12 col-xl-11">
+            <div className="card text-black shadow p-4 mt-4">
+              <div className="card-body p-md-5">
+                <div className="row justify-content-center">
+                  <p className="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">
+                    Update Job Listings
+                  </p>
+
+                  <form onSubmit={handleSubmit} id="update-listings-form">
+                    <div className="form-floating mb-3">
+                      <input
+                        value={title}
+                        onChange={(e) => setTitle(e.target.value)}
+                        type="text"
+                        id="listingsTitle"
+                        className="form-control"
+                      />
+                      <label className="form-label" htmlFor="title">Title</label>
+                    </div>
+
+                    <div className="form-floating mb-3">
+                      <input
+                        value={company_name}
+                        onChange={(e) => setName(e.target.value)}
+                        type="text"
+                        id="companyName"
+                        className="form-control"
+                      ></input>
+                      <label className="form-label" htmlFor="companyName">Company Name</label>
+                    </div>
+
+                    <div className="form-floating mb-3">
+                      <input
+                        value={job_position}
+                        onChange={(e) => setPosition(e.target.value)}
+                        type="text"
+                        id="companyName"
+                        className="form-control"
+                      ></input>
+                      <label className="form-label" htmlFor="jobPosition">Job Position</label>
+                    </div>
+
+                    <div className="form-floating mb-3">
+                      <input
+                        value={apply_url}
+                        onChange={(e) => setUrl(e.target.value)}
+                        type="url"
+                        id="applyURL"
+                        className="form-control"
+                      ></input>
+                      <label className="form-label" htmlFor="applyURL">Application URL</label>
+                    </div>
+
+                    <div className="form-floating mb-3">
+                      <input
+                        value={deadline}
+                        onChange={(e) => setDead(e.target.value)}
+                        type="date"
+                        id="deadline"
+                        className="form-control"
+                      ></input>
+                      <label className="form-label" htmlFor="deadline">Deadline</label>
+                    </div>
+
+                    <button
+                      type="submit"
+                      className="btn btn-outline-primary center"
+                    >
+                      Update Job Listing
+                    </button>
+                  </form>
+                </div>
+                <br />
+                <div className={messageClasses} id="success-message">
+                  Success! Job Listing Updated!
+                </div>
+              </div>
             </div>
-            <div className="form-floating mb-3">
-              <input onChange={e => setName(e.target.value)} placeholder="Company Name"
-              type="text" name ="companyName" id="companyName"
-              className="form-control" value={company_name}/>
-              <label htmlFor="companyName">Company Name</label>
-            </div>
-            <div className="form-floating mb-3">
-              <input onChange={e => setPosition(e.target.value)} placeholder="Job Position"
-              type="text" name ="jobPosition" id="jobPosition"
-              className="form-control" value={job_position}/>
-              <label htmlFor="jobPosition">Job Position</label>
-            </div>
-            <div className="form-floating mb-3">
-              <input onChange = {e => setUrl(e.target.value)} placeholder="Enter an Application URL"
-              type="url" name="applyURL"  id="applyURL"
-              className="form-control" value={apply_url}/>
-              <label htmlFor="applyURL">Application Url</label>
-            </div>
-            <div className="form-floating mb-3">
-              <input onChange = {e => setDead(e.target.value)} placeholder="Deadline"
-              type="date" name="deadline"  id="deadline"
-              className="form-control" value={deadline}/>
-              <label htmlFor="deadline">Deadline</label>
-            </div>
-            <button type="submit" className="btn btn-primary">Update</button>
-          </form>
-        </div><br/>
-        <div className={messageClasses} id="success-message">
-          Success! Job Listing Updated!
+          </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 }
 

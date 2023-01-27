@@ -1,20 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../accounts/Authentication"
-import "../accounts/MainPage.css";
 
 function JobListings() {
   const [jobs, setJob] = useState([]);
-  const [username, setUserName] = useState('')
   const navigate = useNavigate();
   const { token } = useAuthContext();
 
-  function parseJwt(data) {
-    const base64Url = data.split(".")[1];
-    const base64 = base64Url.replace("-", "+").replace("_", "/");
-    const info = JSON.parse(window.atob(base64));
-    setUserName(info.account.username);
-}
   const getJob = async () => {
     const url = `${process.env.REACT_APP_LISTING_SERVICE}/listings`;
     const response = await fetch(url);
@@ -42,24 +34,24 @@ function JobListings() {
 
   useEffect(() => {
     getJob()
-    {
-      if (token) {
-        parseJwt(token);
-      }
-    }
-  }, [token]);
+  }, []);
 
   function handleApply(job) {
     if(!token) {
-      navigate("/signup")
+      navigate("/login")
     }
     else {
       { window.location.href = job.apply_url; }
     }
   }
 
+  console.log(jobs)
+
   return (
-    <div className="targetall">
+    <div style={{height: "100vh"}}>
+      <div className="px-4 py-5 my-5 mt-0 text-center">
+        <h1 className="display-5 fw-bold">Job Listings</h1>
+      </div>
       <table className="table table-striped text-center login">
         <thead>
           <tr>

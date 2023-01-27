@@ -82,13 +82,13 @@ function SignUpModal({ closeSignupModal }) {
 
                           }
                           type="button"
-                          className="submitSignup"
+                          className="btn btn-outline-primary"
                         >
                           Submit
                         </button>
                         <button
                           type="button"
-                          className="cancelSignup"
+                          className="btn btn-outline-primary mx-4"
                           onClick={() => closeSignupModal(false)}
                         >
                           Cancel
