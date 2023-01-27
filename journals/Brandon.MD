@@ -1,3 +1,10 @@
+# 1/26/23:
+Today I worked on:
+- I got all the 404 errors to disappear. It was a very good learning experience about useEffect within our JS files. Essentially what happenened was we were trying to fetch a token without passing in a proper url. That caused React to implement a default link and add that token string to the end of the url path, which resulted in the 404 errors. With the help of the SEIR's we were able to rewrite the useEffects to work correctly and not pass in that extra data to the url.
+
+Tomorrow:
+- I will help with the README but otherwise our MVP is ready!
+
 # 1/25/23:
 Today I worked on:
 - Going to run through our app on localhost to make sure all requirements for the project are met so that the entire group will get a passing grade. Currently have some small tweaks we need to make on the front end. Afterwards, we plan to make a push to main and at that point the MVP should be complete.
