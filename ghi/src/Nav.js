@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Navigate, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import "./Nav.css"
 import { useAuthContext, useToken } from "./accounts/Authentication";
 import anchor from './images/anchor.jpg'
@@ -21,14 +21,18 @@ function Nav() {
   }
 
   const handleLogo = () => {
+    if (token) {
+    navigate('/main')
+  } else {
     navigate('/')
   }
+}
 
   return (
     <div>
       <nav className="navbar navbar-expand-lg">
         <div className="container-fluid">
-  <img src={anchor} className='anchor' onClick={handleLogo}></img>
+          <img src={anchor} className='anchor' onClick={handleLogo}></img>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
               <div className="nav-item">
                 <NavLink className="nav-link link active" aria-current="page" to="/main">
@@ -97,7 +101,7 @@ function Nav() {
                     {token && <NavLink
                       className="dropdown-item link"
                       aria-current="page"
-                      to="/listings/my"
+                      to="/listings/mylistings"
                     >
                       My listings
 

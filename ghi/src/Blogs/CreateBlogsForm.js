@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 function CreateBlogsForm(props) {
 
     const [username, setUserName] = useState('')
-    // const [user_type, setUserType] = useState('')
     let today = new Date()
     let post_date = today.getFullYear() + '-' + parseInt(today.getMonth() + 1) + '-' + today.getDate()
     const [title, setTitle] = useState('')
@@ -15,26 +14,23 @@ function CreateBlogsForm(props) {
     const [submitted, setSubmitted] = useState(false)
     const navigate = useNavigate()
 
-    const token = useAuthContext()
+    const { token } = useAuthContext()
 
     function parseJwt(data) {
         const base64Url = data.split(".")[1];
         const base64 = base64Url.replace("-", "+").replace("_", "/");
         const info = JSON.parse(window.atob(base64));
         setUserName(info.account.username);
-        // setUserType(info.account.user_type);
     }
 
-    useEffect(() => {
-        fetch(token)
-        .then(response => {if ((typeof response.token) !== "object") {
-            setJwt(token.token);
-            if (Jwt !== null) {
-                parseJwt(Jwt);
-            }
-        }})
 
-    }, [token, Jwt])
+    useEffect(() => {
+        {
+          if (token) {
+            parseJwt(token);
+          }
+        }
+      }, [token]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -52,7 +48,7 @@ function CreateBlogsForm(props) {
             body: JSON.stringify(newBlog),
             headers: {
                 'Content-Type': 'application/json',
-                "Authorization": `Bearer ${Jwt}`
+                "Authorization": `Bearer ${token}`
             },
         }
 

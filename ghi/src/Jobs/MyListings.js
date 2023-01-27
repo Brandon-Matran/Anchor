@@ -1,7 +1,6 @@
 import { useEffect , useState} from "react";
 import { useAuthContext } from "../accounts/Authentication"
 import React from 'react';
-// import { Link } from 'react-router-dom';
 
 
 function MyJobs(props) {
@@ -10,7 +9,7 @@ function MyJobs(props) {
   const [username, setUserName] = useState('')
   const [Jwt, setJwt] = useState(null);
 
-  const token = useAuthContext();
+  const { token } = useAuthContext();
 
 
 
@@ -19,7 +18,6 @@ function MyJobs(props) {
     const response = await fetch(url);
     if (response.ok) {
       const data = await response.json();
-      console.log(data);
       setJob(data);
       window.location.reload(false)
     }
@@ -28,7 +26,7 @@ function MyJobs(props) {
   const DeleteJobListing = async (id) => {
 
     const url = `${process.env.REACT_APP_LISTING_SERVICE}/listings/${id}`;
-    const fetchConfig = { 
+    const fetchConfig = {
       method: "delete",
       headers: {
         "Authorization": `Bearer ${Jwt}`,
@@ -38,8 +36,6 @@ function MyJobs(props) {
     const response = await fetch(url, fetchConfig);
     if (response.ok) {
       getJob();
-      const data = await response.json()
-      console.log(data)
     }
   };
 
@@ -55,7 +51,6 @@ function MyJobs(props) {
       <div className="col">
         {props.list.map((data, index) => {
           return (
-            // <Link to={`/listings/${data.id}`} key={index} className="text-decoration-none text-reset" >
               <div key={index} className="card mb-3 shadow">
                 <div className="card-body">
                   <h5 className="card-title">
@@ -63,41 +58,37 @@ function MyJobs(props) {
                   <h6 className="card-subtitle mb-2 text-muted">
                     Company: {data.company_name}
                   </h6>
-                  <h7 className="card-subtitle mb-2 text-muted">
+                  <p className="card-subtitle mb-2 text-muted">
                     Deadline: {data.deadline}
-                  </h7>
-                  <p className="card-text">
-                    Posted date: {data.created}
                   </p>
-                  
+
+
                   <button type="button" className="btn btn-danger" onClick={() => DeleteJobListing(data.id)}>Delete Listing</button>
-              
+
                 </div>
               </div>
-            // </Link>
           );
         })}
       </div>
     );
 }
 
+useEffect(() => {
+  {
+    if (token) {
+      parseJwt(token);
+    }
+  }
+}, [token]);
 
   useEffect(() => {
         const url = `${process.env.REACT_APP_LISTING_SERVICE}/listings`;
-        fetch(token)
-        .then(response => {if ((typeof response.token) !== "object") {
-            setJwt(token.token);
-            if (Jwt !== null) {
-                parseJwt(Jwt);
-            }
-        }})
         async function fetchData() {
           const response = await fetch(url);
           if (response.ok) {
               const data = await response.json();
               const rev_sorted_data = data.reverse();
               const filteredData = rev_sorted_data?.filter(fD => fD.username == username)
-              console.log(filteredData)
               const blogs = [[], [], []];
 
               let i = 0;
@@ -112,9 +103,9 @@ function MyJobs(props) {
           }
       }
       fetchData();
-  }, [token, Jwt, username])
+  }, [username])
 
-  
+
 
 
   return (
@@ -128,7 +119,7 @@ function MyJobs(props) {
             {jobs.map((job, index) => {
                 return (
                     <JobsColumn key={index} list={job} />
-                    
+
                 );
 
             })}

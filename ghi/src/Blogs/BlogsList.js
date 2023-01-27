@@ -1,19 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { useAuthContext } from "../accounts/Authentication"
+import { useNavigate } from 'react-router-dom';
 
 
 const BlogsList = () => {
   const [blogs, setBlog] = useState([]);
-  const token = useAuthContext();
+  const { token } = useAuthContext();
   const [Jwt, setJwt] = useState(null);
   const [userName, setUserName] = useState('')
+  const navigate = useNavigate()
 
   function parseJwt(data) {
     const base64Url = data.split(".")[1];
     const base64 = base64Url.replace("-", "+").replace("_", "/");
     const info = JSON.parse(window.atob(base64));
     setUserName(info.account.username);
-}
+  }
 
   const getBlog = async () => {
     const url = `${process.env.REACT_APP_BLOG_SERVICE}/blogs`;
@@ -24,32 +26,14 @@ const BlogsList = () => {
     }
   };
 
-  const deleteBlog = async (id) => {
-    const url = `${process.env.REACT_APP_BLOG_SERVICE}/blogs/${id}`;
-    const fetchConfig = { 
-      method: "delete",
-      headers: {
-        "Authorization": `Bearer ${Jwt}`,
-        "Content-Type": "application/json"
-      }
-    };
-    const response = await fetch(url, fetchConfig);
-    if (response.ok) {
-      getBlog();
-    }
-  };
-
   useEffect(() => {
     getBlog();
-    fetch(token)
-    .then(response => {if ((typeof response.token) !== "object") {
-        setJwt(token.token);
-        if (Jwt !== null) {
-            parseJwt(Jwt);
-        }
-    }})
-  }, [token, Jwt, userName]);
-    console.log(Jwt, "GHJFGHFFGHJFHGHJHJFGHFGJJGH");
+    {
+      if (token) {
+        parseJwt(token);
+      }
+    }
+  }, [token]);
 
   return (
     <div>
@@ -57,10 +41,10 @@ const BlogsList = () => {
         <thead>
           <tr>
             <th scope="col">Username</th>
-            <th scope="col">Post Date</th>
             <th scope="col">Title</th>
+            <th scope="col">Picture</th>
+            <th scope="col">Post Date</th>
             <th scope="col"></th>
-            <th scope="col">Description</th>
           </tr>
         </thead>
         <tbody>
@@ -68,21 +52,16 @@ const BlogsList = () => {
             return (
               <tr key={blog.id}>
                 <td>{blog.username}</td>
-                <td>{blog.post_date}</td>
                 <td>{blog.title}</td>
                 <td>
-                <img src={blog.pic_url} className="card-img-top figure-img img-fluid img-thumbnail" />
+                <img src={blog.pic_url} className="img-thumbnail"/>
                 </td>
-                <td>{blog.description}</td>
+                <td>{blog.post_date}</td>
                 <td>
-                  <button
-                    type="button"
-                    className="btn btn-danger"
-                    onClick={() => deleteBlog(blog.id)}
-                    >Delete Blog
-                  </button>
+                <button className="btn btn-success" onClick={() => navigate(`/blogs/${blog.id}`)}>Check it out</button>
                 </td>
               </tr>
+
             );
           })}
         </tbody>

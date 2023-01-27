@@ -1,10 +1,11 @@
 import background_image from "../images/anchor_main_background.png";
-import { Navigate, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import "./MainPage.css";
 import { useEffect, useState } from "react";
-import LoginModal from "./LoginModal";
-import SignUpModal from "./SignupModal";
 import { useToken } from "./Authentication.js";
+import { Link } from "react-router-dom";
+import SignUpModal from "./SignupModal";
+import LoginModal from "./LoginModal";
 
 function Column(props) {
   return (
@@ -14,6 +15,26 @@ function Column(props) {
         const dateObj = new Date(dateString);
         const date = dateObj.toLocaleDateString();
         return (
+          <Link to={`/blogs/${data.id}`} key={index} className="text-decoration-none text-reset">
+            <div key={index} className="card mb-5">
+              <div className="row g-0 blogCard">
+                <div className="col-md-4">
+                  <img
+                    src={data.pic_url}
+                    className="card-img-top pic"
+                    alt="..."
+                  />
+                </div>
+                <div className="col-md-8 cardBackground">
+                <div className="card-body">
+                  <p className="card-text">{data.title}</p>
+                </div>
+                <div className="card-body">
+                  <p className="card-text">By: {data.username}</p>
+                </div>
+                <div className="card-body">
+                  <p className="card-text">{date}</p>
+                </div>
           <div key={index} className="card mb-5">
             <div className="row g-0 blogCard">
               <div className="col-md-4">
@@ -29,8 +50,8 @@ function Column(props) {
                 <p className="text-truncate">{data.description}</p>
               </div>
             </div>
-          </div>
-          </div>
+            </div>
+          </Link>
         );
       })}
     </div>
@@ -44,11 +65,6 @@ function MainPage() {
   const [signupModal, setSignUpModal] = useState(false);
   const [blogs, setBlogList] = useState([], [], []);
 
-  const handleLogout = () => {
-    logout();
-    alert("You have logged out");
-  };
-
   const handleSignup = () => {
     navigate("/signup")
   }
@@ -58,6 +74,7 @@ function MainPage() {
   }
 
   useEffect(() => {
+    const url = `${process.env.REACT_APP_BLOG_SERVICE}/blogs`;
     const url = `${process.env.REACT_APP_BLOG_SERVICE}/blogs`;
     async function fetchData() {
       const response = await fetch(url);
@@ -134,7 +151,7 @@ function MainPage() {
         </div>
       <div className="container" id="footer-container">
         <footer
-          className="footer"
+          className="footer footerHeight"
           id="footer"
           style={{ backgroundImage: `url(${background_image})` }}
         ></footer>
