@@ -31,7 +31,7 @@ function MyJobs(props) {
     const fetchConfig = {
       method: "delete",
       headers: {
-        "Authorization": `Bearer ${Jwt}`,
+        "Authorization": `Bearer ${token}`,
         "Content-Type": "application/json"
       }
     };
