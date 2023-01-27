@@ -57,9 +57,9 @@ const JobListings = () => {
             <th scope="col">Title</th>
             <th scope="col">Company Name</th>
             <th scope="col">Job Position</th>
+            <th scope="col">Apply</th>
             <th scope="col">Deadline</th>
             <th scope="col">Created Date</th>
-            <th scope="col"> Button </th>
           </tr>
         </thead>
         <tbody>
@@ -80,9 +80,15 @@ const JobListings = () => {
                   <td>{job.title}</td>
                   <td>{job.company_name}</td>
                   <td>{job.job_position}</td>
+                  <td>
+                    <button onClick={() => { window.location.href = job.apply_url; } }
+                        type="button"
+                        className="btn btn-success"
+                        >Apply
+                    </button>
+                  </td>
                   <td>{job.deadline}</td>
                   <td>{job.created}</td>
-
                   <td>
                   <button onClick={() => { window.location.href = job.apply_url; } }
                       type="button"

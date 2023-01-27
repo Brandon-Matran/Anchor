@@ -32,10 +32,13 @@ function Nav() {
     <div>
       <nav className="navbar navbar-expand-lg">
         <div className="container-fluid">
-  <img src={anchor} className='anchor' onClick={handleLogo}></img>
-
+          <img src={anchor} className='anchor' onClick={handleLogo}></img>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
-
+              <div className="nav-item">
+                <NavLink className="nav-link active" aria-current="page" to="/main">
+                  Home
+                </NavLink>
+              </div>
 
 
           </div>
