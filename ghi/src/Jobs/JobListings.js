@@ -35,7 +35,6 @@ const JobListings = () => {
         return true
       }
       else{
-        console.log(false)
         return false
       }
     }
@@ -51,7 +50,6 @@ const JobListings = () => {
         }
     }})
   }, [token, Jwt, userName]);
-
 
   return (
     <div>
@@ -93,6 +91,13 @@ const JobListings = () => {
                   </td>
                   <td>{job.deadline}</td>
                   <td>{job.created}</td>
+                  <td>
+                  <button onClick={() => { window.location.href = job.apply_url; } }
+                      type="button"
+                      className="btn btn-success"
+                      >Apply
+                  </button>
+                  </td>
                 </tr>
               );
               }

@@ -1,6 +1,5 @@
 import background_image from "../images/background_image.png";
 import programmer from "../images/programmer.jpg";
-import { useNavigate } from "react-router";
 import "./MainPage.css";
 import { useEffect, useState } from "react";
 import LoginModal from "./LoginModal";
@@ -41,18 +40,14 @@ function Column(props) {
 
 function MainPage() {
   const [token, login, logout] = useToken();
-  const navigate = useNavigate();
+
   const [loginModal, setLoginModal] = useState(false);
   const [signupModal, setSignUpModal] = useState(false);
   const [blogs, setBlogList] = useState([], [], []);
 
-  const handleLogout = () => {
-    logout();
-    alert("You have logged out");
-  };
 
   useEffect(() => {
-    const url = "http://localhost:8080/blogs";
+    const url = `${process.env.REACT_APP_BLOG_SERVICE}/blogs`;
     async function fetchData() {
       const response = await fetch(url);
       if (response.ok) {

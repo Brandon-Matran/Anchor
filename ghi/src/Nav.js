@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Navigate, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import "./Nav.css"
 import { useToken } from "./accounts/Authentication";
 import anchor from './images/anchor.jpg'
@@ -21,8 +21,12 @@ function Nav() {
   }
 
   const handleLogo = () => {
+    if (token) {
     navigate('/main')
+  } else {
+    navigate('/')
   }
+}
 
   return (
     <div>
@@ -71,7 +75,7 @@ function Nav() {
                     {token && <NavLink
                       className="dropdown-item link"
                       aria-current="page"
-                      to="blogs/myblogs"
+                      to="/blogs/myblogs"
                     >
                       My Blogs
 
@@ -98,7 +102,7 @@ function Nav() {
                     {token && <NavLink
                       className="dropdown-item link"
                       aria-current="page"
-                      to="/listings/my"
+                      to="/listings/mylistings"
                     >
                       My listings
 

@@ -1,12 +1,12 @@
 import background_image from "../images/background_image.png";
 import programmer from "../images/programmer.jpg";
-import { Navigate, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import "./MainPage.css";
 import { useEffect, useState } from "react";
-import LoginModal from "./LoginModal";
-import SignUpModal from "./SignupModal";
 import { useToken } from "./Authentication.js";
 import { Link } from "react-router-dom";
+import SignUpModal from "./SignupModal";
+import LoginModal from "./LoginModal";
 
 function Column(props) {
   return (
@@ -53,11 +53,6 @@ function MainPage() {
   const [signupModal, setSignUpModal] = useState(false);
   const [blogs, setBlogList] = useState([], [], []);
 
-  const handleLogout = () => {
-    logout();
-    alert("You have logged out");
-  };
-
   const handleSignup = () => {
     navigate("/signup")
   }
@@ -67,7 +62,7 @@ function MainPage() {
   }
 
   useEffect(() => {
-    const url = "http://localhost:8080/blogs";
+    const url = `${process.env.REACT_APP_BLOG_SERVICE}/blogs`;
     async function fetchData() {
       const response = await fetch(url);
       if (response.ok) {
@@ -114,37 +109,35 @@ function MainPage() {
             />
           </div>
           <div className="container">
-            <div className="blogContainer d-flex align-items-cente row">
+            <div className="blogContainer d-flex align-items-center row">
               <div className="col-sm d-flex justify-content-end">
                 <button
-                  // onClick={() => {
-                  //   setSignUpModal(true);
-                  // }}
-                  onClick={() => {handleSignup()}}
+                  onClick={() => {
+                    setSignUpModal(true);
+                  }}
                   type="button"
                   className="openSignupModal"
                 >
                   Sign Up
                 </button>
-                {/* {signupModal && (
+                {signupModal && (
                   <SignUpModal closeSignupModal={setSignUpModal} />
-                )} */}
+                )}
               </div>
               <div className="col-sm d-flex justify-content-start">
                 <button
                   className="openLoginModal"
-                  onClick={() => {handleLogin()}}
-                  // onClick={() => setLoginModal(true)}
+                  onClick={() => setLoginModal(true)}
                 >
                   Log In
                 </button>
-                {/* {loginModal && <LoginModal closeLoginModal={setLoginModal} />} */}
+                {loginModal && <LoginModal closeLoginModal={setLoginModal} />}
               </div>
             </div>
           </div>
 
-          <div className="aboveFooter">
-            <div className="d-flex justify-content-center row">
+          <div className="aboveFooter fill-height">
+            <div className="d-flex justify-content-center row fill-height">
               <div className="row g-0 col-md-4 blogRow">
                 {blogs.map((blog, index) => {
                   return <Column key={index} list={blog} />;
@@ -158,7 +151,7 @@ function MainPage() {
 
       <div className="container" id="footer-container">
         <footer
-          className="footer"
+          className="footer footerHeight"
           id="footer"
           style={{ backgroundImage: `url(${background_image})` }}
         ></footer>

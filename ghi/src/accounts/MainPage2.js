@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import "./MainPage.css";
 import { useEffect, useState } from "react";
 import LoginModal from "./LoginModal";
-import SignUpModal from "./SignupModal";
 import { useToken } from "./Authentication.js";
 
 
@@ -54,17 +53,8 @@ function MainPage() {
   const [signupModal, setSignUpModal] = useState(false);
   const [blogs, setBlogList] = useState([], [], []);
 
-  const handleLogout = () => {
-    logout();
-    alert("You have logged out");
-  };
-
-  const handleSignup = () => {
-    navigate("/signup")
-  }
-
   useEffect(() => {
-    const url = "http://localhost:8080/blogs";
+    const url = `${process.env.REACT_APP_BLOG_SERVICE}/blogs`;
     async function fetchData() {
       const response = await fetch(url);
       if (response.ok) {

@@ -8,7 +8,6 @@ origins = [
     "http://localhost:3000",
     "http://localhost:8090",
     "https://maxbs.gitlab.io",
-
 ]
 
 
