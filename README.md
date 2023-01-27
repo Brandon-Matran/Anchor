@@ -20,7 +20,18 @@ Have you ever wanted to be a part of something bigger than yourself? Welcome to 
 - Type a command "git clone [https://gitlab.com/maxbs/anchor.git](https://gitlab.com/maxbs/anchor.git)"
 - Change your directory to the project's directory by typing a command "cd anchor/"
 - Type a command "code ." so your project opens in VSCode
-- In your terminal type docker volume create
+- Make sure to have Docker Desktop installed on your machine
+- Once everything is ready to go type in the following commands to create the volumes, 
+images and containers for running the application:
+    - docker volume create anchor-postgres-data
+    - docker volume create pg-admin
+    - docker compose build
+    - docker compose up
+- You will see that the database, and images are being created, subsequently the containers will start loading
+- It may take a little bit of time for everything to load, in the end of the process you should see 6 running containers
+- Now the application is ready to be ran in the browser
+- You can check the backend functionality of each microservice in the browser on the ports mentioned under each microservice containner
+- The frontend of the application itself includes and combines all the aspects of the project and runs on port localhost:3000
 - Our project has three microservices, namely, blogs, job_listings and accounts
 
 ---
