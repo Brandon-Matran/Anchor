@@ -1,11 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville&family=Roboto+Mono:wght@100;400&display=swap');
 
-.backgroundImage {
-  background-blend-mode: darken;
+.targetall {
+  font-family: 'Libre Baskerville', serif;
+  background-image: url(../images/background_image.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: 100%;
+  overflow: hidden;
 }
 
 #footer-container {
-  background-color: rgb(243, 243, 243);
+  background-color: transparent;
   max-width: 100%;
 }
 
@@ -95,14 +101,12 @@
 }
 
 .logo {
-  font-family: 'Libre Baskerville', serif;
   font-size: 120px;
   margin: 0;
   animation: fadeIn ease-in 2s;
 }
 
 .logotext {
-  font-family: 'Libre Baskerville', serif;
   font-size: 27px;
   margin: 0;
   animation-delay: 2s;
@@ -159,25 +163,18 @@
 
 
 .footer {
-  position: fixed;
+  position: relative;
   left: 0;
   bottom: 0;
   width: 100%;
-  color: rgb(255, 255, 255);
   text-align: center;
-  padding: 50px;
+  padding: 0;
 }
 
 .blogRow {
   width: 60%;
   padding-top: 20px;
   column-gap: 30px;
-}
-
-.aboveFooter {
-  background-color: #38598a;
-
-
 }
 
 .LogOutButton {
@@ -209,10 +206,6 @@
   right: 50px;
 }
 
-/* .pic {
-  left: 0;
-} */
-
 .card-text {
   font-size: 15px;
   overflow: hidden;
@@ -231,7 +224,7 @@
 }
 
 .cardBackground {
-  background-color:#9BACC4
+  background-color:rgb(164, 212, 243);
   ;
 }
 

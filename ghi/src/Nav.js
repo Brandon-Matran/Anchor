@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./Nav.css"
 import { useAuthContext, useToken } from "./accounts/Authentication";
-import anchor from './images/anchor.jpg'
+import anchor from './images/anchor_icon.png'
 import { useNavigate } from "react-router";
 
 function Nav() {
@@ -32,15 +32,8 @@ function Nav() {
     <div>
       <nav className="navbar navbar-expand-lg">
         <div className="container-fluid">
-          <img src={anchor} className='anchor' onClick={handleLogo}></img>
-          <div className="collapse navbar-collapse" id="navbarSupportedContent">
-              <div className="nav-item">
-                <NavLink className="nav-link link active" aria-current="page" to="/main">
-                  Home
-                </NavLink>
-              </div>
-
-
+          <div id="logo_holder">
+            <img src={anchor} className='anchor' onClick={handleLogo}/>
           </div>
           <div >
             <button
@@ -54,90 +47,90 @@ function Nav() {
 
                 <ul className="dropdownBurger cut">
 
-                    <NavLink
+                    <Link
                       className="dropdown-item link"
                       aria-current="page"
                       to="blogs"
                     >
                       Blogs
-                    </NavLink>
+                    </Link>
 
-                    {token && <NavLink
+                    {token && <Link
                       className="dropdown-item link"
                       aria-current="page"
                       to="blogs/create"
                     >
                       Create Blog
-                    </NavLink>
+                    </Link>
                     }
 
-                    {token && <NavLink
+                    {token && <Link
                       className="dropdown-item link"
                       aria-current="page"
                       to="/blogs/myblogs"
                     >
                       My Blogs
 
-                    </NavLink>
+                    </Link>
                     }
 
-                    <NavLink
+                    <Link
                       className="dropdown-item link"
                       aria-current="page"
                       to="listings"
                     >
                       Job Listings
-                    </NavLink>
+                    </Link>
 
-                    {token && <NavLink
+                    {token && <Link
                       className="dropdown-item link"
                       aria-current="page"
                       to="listings/create"
                     >
                       Post Job Listing
-                    </NavLink>
+                    </Link>
                     }
 
-                    {token && <NavLink
+                    {token && <Link
                       className="dropdown-item link"
                       aria-current="page"
                       to="/listings/mylistings"
                     >
                       My listings
 
-                    </NavLink>
+                    </Link>
                     }
 
 
-                    {!token && <NavLink
+                    {!token && <Link
                       className="dropdown-item link"
                       aria-current="page"
                       to="/signup"
                     >
                       Signup
 
-                    </NavLink>
+                    </Link>
                     }
 
                     {!token &&
-                    <NavLink
+                    <Link
                       className="dropdown-item link"
                       aria-current="page"
                       to="login"
                     >
                       Login
-                    </NavLink>
+                    </Link>
                     }
 
                   {token &&
-                  <NavLink
+                  <Link
                       className="dropdown-item link"
                       aria-current="page"
                       to="/"
                       onClick={handleLogout}
                     >
                       Logout
-                    </NavLink>
+                    </Link>
                   }
                 </ul>
             )}

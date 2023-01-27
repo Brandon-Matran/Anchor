@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { Navigate } from "react-router-dom";
 import { useToken } from "./Authentication";
-import signup_image from "../images/signup_image.png";
+import signup_image from "../images/anchor_wheel.png";
 import background_image from "../images/background_image.png";
+import "./MainPage.css";
 
 function Signup(props) {
   const [token, login, logout, signup] = useToken();
@@ -16,7 +17,7 @@ function Signup(props) {
 
   return (
     <section
-      className="vh-100"
+      className="targetall vh-100"
       style={{ backgroundImage: `url(${background_image})` }}
     >
       <div className="container h-100">

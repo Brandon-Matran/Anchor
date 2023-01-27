@@ -1,6 +1,7 @@
 import { useEffect , useState} from "react";
 import { useAuthContext } from "../accounts/Authentication"
 import React from 'react';
+import "../accounts/MainPage.css";
 
 
 function MyJobs(props) {
@@ -109,24 +110,21 @@ useEffect(() => {
 
 
   return (
-    <>
-        <div className="px-4 py-5 my-5 mt-0 text-center bg-white">
+    <div className="targetall">
+        <div className="px-4 py-5 my-5 mt-0 text-center">
             <h1 className="display-5 fw-bold">My Listings</h1>
         </div>
         <div className="container">
-        <h2>Job Listings</h2>
+        <h2 className="mb-5">Job Listings</h2>
         <div className="row">
             {jobs.map((job, index) => {
                 return (
                     <JobsColumn key={index} list={job} />
-
                 );
-
             })}
-
         </div>
-        </div>
-    </>
+      </div>
+    </div>
 );
 
 }

@@ -2,11 +2,11 @@ import { useEffect , useState} from "react";
 import { useAuthContext } from "../accounts/Authentication"
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import "../accounts/MainPage.css";
 
 function MyBlogs() {
     const [blogs, setBlogs] = useState([], [], []);
     const [username, setUserName] = useState('')
-    const [Jwt, setJwt] = useState(null);
     const navigate = useNavigate()
 
     const { token } = useAuthContext();
@@ -39,11 +39,9 @@ function MyBlogs() {
     }
 
     useEffect(() => {
-
       {
         if (token) {
           parseJwt(token);
-
         }
       }
       fetchData()
@@ -102,26 +100,26 @@ function MyBlogs() {
       );
   }
 
-    return (
-        <>
-            <div className="px-4 py-5 my-5 mt-0 text-center bg-white">
-                <h1 className="display-5 fw-bold mb-4">My Blogs</h1>
-                <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
-                    <Link to="/blogs/create" className="btn btn-success btn-lg px-4 gap-3">Post a New Blog</Link>
-                </div>
-            </div>
-            <div className="container">
-            <h2>Blogs</h2>
-            <div className="row">
-                {blogs.map((blog, index) => {
-                    return (
-                        <BlogsColumn key={index} list={blog} />
-                    );
-                })}
-            </div>
-            </div>
-        </>
-    );
+  return (
+      <div className="targetall">
+          <div className="px-4 py-5 my-5 mt-0 text-center">
+              <h1 className="display-5 fw-bold mb-4">My Blogs</h1>
+              <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                  <Link to="/blogs/create" className="btn btn-success btn-lg px-4 gap-3">Post a New Blog</Link>
+              </div>
+          </div>
+          <div className="container">
+          <h2>Blogs</h2>
+          <div className="row">
+              {blogs.map((blog, index) => {
+                  return (
+                      <BlogsColumn key={index} list={blog} />
+                  );
+              })}
+          </div>
+          </div>
+      </div>
+  );
 
 }
 export default MyBlogs

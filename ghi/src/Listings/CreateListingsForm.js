@@ -2,7 +2,7 @@ import {useEffect, useState} from "react"
 import React from "react";
 import { useAuthContext } from "../accounts/Authentication";
 import { useNavigate } from "react-router-dom";
-
+import "../accounts/MainPage.css";
 
 function CreateJobsForm() {
   const navigate = useNavigate();
@@ -105,7 +105,7 @@ useEffect(() => {
 
 
   return (
-    <div className="row">
+    <div className="targetall row">
       <div className="offset-3 col-6">
         <div className="shadow p-4 mt-4">
           <h1>Create Job Listing</h1>

@@ -26,32 +26,15 @@ function Column(props) {
                   />
                 </div>
                 <div className="col-md-8 cardBackground">
-                <div className="card-body">
-                  <p className="card-text">{data.title}</p>
+                  <div className="card-body">
+                    <h5 className="card-title">{data.title}</h5>
+                    <p>By {data.username} | Date: {date}</p>
+                    <p className="text-truncate">{data.description}</p>
+                  </div>
                 </div>
-                <div className="card-body">
-                  <p className="card-text">By: {data.username}</p>
-                </div>
-                <div className="card-body">
-                  <p className="card-text">{date}</p>
-                </div>
-          <div key={index} className="card mb-5">
-            <div className="row g-0 blogCard">
-              <div className="col-md-4">
-                <img
-                  src={data.pic_url}
-                  className="card-img-top pic"
-                  alt="..."
-                />
-              </div>
-              <div className="col-md-8 cardBackground">
-              <div className="card-body">
-                <p>By {data.username} | Date: {date}</p>
-                <p className="text-truncate">{data.description}</p>
               </div>
             </div>
-            </div>
-          </Link>
+        </Link>
         );
       })}
     </div>
@@ -74,9 +57,8 @@ function MainPage() {
   }
 
   useEffect(() => {
-    const url = `${process.env.REACT_APP_BLOG_SERVICE}/blogs`;
-    const url = `${process.env.REACT_APP_BLOG_SERVICE}/blogs`;
     async function fetchData() {
+      const url = `${process.env.REACT_APP_BLOG_SERVICE}/blogs`;
       const response = await fetch(url);
       if (response.ok) {
         const data = await response.json();
@@ -99,10 +81,10 @@ function MainPage() {
   }, []);
 
   return (
-    <div>
+    <div className="targetall">
       <div className="header" style={{ backgroundImage: `url(${background_image})`}}>
         <div className="row align-items-start">
-          <div className="col align-self-start">
+          <div className="col align-self-start mt-5">
             <div className="logo">
               Anchor
             </div>
@@ -138,9 +120,7 @@ function MainPage() {
         </div>
       </div>
         <div className="container-sm">
-          <div>
-            <h3>Blogs</h3>
-          </div>
+          <h2 className="text-center w-50 p-5">Blogs</h2>
             <div className="d-flex justify-content-center row">
               <div className="row g-0 col-md-4 blogRow">
                 {blogs.map((blog, index) => {

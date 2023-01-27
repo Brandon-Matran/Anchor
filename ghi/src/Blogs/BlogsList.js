@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useAuthContext } from "../accounts/Authentication"
 import { useNavigate } from 'react-router-dom';
-
+import "../accounts/MainPage.css";
 
 const BlogsList = () => {
   const [blogs, setBlog] = useState([]);
@@ -36,8 +36,8 @@ const BlogsList = () => {
   }, [token]);
 
   return (
-    <div>
-      <table className="table table-striped">
+    <div className="targetall">
+      <table className="table table-striped text-center login">
         <thead>
           <tr>
             <th scope="col">Username</th>
@@ -54,7 +54,7 @@ const BlogsList = () => {
                 <td>{blog.username}</td>
                 <td>{blog.title}</td>
                 <td>
-                <img src={blog.pic_url} className="img-thumbnail"/>
+                <img src={blog.pic_url} className="img-thumbnail w-25"/>
                 </td>
                 <td>{blog.post_date}</td>
                 <td>

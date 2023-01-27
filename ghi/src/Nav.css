@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville&family=Roboto+Mono:wght@100;400&display=swap');
+
 .burger {
     height:50px;
     width: 50px;
@@ -13,9 +15,11 @@
 }
 
 .navbar {
-    background-color: rgb(20, 84, 116);
-    background-image: linear-gradient(to right, rgba(20, 84, 116, 1) 10%, rgba(53, 108, 142, 1) 20%, rgba(81, 133, 168, 1) 30%, rgba(108, 160, 195, 1) 40%, rgba(135, 187, 223, 1) 50%, rgba(163, 214, 252, 1) 60%, rgba(191, 243, 255, 1) 70%, rgba(220, 255, 255, 1) 80%, rgba(249, 255, 255, 1) 90%, rgba(255, 255, 255, 1) 100%);
+    background-color: transparent;
+    /* background-image: linear-gradient(to right, rgba(20, 84, 116, 1) 10%, rgba(53, 108, 142, 1) 20%, rgba(81, 133, 168, 1) 30%, rgba(108, 160, 195, 1) 40%, rgba(135, 187, 223, 1) 50%, rgba(163, 214, 252, 1) 60%, rgba(191, 243, 255, 1) 70%, rgba(220, 255, 255, 1) 80%, rgba(249, 255, 255, 1) 90%, rgba(255, 255, 255, 1) 100%); */
     padding-bottom: -10px;
+    position: fixed;
+    width: 100%;
 
 }
 
@@ -32,70 +36,30 @@
     background-color: rgb(157, 169, 175);
     box-shadow: 0.4rem 0.4rem 2.4rem 0.2rem hsla(235, 24%, 81%, 0.3);
     overflow: hidden;
-    animation: fadeInAnimation ease 0.2s;
-    background-image: radial-gradient(circle farthest-corner at center, rgba(20, 84, 116, 1) 15%, rgba(0, 61, 91, 1) 35%, rgba(0, 39, 68, 1) 50%, rgba(0, 19, 45, 1) 65%, rgba(0, 1, 24, 1) 85%, rgba(0, 0, 0, 1) 100%);
+    animation: fadeInAnimation ease 250ms;
 }
 
 .link {
     font-size: 25px;
-    font-family: 'Cinzel', serif;
-    background:#ffffff;
-    background-color: #ffffff;
-    background-image: linear-gradient(0deg, rgba(20, 84, 116, 1) 10%, rgba(53, 108, 142, 1) 20%, rgba(81, 133, 168, 1) 30%, rgba(108, 160, 195, 1) 40%, rgba(135, 187, 223, 1) 50%, rgba(163, 214, 252, 1) 60%, rgba(191, 243, 255, 1) 70%, rgba(220, 255, 255, 1) 80%, rgba(249, 255, 255, 1) 90%, rgba(255, 255, 255, 1) 100%);
+    font-family: 'Libre Baskerville', serif;
+    color: white;
+    background-color: rgb(157, 169, 175);
     background-size: 100%;
     background-repeat: repeat;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    -moz-background-clip: text;
-    -moz-text-fill-color: transparent;
-    border-bottom: 1px solid #6e6e6e;
-
-
+    border-bottom: 1px solid rgb(20, 84, 116);
+    padding: 0.5rem;
 }
-
-
 
 @keyframes fadeInAnimation {
-    0% {
+    from {
         opacity: 0;
     }
-    10% {
-        opacity: 0.1;
-    }
-    20% {
-        opacity: 0.2;
-    }
-    30% {
-        opacity: 0.3;
-    }
-    40% {
-        opacity: 0.4;
-    }
-    50% {
-        opacity: 0.5;
-    }
-    60% {
-        opacity: 0.6;
-    }
-    70% {
-        opacity: 0.7;
-    }
-    80% {
-        opacity: 0.8;
-    }
-    90% {
-        opacity: 0.9;
-    }
-    100% {
-        opacity: 1;
+    to {
+         opacity: 1;
     }
 }
 
-
-  .anchor {
+.anchor {
     width: 70px;
-  }
-
-  .anchor:hover {
     cursor: pointer;
-  }
+}

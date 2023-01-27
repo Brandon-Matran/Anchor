@@ -3,9 +3,7 @@ import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 import "./MainPage.css";
 import { useEffect, useState } from "react";
-import LoginModal from "./LoginModal";
-import { useToken } from "./Authentication.js";
-
+import { useAuthContext } from "../accounts/Authentication"
 
 function Column(props) {
   return (
@@ -26,19 +24,14 @@ function Column(props) {
                   />
                 </div>
                 <div className="col-md-8 cardBackground">
-                <div className="card-body">
-                  <p className="card-text">{data.title}</p>
-                </div>
-                <div className="card-body">
-                  <p className="card-text">By: {data.username}</p>
-                </div>
-                <div className="card-body">
-                  <p className="card-text">{date}</p>
+                  <div className="card-body">
+                    <p>By {data.username} | Date: {date}</p>
+                    <p className="text-truncate">{data.description}</p>
+                  </div>
                 </div>
               </div>
             </div>
-            </div>
-          </Link>
+        </Link>
         );
       })}
     </div>
@@ -49,9 +42,9 @@ function MainPage() {
   const navigate = useNavigate();
   const [blogs, setBlogList] = useState([], [], []);
   const [username, setUserName] = useState('');
-  const [Jwt, setJwt] = useState(null);
+  // const [Jwt, setJwt] = useState(null);
 
-  const token = useAuthContext();
+  const { token } = useAuthContext()
 
   const handleLogout = () => {
     logout();
@@ -65,43 +58,41 @@ function MainPage() {
     setUserName(info.account.username);
   }
 
+  async function fetchData() {
+    const url = `${process.env.REACT_APP_BLOG_SERVICE}/blogs`;
+    const response = await fetch(url);
+    if (response.ok) {
+      const data = await response.json();
+      const blogData = data.slice(data.length - 3);
+      const blogs = [[], [], []];
+      let i = 0;
+
+      for (const event of blogData) {
+        blogs[i].push(event);
+        i = i + 1;
+        if (i > 2) {
+          i = 0;
+        }
+
+        setBlogList(blogs);
+      }
+    }
+  }
 
   useEffect(() => {
-    const url = `${process.env.REACT_APP_BLOG_SERVICE}/blogs`;
-    fetch(token)
-    .then(response => {if ((typeof response.token) !== "object") {
-        setJwt(token.token);
-        if (Jwt !== null) {
-            parseJwt(Jwt);
-        }
-    }})
-    async function fetchData() {
-      const response = await fetch(url);
-      if (response.ok) {
-        const data = await response.json();
-        const blogData = data.slice(data.length - 3);
-        const blogs = [[], [], []];
-        let i = 0;
-
-        for (const event of blogData) {
-          blogs[i].push(event);
-          i = i + 1;
-          if (i > 2) {
-            i = 0;
-          }
-
-          setBlogList(blogs);
-        }
+    {
+      if (token) {
+        parseJwt(token);
       }
     }
     fetchData();
-  }, [token, Jwt, username]);
+  }, [token, username]);
 
   return (
-    <div>
+    <div className="targetall">
       <div className="header" style={{ backgroundImage: `url(${background_image})` }}>
         <div className="row align-items-start">
-          <div className="col align-self-start">
+          <div className="col align-self-start mt-5">
             <div className="logintext">
               Welcome aboard, {username}
             </div>
@@ -111,9 +102,7 @@ function MainPage() {
         </div>
       </div>
         <div className="container-sm">
-          <div>
-            <h3>Blogs</h3>
-          </div>
+          <h2 className="text-center w-50 p-5">Blogs</h2>
           <div className="d-flex justify-content-center row">
             <div className="row g-0 col-md-4 blogRow">
               {blogs.map((blog, index) => {

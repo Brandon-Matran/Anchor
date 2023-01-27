@@ -1,5 +1,5 @@
 import "./App.css";
-import LoginForm from "./accounts/LoginForm.js";
+import LoginForm from "./accounts/LoginForm";
 import {
   BrowserRouter as BrowserRouter,
   Route,
@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { AuthProvider, useToken } from "./accounts/Authentication.js";
-import SignUpModal from "./accounts/Signup";
+import Signup from "./accounts/Signup";
 import MainPage from "./accounts/MainPage";
 import MainPage2 from "./accounts/MainPage2";
 import CreateBlogsForm from "./Blogs/CreateBlogsForm";
@@ -39,7 +39,7 @@ function App() {
           <Route path="/" element={<MainPage />} />
           <Route path="/main" element={<MainPage2 />} />
           <Route path="/login" element={<LoginForm />} />
-          <Route path="/signup" element={<SignUpModal />} />
+          <Route path="/signup" element={<Signup />} />
           <Route path="/blogs">
             <Route index element={<BlogsList />} />
             <Route path=":id" element={<GetOneBlog />} />

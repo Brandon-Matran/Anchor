@@ -30,6 +30,8 @@ function LoginModal({ closeLoginModal }) {
           <form onSubmit={handleSubmit}>
             <div className="form-group">
               <h2>Welcome Back ShipMate!</h2>
+            </div>
+            <div className="form-group mt-4">
               <label htmlFor="username">Username</label>
               <input
                 required
@@ -40,7 +42,7 @@ function LoginModal({ closeLoginModal }) {
                 id="username"
               />
             </div>
-            <div className="form-group">
+            <div className="form-group mt-3">
               <label htmlFor="password">Password</label>
               <input
                 required
@@ -51,16 +53,18 @@ function LoginModal({ closeLoginModal }) {
                 id="password"
               />
             </div>
-            <button type="submit" className="submit">
-              Submit
-            </button>
-            <button
-              type="button"
-              className="cancel"
-              onClick={() => closeLoginModal(false)}
-            >
-              Cancel
-            </button>
+            <div className="form-group mt-3">
+              <button type="submit" className="submit">
+                Submit
+              </button>
+              <button
+                type="button"
+                className="cancel"
+                onClick={() => closeLoginModal(false)}
+              >
+                Cancel
+              </button>
+            </div>
           </form>
           {formSuccess === true && (
             <p className="success-message">Login Successful!</p>
