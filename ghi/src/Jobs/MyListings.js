@@ -1,7 +1,6 @@
 import { useEffect , useState} from "react";
 import { useAuthContext } from "../accounts/Authentication"
 import React from 'react';
-import "../accounts/MainPage.css";
 import { useNavigate } from 'react-router-dom';
 
 
@@ -9,7 +8,6 @@ function MyJobs(props) {
   const [jobs, setJobs] = useState([], [], []);
   const [job, setJob] = useState([]);
   const [username, setUserName] = useState('')
-  const [Jwt, setJwt] = useState(null);
   const navigate = useNavigate()
   const { token } = useAuthContext();
 
@@ -111,7 +109,7 @@ useEffect(() => {
 
 
   return (
-    <div className="targetall">
+    <div style={{height: "100vh"}}>
         <div className="px-4 py-5 my-5 mt-0 text-center">
             <h1 className="display-5 fw-bold">My Listings</h1>
         </div>

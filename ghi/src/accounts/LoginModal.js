@@ -53,18 +53,17 @@ function LoginModal({ closeLoginModal }) {
                 id="password"
               />
             </div>
-            <div className="form-group mt-3">
-              <button type="submit" className="submit">
-                Submit
-              </button>
-              <button
-                type="button"
-                className="cancel"
-                onClick={() => closeLoginModal(false)}
-              >
-                Cancel
-              </button>
-            </div>
+            <div className="form-group mt-4"></div>
+            <button type="submit" className="btn btn-outline-primary">
+              Submit
+            </button>
+            <button
+              type="button"
+              className="btn btn-outline-primary mx-4"
+              onClick={() => closeLoginModal(false)}
+            >
+              Cancel
+            </button>
           </form>
           {formSuccess === true && (
             <p className="success-message">Login Successful!</p>

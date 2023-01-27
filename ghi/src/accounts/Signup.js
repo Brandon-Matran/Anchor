@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import { Navigate } from "react-router-dom";
 import { useToken } from "./Authentication";
 import signup_image from "../images/anchor_wheel.png";
-import background_image from "../images/background_image.png";
-import "./MainPage.css";
 
 function Signup(props) {
   const [token, login, logout, signup] = useToken();
@@ -17,8 +15,7 @@ function Signup(props) {
 
   return (
     <section
-      className="targetall vh-100"
-      style={{ backgroundImage: `url(${background_image})` }}
+      className="vh-100"
     >
       <div className="container h-100">
         <div className="row d-flex justify-content-center align-items-center h-100">
@@ -77,13 +74,13 @@ function Signup(props) {
                           </select>
                         </div>
                       </div>
-                      <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                      <div className="d-flex justify-content-start mx-5 mb-lg-3">
                         <button
                           onClick={async () =>
                             await signup(username, password, user_type)
                           }
                           type="button"
-                          className="btn btn-primary btn-lg"
+                          className="btn btn-outline-primary btn-lg"
                         >
                           Submit
                         </button>

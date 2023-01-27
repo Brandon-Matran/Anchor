@@ -1,7 +1,6 @@
 import {useEffect, useState} from "react"
 import { useAuthContext } from "../accounts/Authentication"
 import { useNavigate } from "react-router-dom";
-import background_image from "../images/background_image.png";
 
 function CreateBlogsForm(props) {
 
@@ -70,41 +69,75 @@ function CreateBlogsForm(props) {
   }
 
     return (
-      // <section className="vh-100" style={{ backgroundImage: `url(${background_image})` }}>
-      // </section>
-      //   <div className="container h-100">
+      <section
+      className="vh-100"
+    >
+      <div className="container">
+        <div className="row d-flex justify-content-center align-items-center h-100">
+          <div className="col-lg-12 col-xl-11">
+            <div className="card text-black shadow p-4 mt-4">
+              <div className="card-body p-md-5">
+                <div className="row justify-content-center">
+                  <p className="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">
+                    Create a New Blog
+                  </p>
+                  <form onSubmit={handleSubmit} id="create-blog-form">
+                    <div className="form-floating mb-3">
+                      <input
+                        value={title}
+                        required
+                        onChange={(e) => setTitle(e.target.value)}
+                        type="text"
+                        id="title"
+                        placeholder="Blog Title"
+                        className="form-control"
+                      />
+                      <label className="form-label">Title</label>
+                    </div>
 
-      //   </div>
-        <div className="row">
-            <div className="offset-3 col-6">
-                <div className="shadow p-4 mt-4">
-                    <h1>Create a New Blog</h1>
-                    <form onSubmit={handleSubmit} id="create-blog-form">
-                        <div className="form-floating mb-3">
-                            <input onChange = {e => setTitle(e.target.value)} placeholder="Write a Blog Title" required
-                            type="text" name ="title" id="title"
-                            className="form-control" value={title}/>
-                            <label htmlFor="title">Title</label>
-                        </div>
-                        <div className="form-floating mb-3">
-                                <input onChange = {e => setPicURL(e.target.value)} placeholder="Enter a Picture Url"
-                                required type="url" name="pic_url"  id="pic_url"
-                                className="form-control" value={pic_url}/>
-                                <label htmlFor="pic_url">Picture Url</label>
-                        </div>
-                        <div className="mb-3">
-                            <label htmlFor="description" className="form-label">Description</label>
-                            <textarea onChange={e => setDescription(e.target.value)} className="form-control" style={{height: 250}}
-                            id="description" rows="3" value={description} ></textarea>
-                        </div>
-                        <button type="submit" className="btn btn-primary">Create</button>
-                    </form>
-                </div><br/>
-                <div className={messageClasses} id="success-message">
-                    Success! New Blog Posted!
+                    <div className="form-floating mb-3">
+                      <input
+                        value={pic_url}
+                        onChange={(e) => setPicURL(e.target.value)}
+                        type="url"
+                        placeholder="Enter a Picture URL"
+                        className="form-control"
+                      ></input>
+                      <label className="form-label">Picture URL</label>
+                    </div>
+
+                    <div className="form-floating mb-3">
+                      <textarea
+                        value={description}
+                        required
+                        onChange={(e) => setDescription(e.target.value)}
+                        className="form-control"
+                        type="text"
+                        placeholder="Write a Blog"
+                        id="blogDescription"
+                        rows="3"
+                        style={{height: 300}}
+                      ></textarea>
+                      <label className="form-label">Description</label>
+                    </div>
+                    <button
+                      type="submit"
+                      className="btn btn-outline-primary center"
+                    >
+                      Post New Blog
+                    </button>
+                  </form>
                 </div>
+                <br />
+                <div className={messageClasses} id="success-message">
+                  Success! New Blog Posted!
+                </div>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
+    </section>
     );
 
 }

@@ -2,7 +2,6 @@ import { useEffect , useState} from "react";
 import { useAuthContext } from "../accounts/Authentication"
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import "../accounts/MainPage.css";
 
 function MyBlogs() {
     const [blogs, setBlogs] = useState([], [], []);
@@ -43,8 +42,8 @@ function MyBlogs() {
         if (token) {
           parseJwt(token);
         }
+        fetchData()
       }
-      fetchData()
     }, [token, username]);
 
     function deleteBlog(id) {
@@ -60,11 +59,9 @@ function MyBlogs() {
       .then((response) => {
           if (!response.ok) {
               throw new Error ("Something went wrong!")
-          }
+            }
+          fetchData()
       })
-      .then(
-        fetchData()
-      )
       .catch((err) => {
       })
     }
@@ -101,7 +98,7 @@ function MyBlogs() {
   }
 
   return (
-      <div className="targetall">
+      <div style={{height: "100vh"}}>
           <div className="px-4 py-5 my-5 mt-0 text-center">
               <h1 className="display-5 fw-bold mb-4">My Blogs</h1>
               <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">

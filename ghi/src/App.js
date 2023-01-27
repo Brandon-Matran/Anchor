@@ -31,31 +31,33 @@ function App() {
   const basename = process.env.PUBLIC_URL.replace(domain, "");
 
   return (
-    <BrowserRouter basename={basename}>
-      <AuthProvider>
-        <GetToken />
-        <Nav />
-        <Routes>
-          <Route path="/" element={<MainPage />} />
-          <Route path="/main" element={<MainPage2 />} />
-          <Route path="/login" element={<LoginForm />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/blogs">
-            <Route index element={<BlogsList />} />
-            <Route path=":id" element={<GetOneBlog />} />
-            <Route path="update/:id" element={<UpdateBlog />} />
-            <Route path="create" element={<CreateBlogsForm />} />
-            <Route path="myblogs" element={<MyBlogs />} />
-          </Route>
-          <Route path="listings">
-            <Route index element={<JobListings />} />
-            <Route path="mylistings" element={<MyListings />} />
-            <Route path="create" element={<CreateJobsForm />} />
-            <Route path="update/:id" element={<UpdateListing />} />
-          </Route>
-        </Routes>
-      </AuthProvider>
-    </BrowserRouter>
+    <div className="App">
+      <BrowserRouter basename={basename}>
+        <AuthProvider>
+          <GetToken />
+          <Nav />
+          <Routes>
+            <Route path="/" element={<MainPage />} />
+            <Route path="/main" element={<MainPage2 />} />
+            <Route path="/login" element={<LoginForm />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/blogs">
+              <Route index element={<BlogsList />} />
+              <Route path=":id" element={<GetOneBlog />} />
+              <Route path="update/:id" element={<UpdateBlog />} />
+              <Route path="create" element={<CreateBlogsForm />} />
+              <Route path="myblogs" element={<MyBlogs />} />
+            </Route>
+            <Route path="listings">
+              <Route index element={<JobListings />} />
+              <Route path="mylistings" element={<MyListings />} />
+              <Route path="create" element={<CreateJobsForm />} />
+              <Route path="update/:id" element={<UpdateListing />} />
+            </Route>
+          </Routes>
+        </AuthProvider>
+      </BrowserRouter>
+    </div>
   );
 }
 

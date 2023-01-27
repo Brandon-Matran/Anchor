@@ -42,7 +42,6 @@ function MainPage() {
   const navigate = useNavigate();
   const [blogs, setBlogList] = useState([], [], []);
   const [username, setUserName] = useState('');
-  // const [Jwt, setJwt] = useState(null);
 
   const { token } = useAuthContext()
 

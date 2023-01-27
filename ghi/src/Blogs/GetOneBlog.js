@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
+import { getToken } from "../accounts/Authentication";
+import { useAuthContext } from "../accounts/Authentication"
 
 
 function GetOneBlog() {
   const { id } = useParams();
   const [blog, setBlog] = useState([]);
+  const { token } = useAuthContext()
 
   useEffect(()=> {
     const url = `${process.env.REACT_APP_BLOG_SERVICE}/blogs/${id}`;
@@ -18,6 +21,14 @@ function GetOneBlog() {
 
 
   }, []);
+
+  let logOutClasses = "btn btn-warning btn-lg px-4 gap-3";
+  let logInClasses = "btn btn-warning btn-lg px-4 gap-3 d-none";
+  if (token) {
+    logInClasses = "btn btn-warning btn-lg px-4 gap-3";
+    logOutClasses = "btn btn-warning btn-lg px-4 gap-3 d-none";
+  }
+
   return (
       <div>
         {blog ? (
@@ -30,7 +41,8 @@ function GetOneBlog() {
                 <p className="text-md-start">{blog.description}</p>
               </div>
               <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
-                <Link to="/blogs/myblogs" className="btn btn-danger btn-lg px-4 gap-3">Back to MyBlogs</Link>
+                <Link to="/blogs" className={logOutClasses}>Back to Blogs</Link>
+                <Link to="/blogs/myblogs" className={logInClasses}>Back to MyBlogs</Link>
               </div>
             </div>
           </div>
