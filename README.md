@@ -11,6 +11,7 @@ Have you ever wanted to be a part of something bigger than yourself? Welcome to 
  - Steven Duong
 
 ---
+
 # How to Run Application
 - In your browser go to this link: [https://gitlab.com/maxbs/anchor](https://gitlab.com/maxbs/anchor)
 - Fork the project
@@ -25,9 +26,49 @@ Have you ever wanted to be a part of something bigger than yourself? Welcome to 
 
 ---
 
-## API Design
+# Microservices:
+
+##  Accounts
+
+As an account user, there are only 3 requirements that need to be met. A username, password, and your choice of user type.
+
+There are currently two user types available: Individual and Company.
+
+An individual user can post, edit, and delete blogs that they authored. Individual users can get blogs from other users and also browse job listings.
+
+As a company user, I can post, edit, and delete job listings to prospective employees and also have all the blogs functions that are available as an individual user.
+
 
 ---
+## Blogs
+
+The 3 most recent blogs will be displayed on the main page.
+
+Created a form to post blogs. In the form for blogs, we have 3 fields that are required.
+Title, description, and pic url. Post date and username will automatically be applied.
+
+When you click on "my blogs" the user can view all the blogs they posted.
+
+---
+## Jobs
+
+As a company user, you can post job listings so people can apply.
+
+In the job listings form, the required fields are:
+Title, Company Name, Job Position, Apply URL, and a deadline date.
+
+Username and created timestamp will automatically be applied on click of "post job."
+
+When you click on "my listings" the user can view all the job listings they posted.
+
+---
+
+# GHI Design
+- [GHI](docs/wireframe.md)
+
+---
+
+# API Design
 
 - In order to test the backend CRUD codes for the accounts microservice:
     - go to [Accounts API](http://localhost:8100/docs)
@@ -72,7 +113,7 @@ Have you ever wanted to be a part of something bigger than yourself? Welcome to 
 ---
 
 - In order to test the backend CRUD codes for the blogs microservice:
-    - go to [http://localhost:8080/docs#/default](http://localhost:8080/docs)
+    - go to [Blogs API](http://localhost:8080/docs)
     - from there, depeding on the feature you would like to test click on it:
         - for instance POST, GET, DELETE or PUT methods
 
@@ -157,7 +198,7 @@ Have you ever wanted to be a part of something bigger than yourself? Welcome to 
         }
         ```
         Creating a successful job listing will save the attributes in the input field and assign a unique id to that job listing
-        
+
     - GET Specific Job Listing:
         - Click on GET /listings/{listing_id} Get One Listing
         - Enter ID of job listing into the listing_id field
@@ -216,12 +257,8 @@ Have you ever wanted to be a part of something bigger than yourself? Welcome to 
         ```
 
 ---
-# Diagrams:
-![Diagrams] (ghi\public\Images\MAXBS_Anchor.png)
-![Diagrams] (ghi\public\Images\MAXBS_Anchor2.png)
 
 
----
 # Backend Endpoints:
 ## Default Ports
 blogs:8080
@@ -271,43 +308,3 @@ accounts:8100
 REACT:
 
 http://localhost:3000
-
-
-
----
-### Microservices:
----
-
-
-###  Accounts -
-
-As an account user, there are only 3 requirements that need to be met. A username, password, and your choice of user type.
-
-There are currently two user types available: Individual and Company.
-
-An individual user can post, edit, and delete blogs that they authored. Individual users can get blogs from other users and also browse job listings.
-
-As a company user, I can post, edit, and delete job listings to prospective employees and also have all the blogs functions that are available as an individual user.
-
-
----
-### Blogs -
-
-The 3 most recent blogs will be displayed on the main page.
-
-Created a form to post blogs. In the form for blogs, we have 3 fields that are required.
-Title, description, and pic url. Post date and username will automatically be applied.
-
-When you click on "my blogs" the user can view all the blogs they posted.
-
----
-### Jobs -
-
-As a company user, you can post job listings so people can apply.
-
-In the job listings form, the required fields are:
-Title, Company Name, Job Position, Apply URL, and a deadline date.
-
-Username and created timestamp will automatically be applied on click of "post job."
-
-When you click on "my listings" the user can view all the job listings they posted.
