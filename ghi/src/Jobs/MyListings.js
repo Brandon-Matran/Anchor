@@ -2,6 +2,7 @@ import { useEffect , useState} from "react";
 import { useAuthContext } from "../accounts/Authentication"
 import React from 'react';
 import "../accounts/MainPage.css";
+import { useNavigate } from 'react-router-dom';
 
 
 function MyJobs(props) {
@@ -9,7 +10,7 @@ function MyJobs(props) {
   const [job, setJob] = useState([]);
   const [username, setUserName] = useState('')
   const [Jwt, setJwt] = useState(null);
-
+  const navigate = useNavigate()
   const { token } = useAuthContext();
 
 
@@ -65,7 +66,7 @@ function MyJobs(props) {
 
 
                   <button type="button" className="btn btn-danger" onClick={() => DeleteJobListing(data.id)}>Delete Listing</button>
-
+                  <button className="btn btn-warning" onClick={() => navigate(`/listings/update/${data.id}`)}>Update</button>
                 </div>
               </div>
           );
