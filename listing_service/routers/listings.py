@@ -1,7 +1,5 @@
 from fastapi import APIRouter, Depends, Response, HTTPException
 from typing import Union, List, Optional
-
-# from token_auth import get_current_user
 from auth import authenticator
 from queries.listings import (
     ListingError,
@@ -11,12 +9,6 @@ from queries.listings import (
 )
 
 router = APIRouter()
-
-# not_authorized = HTTPException(
-#     status_code=status.HTTP_401_UNAUTHORIZED,
-#     detail="Invalid authentication credentials",
-#     headers={"WWW-Authenticate": "Bearer"},
-# )
 
 
 @router.get("/listings", response_model=Union[List[ListingOut], ListingError])
@@ -31,7 +23,6 @@ def create_listing(
     listing: ListingIn,
     response: Response,
     repo: ListingRepository = Depends(),
-    # account: dict = Depends(get_current_user),
     account: dict = Depends(authenticator.get_current_account_data),
 ):
     if account["user_type"] == "company":
@@ -46,7 +37,6 @@ def create_listing(
 def delete_listing(
     listing_id: int,
     repo: ListingRepository = Depends(),
-    # account: dict = Depends(get_current_user),
     account: dict = Depends(authenticator.get_current_account_data),
 ) -> bool:
     if account["user_type"] == "company":

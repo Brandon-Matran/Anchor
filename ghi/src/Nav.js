@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Navigate, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import "./Nav.css"
 import { useToken } from "./accounts/Authentication";
 import anchor from './images/anchor.jpg'
@@ -21,8 +21,12 @@ function Nav() {
   }
 
   const handleLogo = () => {
+    if (token) {
+    navigate('/main')
+  } else {
     navigate('/')
   }
+}
 
   return (
     <div>
@@ -32,11 +36,6 @@ function Nav() {
 
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
 
-              <div className="nav-item">
-                <NavLink className="nav-link active" aria-current="page" to="/">
-                  Home
-                </NavLink>
-              </div>
 
 
           </div>
@@ -51,7 +50,7 @@ function Nav() {
             </button>
             {menu && (
 
-                <ul class="dropdownBurger cut">
+                <ul className="dropdownBurger cut">
 
                     <NavLink
                       className="dropdown-item link"
@@ -61,14 +60,24 @@ function Nav() {
                       Blogs
                     </NavLink>
 
-                    <NavLink
+                    {token && <NavLink
                       className="dropdown-item link"
                       aria-current="page"
                       to="blogs/create"
                     >
                       Create Blog
                     </NavLink>
+                    }
 
+                    {token && <NavLink
+                      className="dropdown-item link"
+                      aria-current="page"
+                      to="/blogs/myblogs"
+                    >
+                      My Blogs
+
+                    </NavLink>
+                    }
 
                     <NavLink
                       className="dropdown-item link"
@@ -78,13 +87,24 @@ function Nav() {
                       Job Listings
                     </NavLink>
 
-                    <NavLink
+                    {token && <NavLink
                       className="dropdown-item link"
                       aria-current="page"
                       to="listings/create"
                     >
                       Post Job Listing
                     </NavLink>
+                    }
+
+                    {token && <NavLink
+                      className="dropdown-item link"
+                      aria-current="page"
+                      to="/listings/mylistings"
+                    >
+                      My listings
+
+                    </NavLink>
+                    }
 
 
                     {!token && <NavLink

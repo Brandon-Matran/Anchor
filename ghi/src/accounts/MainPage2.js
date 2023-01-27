@@ -3,9 +3,8 @@ import programmer from "../images/programmer.jpg";
 import { useNavigate } from "react-router";
 import "./MainPage.css";
 import { useEffect, useState } from "react";
-import { useToken } from "./Authentication.js";
-import SignUpModal from "./SignupModal";
 import LoginModal from "./LoginModal";
+import { useToken } from "./Authentication.js";
 
 function Column(props) {
   return (
@@ -26,9 +25,9 @@ function Column(props) {
               </div>
               <div className="col-md-8 cardBackground">
               <div className="card-body">
-                <p className="card-text blogText">Date: {date}</p>
+                <p className="card-text">Date: {date}</p>
 
-                <p className="card-text text-truncate blogText">Description: {data.description}</p>
+                <p className="card-text">Description: {data.description}</p>
               </div>
             </div>
           </div>
@@ -45,14 +44,6 @@ function MainPage() {
   const [loginModal, setLoginModal] = useState(false);
   const [signupModal, setSignUpModal] = useState(false);
   const [blogs, setBlogList] = useState([], [], []);
-
-  const handleSignup = () => {
-    navigate("/signup")
-  }
-
-  const handleLogin = () => {
-    navigate("/login")
-  }
 
   useEffect(() => {
     const url = `${process.env.REACT_APP_BLOG_SERVICE}/blogs`;
@@ -102,35 +93,15 @@ function MainPage() {
             />
           </div>
           <div className="container">
-            <div className="blogContainer d-flex align-items-center row">
+            <div className="blogContainer d-flex align-items-cente row">
               <div className="col-sm d-flex justify-content-end">
-                <button
-                  onClick={() => {
-                    setSignUpModal(true);
-                  }}
-                  type="button"
-                  className="openSignupModal"
-                >
-                  Sign Up
-                </button>
-                {signupModal && (
-                  <SignUpModal closeSignupModal={setSignUpModal} />
-                )}
-              </div>
-              <div className="col-sm d-flex justify-content-start">
-                <button
-                  className="openLoginModal"
-                  onClick={() => setLoginModal(true)}
-                >
-                  Log In
-                </button>
                 {loginModal && <LoginModal closeLoginModal={setLoginModal} />}
               </div>
             </div>
           </div>
 
-          <div className="aboveFooter fill-height">
-            <div className="d-flex justify-content-center row fill-height">
+          <div className="aboveFooter">
+            <div className="d-flex justify-content-center row">
               <div className="row g-0 col-md-4 blogRow">
                 {blogs.map((blog, index) => {
                   return <Column key={index} list={blog} />;
@@ -144,7 +115,7 @@ function MainPage() {
 
       <div className="container" id="footer-container">
         <footer
-          className="footer footerHeight"
+          className="footer"
           id="footer"
           style={{ backgroundImage: `url(${background_image})` }}
         ></footer>

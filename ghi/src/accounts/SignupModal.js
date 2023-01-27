@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate, Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useToken } from "./Authentication";
 import signup_image from "../images/signup_image.png";
 import "./SignupModal.css";
@@ -10,32 +10,17 @@ function SignUpModal({ closeSignupModal }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [user_type, setType] = useState("");
-  const [signUpSuccess, setsignUpSuccess] = useState(null);
 
-
-
-
-  // function handleClick() {
-  //   if (token) {
-  //     setsignUpSuccess(true);
-  //     navigate("/test");
-  //   }
-  //   else {
-  //     alert('Invalid Credentials')
-  //   }
-  // }
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   await signup(username, password, user_type);
-  // };
-
+  if (token) {
+    navigate('/main')
+  }
   return (
     <div className="modalBackground">
       <div className="container-fluid signUpModal">
         <div className="row d-flex justify-content-center align-items-center h-100">
           <div className="col-lg-12 col-xl-11">
             <div className="card text-black">
-              <div className="card-body p-md-5">
+              <div className="card-body p-md-5 signupCard">
                 <div className="row justify-content-center">
                   <div className="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
                     <p className="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">
@@ -94,6 +79,7 @@ function SignUpModal({ closeSignupModal }) {
                         <button
                           onClick={async () =>
                             await signup(username, password, user_type)
+
                           }
                           type="button"
                           className="submitSignup"
