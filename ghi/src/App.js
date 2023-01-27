@@ -1,5 +1,5 @@
 import "./App.css";
-import LoginForm from "./accounts/LoginForm.js";
+import LoginForm from "./accounts/LoginForm";
 import {
   BrowserRouter as BrowserRouter,
   Route,

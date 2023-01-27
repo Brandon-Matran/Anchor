@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../accounts/Authentication"
+import "../accounts/MainPage.css";
 
-const JobListings = () => {
+function JobListings() {
   const [jobs, setJob] = useState([]);
+  const [username, setUserName] = useState('')
   const navigate = useNavigate();
   const { token } = useAuthContext();
-  const [Jwt, setJwt] = useState(null);
-  const [userName, setUserName] = useState('')
 
   function parseJwt(data) {
     const base64Url = data.split(".")[1];
@@ -49,9 +49,18 @@ const JobListings = () => {
     }
   }, [token]);
 
+  function handleApply(job) {
+    if(!token) {
+      navigate("/signup")
+    }
+    else {
+      { window.location.href = job.apply_url; }
+    }
+  }
+
   return (
-    <div>
-      <table className="table table-striped">
+    <div className="targetall">
+      <table className="table table-striped text-center login">
         <thead>
           <tr>
             <th scope="col">Title</th>
@@ -81,7 +90,7 @@ const JobListings = () => {
                   <td>{job.company_name}</td>
                   <td>{job.job_position}</td>
                   <td>
-                    <button onClick={() => { window.location.href = job.apply_url; } }
+                    <button onClick={() => handleApply(job) }
                         type="button"
                         className="btn btn-success"
                         >Apply
@@ -89,13 +98,6 @@ const JobListings = () => {
                   </td>
                   <td>{job.deadline}</td>
                   <td>{job.created}</td>
-                  <td>
-                  <button onClick={() => { window.location.href = job.apply_url; } }
-                      type="button"
-                      className="btn btn-success"
-                      >Apply
-                  </button>
-                  </td>
                 </tr>
               );
               }

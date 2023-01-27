@@ -1,12 +1,9 @@
-import background_image from "../images/background_image.png";
-import programmer from "../images/programmer.jpg";
+import background_image from "../images/anchor_main_background.png";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 import "./MainPage.css";
 import { useEffect, useState } from "react";
-import LoginModal from "./LoginModal";
-import { useToken } from "./Authentication.js";
-
+import { useAuthContext } from "../accounts/Authentication"
 
 function Column(props) {
   return (
@@ -27,19 +24,14 @@ function Column(props) {
                   />
                 </div>
                 <div className="col-md-8 cardBackground">
-                <div className="card-body">
-                  <p className="card-text">{data.title}</p>
-                </div>
-                <div className="card-body">
-                  <p className="card-text">By: {data.username}</p>
-                </div>
-                <div className="card-body">
-                  <p className="card-text">{date}</p>
+                  <div className="card-body">
+                    <p>By {data.username} | Date: {date}</p>
+                    <p className="text-truncate">{data.description}</p>
+                  </div>
                 </div>
               </div>
             </div>
-            </div>
-          </Link>
+        </Link>
         );
       })}
     </div>
@@ -47,80 +39,78 @@ function Column(props) {
 }
 
 function MainPage() {
-  const [token, login, logout] = useToken();
   const navigate = useNavigate();
-  const [loginModal, setLoginModal] = useState(false);
-  const [signupModal, setSignUpModal] = useState(false);
   const [blogs, setBlogList] = useState([], [], []);
+  const [username, setUserName] = useState('');
+  // const [Jwt, setJwt] = useState(null);
+
+  const { token } = useAuthContext()
+
+  const handleLogout = () => {
+    logout();
+    alert("You have logged out");
+  };
+
+  function parseJwt(data) {
+    const base64Url = data.split(".")[1];
+    const base64 = base64Url.replace("-", "+").replace("_", "/");
+    const info = JSON.parse(window.atob(base64));
+    setUserName(info.account.username);
+  }
+
+  async function fetchData() {
+    const url = `${process.env.REACT_APP_BLOG_SERVICE}/blogs`;
+    const response = await fetch(url);
+    if (response.ok) {
+      const data = await response.json();
+      const blogData = data.slice(data.length - 3);
+      const blogs = [[], [], []];
+      let i = 0;
+
+      for (const event of blogData) {
+        blogs[i].push(event);
+        i = i + 1;
+        if (i > 2) {
+          i = 0;
+        }
+
+        setBlogList(blogs);
+      }
+    }
+  }
 
   useEffect(() => {
-    const url = `${process.env.REACT_APP_BLOG_SERVICE}/blogs`;
-    async function fetchData() {
-      const response = await fetch(url);
-      if (response.ok) {
-        const data = await response.json();
-        const blogData = data.slice(data.length - 3);
-        const blogs = [[], [], []];
-        let i = 0;
-
-        for (const event of blogData) {
-          blogs[i].push(event);
-          i = i + 1;
-          if (i > 2) {
-            i = 0;
-          }
-
-          setBlogList(blogs);
-        }
+    {
+      if (token) {
+        parseJwt(token);
       }
     }
     fetchData();
-  }, []);
+  }, [token, username]);
 
   return (
-    <div>
-      <div
-        className="header"
-        style={{ backgroundImage: `url(${background_image})` }}
-      >
-        <div
-          className="col-sm d-flex justify-content-end"
-          id="logo"
-          animation="fadeIn 3s"
-        >
-          Anchor
+    <div className="targetall">
+      <div className="header" style={{ backgroundImage: `url(${background_image})` }}>
+        <div className="row align-items-start">
+          <div className="col align-self-start mt-5">
+            <div className="logintext">
+              Welcome aboard, {username}
+            </div>
+            <button className="openSignupModal mt-5" onClick={() => navigate("/blogs/myblogs")}>View MyBlogs</button>
+            <button className="openLoginModal mt-5 mx-4" onClick={() => navigate("/listings/mylistings")}>View MyListings</button>
+          </div>
         </div>
       </div>
-      <div className="middle">
-        <div>
-          <div className="container-fluid">
-            <img
-              src={programmer}
-              className="programmer img-fluid"
-              alt="programmer"
-            />
-          </div>
-          <div className="container">
-            <div className="blogContainer d-flex align-items-cente row">
-              <div className="col-sm d-flex justify-content-end">
-                {loginModal && <LoginModal closeLoginModal={setLoginModal} />}
-              </div>
-            </div>
-          </div>
-
-          <div className="aboveFooter">
-            <div className="d-flex justify-content-center row">
-              <div className="row g-0 col-md-4 blogRow">
-                {blogs.map((blog, index) => {
-                  return <Column key={index} list={blog} />;
-                })}
-              </div>
+        <div className="container-sm">
+          <h2 className="text-center w-50 p-5">Blogs</h2>
+          <div className="d-flex justify-content-center row">
+            <div className="row g-0 col-md-4 blogRow">
+              {blogs.map((blog, index) => {
+                return <Column key={index} list={blog} />;
+              })}
             </div>
           </div>
         </div>
-
-      </div>
-
       <div className="container" id="footer-container">
         <footer
           className="footer"

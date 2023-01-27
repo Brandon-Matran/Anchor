@@ -1,6 +1,7 @@
 import {useEffect, useState} from "react"
 import { useAuthContext } from "../accounts/Authentication"
 import { useNavigate } from "react-router-dom";
+import background_image from "../images/background_image.png";
 
 function CreateBlogsForm(props) {
 
@@ -10,7 +11,6 @@ function CreateBlogsForm(props) {
     const [title, setTitle] = useState('')
     const [pic_url, setPicURL] = useState('')
     const [description, setDescription] = useState('')
-    const [Jwt, setJwt] = useState(null)
     const [submitted, setSubmitted] = useState(false)
     const navigate = useNavigate()
 
@@ -42,15 +42,15 @@ function CreateBlogsForm(props) {
       description: description,
     };
 
-        const blogURL = `${process.env.REACT_APP_BLOG_SERVICE}/blogs`
-        const fetchConfig = {
-            method: "post",
-            body: JSON.stringify(newBlog),
-            headers: {
-                'Content-Type': 'application/json',
-                "Authorization": `Bearer ${token}`
-            },
-        }
+    const blogURL = `${process.env.REACT_APP_BLOG_SERVICE}/blogs`
+    const fetchConfig = {
+        method: "post",
+        body: JSON.stringify(newBlog),
+        headers: {
+            'Content-Type': 'application/json',
+            "Authorization": `Bearer ${token}`
+        },
+    }
 
     fetch(blogURL, fetchConfig)
       .then((response) => response.json())
@@ -70,6 +70,11 @@ function CreateBlogsForm(props) {
   }
 
     return (
+      // <section className="vh-100" style={{ backgroundImage: `url(${background_image})` }}>
+      // </section>
+      //   <div className="container h-100">
+
+      //   </div>
         <div className="row">
             <div className="offset-3 col-6">
                 <div className="shadow p-4 mt-4">
@@ -89,7 +94,7 @@ function CreateBlogsForm(props) {
                         </div>
                         <div className="mb-3">
                             <label htmlFor="description" className="form-label">Description</label>
-                            <textarea onChange={e => setDescription(e.target.value)} className="form-control"
+                            <textarea onChange={e => setDescription(e.target.value)} className="form-control" style={{height: 250}}
                             id="description" rows="3" value={description} ></textarea>
                         </div>
                         <button type="submit" className="btn btn-primary">Create</button>
