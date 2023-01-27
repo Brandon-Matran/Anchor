@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useAuthContext } from "../accounts/Authentication.js";
 import { useParams } from "react-router";
+import { useNavigate } from 'react-router-dom';
 
 function UpdateListing() {
   const { id } = useParams()
@@ -12,6 +13,7 @@ function UpdateListing() {
   const [deadline, setDead] = useState('');
   const [created, setCreated] = useState('');
   const [submitted, setSubmitted] = useState(false)
+  const navigate = useNavigate()
 
   const { token } = useAuthContext();
 
@@ -39,6 +41,7 @@ function UpdateListing() {
 
   const handleSubmit = (event) => {
     event.preventDefault()
+    navigate("/listings/mylistings");
     const updatedListings = {
       "username": username,
       "title": title,
@@ -58,7 +61,7 @@ function UpdateListing() {
           "Authorization": `Bearer ${token}`
       },
   }
-  
+
   fetch(listingsURL, fetchConfig)
       .then(response => response.json())
       .then(() => {
