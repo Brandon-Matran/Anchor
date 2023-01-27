@@ -93,7 +93,7 @@ function CreateBlogsForm(props) {
                         </div>
                         <div className="mb-3">
                             <label htmlFor="description" className="form-label">Description</label>
-                            <textarea onChange={e => setDescription(e.target.value)} className="form-control"
+                            <textarea onChange={e => setDescription(e.target.value)} className="form-control" style={{height: 250}}
                             id="description" rows="3" value={description} ></textarea>
                         </div>
                         <button type="submit" className="btn btn-primary">Create</button>

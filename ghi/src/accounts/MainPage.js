@@ -1,5 +1,4 @@
-import background_image from "../images/background_image.png";
-import programmer from "../images/programmer.jpg";
+import background_image from "../images/anchor_main_background.png";
 import { Navigate, useNavigate } from "react-router";
 import "./MainPage.css";
 import { useEffect, useState } from "react";
@@ -26,9 +25,8 @@ function Column(props) {
               </div>
               <div className="col-md-8 cardBackground">
               <div className="card-body">
-                <p className="card-text">Date: {date}</p>
-
-                <p className="card-text text-truncate">Description: {data.description}</p>
+                <p>By {data.username} | Date: {date}</p>
+                <p className="text-truncate">{data.description}</p>
               </div>
             </div>
           </div>
@@ -60,7 +58,7 @@ function MainPage() {
   }
 
   useEffect(() => {
-    const url = "http://localhost:8080/blogs";
+    const url = `${process.env.REACT_APP_BLOG_SERVICE}/blogs`;
     async function fetchData() {
       const response = await fetch(url);
       if (response.ok) {
@@ -85,58 +83,47 @@ function MainPage() {
 
   return (
     <div>
-      <div
-        className="header"
-        style={{ backgroundImage: `url(${background_image})` }}
-      >
-        <div
-          className="col-sm d-flex justify-content-end"
-          id="logo"
-          animation="fadeIn 3s"
-        >
-          Anchor
+      <div className="header" style={{ backgroundImage: `url(${background_image})`}}>
+        <div className="row align-items-start">
+          <div className="col align-self-start">
+            <div className="logo">
+              Anchor
+            </div>
+            <div className="logotext">
+              A community crewed by engineers
+            </div>
+            <button
+              onClick={() => {
+                setSignUpModal(true);
+              }}
+              // onClick={() => {handleSignup()}}
+              // type="button"
+              className="openSignupModal mt-5"
+            >
+              Sign Up
+            </button>
+            {signupModal && (
+              <SignUpModal closeSignupModal={setSignUpModal} />
+            )}
+            <button
+              className="openLoginModal mt-5 mx-4"
+              // onClick={() => {handleLogin()}}
+              onClick={() => setLoginModal(true)}
+            >
+              Log In
+            </button>
+            {loginModal && <LoginModal closeLoginModal={setLoginModal} />}
+          </div>
+          <div className="col align-self-center">
+          </div>
+          <div className="cold-flex col align-self-end">
+          </div>
         </div>
       </div>
-      <div className="middle">
-        <div>
-          <div className="container-fluid">
-            <img
-              src={programmer}
-              className="programmer img-fluid"
-              alt="programmer"
-            />
+        <div className="container-sm">
+          <div>
+            <h3>Blogs</h3>
           </div>
-          <div className="container">
-            <div className="blogContainer d-flex align-items-cente row">
-              <div className="col-sm d-flex justify-content-end">
-                <button
-                  // onClick={() => {
-                  //   setSignUpModal(true);
-                  // }}
-                  onClick={() => {handleSignup()}}
-                  type="button"
-                  className="openSignupModal"
-                >
-                  Sign Up
-                </button>
-                {/* {signupModal && (
-                  <SignUpModal closeSignupModal={setSignUpModal} />
-                )} */}
-              </div>
-              <div className="col-sm d-flex justify-content-start">
-                <button
-                  className="openLoginModal"
-                  onClick={() => {handleLogin()}}
-                  // onClick={() => setLoginModal(true)}
-                >
-                  Log In
-                </button>
-                {/* {loginModal && <LoginModal closeLoginModal={setLoginModal} />} */}
-              </div>
-            </div>
-          </div>
-
-          <div className="aboveFooter">
             <div className="d-flex justify-content-center row">
               <div className="row g-0 col-md-4 blogRow">
                 {blogs.map((blog, index) => {
@@ -144,11 +131,7 @@ function MainPage() {
                 })}
               </div>
             </div>
-          </div>
         </div>
-
-      </div>
-
       <div className="container" id="footer-container">
         <footer
           className="footer"
@@ -156,7 +139,7 @@ function MainPage() {
           style={{ backgroundImage: `url(${background_image})` }}
         ></footer>
       </div>
-    </div>
+  </div>
   );
 }
 

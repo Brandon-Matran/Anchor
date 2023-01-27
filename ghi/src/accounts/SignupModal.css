@@ -48,7 +48,6 @@
 }
 
 .signUpModal {
-  position: absolute;
   animation: fadeInAnimation ease 1s;
   width: 50%;
   top: 30%;

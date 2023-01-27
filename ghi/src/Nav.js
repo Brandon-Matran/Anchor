@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Navigate, NavLink } from "react-router-dom";
 import "./Nav.css"
-import { useToken } from "./accounts/Authentication";
+import { useAuthContext, useToken } from "./accounts/Authentication";
 import anchor from './images/anchor.jpg'
 import { useNavigate } from "react-router";
 
@@ -29,18 +29,15 @@ function Nav() {
       <nav className="navbar navbar-expand-lg">
         <div className="container-fluid">
   <img src={anchor} className='anchor' onClick={handleLogo}></img>
-
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
-
               <div className="nav-item">
-                <NavLink className="nav-link active" aria-current="page" to="/main">
+                <NavLink className="nav-link link active" aria-current="page" to="/main">
                   Home
                 </NavLink>
               </div>
 
 
           </div>
-
           <div >
             <button
               className="burger"
@@ -51,7 +48,7 @@ function Nav() {
             </button>
             {menu && (
 
-                <ul class="dropdownBurger cut">
+                <ul className="dropdownBurger cut">
 
                     <NavLink
                       className="dropdown-item link"
@@ -73,7 +70,7 @@ function Nav() {
                     {token && <NavLink
                       className="dropdown-item link"
                       aria-current="page"
-                      to="/blogs/my"
+                      to="/blogs/myblogs"
                     >
                       My Blogs
 
@@ -142,7 +139,6 @@ function Nav() {
             )}
           </div>
         </div>
-
       </nav>
     </div>
   );

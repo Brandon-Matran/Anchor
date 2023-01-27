@@ -1,11 +1,8 @@
-import background_image from "../images/background_image.png";
-import programmer from "../images/programmer.jpg";
+import background_image from "../images/anchor_main_background.png";
 import { Navigate, useNavigate } from "react-router";
 import "./MainPage.css";
 import { useEffect, useState } from "react";
-import LoginModal from "./LoginModal";
-import SignUpModal from "./SignupModal";
-import { useToken } from "./Authentication.js";
+import { useAuthContext } from "../accounts/Authentication"
 
 function Column(props) {
   return (
@@ -26,9 +23,10 @@ function Column(props) {
               </div>
               <div className="col-md-8 cardBackground">
               <div className="card-body">
-                <p className="card-text">Date: {date}</p>
-
-                <p className="card-text">Description: {data.description}</p>
+                <p className="card-text">By {data.username} | Date: {date}</p>
+              </div>
+              <div>
+                <p className="text-truncate">{data.description}</p>
               </div>
             </div>
           </div>
@@ -40,23 +38,35 @@ function Column(props) {
 }
 
 function MainPage() {
-  const [token, login, logout] = useToken();
   const navigate = useNavigate();
-  const [loginModal, setLoginModal] = useState(false);
-  const [signupModal, setSignUpModal] = useState(false);
   const [blogs, setBlogList] = useState([], [], []);
+  const [username, setUserName] = useState('');
+  const [Jwt, setJwt] = useState(null);
+
+  const token = useAuthContext();
 
   const handleLogout = () => {
     logout();
     alert("You have logged out");
   };
 
-  const handleSignup = () => {
-    navigate("/signup")
+  function parseJwt(data) {
+    const base64Url = data.split(".")[1];
+    const base64 = base64Url.replace("-", "+").replace("_", "/");
+    const info = JSON.parse(window.atob(base64));
+    setUserName(info.account.username);
   }
 
+
   useEffect(() => {
-    const url = "http://localhost:8080/blogs";
+    const url = `${process.env.REACT_APP_BLOG_SERVICE}/blogs`;
+    fetch(token)
+    .then(response => {if ((typeof response.token) !== "object") {
+        setJwt(token.token);
+        if (Jwt !== null) {
+            parseJwt(Jwt);
+        }
+    }})
     async function fetchData() {
       const response = await fetch(url);
       if (response.ok) {
@@ -77,52 +87,33 @@ function MainPage() {
       }
     }
     fetchData();
-  }, []);
+  }, [token, Jwt, username]);
 
   return (
     <div>
-      <div
-        className="header"
-        style={{ backgroundImage: `url(${background_image})` }}
-      >
-        <div
-          className="col-sm d-flex justify-content-end"
-          id="logo"
-          animation="fadeIn 3s"
-        >
-          Anchor
+      <div className="header" style={{ backgroundImage: `url(${background_image})` }}>
+        <div className="row align-items-start">
+          <div className="col align-self-start">
+            <div className="logintext">
+              Welcome aboard, {username}
+            </div>
+            <button className="openSignupModal mt-5" onClick={() => navigate("/blogs/myblogs")}>View MyBlogs</button>
+            <button className="openLoginModal mt-5 mx-4" onClick={() => navigate("/listings/mylistings")}>View MyListings</button>
+          </div>
         </div>
       </div>
-      <div className="middle">
-        <div>
-          <div className="container-fluid">
-            <img
-              src={programmer}
-              className="programmer img-fluid"
-              alt="programmer"
-            />
+        <div className="container-sm">
+          <div>
+            <h3>Blogs</h3>
           </div>
-          <div className="container">
-            <div className="blogContainer d-flex align-items-cente row">
-              <div className="col-sm d-flex justify-content-end">
-                {loginModal && <LoginModal closeLoginModal={setLoginModal} />}
-              </div>
-            </div>
-          </div>
-
-          <div className="aboveFooter">
-            <div className="d-flex justify-content-center row">
-              <div className="row g-0 col-md-4 blogRow">
-                {blogs.map((blog, index) => {
-                  return <Column key={index} list={blog} />;
-                })}
-              </div>
+          <div className="d-flex justify-content-center row">
+            <div className="row g-0 col-md-4 blogRow">
+              {blogs.map((blog, index) => {
+                return <Column key={index} list={blog} />;
+              })}
             </div>
           </div>
         </div>
-
-      </div>
-
       <div className="container" id="footer-container">
         <footer
           className="footer"
