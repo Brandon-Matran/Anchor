@@ -41,6 +41,7 @@ function UpdateListing() {
 
   const handleSubmit = (event) => {
     event.preventDefault()
+    navigate("/listings/mylistings");
     const updatedListings = {
       "username": username,
       "title": title,
