@@ -33,17 +33,15 @@ function MyBlogs() {
                 if (i > 2) {
                     i = 0;
                 }
-            } setBlogs(blogs);
-        }
+              } setBlogs(blogs);
+          }
     }
 
     useEffect(() => {
-      {
         if (token) {
           parseJwt(token);
         }
         fetchData()
-      }
     }, [token, username]);
 
     function deleteBlog(id) {

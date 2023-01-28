@@ -73,16 +73,11 @@ function MyJobs(props) {
     );
 }
 
-useEffect(() => {
-  {
-    if (token) {
-      parseJwt(token);
-    }
-  }
-}, [token]);
-
   useEffect(() => {
         const url = `${process.env.REACT_APP_LISTING_SERVICE}/listings`;
+        if (token) {
+          parseJwt(token);
+        }
         async function fetchData() {
           const response = await fetch(url);
           if (response.ok) {
@@ -103,7 +98,7 @@ useEffect(() => {
           }
       }
       fetchData();
-  }, [username])
+  }, [token, username])
 
 
 
