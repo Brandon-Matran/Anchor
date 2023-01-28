@@ -1,5 +1,38 @@
 # Allen's Day to Day
 
+## 01/27/2023
+
+## 01/26/2023
+Completed:
+- Built a new Main Page with title animations
+- Edited modal pages for css
+- Added new images for the background
+- Resolved issue with Navbar rendering
+- Refactorted CSS files
+- Added new text family to apply to the entire website
+
+Work in Progress:
+- Resizing the background image to fit all pages
+- Refactoring all microservices codes to accomodate CSS
+- Center view all blog and listings
+- Refactor forms to uniformly conform to a single format
+- Fix issue with other pages overlapping burger dropdown
+
+Note:
+Liking the new page. Need to team's help to finish the rest of the css
+
+## 01/25/2023
+Completed:
+- Added Create, Delete and Update buttons to MyBlogs
+- Resolved token bug; replaced Jwt with token
+
+Work In Progress:
+- Need MyBlogs page to reset when creating a new blog, deleting and updating an existing blog
+- Will work on CSS for the entire app
+
+Note:
+All our codes are different. I will need to figure out how to implement CSS to main page, navbar, forms, and view all pages.
+
 ## 01/24/2023
 Completed:
 - Finished unit test
