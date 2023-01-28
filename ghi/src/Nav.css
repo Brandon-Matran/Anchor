@@ -24,16 +24,16 @@
 }
 
 .dropdownBurger {
-    position: absolute;
+    position: fixed;
     right: 1%;
-    top:120%;
+    /* top:120%; */
+
     background-color: rgb(146, 148, 146);
     padding: 10px;
     padding: 2rem 2rem;
     border-radius: 0.8rem;
     color: var(--light);
     background: var(--background);
-    background-color: rgb(157, 169, 175);
     box-shadow: 0.4rem 0.4rem 2.4rem 0.2rem hsla(235, 24%, 81%, 0.3);
     overflow: hidden;
     animation: fadeInAnimation ease 250ms;

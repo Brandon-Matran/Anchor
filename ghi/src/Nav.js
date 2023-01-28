@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./Nav.css"
 import { useAuthContext, useToken } from "./accounts/Authentication";
@@ -8,6 +8,7 @@ import { useNavigate } from "react-router";
 function Nav() {
   const [menu, setMenu] = useState(false);
   const [token, login, logout] = useToken();
+  const [iscompany, setisCompany] = useState(false)
   const navigate = useNavigate();
 
   const handleOpen = () => {
@@ -27,6 +28,26 @@ function Nav() {
     navigate('/')
   }
 }
+
+function parseJwt(token) {
+  const base64Url = token.split(".")[1];
+  const base64 = base64Url.replace("-", "+").replace("_", "/");
+  const info = JSON.parse(window.atob(base64));
+  const user_type = info.account.user_type
+  if (user_type === "company") {
+  setisCompany(true)
+  }
+  }
+
+
+useEffect( () => {
+  if (token) {
+    parseJwt(token)
+
+  }
+}, [token])
+
+
 
   return (
     <div>
@@ -82,7 +103,7 @@ function Nav() {
                       Job Listings
                     </Link>
 
-                    {token && <Link
+                    {iscompany === true && <Link
                       className="dropdown-item link"
                       aria-current="page"
                       to="listings/create"
