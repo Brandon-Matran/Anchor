@@ -25,7 +25,7 @@ def test_get_one_listing():
     req = {"id": 1}
 
     app.dependency_overrides[ListingRepository] = MockQueries
-    response = client.get("/listings/1", json=req)
+    response = client.get("/listings/1")
     actual = response.json()
     assert response.status_code == 200
     assert actual == expected_response

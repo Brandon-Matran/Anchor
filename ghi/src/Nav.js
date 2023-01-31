@@ -103,13 +103,13 @@ useEffect( () => {
                       Job Listings
                     </Link>
 
-                    {iscompany === true && <Link
+                    {iscompany ? (<Link
                       className="dropdown-item link"
                       aria-current="page"
                       to="listings/create"
                     >
                       Post Job Listing
-                    </Link>
+                    </Link>) : ""
                     }
 
                     {token && <Link
