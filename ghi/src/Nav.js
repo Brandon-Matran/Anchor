@@ -153,6 +153,14 @@ useEffect( () => {
                       Logout
                     </Link>
                   }
+
+                    <Link
+                      className="dropdown-item link"
+                      aria-current="page"
+                      to="/about"
+                    >
+                      About Us
+                    </Link>
                 </ul>
             )}
           </div>

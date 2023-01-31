@@ -20,6 +20,7 @@ import CreateJobsForm from "./Listings/CreateListingsForm";
 import GetOneBlog from "./Blogs/GetOneBlog";
 import Nav from "./Nav";
 import MyBlogs from "./Blogs/MyBlogs";
+import Model4 from "./AboutUs/TeamMembers";
 
 function GetToken() {
   useToken();
@@ -54,6 +55,7 @@ function App() {
               <Route path="create" element={<CreateJobsForm />} />
               <Route path="update/:id" element={<UpdateListing />} />
             </Route>
+            <Route path="/about" element={<Model4 />} />
           </Routes>
         </AuthProvider>
       </BrowserRouter>
