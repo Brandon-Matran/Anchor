@@ -1,16 +1,15 @@
 import { useEffect , useState} from "react";
 import { useAuthContext } from "../accounts/Authentication"
 import React from 'react';
-// import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 
 function MyJobs(props) {
   const [jobs, setJobs] = useState([], [], []);
   const [job, setJob] = useState([]);
   const [username, setUserName] = useState('')
-  const [Jwt, setJwt] = useState(null);
-
-  const token = useAuthContext();
+  const navigate = useNavigate()
+  const { token } = useAuthContext();
 
 
 
@@ -30,14 +29,13 @@ function MyJobs(props) {
     const fetchConfig = {
       method: "delete",
       headers: {
-        "Authorization": `Bearer ${Jwt}`,
+        "Authorization": `Bearer ${token}`,
         "Content-Type": "application/json"
       }
     };
     const response = await fetch(url, fetchConfig);
     if (response.ok) {
       getJob();
-      const data = await response.json()
     }
   };
 
@@ -53,7 +51,6 @@ function MyJobs(props) {
       <div className="col">
         {props.list.map((data, index) => {
           return (
-            // <Link to={`/listings/${data.id}`} key={index} className="text-decoration-none text-reset" >
               <div key={index} className="card mb-3 shadow">
                 <div className="card-body">
                   <h5 className="card-title">
@@ -61,34 +58,31 @@ function MyJobs(props) {
                   <h6 className="card-subtitle mb-2 text-muted">
                     Company: {data.company_name}
                   </h6>
-                  <h7 className="card-subtitle mb-2 text-muted">
+                  <p className="card-subtitle mb-2 text-muted">
                     Deadline: {data.deadline}
-                  </h7>
-                  <p className="card-text">
-                    Posted date: {data.created}
                   </p>
 
-                  <button type="button" className="btn btn-danger" onClick={() => DeleteJobListing(data.id)}>Delete Listing</button>
 
+                  <button type="button" className="btn btn-danger" onClick={() => DeleteJobListing(data.id)}>Delete Listing</button>
+                  <button className="btn btn-warning" onClick={() => navigate(`/listings/update/${data.id}`)}>Update</button>
                 </div>
               </div>
-            // </Link>
           );
         })}
       </div>
     );
 }
 
+useEffect(() => {
+  {
+    if (token) {
+      parseJwt(token);
+    }
+  }
+}, [token]);
 
   useEffect(() => {
         const url = `${process.env.REACT_APP_LISTING_SERVICE}/listings`;
-        fetch(token)
-        .then(response => {if ((typeof response.token) !== "object") {
-            setJwt(token.token);
-            if (Jwt !== null) {
-                parseJwt(Jwt);
-            }
-        }})
         async function fetchData() {
           const response = await fetch(url);
           if (response.ok) {
@@ -109,30 +103,27 @@ function MyJobs(props) {
           }
       }
       fetchData();
-  }, [token, Jwt, username])
+  }, [username])
 
 
 
 
   return (
-    <>
-        <div className="px-4 py-5 my-5 mt-0 text-center bg-white">
+    <div style={{height: "100vh"}}>
+        <div className="px-4 py-5 my-5 mt-0 text-center">
             <h1 className="display-5 fw-bold">My Listings</h1>
         </div>
         <div className="container">
-        <h2>Job Listings</h2>
+        <h2 className="mb-5">Job Listings</h2>
         <div className="row">
             {jobs.map((job, index) => {
                 return (
                     <JobsColumn key={index} list={job} />
-
                 );
-
             })}
-
         </div>
-        </div>
-    </>
+      </div>
+    </div>
 );
 
 }

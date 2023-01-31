@@ -1,8 +1,6 @@
 .modalContainer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 25%;
+  font-size: 16px;
+  width: 30%;
   padding: 4rem 2rem;
   border-radius: 0.8rem;
   color: var(--light);
@@ -25,47 +23,20 @@
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.4);
   backdrop-filter: blur(15px);
-    align-items: center;
+  align-items: center;
   justify-content: center;
 }
 
 @keyframes fadeInAnimation {
-    0% {
-        opacity: 0;
-    }
-    10% {
-        opacity: 0.1;
-    }
-    20% {
-        opacity: 0.2;
-    }
-    30% {
-        opacity: 0.3;
-    }
-    40% {
-        opacity: 0.4;
-    }
-    50% {
-        opacity: 0.5;
-    }
-    60% {
-        opacity: 0.6;
-    }
-    70% {
-        opacity: 0.7;
-    }
-    80% {
-        opacity: 0.8;
-    }
-    90% {
-        opacity: 0.9;
-    }
-    100% {
-        opacity: 1;
-    }
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
-.cancel {
+/* .cancel {
   align-self: flex-end;
   border-radius: 8px;
   border-style: none;
@@ -81,10 +52,10 @@
   height: 40px;
   line-height: 20px;
   list-style: none;
-  margin: 0;
+  margin: 1rem;
   outline: none;
   padding: 10px 16px;
-  position: absolute;
+  position: sticky;
   right: 8%;
   text-align: center;
   text-decoration: none;
@@ -120,7 +91,7 @@
   margin: 0;
   outline: none;
   padding: 10px 16px;
-  position: relative;
+  position: sticky;
   text-align: center;
   text-decoration: none;
   transition: color 100ms;
@@ -133,4 +104,4 @@
 .submit:hover,
 .submit:focus {
   background-color: #82b5f0;
-}
+} */

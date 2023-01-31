@@ -1,16 +1,5 @@
-.backgroundImage {
-  background-blend-mode: darken;
-}
-
-.programmer {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 40%;
-}
-
 #footer-container {
-  background-color: rgb(243, 243, 243);
+  background-color: transparent;
   max-width: 100%;
 }
 
@@ -22,7 +11,6 @@
 }
 
 .openLoginModal {
-  /* transform: translate(700%, -100%); */
   background-color: #3d5c97;
   border-radius: 8px;
   border-style: none;
@@ -88,55 +76,93 @@
   background-color: #82b5f0;
 }
 
-#logo {
-  font-family: "Cinzel", serif;
-  font-size: 90px;
-  display: flex;
-  position: absolute;
-  bottom: 20vh;
-  left: 50%;
-  margin: 0;
-  transform: translate(-50%, 10%);
-  user-select: none;
-  top: -1%;
-  margin: auto;
-  animation: fadeIn 3s;
-  text-align: center;
-}
-
 .header {
   padding: 60px;
-  text-align: center;
-  background: #1abc9c;
+  text-align: start;
   color: rgb(56, 89, 138);
+  height: 1100px;
   font-size: 30px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  overflow: hidden;
 }
 
+.logo {
+  font-size: 120px;
+  margin: 0;
+  animation: fadeIn ease-in 2s;
+}
+
+.logotext {
+  font-size: 27px;
+  margin: 0;
+  animation-delay: 2s;
+  animation: fadeIn ease-in 2s;
+}
+
+.logintext {
+  font-family: 'Libre Baskerville', serif;
+  font-size: 55px;
+  margin: 0;
+  animation: fadeIn ease-in 2s;
+}
+
+
+.col > button {
+  display: inline-block;
+  margin: 0;
+  color: rgb(56, 89, 138);
+  font-family: 'Libre Baskerville', serif;
+  font-size: 0.50em;
+  background-color: transparent;
+  border: 1px solid;
+  cursor: pointer;
+  animation-delay: 2s;
+  animation: fadeIn ease-in 2s;
+}
+
+@-webkit-keyframes fadeIn {
+  from {
+      opacity: 0;
+  }
+  to {
+       opacity: 1;
+  }
+}
+
+@-moz-keyframes fadeIn {
+  from {
+      opacity: 0;
+  }
+  to {
+       opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+
 .footer {
-  position: fixed;
+  position: relative;
   left: 0;
   bottom: 0;
   width: 100%;
-  color: rgb(255, 255, 255);
   text-align: center;
-  padding: 50px;
-}
-
-.middle {
-  background-color: #ffffff;
+  padding: 0;
 }
 
 .blogRow {
-  /* margin: auto; */
   width: 60%;
   padding-top: 20px;
   column-gap: 30px;
-}
-
-.aboveFooter {
-  background-color: #38598a;
-
-
 }
 
 .LogOutButton {
@@ -168,19 +194,6 @@
   right: 50px;
 }
 
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-.pic {
-  left: 0;
-}
-
 .card-text {
   font-size: 15px;
   overflow: hidden;
@@ -198,9 +211,8 @@
   width: 100%;
 }
 
-
 .cardBackground {
-  background-color:#9BACC4
+  background-color:rgb(164, 212, 243);
   ;
 }
 
@@ -208,7 +220,7 @@
 .fill-height {
   height: calc(30vh);
   display: grid;
-  grid-gap: 1rem; /* this will create a gap of 1rem between each card */
+  grid-gap: 1rem;
 }
 
 

@@ -6,17 +6,15 @@ import { Link, useNavigate } from 'react-router-dom';
 function MyBlogs() {
     const [blogs, setBlogs] = useState([], [], []);
     const [username, setUserName] = useState('')
-    const [Jwt, setJwt] = useState(null);
     const navigate = useNavigate()
 
-    const token = useAuthContext();
+    const { token } = useAuthContext();
 
     function parseJwt(data) {
         const base64Url = data.split(".")[1];
         const base64 = base64Url.replace("-", "+").replace("_", "/");
         const info = JSON.parse(window.atob(base64));
         setUserName(info.account.username);
-        // setUserType(info.account.user_type);
     }
 
     async function fetchData() {
@@ -40,15 +38,13 @@ function MyBlogs() {
     }
 
     useEffect(() => {
-        fetch(token)
-        .then(response => {if ((typeof response.token) !== "object") {
-            setJwt(token.token);
-            if (Jwt !== null) {
-                parseJwt(Jwt);
-            }
-        }})
-        fetchData();
-    }, [token, Jwt, username])
+      {
+        if (token) {
+          parseJwt(token);
+        }
+        fetchData()
+      }
+    }, [token, username]);
 
     function deleteBlog(id) {
       const blogURL = `${process.env.REACT_APP_BLOG_SERVICE}/blogs/${id}`
@@ -56,18 +52,16 @@ function MyBlogs() {
         method: 'delete',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${Jwt}`
+            'Authorization': `Bearer ${token}`
         },
       }
       fetch(blogURL, fetchConfig)
       .then((response) => {
           if (!response.ok) {
               throw new Error ("Something went wrong!")
-          }
+            }
+          fetchData()
       })
-      .then(
-        fetchData
-      )
       .catch((err) => {
       })
     }
@@ -103,26 +97,26 @@ function MyBlogs() {
       );
   }
 
-    return (
-        <>
-            <div className="px-4 py-5 my-5 mt-0 text-center bg-white">
-                <h1 className="display-5 fw-bold mb-4">My Blogs</h1>
-                <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
-                    <Link to="/blogs/create" className="btn btn-success btn-lg px-4 gap-3">Post a New Blog</Link>
-                </div>
-            </div>
-            <div className="container">
-            <h2>Blogs</h2>
-            <div className="row">
-                {blogs.map((blog, index) => {
-                    return (
-                        <BlogsColumn key={index} list={blog} />
-                    );
-                })}
-            </div>
-            </div>
-        </>
-    );
+  return (
+      <div style={{height: "100vh"}}>
+          <div className="px-4 py-5 my-5 mt-0 text-center">
+              <h1 className="display-5 fw-bold mb-4">My Blogs</h1>
+              <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                  <Link to="/blogs/create" className="btn btn-success btn-lg px-4 gap-3">Post a New Blog</Link>
+              </div>
+          </div>
+          <div className="container">
+          <h2>Blogs</h2>
+          <div className="row">
+              {blogs.map((blog, index) => {
+                  return (
+                      <BlogsColumn key={index} list={blog} />
+                  );
+              })}
+          </div>
+          </div>
+      </div>
+  );
 
 }
 export default MyBlogs

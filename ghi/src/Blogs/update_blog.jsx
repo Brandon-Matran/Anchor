@@ -1,18 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../accounts/Authentication.js";
-import background_image from "../images/background_image.png";
-
-// import parseJwt from "../decode.jsx";
 
 function UpdateBlog() {
   const { token } = useAuthContext();
-  //   const info = parseJwt(token);
   const { id } = useParams();
 
   const [username, setUserName] = useState("");
   const [post_date, setDate] = useState("");
-  // const new_post_date = new Date().toLocaleString() + "";
 
   const [title, setTitle] = useState("");
   const [pic_url, setPicURL] = useState("");
@@ -63,8 +58,6 @@ function UpdateBlog() {
     const res = await fetch(url, fetchConfig);
     if (res.ok) {
       const data = await res.json();
-      // setUserName(data.username);
-      // setDate(data.post_date);
       setTitle(data.title);
       setPicURL(data.pic_url);
       setDescription(data.description);
@@ -81,17 +74,15 @@ function UpdateBlog() {
   return (
     <section
       className="vh-100"
-      style={{ backgroundImage: `url(${background_image})` }}
     >
       <div className="container h-100">
         <div className="row d-flex justify-content-center align-items-center h-100">
           <div className="col-lg-12 col-xl-11">
-            <div className="card text-black">
+            <div className="card text-black shadow p-4 mt-4">
               <div className="card-body p-md-5">
                 <div className="row justify-content-center">
-                  {/*  <div className="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1"> */}
                   <p className="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">
-                    Blog
+                    Update Blog
                   </p>
 
                   <form onSubmit={handleSubmit} id="update-blog-form">
@@ -100,6 +91,7 @@ function UpdateBlog() {
                         value={title}
                         onChange={(e) => setTitle(e.target.value)}
                         type="text"
+                        placeholder="Title"
                         id="form6Example1"
                         className="form-control"
                       />
@@ -110,6 +102,8 @@ function UpdateBlog() {
                       <input
                         value={pic_url}
                         onChange={(e) => setPicURL(e.target.value)}
+                        tyoe="url"
+                        placeholder="Picture URL"
                         className="form-control"
                       ></input>
                       <label className="form-label">Picture</label>
@@ -120,6 +114,8 @@ function UpdateBlog() {
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
                         className="form-control"
+                        type="text"
+                        placeholder="Update Blog Here"
                         id="exampleFormControlTextarea1"
                         rows="3"
                         style={{height: 300}}
@@ -144,7 +140,6 @@ function UpdateBlog() {
           </div>
         </div>
       </div>
-      {/*   </div> */}
     </section>
   );
 }

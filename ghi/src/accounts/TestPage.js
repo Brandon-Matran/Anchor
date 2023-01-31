@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const TestPage = () => {
   const [user, setUser] = useState("");
@@ -6,8 +6,6 @@ const TestPage = () => {
   const [title, setTitle] = useState("");
   const [pic, setPic] = useState("");
   const [desc, setDesc] = useState("");
-  // const [role, setRole] = useState(false);
-
 
   async function getAccount() {
       const url = `http://localhost:8100/token`;
@@ -33,7 +31,7 @@ const TestPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (await getAccount() === true) {
-      const url = `http://localhost:8080/blogs`;
+      const url = `{http://localhost:8080/blogs}`;
       const fetchConfig = {
         method: "post",
         body: JSON.stringify({

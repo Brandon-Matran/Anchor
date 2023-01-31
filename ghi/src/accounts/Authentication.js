@@ -21,6 +21,7 @@ export async function getTokenInternal() {
   return false;
 }
 
+
 function handleErrorMessage(error) {
   if ("error" in error) {
     error = error.error;
@@ -120,6 +121,7 @@ export function useToken() {
 
     if (response.ok) {
       await login(username, password, user_type);
+      navigate("/main")
     }
     return false;
   }

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { useNavigate, Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useToken } from "./Authentication";
-import signup_image from "../images/signup_image.png";
+import signup_image from "../images/anchor_wheel.png";
 import "./SignupModal.css";
 
 function SignUpModal({ closeSignupModal }) {
@@ -11,16 +11,16 @@ function SignUpModal({ closeSignupModal }) {
   const [password, setPassword] = useState("");
   const [user_type, setType] = useState("");
 
-  if (token) {
-    navigate('/main')
-  }
+  // if (token) {
+  //   navigate('/main')
+  // }
   return (
     <div className="modalBackground">
       <div className="container-fluid signUpModal">
         <div className="row d-flex justify-content-center align-items-center h-100">
           <div className="col-lg-12 col-xl-11">
             <div className="card text-black">
-              <div className="card-body p-md-5 signupCard">
+              <div className="card-body p-md-5">
                 <div className="row justify-content-center">
                   <div className="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
                     <p className="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">
@@ -82,13 +82,13 @@ function SignUpModal({ closeSignupModal }) {
 
                           }
                           type="button"
-                          className="submitSignup"
+                          className="btn btn-outline-primary"
                         >
                           Submit
                         </button>
                         <button
                           type="button"
-                          className="cancelSignup"
+                          className="btn btn-outline-primary mx-4"
                           onClick={() => closeSignupModal(false)}
                         >
                           Cancel
