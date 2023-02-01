@@ -20,7 +20,7 @@ export default function Model4() {
                 <h1>Murad Khediev</h1>
                 <h2>Full Stack Web Developer</h2>
                 <p>
-                Murad is a Full-Stack web developer professional responsible for working on both front-end and back-end development processes. He designs, develops, and maintains fully-fledged and functioning platforms with databases or servers.
+                Murad is a Full Stack Web Developer who has expertise in both front-end and back-end web development. He has a comprehensive understanding of how the various components of a web application work together to create a seamless user experience.
                 </p>
             </div>
           </div>
@@ -32,7 +32,7 @@ export default function Model4() {
                 <h1>Allen Chen</h1>
                 <h2>Full Stack Web Developer</h2>
                 <p>
-                Allen is a Full-Stack web developer professional responsible for working on both front-end and back-end development processes. He designs, develops, and maintains fully-fledged and functioning platforms with databases or servers.
+                Allen is a Full Stack Web Developer who has a complete understanding of both front-end and back-end development, and can design, develop, and deploy a dynamic website from start to finish.
                 </p>
             </div>
           </div>
@@ -44,7 +44,7 @@ export default function Model4() {
                 <h1>Xue Yu</h1>
                 <h2>Full Stack Web Developer</h2>
                 <p>
-                Xue is a Full-Stack web developer professional responsible for working on both front-end and back-end development processes. She designs, develops, and maintains fully-fledged and functioning platforms with databases or servers.
+                Xue is a Full-Stack web developer who is well-versed in various programming languages such as HTML, CSS, JavaScript for the front-end and Python for the back-end. She is also familiar with web technologies such as databases, servers, and APIs.
                 </p>
             </div>
           </div>
@@ -56,7 +56,7 @@ export default function Model4() {
                 <h1>Brandon Matran</h1>
                 <h2>Full Stack Web Developer</h2>
                 <p>
-                Brandon is a Full-Stack web developer professional responsible for working on both front-end and back-end development processes. He designs, develops, and maintains fully-fledged and functioning platforms with databases or servers.
+                Brandon is a Full-Stack web developer responsible for working on both front-end and back-end development processes. He designs, develops, and maintains fully-fledged functioning applications with databases and servers.
                 </p>
             </div>
           </div>
@@ -68,7 +68,7 @@ export default function Model4() {
                 <h1>Steven Duong</h1>
                 <h2>Full Stack Web Developer</h2>
                 <p>
-                Steven is a Full-Stack web developer professional responsible for working on both front-end and back-end development processes. He designs, develops, and maintains fully-fledged and functioning platforms with databases or servers.
+                Steven is a Full Stack Web Developer who possesses a strong understanding of how to build responsive and user-friendly websites, and has the ability to solve problems and debug code across the entire development stack.
                 </p>
             </div>
           </div>
