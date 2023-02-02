@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from routers import blogs_r
+from routers import blogs_r, comments_r
 
 app = FastAPI()
 
@@ -19,3 +19,4 @@ app.add_middleware(
 )
 
 app.include_router(blogs_r.router)
+app.include_router(comments_r.router)
