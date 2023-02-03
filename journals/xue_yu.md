@@ -5,45 +5,41 @@ docker volume create pg-admin
 docker compose build
 docker compose up
 
-when you create a ConnectionPool to use to connect to the database, use code like this:
-pool = ConnectionPool(conninfo=os.environ["DATABASE_URL"])
 
-Use in your API calls rather than hard-coded URLs like this:
-const url = `${process.env.REACT_APP_FASTAPI_SERVICE}/api/boots`;
-const response = await fetch(url);
+## 02/03/2023
+- fixed job posting and blog posting state issue
+    - modified the my listings page coding structure
+    - modified the create blog and create listing page coding structure
+- removed my listings button on main page for individual user
+- combined Jobs and Listing folder in ghi
 
-remove:
-docker container prune
-docker volume remove postgres-data
 
 ## 01/26/2023
 Completed:
  - codes cleaned up
  - touch up on readme
-Plan:
- -
 
 ## 01/25/2023
 Completed:
-  - help Allen with the my blogs page,
+ - help Allen with the my blogs page,
 		to make the delete and update functions work nicely.
 Plan:
  - clean up codes
 
 ## 01/24/2023
 Completed:
-	- updated the gitlab ci file to make sure the unit tests for
+ - updated the gitlab ci file to make sure the unit tests for
 		blog and listing end points work.
-	- fixed all the current pipeline fails.
+ - fixed all the current pipeline fails.
 
 ## 01/23/2023
-Team Completed:
-The front ends almost done.
+- Team Completed:
+- The front ends almost done.
 
 Plan:
-Two more unit tests needed.
-Working on deployment.
-Merge story branches to main.
+- Two more unit tests needed.
+- Working on deployment.
+- Merge story branches to main.
 
 Blocker:
  - Guidance on how to merge correctly.
@@ -53,7 +49,7 @@ Completed:
  - unit test get one listing works
 
 problem to fix:
-unit test update blog error 'invalid token'
+- unit test update blog error 'invalid token'
 
 plan:
  - run flake8 to fix codes
