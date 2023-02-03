@@ -52,14 +52,9 @@ function CreateBlogsForm(props) {
     }
 
     fetch(blogURL, fetchConfig)
-      .then((response) => response.json())
-      .then(() => {
-        setTitle("");
-        setPicURL("");
-        setDescription("");
-        setSubmitted(true);
-      })
-      .then(navigate("/blogs/myblogs"))
+      .then((response) => response.json()
+      )
+      navigate("/blogs/myblogs")
       .catch((e) => console.error("ERROR: ", e));
   };
 

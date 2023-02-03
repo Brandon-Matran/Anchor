@@ -59,7 +59,7 @@ useEffect(() => {
 }, [token]);
 
 
-  const handleSubmit = (event) => {
+async function handleSubmit(event) {
     event.preventDefault();
     const newJob = {
       username: username,
@@ -67,7 +67,7 @@ useEffect(() => {
       company_name: company_name,
       job_position: job_position,
       apply_url: apply_url,
-      deadline: deadline,
+      deadline:deadline,
       created: created,
     };
 
@@ -81,19 +81,12 @@ useEffect(() => {
       },
     };
 
-    fetch(jobsListingURL, fetchConfig)
-      .then((response) => response.json())
-
-      .then(() => {
-        setTitle("");
-        setCompanyName("");
-        setJobPosition("");
-        setApplyUrl("");
-        setDeadline("");
+    const res = await fetch(jobsListingURL, fetchConfig)
+    if (res.ok) {
+      const data = await res.json();
         setSubmitted(true);
-      })
-      .then(navigate("/listings/mylistings"))
-      .catch((e) => console.error("ERROR: ", e));
+        navigate("/listings/mylistings")
+      }
   };
 
   let messageClasses = "alert alert-success d-none mb-0";

@@ -5,6 +5,8 @@ import "./MainPage.css";
 import { useEffect, useState } from "react";
 import { useAuthContext } from "../accounts/Authentication"
 
+
+
 function Column(props) {
   return (
     <div className="col-md">
@@ -42,7 +44,7 @@ function MainPage() {
   const navigate = useNavigate();
   const [blogs, setBlogList] = useState([], [], []);
   const [username, setUserName] = useState('');
-
+  const [iscompany, setisCompany] = useState(false)
   const { token } = useAuthContext()
 
   const handleLogout = () => {
@@ -55,6 +57,10 @@ function MainPage() {
     const base64 = base64Url.replace("-", "+").replace("_", "/");
     const info = JSON.parse(window.atob(base64));
     setUserName(info.account.username);
+    const user_type = info.account.user_type;
+    if (user_type === "company") {
+    setisCompany(true)
+    }
   }
 
   async function fetchData() {
@@ -96,7 +102,8 @@ function MainPage() {
               Welcome aboard, {username}
             </div>
             <button className="openSignupModal mt-5" onClick={() => navigate("/blogs/myblogs")}>View MyBlogs</button>
-            <button className="openLoginModal mt-5 mx-4" onClick={() => navigate("/listings/mylistings")}>View MyListings</button>
+            {/* <button className="openLoginModal mt-5 mx-4" onClick={() => navigate("/listings/mylistings")}>View MyListings</button> */}
+            {iscompany === true &&  <button className="openLoginModal mt-5 mx-4" onClick={() => navigate("/listings/mylistings")}>View MyListings</button>}
           </div>
         </div>
       </div>
