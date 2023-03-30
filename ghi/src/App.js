@@ -20,6 +20,7 @@ import CreateJobsForm from "./Listings/CreateListingsForm";
 import GetOneBlog from "./Blogs/GetOneBlog";
 import Nav from "./Nav";
 import MyBlogs from "./Blogs/MyBlogs";
+import Chat from "./Chat";
 
 function GetToken() {
   useToken();
@@ -41,6 +42,7 @@ function App() {
             <Route path="/main" element={<MainPage2 />} />
             <Route path="/login" element={<LoginForm />} />
             <Route path="/signup" element={<Signup />} />
+            <Route path="/chat" element={<Chat />} />
             <Route path="/blogs">
               <Route index element={<BlogsList />} />
               <Route path=":id" element={<GetOneBlog />} />
